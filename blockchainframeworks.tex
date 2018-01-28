@@ -1,0 +1,106 @@
+\chapter{Blockchain Frameworks}
+\label{chap:blockchain-frameworks}
+
+%\minitoc \mtcskip \noindent
+Not sure if this would have enough content to be a whole new chapter, it could probably be integrated in the previous one, we'll see.
+
+\section{Ethereum}
+
+With the purpose of building a blockchain that does more than just provide a currency system, the Ethereum project was developed and launched in 2014. A white paper, written by Vitalik Buterin was released explaining the concepts and inner-workings of this platform, and its popularity has been growing ever since. Citing Buterin's paper, Ethereum has the intent to \textit{"allow developers to create arbitrary consensus-based applications that have the
+scalability, standardization, feature-completeness, ease of development and interoperability" } \cite{Buterin2014}.
+
+\subsection{Smart Contracts}
+In short, Ethereum is a blockchain platform that implements a Turing-complete programming language, allowing for the existence of code stored in the form of "contracts". This allows for the practical existence of Smart Contracts, a concept first proposed by Nick Szabo in 1996 \cite{szabo1996smart}. According to Szabo, \textit{"A smart contract is a set of promises, specified in digital form, including protocols within which the parties perform on these promises."} 
+
+So, at a more superficial level, a smart contract is just code, a structure that follows pre-specified rules, in order to move around assets, such as cryptocurrency tokens, and change its state. It reacts according to the interactions it has with the other elements of the blockchain, which, in a crude manner, can be either people or other contracts. In other words, Ethereum moves beyond the realm of currency and opens up the possiblity for decentralized applications to be ran directly on the blockchain. 
+
+%In general, there are
+%two types of accounts: externally owned accounts, controlled by private keys, and contract accounts, controlled
+%by their contract code. An externally owned account has no code, and one can send messages from an
+%externally owned account by creating and signing a transaction;
+%in a contract account, every time the
+%contract account receives a message its code activates, allowing it to read and write to internal storage and
+%send other messages or create contracts in turn.
+
+\subsection{Currency}
+
+The interesting aspect of Ethereum, however, is that the code from these applications or contracts is executed by the peer-to-peer network nodes, making Ethereum a globally available computer. Of course, with computational power comes a price. Each time a function from a contract is called, someone's computer, a mining node, is doing all the computations, and for each line of code, an agreed fee must be paid. As such, Ethereum has its own cryptocurrency, by the name of Ether, and which is essential to fuel the network.
+
+\subsection{Consensus}
+
+At the moment, Ethereum is still using PoW as the consensus protocol, in a similar fashion to Bitcoin. There are projects currently trying to move Ethereum to PoS, such as Casper \cite{Buterin2017}. PoS is a consensus protocol with a different paradigm, in which the block mining process is roughly based on trust, on the fact that the miner has a certain stake or investment (like cryptocurrency) in the network, and so it is in their best benefit to be an honest node. 
+
+The benefit of PoS over PoW is that there isn't as much waste of computational power as in PoW. In PoW, miners have to intensively search for a target number, which allows them to claim the block as their own. This serves no other scientific or practical purpose other than making the mining process hard, and, as soon as a node successfuly mines a block, all the energy used  by all the other mining nodes that were in this process basically goes to waste \cite{Buterin2013}. There are other concerns that make a PoS system like Casper a better option as well, such as performance concerns. 
+
+\subsection{Performance and Scalability}
+
+\paragraph{Issues} 
+- Check original scalability issues from white paper
+
+Ever since its conception, there has been concern as to whether Ethereum's throughput and latency are enough to handle a large amount of applications running at once, and if it will be scalable in the future. The recent launch of an application by the name of CryptoKitties disrupted Ethereum, congesting the main network and slowing down the speed of transactions, again raising concern over Ethereum's performance.
+
+These concerns are also very much valid for the case of supply chains. If Ethereum were to be integrated with a supply chain, one of the most important factors to take into account would be the performance and scalability of the system. It is important to note, though, that private and public blockchains have different performances as well as different scalability concerns. Furthermore, certain values that affect the performance (such as the block time) also have an affect on security. This means that there is a bootstrap effect between security, performance and scalability.
+
+In a public chain, security is a much bigger concern, as there are many different kinds of attacks, and the blockchain's values are balanced in a way that tries to prevent these. Such values can easily be adjusted in a private chain, in ways they can't in a public chain, where they would cause forks, clog the chain or raise security issues. 
+
+The performance of blockchains such as Ethereum is usually measured by the average throughput, which is the number of processed transactions per second (TPS). This depends a lot on two main factors:
+\begin{itemize}
+\item The block size - in Ethereum, the block size is not a fixed value; rather, it has a "gas" limit; each transaction put into the block spends some gas, and when the gas reaches the limit for that block, the block is full;
+\item The average time to publish a block - block interval; in Bitcoin, this was a fixed 10 minute time, but in Ethereum, the average time is around 15 seconds; this is directly related to the latency, the time a transaction takes to be integrated into the blockchain;
+\end{itemize}
+
+The fact that both transactions and block can vary in their size makes it hard to theoretically pinpoint what the performance of an Ethereum network is. In practice, though, and according to recent studies and statistics gathered, the throughput of the main Ethereum network is around 15 TPS.
+
+\paragraph{Practical values}
+In practice, it can handle
+
+ Every node validates all the transactions: this is wasteful
+
+\paragraph{Casper}
+It allows the throughput of the network to increase.
+
+The block time is able to be lowered because validators aren't burning cash on electricity to mine
+
+\paragraph{Sharding}
+- sharding
+
+\paragraph{Plasma}
+- Scalability (check recent paper from Vitalik) + plasma (check from Joseph Poon)
+
+- Public blockchain and private would scale differently
+\break
+
+%EXCERPT FROM ARTICLE-THESIS, to take some info out:
+%"Probably the biggest scalability issues with Ethereum are that every node has to process all
+%transactions and has to store the entire state of every account balance, contract code and
+%storage, etc. Although this provides a large amount of security, but greatly limits scalability
+%to the point that a blockchain cannot process more transactions than a single node. One
+%would think that a network with thousands of nodes should be able to have more throughput
+%than a single node, but this is not the case in Ethereum or in public blockchain networks in
+%general.
+%A possible solution for this problem is to create a new mechanism where only a small subset
+%of nodes has to verify a subset of transactions. As long as there are sufficient many nodes
+%verifying each transaction, the system will still be secure, but also allow for the system to
+%process transactions in parallel. This techniques is called sharding. The basic idea behind
+%sharding is by dividing the global state of accounts, both external and contract accounts,
+%in smaller chunks known as a shard. In simpler forms of sharding, each shard also has its
+own transaction history, and the effects of transaction in some shard K are limited to the
+state of shard K. However, transactions across two shards can be achieved with a ”debit”
+and ”credit” kind of transactions. For example a transfer of money, where money is moved
+from shard K to shard L by first creating a ”debit” transaction that destroys coins in shard
+K, and then creating a ”credit” transaction that creates coin in shard L, pointing to a receipt
+created by the debit transaction as proof that the credit is legitimate. In more complex
+forms of sharding, transactions may in some cases affect other shards as well and may also
+synchronously ask for data from the state of multiple shards. Each shard gets its own set of
+validators, and these validators will not need to validate all shards[35]."
+
+\subsection{Usability}
+- Explain that, though there is a main ethereum network, it can also be deployed privately
+
+- Examples of companies that Ethereum, either in the public chain, or in a private one
+
+\subsection{Ethereum Applicability to Supply Chain}
+Maybe this subsection is already what is described in the sections that follow, such as section 3.5 Applications and so on. Especially in section 3.5, I should explain better how the Applications of Ethereum (section 3.4.4), can be applied in general
+- Talk about Eth possible applicability, because of the fact it might be expensive;
+
+\section{Hyperledger}

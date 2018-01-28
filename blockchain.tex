@@ -1,0 +1,85 @@
+\chapter{Blockchain}
+\label{chap:blockchain}
+
+%\minitoc \mtcskip \noindent
+
+This chapter introduces the most important concepts of blockchain which are essential for its applications. It interleaves the features of blockchain with its applicability to supply chain, by highlighting both the disadvantages and disadvantages, of blockchain in general and in particular to SCM, as well as any existing models for the integration of blockchain with SCM.
+
+    \section{Introduction}
+   “The Byzantine Generals' Problem” is a classical problem faced by distributed systems, which, in simple terms, states that consistency in a distributed system can never be fully guaranteed \cite{byzantine-generals-problem}. This is derived from a lack of general consensus as to what the state of the system is at any given time.
+   Nakamoto's implementation of a blockchain seems to be, at present, the most practical way to face and solve this problem (though with its limitations), even earning the term "Practical Byzantine Fault Tolerance Algorithm", because of how it handles the consensus issue. The fact that many kinds of applications rely on distributed architectures, which might face these problems, turns blockchain all the more interesting and appealing. 
+   
+   Some improvements have been built upon the traditional blockchain, such as smart contracts, which further enhance its use and allow for a wider variety of applications. Some areas where blockchain is starting to see some use include insurance, finance, internet-of-things, healthcare, identity management, to name a few. 
+   In each of these areas, there are many ways in which blockchain can be used, be it to store information, process information, process payments or provide services. The versatility and popularity of this technology allows for the possibility of many other applications to be proposed.
+
+\section{Core Concepts and Features}
+
+%\paragraph{Original blockchain}    
+The original blockchain, Bitcoin, was developed with the purpose of creating a distributed online payment system without the need for a financial institution or any other centralized trusted third party to verify the transactions and even had its own currency, also known as a cryptocurrency, made up from digital tokens, that represent real money. Eventually, this concept evolved into something more, and new uses, other than online transactions, emerged from the blockchain technology. As described by Marc Pilkington \cite{Pilkington2015}, \textit{"The essence of the blockchain is informational before being economic or monetary, conducive to many emerging and increasingly popular token-free blockchains."} Therefore, the algorithms used by Bitcoin are not a defining feature of the blockchain technology, but merely one of the many possible applications.
+    
+    The blockchain itself consists of a peer-to-peer network which continually stores and updates a chronological chain of blocks, where each block stores whatever information is relevant to the system in question, as well as the hash of the previous block. In the original blockchain, each block stored information about transactions between people, where there was a set of rules to check whether the transactions were valid or not. We'll get to how a blockchain can be built in a moment.
+    
+    One really important property of the blockchain is that the hash of the previous block also serves as an address. Therefore, each block has a pointer to the previous block, which is known as an hash pointer. %PUT SOURCE HERE
+    % explain hash pointers a little better
+    \includegraphics[scale=0.35]{media/Blockchain_workflow.png}
+    This hash thus guarantees that the blocks are linked to each other, but it also guarantees the integrity of the block chain. If one block is altered, the hash on the block that follows it stops matching the block's. If we really wanted to change something on this  first block, we would have to alter the hash on the following block to match. But then, that second block would also have been altered, and we would have to change the hash on the third block to match, and so on. This means that the blockchain is immutable, as it is not possible to alter a single block without manually altering all the others. 
+    
+    So, how is data added to the blockchain? First, it is important to notice that the blockchain itself exists only in the peer-to-peer network, and as such, is stored and extended by the nodes of the network. The nodes are machines that have the core code of the blockchain system and which receive and share among themselves the incoming information, also validating it according to the established rule set. All the nodes (if they are honest) contain the same blockchain, as they all agree on its contents through a consensus algorithm. 
+    
+     The nodes that actually gather information to add it to the blockchain in the form of blocks are called miners. As they are doing all the hard word, they usually need some incentive to do so. Cryptocurrencies are virtual currencies that only exist on the blockchain they belong to, and they allow for a new monetary system to come into life. These currencies play an important role in blockchain, since they allow for miners to be rewarded. Without them, public blockchains would probably not work as well, which is why there are so many alternative currencies popping up, with the advent of this technology. 
+    
+    \subsection{Consensus}
+    Over time, each node aggregates the information they receive into a block. This block is not yet aggregated to the blockchain, rather, it is just stored locally on the node that created it. 
+    
+    
+    After creating the block locally, each node then attempts to extend the blockchain with its own block. Obviously, it is impossible for all the nodes to add their blocks at the same time, as each of them would then have a different version of the blockchain and they would get desynchronized. And so, the nodes must reach a consensus as to which block gets added next to the blockchain. For this very reason, the code of the blockchain must have both a consensus algorithm and also a block validation algorithm. The most commonly used consensus algorithm is \textbf{Proof of Work (PoW)}, though there are others, like the most used alternatives, \textbf{Proof of Stake (PoS)}, and \textbf{Proof of Activity (PoA)}. 
+    
+    In short, PoW works by making the nodes spend computational power until they can find out a number that satisfies a certain rule. % Explain hash stuff about PoW. 
+    When a node finds that number, it is allowed to extend the blockchain with the block it previously created. So, when this happens, and as this is a peer-to-peer network, this node transmits to all the others the new blockchain with the added block. This block has the number found by the creator node, so that the other nodes can confirm themselves that the creator node rightfully worked to mine and add this block to the chain. They will also do standard validation checks on the block, to guarantee that everything is in order. Upon positively verifying a block, all the other nodes implicitly add it to their version of the blockchain, by including its hash in the next block they try to create. 
+    %Explain incentives to do the mining
+    It is also worth to notice that not all nodes work at the same speed, or are active at the same time. This means that some nodes might not be up to date, and might have difficulties catching up to the current blockchain, as it might not correspond to their outdated version. So, in general, it is assumed that the longest valid chain held by the nodes is the correct one. This way, a node in these conditions can simply query other nodes to find out what the current blockchain is, and continue working from there.
+    
+    \subsection{Transparency}
+   The blockchain is not only available to the mining nodes in the network. Though they are the ones who actively interact with the chain in order to make it grow, if the chain is public, anyone can view the records and verify the authenticity of the data. This is the property of transparency. In private or permissioned blockchains, it might happen that only certain actors have access to certain records, according to the access control rules set by the organization or set of organizations that manage it. This is done with the help of sets of asymmetric key pairs and a public key infrastructure.
+    
+% Talk about merkle tree - is it necessary?
+        
+\section{Security Features}
+
+In a blockchain, security is a multi-faceted aspect. It depends heavily on cryptography, especially hashing and public key cryptography. But it also depends on a blockchain's characteristics and set values, such as the average block time.
+
+\paragraph{Hashing}
+
+\paragraph{Public Key Cryptography}
+
+\paragraph{Other aspects and concerns}
+
+\section{Private, Public and Hybrid Blockchains}
+
+    Blockchain, traditionally, is of public nature. But, as many institutions grew aware of the possible benefits of this technology, they started investing in it, and so appeared the private blockchains and the semi-private or consortium blockchains.
+    
+    \paragraph{Public Blockchains} When a blockchain is public, it is accessible to any user. Anyone is able to both read and validate information from it, as well as contribute to its extension by participating in the consensus process. They are secured by cryptoeconomics, as incentives need to be given to the miners. These blockchains can be  considered fully decentralized and have no access control. Every user is at the same level.
+    
+    \paragraph{Private Blockchains} These are usually owned by some organization and have access control, restricting write access to certain peers inside the organization. Read access might be restricted or not, according to the organization's goals. These blockchains, unlike public ones, might not require cryptocurrency or incentives, as the maintenance of the blockchain is done by the organization who owns it, and so they have all the interest in having nodes that can run the consensus process. In the end, this is a more centralized version of the blockchain, as the nodes are concentrated under the ownership of the organization. This also gives the advantage that alterations to the blockchain are easier to achieve, if so is desired (though it subtracts from the actual meaning and concept of an immutable blockchain).
+    
+    \paragraph{Consortium blockchains} They are a kind of hybrid blockchain, though closer to a private blockchain. They are controlled by many different organizations, and the consensus process is handled by pre-selected nodes from the organizations. This consensus might involve, for example, at least a certain percentage of the nodes agreeing on something (e.g.: if there are 15 fixed nodes, require at least 10 to sign the block). The permissions to read might be public or otherwise permissioned, and as such, this can also be considered a partially decentralized blockchain.
+
+
+
+\section{Applications}
+
+    In general, blockchains are applied in different ways, from public ledgers to private, in a continuum, according to the specific needs. Many of them even apply the concept of smart contracts. Vitalik himself suggested some possible applications of Ethereum, and many more have been idealized, with some even being successfully applied. Here are some examples of areas where the benefits of introducing blockchain have been studied.
+    
+    \begin{itemize}
+     \item Identity/Record Management - like in a notary, documents are validated and recorded, but instead, this happens on the blockchain.
+     
+     \item Insurance - Smart contracts, having to abide to certain rule with certainty, make for a perfect system for risk-management. Given that certain conditions are met, the insurance could be claimed, giving way to faster and less error-prone insurance processing.
+     
+     \item Health care - Health records easily accessible anywhere. This could be coupled with other applications, like using sensors and smart contracts to automatically monitor patient status.
+     
+     \item Distributed Cloud Storage - Instead of the traditional centralized cloud, distributed clouds could become a reality.
+     
+     \item Voting - Using blockchain, digital voting could become feasible. The greatest barrier to e-voting have been the concerns with security, and blockchain provides an anonymous and secure way to do it.
+     
+     \item Internet-of-Things (IoT) - Any object connected to the Internet can upload information, which can either be stored or processed on the blockchain. Devices with sensors, for instance, can be programmed to send their values to the blockchain, which can then be queried by others to check these values. There can even be pre-programmed smart contracts that have events based on what is happening and the information that is being sent by the devices.
+	\end{itemize}

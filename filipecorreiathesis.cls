@@ -211,8 +211,8 @@
 	\ \\ 
 	\ \\ 
 	\ \\ 
-	\Huge \textsf{\textbf{The Full Title}} \\
-	\huge \textsf{\textbf{Of The Thesis}} \\
+	\Huge \textsf{\textbf{Supply Chain Management  with Blockchain Technologies:}} \\
+	\huge \textsf{\textbf{A case study}} \\
 
 	\vspace{4pc}
 	%\includegraphics[scale=0.40]{media/layout/ornament} \\
@@ -220,20 +220,20 @@
 
 	\large \@author \normalsize
 	\vspace{1pc} \\
-	January 2015
+	January 2018
 	\ \\
 	\vfill
 	\ \\
 	Scientific Supervision by \\
 	\ \\
-	The Advisor's Name, His Title \\
+	Filipe Alexandre Pais de Figueiredo Correia, Professor Auxiliar Convidado \\
 	Departmento de Engenharia Informática \\
 
 	\vspace{4pc}
 
 	In partial fulfillment of requirements for the degree of \\
-	Doctor of Philosophy in Informatics Engineering \\
-	by the ProDEI Doctoral Programme \\
+	Master in Informatics and Computing Engineering \\
+	by the EUR-ACE Programme  \\
 	\clearpage
   \end{titlepage} 
 }
