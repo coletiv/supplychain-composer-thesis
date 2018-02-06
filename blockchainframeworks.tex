@@ -4,6 +4,8 @@
 %\minitoc \mtcskip \noindent
 Not sure if this would have enough content to be a whole new chapter, it could probably be integrated in the previous one, we'll see.
 
+\todo{fcorreia: don't forget to review the previous paragraph.}
+
 \section{Ethereum}
 
 With the purpose of building a blockchain that does more than just provide a currency system, the Ethereum project was developed and launched in 2014. A white paper, written by Vitalik Buterin was released explaining the concepts and inner-workings of this platform, and its popularity has been growing ever since. Citing Buterin's paper, Ethereum has the intent to \textit{"allow developers to create arbitrary consensus-based applications that have the
@@ -12,7 +14,11 @@ scalability, standardization, feature-completeness, ease of development and inte
 \subsection{Smart Contracts}
 In short, Ethereum is a blockchain platform that implements a Turing-complete programming language, allowing for the existence of code stored in the form of "contracts". This allows for the practical existence of Smart Contracts, a concept first proposed by Nick Szabo in 1996 \cite{szabo1996smart}. According to Szabo, \textit{"A smart contract is a set of promises, specified in digital form, including protocols within which the parties perform on these promises."} 
 
+\todo{fcorreia: in the above citation: make "A" lowercase and move the final mark to after the closing double quote.}
+
 So, at a more superficial level, a smart contract is just code, a structure that follows pre-specified rules, in order to move around assets, such as cryptocurrency tokens, and change its state. It reacts according to the interactions it has with the other elements of the blockchain, which, in a crude manner, can be either people or other contracts. In other words, Ethereum moves beyond the realm of currency and opens up the possiblity for decentralized applications to be ran directly on the blockchain. 
+
+\todo{fcorreia: could be worth mentioning that the result of applying a contract is still subject to the consensus mechanism. this ties in nicely with what toy explain in the next section, as it is what makes the concept of a "global computer" possible.}
 
 %In general, there are
 %two types of accounts: externally owned accounts, controlled by private keys, and contract accounts, controlled
@@ -30,7 +36,9 @@ The interesting aspect of Ethereum, however, is that the code from these applica
 
 At the moment, Ethereum is still using PoW as the consensus protocol, in a similar fashion to Bitcoin. There are projects currently trying to move Ethereum to PoS, such as Casper \cite{Buterin2017}. PoS is a consensus protocol with a different paradigm, in which the block mining process is roughly based on trust, on the fact that the miner has a certain stake or investment (like cryptocurrency) in the network, and so it is in their best benefit to be an honest node. 
 
-The benefit of PoS over PoW is that there isn't as much waste of computational power as in PoW. In PoW, miners have to intensively search for a target number, which allows them to claim the block as their own. This serves no other scientific or practical purpose other than making the mining process hard, and, as soon as a node successfuly mines a block, all the energy used  by all the other mining nodes that were in this process basically goes to waste \cite{Buterin2013}. There are other concerns that make a PoS system like Casper a better option as well, such as performance concerns. 
+The benefit of PoS over PoW is that there isn't as much waste of computational power as in PoW. In PoW, miners have to intensively search for a target number, which allows them to claim the block as their own. This serves no other scientific or practical purpose other than making the mining process hard, and, as soon as a node successfully mines a block, all the energy used  by all the other mining nodes that were in this process basically goes to waste \cite{Buterin2013}. There are other concerns that make a PoS system like Casper a better option as well, such as performance concerns. 
+
+\todo{fcorreia: to call it "waste" is a bit subjective, as this is a mechanism that fulfill a specific purpose (i.e., it's suppose to have an increasing difficulty for it to work). I do agree that other alternatives can be more computationally and energetically efficient though, and that this is ever more important as the use of these platforms increases, as so does the cost (financial, environmental, etc).}
 
 \subsection{Performance and Scalability}
 
@@ -104,7 +112,15 @@ Maybe this subsection is already what is described in the sections that follow, 
 - Talk about Eth possible applicability, because of the fact it might be expensive;
 
 \section{Hyperledger}
-
+Various frameworks from hyperledger, difference
+\section{Coco}
+"Coco Will be Open Source
+Currently, (at the time of writing this) Microsoft has not yet publicly released the Coco Framework. However, Microsoft is planning to release the Coco Framework to Open Source in early 2018. Along with their open approach to Blockchain, Coco will be compatible with any Blockchain ledger protocol, and will be able to operate in the cloud as well as on-premises."
+Check white paper
+--> https://buildazure.com/2017/11/22/introducing-microsoft-coco-framework-for-blockchain/
 \section{Corda}
-
+Check introductory + technical white papers
 \section{Comparison}
+"Comparison of Ethereum,
+Hyperledger Fabric and
+Corda" -> Frankfurt school article
