@@ -42,66 +42,48 @@ The benefit of PoS over PoW is that there isn't as much waste of computational p
 
 \subsection{Performance and Scalability}
 
-\paragraph{Issues} 
-- Check original scalability issues from white paper
+\paragraph{Latency and Throughput} 
 
-Ever since its conception, there has been concern as to whether Ethereum's throughput and latency are enough to handle a large amount of applications running at once, and if it will be scalable in the future. The recent launch of an application by the name of CryptoKitties disrupted Ethereum, congesting the main network and slowing down the speed of transactions, again raising concern over Ethereum's performance.
+Ever since its conception, there has been concern as to whether Ethereum's \textbf{throughput} and \textbf{latency} are enough to handle a large amount of applications running at once, and if it will be scalable in the future. The recent launch of an application by the name of CryptoKitties disrupted Ethereum, congesting the main network and slowing down the speed of transactions, again raising concern over Ethereum's performance.
 
-These concerns are also very much valid for the case of supply chains. If Ethereum were to be integrated with a supply chain, one of the most important factors to take into account would be the performance and scalability of the system. It is important to note, though, that private and public blockchains have different performances as well as different scalability concerns. Furthermore, certain values that affect the performance (such as the block time) also have an affect on security. This means that there is a bootstrap effect between security, performance and scalability.
+These concerns are also very much valid for the case of supply chains. If Ethereum were to be integrated with a supply chain, one of the most important factors to take into account would be exactly the performance and scalability of the system. It is important to note, though, that private and public blockchains have different performances as well as different scalability concerns. Furthermore, certain values that affect the performance (such as the block time) also have an affect on the scalability, and consequently, on the security. This means that these attributes are interdependent and require a fine balance. \todo{pedro: citar paper de performance analysis}
 
-In a public chain, security is a much bigger concern, as there are many different kinds of attacks, and the blockchain's values are balanced in a way that tries to prevent these. Such values can easily be adjusted in a private chain, in ways they can't in a public chain, where they would cause forks, clog the chain or raise security issues. 
+In a public chain, security is a much bigger concern, as there are many different kinds of attacks, and the blockchain's values are balanced in a way that tries to prevent these. Such values can easily be adjusted in a private chain, in ways they can't in a public chain, where they would cause forks, clog the chain or raise security issues. In addition, private blockchain deployments are usually more centralized, concentrating their power in fewer nodes, as there is an inherent sense of trust from within the network. For this very reason, this type of blockchain is more easily scalable as well.
 
 The performance of blockchains such as Ethereum is usually measured by the average throughput, which is the number of processed transactions per second (TPS). This depends a lot on two main factors:
 \begin{itemize}
 \item The block size - in Ethereum, the block size is not a fixed value; rather, it has a "gas" limit; each transaction put into the block spends some gas, and when the gas reaches the limit for that block, the block is full;
-\item The average time to publish a block - block interval; in Bitcoin, this was a fixed 10 minute time, but in Ethereum, the average time is around 15 seconds; this is directly related to the latency, the time a transaction takes to be integrated into the blockchain;
+\item The average time to publish a block - block interval; in Bitcoin, this was a fixed 10 minute time, but in Ethereum, this time can be as low as 15 seconds\todo{pedro: citar paper de performance analysis}; this is directly related to the latency, the time a transaction takes to be integrated into the blockchain;
 \end{itemize}
 
-The fact that both transactions and block can vary in their size makes it hard to theoretically pinpoint what the performance of an Ethereum network is. In practice, though, and according to recent studies and statistics gathered, the throughput of the main Ethereum network is around 15 TPS.
+The fact that both transactions and block can vary in their size makes it hard to theoretically pinpoint what the performance of an Ethereum network is. In practice, though, and according to recent studies and statistics gathered, the throughput of the main Ethereum network is around 15 TPS %again, o mesmo estudo dá estes valores.
 
-\paragraph{Practical values}
-In practice, it can handle
+\paragraph{Blockchain Size}
+Besides latency and throughput, most blockchains are facing the problem that the size required to store the blockchain itself is becoming increasingly large, and is constantly growing. With this kind of pace, not every node will be able to store the chain in order to validate it.
 
- Every node validates all the transactions: this is wasteful
+This easily becomes a security problem for public blockchains, as the power will be concentrated among the few nodes who can store the blockchain. In Ethereum, every node has to process all transactions and store the entire state of the blockchain, \todo{pedro: Citar onde diz isto do Ethereum (era no white paper?)} hence, this is an important issue to address. 
+
+Solutions to the above mentioned issues of the above mentioned issues have already been proposed and are being tested. Some of these are Raiden, Casper, Sharding and Plasma.
 
 \paragraph{Casper}
-It allows the throughput of the network to increase.
 
-The block time is able to be lowered because validators aren't burning cash on electricity to mine
+To put it simply, Casper is a partial consensus mechanism that aims to implement PoS as the consensus algorithm in Ethereum. The way it works, it basically allows anyone who holds anything of value in the system, in this case, the Ethereum currency, Ethers, to participate in choosing the next block.
+
+Casper has the important characteristic of accountability. The validator nodes deposit some of their currency to have a stake on the mining process of a block, so they have their own deposits at stake. Therefore, they are encouraged to be honest, because any violation of the rules or attempts of attack puts them at risk of losing this deposit. The higher the stake, the higher the power: with a high stake, it might be easier to perform an attack, but as it is also a lot riskier, so attacks are discouraged.
+
+Another important aspect of Casper is that, as a PoS based mechanism, it allows for a more efficient Blockchain as it enables miners to work without high end hardware and high electricity costs, while also potentially allowing for lower block times.
 
 \paragraph{Sharding}
-- sharding
+
+Sharding is a solution that aims to increase the throughput of Ethereum. It acts upon the problem problem that every node must validate every transaction, by dividing nodes and transactions into subsets and assigning them such that a subset of the nodes will verify a subset of transactions \cite{ButerinSharding}. This allows for transactions to be processed in parallel, and, as long as there are enough nodes validating a transaction, security is maintained, and more transactions per second are able to be processed, therefore increasing throughput in a scalable way.
 
 \paragraph{Plasma}
-- Scalability (check recent paper from Vitalik) + plasma (check from Joseph Poon)
 
-- Public blockchain and private would scale differently
+\paragraph{Raiden}
+
 \break
 
-%EXCERPT FROM ARTICLE-THESIS, to take some info out:
-%"Probably the biggest scalability issues with Ethereum are that every node has to process all
-%transactions and has to store the entire state of every account balance, contract code and
-%storage, etc. Although this provides a large amount of security, but greatly limits scalability
-%to the point that a blockchain cannot process more transactions than a single node. One
-%would think that a network with thousands of nodes should be able to have more throughput
-%than a single node, but this is not the case in Ethereum or in public blockchain networks in
-%general.
-%A possible solution for this problem is to create a new mechanism where only a small subset
-%of nodes has to verify a subset of transactions. As long as there are sufficient many nodes
-%verifying each transaction, the system will still be secure, but also allow for the system to
-%process transactions in parallel. This techniques is called sharding. The basic idea behind
-%sharding is by dividing the global state of accounts, both external and contract accounts,
-%in smaller chunks known as a shard. In simpler forms of sharding, each shard also has its
-own transaction history, and the effects of transaction in some shard K are limited to the
-state of shard K. However, transactions across two shards can be achieved with a ”debit”
-and ”credit” kind of transactions. For example a transfer of money, where money is moved
-from shard K to shard L by first creating a ”debit” transaction that destroys coins in shard
-K, and then creating a ”credit” transaction that creates coin in shard L, pointing to a receipt
-created by the debit transaction as proof that the credit is legitimate. In more complex
-forms of sharding, transactions may in some cases affect other shards as well and may also
-synchronously ask for data from the state of multiple shards. Each shard gets its own set of
-validators, and these validators will not need to validate all shards[35]."
-
+\iffalse
 \subsection{Usability}
 - Explain that, though there is a main ethereum network, it can also be deployed privately
 
@@ -110,9 +92,17 @@ validators, and these validators will not need to validate all shards[35]."
 \subsection{Ethereum Applicability to Supply Chain}
 Maybe this subsection is already what is described in the sections that follow, such as section 3.5 Applications and so on. Especially in section 3.5, I should explain better how the Applications of Ethereum (section 3.4.4), can be applied in general
 - Talk about Eth possible applicability, because of the fact it might be expensive;
+\fi
 
 \section{Hyperledger}
+
+Later today (07/02), I'll have an  high level explanation of Hyperledger, Coco and Corda (less focus on these last 2). I'll also try having written 5.2 and 5.3.
+
 Various frameworks from hyperledger, difference
+
+"enables design decisions like sharding and channels to be implemented without much hassle. And since trust is already achieved from outside the network, we do not need much computational power to support that trust. This allows us to use different consensus mechanism, such as BFT protocols, and almost all of the issues public blockchains have, disappears. Furthermore, the governing body can ensure data access to participants in the channel and only allow them to view sensitive transaction data. Thus, Hyperledger Fabric has the features required for modern enterprise security standards, that are difficult to achieve in public
+blockchains."
+
 \section{Coco}
 "Coco Will be Open Source
 Currently, (at the time of writing this) Microsoft has not yet publicly released the Coco Framework. However, Microsoft is planning to release the Coco Framework to Open Source in early 2018. Along with their open approach to Blockchain, Coco will be compatible with any Blockchain ledger protocol, and will be able to operate in the cloud as well as on-premises."
