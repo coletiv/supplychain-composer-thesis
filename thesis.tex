@@ -31,6 +31,7 @@
 \usepackage{calligra}
 \newcommand{\setfont}[2]{{\fontfamily{#1}\selectfont #2}}
 
+% \usepackage[disable]{todonotes}
 \usepackage[]{todonotes}
 \presetkeys%
     {todonotes}%
@@ -117,13 +118,13 @@
 		\addcontentsline{toc}{chapter}{\listtablename}
 		\listoftables
 		\cleardoublepage
-		\include{00-preface}
+		%\include{00-preface}
 
 	\mainmatter
 
 	% final lineup
-	\include{introduction}
-	\include{supplychainproblems}
+    \include{introduction}
+	%\include{supplychainproblems}
     \include{blockchain}
     \include{blockchainframeworks}
     \include{blockchainapplicability}
@@ -133,15 +134,15 @@
 	%\include{validation}
 	\include{conclusions}
 
-	\include{epilogue}
+	%\include{epilogue}
 
 
-    \bookmarksetup{startatroot}
-	\phantomsection
-	\addcontentsline{toc}{part}{\appendixtocname}
-	\appendixpage
-	\appendix
-		\include{appendix1}
+    %\bookmarksetup{startatroot}
+	%\phantomsection
+	%\addcontentsline{toc}{part}{\appendixtocname}
+	%\appendixpage
+	%\appendix
+		%\include{appendix1}
 		%\include{appendix2}
 
 
@@ -154,7 +155,7 @@
 	\bookmarksetup{startatroot}
 	\backmatter
 		\cleardoublepage
-		\include{publications}
+		%\include{publications}
 
 
 		% Glossary
@@ -176,7 +177,7 @@
 		\begin{singlespace}
 		\begin{footnotesize}
 		\addcontentsline{toc}{chapter}{References}
-		\bibliographystyle{amsalpha}
+		\bibliographystyle{amsalpha}%{plainnat}
 		\renewcommand{\bibname}{References}
 		\bibliography{references}
 		\end{footnotesize}
