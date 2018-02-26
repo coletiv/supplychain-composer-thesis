@@ -282,3 +282,5 @@ In every test performed, Hyperledger had a higher throughput, lower latency and 
 
 Another interesting conclusion was that, with a really high number of transactions (10000), Hyperledger only took 3.57 seconds to finish executing the first transaction, while Ethereum took 361.36 seconds, showing that Ethereum's network clogs easily and is slow to start up, while Hyperledger executes the transactions more consistently. This was exactly one of the reasons for the revision in the architecture of Fabric.
 
+%\section{Tendermint}
+% Fabric takes a similar approach to Tendermint, but is more opinionated about how the state is managed, and requires that all application behaviour runs in potentially many docker containers, modules it calls “chaincode”. It uses an implementation of PBFT. from a team at IBM that is augmented to handle potentially non-deterministic chaincode It is possible to implement this docker-based behaviour as a ABCI app in Tendermint, though extending Tendermint to handle non-determinism remains for future work.
