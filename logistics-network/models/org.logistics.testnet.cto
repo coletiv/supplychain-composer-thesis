@@ -44,21 +44,22 @@ transaction TemperatureReading extends ShipmentTransaction {
 
 
 // transfer possession to another person; final owner stays the same; check final owner
-transaction TransferCommodity {
+transaction TransferCommodityPossession {
   --> Commodity commodity
-  --> supplyChainMember newOwner
+  --> supplyChainMember newHolder
 }
 
 transaction CreateCommodity {
   --> supplyChainMember owner
+  --> supplyChainMember holder
   o String GTIN
   o String name
   o String description
 }
 
 asset Commodity identified by GTIN {
-  --> supplyChainMember owner //FINAL OWNER
-  --> supplyChainMember inPossesion //IN POSSESSION OF ...
+  --> supplyChainMember owner //FINAL OWNER - is updated on payout. If there's no payout implemented ==> if holder==shipment.buyer then owner=shipment.buyer
+  --> supplyChainMember holder //IN POSSESSION OF ...
   o String GTIN
   o String name
   o String description
@@ -150,6 +151,6 @@ transaction SetupDemo {
 
 event changeOwnershipEvent{
 --> Commodity commodity
---> supplyChainMember newOwner
---> supplyChainMember oldOwner
+--> supplyChainMember newHolder
+--> supplyChainMember oldHolder
 }

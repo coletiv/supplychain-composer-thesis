@@ -93,19 +93,19 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
  * @param {org.logistics.testnet.TransferCommodity} transfer - the TransferCommodity transaction
  * @transaction
  */
- async function TransferCommodity(transfer) {
+ async function TransferCommodityPossession(transfer) {
     try {
-        var newOwner = transfer.newOwner;
+        var newHolder = transfer.newHolder;
         var commodity = transfer.commodity;
-        var oldOwner = transfer.commodity.owner;
+        var oldHolder = transfer.commodity.holder;
 
         // INTEGRITY CHECKS -> Refactor into a function
-        if (newOwner == '')
+        if (newHolder == '')
             throw 'GTIN can not be an empty string!';
         else if (commodity == '')
             throw 'commodity can not be an empty string!';
 
-        transfer.commodity.owner = transfer.newOwner;
+        transfer.commodity.holder = transfer.newHolder;
         const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
         await commodityAssetRegistry.update(transfer.commodity);
 
@@ -113,8 +113,8 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
         // Emit an event for the change of ownership
         let event = getFactory().newEvent('org.logistics.testnet', 'changeOwnershipEvent');
         event.commodity = commodity;
-        event.oldOwner = oldOwner;
-        event.newOwner = newOwner;
+        event.oldHolder = oldHolder;
+        event.newHolder = newHolder;
         emit(event);
 
     } catch (error) {
@@ -132,7 +132,9 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
  * @transaction
  */
  async function createCommodity(commodity) {
+	
     var owner = commodity.owner;
+    var holder = commodity.holder;
     var GTIN = commodity.GTIN;
 
     // INTEGRITY CHECKS
@@ -153,6 +155,7 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
             //var commodityId = 'COMMODITY_' + owner + getAll
             var newCommodity = factory.newResource('org.logistics.testnet', 'Commodity', GTIN);
             newCommodity.owner = owner;
+			newCommodity.holder = holder;
             //console.log('test: ' + GTIN)
             newCommodity.GTIN = GTIN;
             newCommodity.name = 'Wood';
