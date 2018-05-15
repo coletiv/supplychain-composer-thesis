@@ -3,7 +3,7 @@
     "composer": "^0.19.5"
   },
   "name": "logistics-network",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "SC + BC",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/logistics-network.bna",

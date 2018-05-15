@@ -1,17 +1,6 @@
-/*
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
- /* global getParticipantRegistry getAssetRegistry getFactory */
+
+/* global getParticipantRegistry getAssetRegistry getFactory */
+
 /**
  * A shipment has been received by an importer
  * @param {org.logistics.testnet.ShipmentReceived} shipmentReceived - the ShipmentReceived transaction
@@ -88,12 +77,35 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
     await shipmentRegistry.update(shipment);
 }
 */
+
 /**
  * 
- * @param {org.logistics.testnet.TransferCommodity} transfer - the TransferCommodity transaction
+ * @param {org.logistics.testnet.ReportDamagedGood} damageReport - the ReportDamagedGood transaction
  * @transaction
  */
- async function TransferCommodityPossession(transfer) {
+async function ReportDamagedGood(damageReport) {
+    //vehicleAssetRegistry.updateAll([vehicle1, vehicle2]);
+    var damagedGood = damageReport.damagedGood;
+
+    //var arrayLength = damagedGoods.length;
+    //for (var i = 0; i < arrayLength; i++) {
+        damagedGood.itemCondition.status=damageReport.itemStatus;
+        damagedGood.itemCondition.conditionDescription=damageReport.itemConditionDescription;
+        
+    //}
+
+
+    const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
+    await commodityAssetRegistry.update(damagedGood);
+}
+
+
+/**
+ * 
+ * @param {org.logistics.testnet.TransferCommodityPossession} transfer - the TransferCommodityPossession transaction
+ * @transaction
+ */
+async function TransferCommodityPossession(transfer) {
     try {
         var newHolder = transfer.newHolder;
         var commodity = transfer.commodity;
@@ -131,8 +143,9 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
  * @param {org.logistics.testnet.CreateCommodity} commodity - the CreateCommodity transaction
  * @transaction
  */
- async function createCommodity(commodity) {
-	
+/*
+async function createCommodity(commodity) {
+
     var owner = commodity.owner;
     var holder = commodity.holder;
     var GTIN = commodity.GTIN;
@@ -145,7 +158,7 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
 
     // Get the vehicle asset registry.
     return getAssetRegistry('org.logistics.testnet.Commodity')
-    .then(function(commodityAssetRegistry) {
+        .then(function (commodityAssetRegistry) {
 
             // Get the factory for creating new asset instances.
             var factory = getFactory();
@@ -155,7 +168,7 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
             //var commodityId = 'COMMODITY_' + owner + getAll
             var newCommodity = factory.newResource('org.logistics.testnet', 'Commodity', GTIN);
             newCommodity.owner = owner;
-			newCommodity.holder = holder;
+            newCommodity.holder = holder;
             //console.log('test: ' + GTIN)
             newCommodity.GTIN = GTIN;
             newCommodity.name = 'Wood';
@@ -163,13 +176,13 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
             // Add the vehicle to the vehicle asset registry.
             return commodityAssetRegistry.add(newCommodity);
         })
-    .catch(function(error) {
-        console.log(error);
+        .catch(function (error) {
+            console.log(error);
             // Add optional error handling here.
             throw error;
         });
 }
-
+*/
 
 
 /**

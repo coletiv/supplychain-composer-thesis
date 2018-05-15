@@ -4,11 +4,25 @@ namespace org.logistics.testnet
  * The type of perishable product being shipped
  */
 enum ProductType {
-  o BANANAS
-  o APPLES
-  o PEARS
-  o PEACHES
-  o COFFEE
+  o FOOD
+	o MEDICINE
+	o MACHINES
+	o OTHER
+}
+
+enum ItemStatus {
+  o GOOD
+  o DAMAGED
+  o CRITICAL
+}
+/**
+ * Transformation types for a product
+ */
+enum TransformationType{
+	o JOIN
+	o SPLIT
+  o UPGRADE
+	//o DELETE
 }
 
 /**
@@ -49,6 +63,7 @@ transaction TransferCommodityPossession {
   --> supplyChainMember newHolder
 }
 
+/*
 transaction CreateCommodity {
   --> supplyChainMember owner
   --> supplyChainMember holder
@@ -56,13 +71,34 @@ transaction CreateCommodity {
   o String name
   o String description
 }
+*/
+
+transaction ReportDamagedGood {
+  --> Commodity damagedGood
+  o DateTime dateOccurred
+  o DateTime dateReported
+  o String occurrenceDescription
+  o String itemConditionDescription
+  o ItemStatus itemStatus
+
+}
+
+transaction TransformProduct {
+
+}
+
+transaction DeleteProduct{
+
+}
 
 asset Commodity identified by GTIN {
   --> supplyChainMember owner //FINAL OWNER - is updated on payout. If there's no payout implemented ==> if holder==shipment.buyer then owner=shipment.buyer
   --> supplyChainMember holder //IN POSSESSION OF ...
+  o ProductType type
   o String GTIN
   o String name
   o String description
+  o ItemCondition itemCondition
 }
 
 
@@ -94,6 +130,11 @@ asset OrderContract identified by orderId {
   o Double maxTemperature
   o Double minPenaltyFactor
   o Double maxPenaltyFactor
+}
+
+concept ItemCondition {
+  o String conditionDescription
+  o ItemStatus status
 }
 
 /**
