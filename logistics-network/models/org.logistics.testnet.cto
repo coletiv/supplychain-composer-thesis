@@ -83,8 +83,17 @@ transaction ReportDamagedGood {
 
 }
 
-transaction TransformProduct {
+/**
+* Deletes the input commodities and creates the new output commodities
+*/
+transaction TransformCommodities {
+  --> Commodity[] commoditiesToBeConsumed
+  o Commodity[] commoditiesToBeCreated
+}
 
+transaction RevertTransformation {
+  o Commodity[] commoditiesToRestore
+  --> Commodity[] commoditiesToDelete
 }
 
 transaction DeleteProduct{

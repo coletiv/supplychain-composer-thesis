@@ -91,14 +91,62 @@ async function ReportDamagedGood(damageReport) {
     //for (var i = 0; i < arrayLength; i++) {
         damagedGood.itemCondition.status=damageReport.itemStatus;
         damagedGood.itemCondition.conditionDescription=damageReport.itemConditionDescription;
-        
     //}
-
 
     const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
     await commodityAssetRegistry.update(damagedGood);
 }
 
+/**
+ * 
+ * @param {org.logistics.testnet.TransformCommodity} transformation - the TransformCommodity transaction
+ * @transaction
+ */
+async function TransformProduct(transformation) {
+    var inputProducts = transformation.commoditiesToBeConsumed;
+    var outputProducts = transformation.commoditiesToBeCreated;
+    var createdCommodities;
+
+    if (inputProducts.length <= 0 || outputProducts.length <= 0){
+        throw 'The number of commodities consumed or created can not be 0. To create or delete commodities, use the corresponding Add or Delete transactions.'
+    }
+
+    const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
+    var factory = getFactory();
+
+    for (var i = 0; i < outputProducts.length; i++){
+        createdCommodities[i] = factory.newResource('org.logistics.testnet', 'Commodity', outputProducts[i].GTIN);
+        createdCommodities[i].owner = outputProducts[i].owner;
+        createdCommodities[i].holder = outputProducts[i].holder;
+        createdCommodities[i].type = outputProducts[i].type;
+        createdCommodities[i].GTIN = outputProducts[i].GTIN;
+        createdCommodities[i].name = outputProducts[i].name;
+        createdCommodities[i].description = outputProducts[i].description;
+        createdCommodities[i].itemCondition = outputProducts[i].itemCondition;
+
+    }
+
+    // Add the vehicles to the vehicle asset registry.
+    commodityAssetRegistry.addAll(outputProducts);
+
+    //addAll    redmoveAll
+
+
+
+}
+
+/**
+ * 
+ * @param {org.logistics.testnet.RevertTransformation} transformation - the RevertTransformation transaction
+ * @transaction
+ */
+async function RevertTransformation(transformation) {
+    var inputProducts = transformation.input;
+    var outputProducts = transformation.output;
+
+    const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
+    var factory = getFactory();
+}
 
 /**
  * 
