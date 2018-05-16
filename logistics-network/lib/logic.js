@@ -99,13 +99,13 @@ async function ReportDamagedGood(damageReport) {
 
 /**
  * 
- * @param {org.logistics.testnet.TransformCommodity} transformation - the TransformCommodity transaction
+ * @param {org.logistics.testnet.TransformCommodities} transformation - the TransformCommodity transaction
  * @transaction
  */
-async function TransformProduct(transformation) {
+async function TransformCommodities(transformation) {
     var inputProducts = transformation.commoditiesToBeConsumed;
     var outputProducts = transformation.commoditiesToBeCreated;
-    var createdCommodities;
+    var createdCommodities = [];
 
     if (inputProducts.length <= 0 || outputProducts.length <= 0){
         throw 'The number of commodities consumed or created can not be 0. To create or delete commodities, use the corresponding Add or Delete transactions.'
@@ -115,24 +115,22 @@ async function TransformProduct(transformation) {
     var factory = getFactory();
 
     for (var i = 0; i < outputProducts.length; i++){
-        createdCommodities[i] = factory.newResource('org.logistics.testnet', 'Commodity', outputProducts[i].GTIN);
-        createdCommodities[i].owner = outputProducts[i].owner;
-        createdCommodities[i].holder = outputProducts[i].holder;
-        createdCommodities[i].type = outputProducts[i].type;
-        createdCommodities[i].GTIN = outputProducts[i].GTIN;
-        createdCommodities[i].name = outputProducts[i].name;
-        createdCommodities[i].description = outputProducts[i].description;
-        createdCommodities[i].itemCondition = outputProducts[i].itemCondition;
-
+      createdCommodities[i] = factory.newResource('org.logistics.testnet', 'Commodity', outputProducts[i].GTIN);
+     
+      createdCommodities[i].owner = outputProducts[i].owner;
+      createdCommodities[i].holder = outputProducts[i].holder;
+      createdCommodities[i].type = outputProducts[i].type;
+      createdCommodities[i].GTIN = outputProducts[i].GTIN;
+      createdCommodities[i].name = outputProducts[i].name;
+      createdCommodities[i].description = outputProducts[i].description;
+      createdCommodities[i].itemCondition = outputProducts[i].itemCondition;
+        
     }
 
     // Add the vehicles to the vehicle asset registry.
-    commodityAssetRegistry.addAll(outputProducts);
-
+    commodityAssetRegistry.addAll(createdCommodities);
+    commodityAssetRegistry.removeAll(inputProducts);
     //addAll    redmoveAll
-
-
-
 }
 
 /**
