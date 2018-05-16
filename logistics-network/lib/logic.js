@@ -78,6 +78,15 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
 }
 */
 
+
+/**
+ * 
+ * @param {org.logistics.testnet.updateShipment} update - the updateShipment transaction
+ * @transaction
+ */
+async function updateShipment(update) {
+}
+
 /**
  * 
  * @param {org.logistics.testnet.ReportDamagedGood} damageReport - the ReportDamagedGood transaction
@@ -106,6 +115,8 @@ async function TransformCommodities(transformation) {
     var inputProducts = transformation.commoditiesToBeConsumed;
     var outputProducts = transformation.commoditiesToBeCreated;
     var createdCommodities = [];
+
+    //TODO: CHECK SHIPMENT STATUS
 
     if (inputProducts.length <= 0 || outputProducts.length <= 0){
         throw 'The number of commodities consumed or created can not be 0. To create or delete commodities, use the corresponding Add or Delete transactions.'

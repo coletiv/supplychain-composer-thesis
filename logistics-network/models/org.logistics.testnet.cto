@@ -44,7 +44,7 @@ enum ShipmentStatus {
  * An abstract transaction that is related to a Shipment
  */
 abstract transaction ShipmentTransaction {
-  --> Shipment shipment
+  --> ShipmentBatch shipment
   o ShipmentStatus status
 }
 
@@ -54,6 +54,13 @@ abstract transaction ShipmentTransaction {
  */
 transaction TemperatureReading extends ShipmentTransaction {
   o Double centigrade
+}
+
+/**
+ * Transfer holdership of assets to another person and update the status of the shipment
+ */
+transaction UpdateShipment extends ShipmentTransaction {
+
 }
 
 
@@ -94,9 +101,10 @@ transaction TransformCommodities {
 transaction RevertTransformation {
   o Commodity[] commoditiesToRestore
   --> Commodity[] commoditiesToDelete
+  //or should it be || o String transactionID 
 }
 
-transaction DeleteProduct{
+transaction updateShipment{
 
 }
 
@@ -110,20 +118,28 @@ asset Commodity identified by GTIN {
   o ItemCondition itemCondition
 }
 
+/** Only to be used in case of Shipment=transportation of various batches from one destination to another; At the moment, shipment= end-to-end transport of a batch of items to its owner; so, this is more designed with the final customer in perspective
+
+asset Batch identified by batchId {
+  o String batchId
+  --> Commodity[] batchCommodities
+}
+*/
 
 
 /**
  * A shipment being tracked as an asset on the ledger
  */
-asset Shipment identified by shipmentId {
+asset ShipmentBatch identified by shipmentId {
   o String shipmentId
   o String trackingNumber
   o ShipmentStatus status
   o Location location
   o Long unitCount
   o TemperatureReading[] temperatureReadings optional
+  --> supplyChainMember holder
   --> OrderContract contract
-  --> Commodity assetExchanged
+  --> Commodity[] assetExchanged
 }
 
 /**
