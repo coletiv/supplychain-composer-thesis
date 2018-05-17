@@ -60,9 +60,13 @@ transaction TemperatureReading extends ShipmentTransaction {
  * Transfer holdership of assets to another person and update the status of the shipment
  */
 transaction UpdateShipment extends ShipmentTransaction {
-
+  o ShipmentStatus newLocation
+  --> supplyChainMember newHolder
 }
 
+transaction PayOut{
+  
+}
 
 // transfer possession to another person; final owner stays the same; check final owner
 transaction TransferCommodityPossession {
@@ -104,12 +108,6 @@ transaction RevertTransformation {
   //or should it be || o String transactionID 
 }
 
-transaction updateShipment{
-  o ShipmentStatus newStatus
-  o ShipmentStatus newLocation
-  --> supplyChainMember newHolder
-  --> ShipmentBatch shipmentToUpdate
-}
 
 asset Commodity identified by GTIN {
   o ProductType type
@@ -136,7 +134,6 @@ asset ShipmentBatch identified by shipmentId {
   o String trackingNumber
   o ShipmentStatus status
   o Location location
-  o Long unitCount
   o TemperatureReading[] temperatureReadings optional
   --> supplyChainMember owner //FINAL OWNER - is updated on payout. If there's no payout implemented ==> if holder==shipment.buyer then owner=shipment.buyer
   --> supplyChainMember holder //IN POSSESSION OF ...
@@ -151,8 +148,9 @@ asset OrderContract identified by orderId {
   o String orderId
   --> supplyChainMember buyer
   --> supplyChainMember seller
+  o Location expectedArrivalLocation
   o DateTime arrivalDateTime
-  o Double unitPrice
+  o Double paymentPrice
   o Double minTemperature
   o Double maxTemperature
   o Double minPenaltyFactor
@@ -217,8 +215,16 @@ participant Customer extends supplyChainMember {
 transaction SetupDemo {
 }
 
+transaction TestTransaction{
+
+}
+
 event changeOwnershipEvent{
 --> Commodity commodity
 --> supplyChainMember newHolder
 --> supplyChainMember oldHolder
+}
+
+event detectLocationFraud{
+
 }

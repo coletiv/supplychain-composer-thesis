@@ -78,20 +78,55 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
 }
 */
 
+function validPayment(shipment){
+    const contract = shipment.contract;
+    let payOut = contract.paymentPrice;
+
+    console.log('Received at: ' + shipment.timestamp);
+    console.log('Contract arrivalDateTime: ' + contract.arrivalDateTime);
+
+    // if the shipment did not arrive on time the payout is zero
+    if (shipmentReceived.timestamp > contract.arrivalDateTime) {
+        console.log('Late shipment');
+    }
+
+    if(contract.paymentPrice > contract.buyer.accountBalance)
+        return false;
+    else
+        return true;
+}
+
 
 /**
  * 
- * @param {org.logistics.testnet.updateShipment} updatedItems - the updateShipment transaction
+ * @param {org.logistics.testnet.UpdateShipment} updatedItems - the UpdateShipment transaction
  * @transaction
  */
-async function updateShipment(updatedItems) {
-    var newStatus = updatedItems.newStatus;
+async function UpdateShipment(updatedItems) {
+    var newStatus = updatedItems.status;
     var newHolder = updatedItems.newHolder;
     var newLocation = updatedItems.newLocation;
-    var shipment = updatedItems.shipmentToUpdate;
+    var shipment = updatedItems.shipment;
 
     if(newStatus == 'DELIVERED'){
-        if(newHolder != shipment.owner){
+        if(newHolder == shipment.contract.buyer){
+
+            //Verify balance
+            if(validPayment(shipment)){
+
+                shipment.holder = newHolder;
+                shipment.status = newStatus;
+                shipment.newLocation = newLocation;
+
+                const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
+                await shipmentAssetRegistry.update(shipment);
+
+                //Trigger PayOut transaction
+
+                 // create the manufacturer
+                const payout = factory.newResource(NS, 'PayOut', 'transactionID-222');
+            }
+
             //Option 1
             //payout(shipment);
 
@@ -101,15 +136,14 @@ async function updateShipment(updatedItems) {
             //Option 3
             //Do nothing, and say it can not update to delivered with this transaction
             //In its place, to update the status to 'DELIVERED', the shipmentReceived transaction should be called -> who can call it? || Should be signed by the holder and the owner at the same time to work, but that feature is not yet implemented in Composer
+
+
+            if(newLocation != shipment.contract.expectedArrivalLocation){
+                let event = getFactory().newEvent('org.logistics.testnet', 'detectLocationFraud');
+                emit(event);
+            }
         }
     }
-
-    shipment.holder = newHolder;
-    shipment.status = newStatus;
-    shipment.newLocation = newLocation;
-
-    const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
-    await shipmentAssetRegistry.update(shipment);
 }
 
 /**
@@ -118,7 +152,6 @@ async function updateShipment(updatedItems) {
  * @transaction
  */
 async function ReportDamagedGood(damageReport) {
-    //vehicleAssetRegistry.updateAll([vehicle1, vehicle2]);
     var damagedGood = damageReport.damagedGood;
 
     //var arrayLength = damagedGoods.length;
@@ -142,6 +175,9 @@ async function TransformCommodities(transformation) {
     var createdCommodities = [];
 
     //TODO: CHECK SHIPMENT STATUS
+
+    //TODO: CHECK IF IT IS THE OWNER OF THE INPUT PRODUCTS DOING THE TRANSACTION
+    //TODO: OWNER OF CREATED PRODUCTS = OWNER OF INPUT PRODUCTS
 
     if (inputProducts.length <= 0 || outputProducts.length <= 0){
         throw 'The number of commodities consumed or created can not be 0. To create or delete commodities, use the corresponding Add or Delete transactions.'
@@ -180,6 +216,12 @@ async function RevertTransformation(transformation) {
 
     const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
     var factory = getFactory();
+
+    // Apparently, there is no method to get the list of transactions in runtime; therefore, it is impossible to revert a transaction by just having its ID in runtime
+    // Maybe if the client app reads the transaction and sends back the items to revert;
+
+    //UNFINISHED
+
 }
 
 /**
@@ -287,6 +329,20 @@ async function temperatureReading(temperatureReading) { // eslint-disable-line n
     // add the temp reading to the shipment
     const shipmentRegistry = await getAssetRegistry('org.logistics.testnet.Shipment');
     await shipmentRegistry.update(shipment);
+}
+
+
+/**
+ * Test Transaction
+ * @param {org.logistics.testnet.TestTransaction} testParameters - the TestTransaction transaction
+ * @transaction
+ */
+async function TestTransaction(testParameters){
+    console.log('test');
+
+    //const addAssetRegistry = await getTransactionRegistry('org.logistics.testnet.AddAsset');
+    console.log("hi?");
+    console.log('hi!' + addAssetRegistry);
 }
 
 /**
