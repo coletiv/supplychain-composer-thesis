@@ -105,12 +105,13 @@ transaction RevertTransformation {
 }
 
 transaction updateShipment{
-
+  o ShipmentStatus newStatus
+  o ShipmentStatus newLocation
+  --> supplyChainMember newHolder
+  --> ShipmentBatch shipmentToUpdate
 }
 
 asset Commodity identified by GTIN {
-  --> supplyChainMember owner //FINAL OWNER - is updated on payout. If there's no payout implemented ==> if holder==shipment.buyer then owner=shipment.buyer
-  --> supplyChainMember holder //IN POSSESSION OF ...
   o ProductType type
   o String GTIN
   o String name
@@ -137,7 +138,8 @@ asset ShipmentBatch identified by shipmentId {
   o Location location
   o Long unitCount
   o TemperatureReading[] temperatureReadings optional
-  --> supplyChainMember holder
+  --> supplyChainMember owner //FINAL OWNER - is updated on payout. If there's no payout implemented ==> if holder==shipment.buyer then owner=shipment.buyer
+  --> supplyChainMember holder //IN POSSESSION OF ...
   --> OrderContract contract
   --> Commodity[] assetExchanged
 }

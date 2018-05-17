@@ -81,10 +81,35 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
 
 /**
  * 
- * @param {org.logistics.testnet.updateShipment} update - the updateShipment transaction
+ * @param {org.logistics.testnet.updateShipment} updatedItems - the updateShipment transaction
  * @transaction
  */
-async function updateShipment(update) {
+async function updateShipment(updatedItems) {
+    var newStatus = updatedItems.newStatus;
+    var newHolder = updatedItems.newHolder;
+    var newLocation = updatedItems.newLocation;
+    var shipment = updatedItems.shipmentToUpdate;
+
+    if(newStatus == 'DELIVERED'){
+        if(newHolder != shipment.owner){
+            //Option 1
+            //payout(shipment);
+
+            //Option 2
+            //trigger ShipmentReceived transaction
+
+            //Option 3
+            //Do nothing, and say it can not update to delivered with this transaction
+            //In its place, to update the status to 'DELIVERED', the shipmentReceived transaction should be called -> who can call it? || Should be signed by the holder and the owner at the same time to work, but that feature is not yet implemented in Composer
+        }
+    }
+
+    shipment.holder = newHolder;
+    shipment.status = newStatus;
+    shipment.newLocation = newLocation;
+
+    const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
+    await shipmentAssetRegistry.update(shipment);
 }
 
 /**
