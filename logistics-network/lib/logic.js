@@ -86,7 +86,7 @@ function validPayment(shipment){
     console.log('Contract arrivalDateTime: ' + contract.arrivalDateTime);
 
     // if the shipment did not arrive on time the payout is zero
-    if (shipmentReceived.timestamp > contract.arrivalDateTime) {
+    if (shipment.timestamp > contract.arrivalDateTime) {
         console.log('Late shipment');
     }
 
@@ -109,8 +109,11 @@ async function UpdateShipment(updatedItems) {
     var shipment = updatedItems.shipment;
 
     if(newStatus == 'DELIVERED'){
-        if(newHolder == shipment.contract.buyer){
-
+        console.log('New Holder: ' + newHolder);
+        console.log('Contract buyer: ' + shipment.contract.buyer);
+        console.log('Contract: ' + shipment.contract);
+        if(newHolder.id == shipment.contract.buyer.id){
+            
             //Verify balance
             if(validPayment(shipment)){
 
@@ -125,6 +128,8 @@ async function UpdateShipment(updatedItems) {
 
                  // create the manufacturer
                 const payout = factory.newResource(NS, 'PayOut', 'transactionID-222');
+            }else{
+                throw 'Not enough money to make the payment transaction on delivery';
             }
 
             //Option 1
@@ -142,6 +147,8 @@ async function UpdateShipment(updatedItems) {
                 let event = getFactory().newEvent('org.logistics.testnet', 'detectLocationFraud');
                 emit(event);
             }
+        }else{
+            throw 'Not delivering to the contract buyer!';
         }
     }
 }

@@ -60,12 +60,12 @@ transaction TemperatureReading extends ShipmentTransaction {
  * Transfer holdership of assets to another person and update the status of the shipment
  */
 transaction UpdateShipment extends ShipmentTransaction {
-  o ShipmentStatus newLocation
+  o Location newLocation
   --> supplyChainMember newHolder
 }
 
 transaction PayOut{
-  
+
 }
 
 // transfer possession to another person; final owner stays the same; check final owner
