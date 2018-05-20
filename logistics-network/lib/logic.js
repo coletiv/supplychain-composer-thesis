@@ -360,12 +360,11 @@ async function temperatureReading(temperatureReading) { // eslint-disable-line n
  * @transaction
  */
 async function TestTransaction(testParameters){
-    console.log('test');
-
-    //const addAssetRegistry = await getTransactionRegistry('org.logistics.testnet.AddAsset');
-    console.log("hi?");
-    console.log('hi!' + addAssetRegistry);
+    let event = getFactory().newEvent('org.logistics.testnet', 'TestEvent');
+        event.eventString = 'Testing Notifications.'
+        emit(event);
 }
+
 
 /**
  * Initialize some test assets and participants useful for running a demo.

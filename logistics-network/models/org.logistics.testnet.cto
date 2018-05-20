@@ -241,6 +241,10 @@ transaction TestTransaction{
 
 }
 
+event TestEvent{
+  o String eventString
+}
+
 event changeOwnershipEvent{
 --> Commodity commodity
 --> supplyChainMember newHolder
