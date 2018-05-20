@@ -121,6 +121,54 @@ function checkLocationFraud(newLocation, expectedArrivalLocation, shipment){
 
 /**
  * 
+ * @param {org.logistics.testnet.CreateShipmentAndContract} shipmentAndContract - the CreateShipmentAndContract transaction
+ * @transaction
+ */
+async function CreateShipmentAndContract(shipmentAndContract){
+
+    var shipment = factory.newResource('org.logistics.testnet', 'ShipmentBatch', shipmentAndContract.shipmentId);
+
+    var contract = factory.newResource('org.logistics.testnet', 'OrderContract', outputProducts[i].GTIN);
+
+    //MANDATORY SHIPMENT PARAMETERS
+    shipment.shipmentId = shipmentAndContract.shipmentId;
+    shipment.trackingNumber = shipmentAndContract.trackingNumber;
+    shipment.location = shipmentAndContract.location;
+    shipment.owner = shipmentAndContract.owner;
+    shipment.holder = shipmentAndContract.holder;
+    shipment.assetExchanged = shipmentAndContract.assetExchanged;
+    //OPTIONAL SHIPMENT PARAMETERS
+    if (shipmentAndContract.status != '' && shipmentAndContract.status !=  null){
+        shipment.status = shipmentAndContract.status;
+    }else{
+        shipmentAndContract.status = 'WAITING';
+    }
+    shipment.temperatureReadings = [];
+
+    //MANDATORY CONTRACT PARAMETERS
+    contract.orderId = shipmentAndContract.orderId;
+    contract.buyer = shipmentAndContract.buyer;
+    contract.seller = shipmentAndContract.seller;
+    contract.expectedArrivalLocation = shipmentAndContract.expectedArrivalLocation;
+    contract.payOnArrival = shipmentAndContract.payOnArrival;
+    contract.paymentPrice = shipmentAndContract.paymentPrice;
+    //Checking that the actual arrival date is AFTER the current date
+    var now = new Date();
+    if (shipmentAndContract.arrivalDateTime <= now){
+        throw 'Arrival Date is set to before the current date.'
+    }else{
+        contract.arrivalDateTime = shipmentAndContract.arrivalDateTime;
+    }
+
+    const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
+    await shipmentAssetRegistry.add(shipment);
+
+    const contractAssetRegistry = await getAssetRegistry('org.logistics.testnet.OrderContract');
+    await contractAssetRegistry.add(contract);
+}
+
+/**
+ * 
  * @param {org.logistics.testnet.UpdateShipment} updatedItems - the UpdateShipment transaction
  * @transaction
  */

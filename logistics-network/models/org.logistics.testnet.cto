@@ -67,7 +67,6 @@ transaction CreateShipmentAndContract {
   o String trackingNumber
   o ShipmentStatus status default = 'WAITING'
   o Location location
-  o TemperatureReading[] temperatureReadings optional
   --> supplyChainMember owner 
   --> supplyChainMember holder //IN POSSESSION OF ...
   // --> OrderContract contract
@@ -82,10 +81,6 @@ transaction CreateShipmentAndContract {
   o Boolean payOnArrival
   o DateTime arrivalDateTime
   o Double paymentPrice
-  o Double minTemperature optional
-  o Double maxTemperature optional
-  o Double minPenaltyFactor optional
-  o Double maxPenaltyFactor optional
 }
 
 
@@ -102,7 +97,6 @@ transaction TransferCommodityPossession {
   --> Commodity commodity
   --> supplyChainMember newHolder
 }
-
 
 
 transaction ReportDamagedGood {
@@ -123,12 +117,15 @@ transaction TransformCommodities {
   o Commodity[] commoditiesToBeCreated
 }
 
+/**
+
+
 transaction RevertTransformation {
   o Commodity[] commoditiesToRestore
   --> Commodity[] commoditiesToDelete
   //or should it be || o String transactionID 
 }
-
+*/
 
 asset Commodity identified by GTIN {
   o ProductType type
@@ -173,10 +170,6 @@ asset OrderContract identified by orderId {
   o Boolean payOnArrival
   o DateTime arrivalDateTime
   o Double paymentPrice
-  o Double minTemperature
-  o Double maxTemperature
-  o Double minPenaltyFactor
-  o Double maxPenaltyFactor
 }
 
 concept ItemCondition {
