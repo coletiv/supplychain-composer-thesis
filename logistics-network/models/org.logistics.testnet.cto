@@ -188,7 +188,6 @@ concept Address {
 }
 
 concept Location {
-  o String locationId
   o String globalLN // global location number
   o Address address
 }
