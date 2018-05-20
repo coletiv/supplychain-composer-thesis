@@ -126,9 +126,11 @@ function checkLocationFraud(newLocation, expectedArrivalLocation, shipment){
  */
 async function CreateShipmentAndContract(shipmentAndContract){
 
+    var factory = getFactory();
+
     var shipment = factory.newResource('org.logistics.testnet', 'ShipmentBatch', shipmentAndContract.shipmentId);
 
-    var contract = factory.newResource('org.logistics.testnet', 'OrderContract', outputProducts[i].GTIN);
+    var contract = factory.newResource('org.logistics.testnet', 'OrderContract', shipmentAndContract.orderId);
 
     //MANDATORY SHIPMENT PARAMETERS
     shipment.shipmentId = shipmentAndContract.shipmentId;
@@ -136,6 +138,7 @@ async function CreateShipmentAndContract(shipmentAndContract){
     shipment.location = shipmentAndContract.location;
     shipment.owner = shipmentAndContract.owner;
     shipment.holder = shipmentAndContract.holder;
+    //TODO: CHECK IF ASSETS EXIST
     shipment.assetExchanged = shipmentAndContract.assetExchanged;
     //OPTIONAL SHIPMENT PARAMETERS
     if (shipmentAndContract.status != '' && shipmentAndContract.status !=  null){
@@ -147,6 +150,7 @@ async function CreateShipmentAndContract(shipmentAndContract){
 
     //MANDATORY CONTRACT PARAMETERS
     contract.orderId = shipmentAndContract.orderId;
+    //TODO: CHECK IF BUYER+SELLER EXIST
     contract.buyer = shipmentAndContract.buyer;
     contract.seller = shipmentAndContract.seller;
     contract.expectedArrivalLocation = shipmentAndContract.expectedArrivalLocation;
@@ -159,6 +163,8 @@ async function CreateShipmentAndContract(shipmentAndContract){
     }else{
         contract.arrivalDateTime = shipmentAndContract.arrivalDateTime;
     }
+
+    shipment.contract = contract;
 
     const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
     await shipmentAssetRegistry.add(shipment);
@@ -279,7 +285,7 @@ async function TransformCommodities(transformation) {
  * 
  * @param {org.logistics.testnet.RevertTransformation} transformation - the RevertTransformation transaction
  * @transaction
- */
+ *
 async function RevertTransformation(transformation) {
     var inputProducts = transformation.input;
     var outputProducts = transformation.output;
@@ -293,6 +299,7 @@ async function RevertTransformation(transformation) {
     //UNFINISHED
 
 }
+*/
 
 /**
  * 
