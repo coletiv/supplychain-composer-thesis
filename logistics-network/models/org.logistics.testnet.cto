@@ -57,15 +57,44 @@ transaction TemperatureReading extends ShipmentTransaction {
 }
 
 /**
+ * We want to create a shipment and contract that are linked, but SEPARATE assets, so that they can have separate permissions. If they were all 1 asset it would not be possible, and even creating 2 assets with 2 different transactions, it is sometimes hard to link the shipment and contract manually; So, when creating a shipment, we automatically create the corresponding contract;
+ */
+transaction CreateShipmentAndContract {
+  /*
+  * Shipment parameters
+  */
+  o String shipmentId
+  o String trackingNumber
+  o ShipmentStatus status default = 'WAITING'
+  o Location location
+  o TemperatureReading[] temperatureReadings optional
+  --> supplyChainMember owner 
+  --> supplyChainMember holder //IN POSSESSION OF ...
+  // --> OrderContract contract
+  --> Commodity[] assetExchanged
+ /*
+  * Contract parameters
+  */
+  o String orderId
+  --> supplyChainMember buyer
+  --> supplyChainMember seller
+  o Location expectedArrivalLocation
+  o Boolean payOnArrival
+  o DateTime arrivalDateTime
+  o Double paymentPrice
+  o Double minTemperature optional
+  o Double maxTemperature optional
+  o Double minPenaltyFactor optional
+  o Double maxPenaltyFactor optional
+}
+
+
+/**
  * Transfer holdership of assets to another person and update the status of the shipment
  */
 transaction UpdateShipment extends ShipmentTransaction {
   o Location newLocation
   --> supplyChainMember newHolder
-}
-
-transaction PayOut{
-
 }
 
 // transfer possession to another person; final owner stays the same; check final owner
@@ -74,15 +103,7 @@ transaction TransferCommodityPossession {
   --> supplyChainMember newHolder
 }
 
-/*
-transaction CreateCommodity {
-  --> supplyChainMember owner
-  --> supplyChainMember holder
-  o String GTIN
-  o String name
-  o String description
-}
-*/
+
 
 transaction ReportDamagedGood {
   --> Commodity damagedGood
@@ -135,7 +156,7 @@ asset ShipmentBatch identified by shipmentId {
   o ShipmentStatus status
   o Location location
   o TemperatureReading[] temperatureReadings optional
-  --> supplyChainMember owner //FINAL OWNER - is updated on payout. If there's no payout implemented ==> if holder==shipment.buyer then owner=shipment.buyer
+  --> supplyChainMember owner
   --> supplyChainMember holder //IN POSSESSION OF ...
   --> OrderContract contract
   --> Commodity[] assetExchanged
@@ -149,6 +170,7 @@ asset OrderContract identified by orderId {
   --> supplyChainMember buyer
   --> supplyChainMember seller
   o Location expectedArrivalLocation
+  o Boolean payOnArrival
   o DateTime arrivalDateTime
   o Double paymentPrice
   o Double minTemperature

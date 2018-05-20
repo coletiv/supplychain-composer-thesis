@@ -78,11 +78,11 @@ async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
 }
 */
 
-function validPayment(shipment){
+function validPayment(shipment, transactionItems){
     const contract = shipment.contract;
     let payOut = contract.paymentPrice;
 
-    console.log('Received at: ' + shipment.timestamp);
+    console.log('Received at: ' + transactionItems.timestamp);
     console.log('Contract arrivalDateTime: ' + contract.arrivalDateTime);
 
     // if the shipment did not arrive on time the payout is zero
@@ -96,61 +96,76 @@ function validPayment(shipment){
         return true;
 }
 
+function payOut(sender, receiver, shipment){
+    var ammount = shipment.contract.paymentPrice;
+    //verify again, just cuz... hyperledger consensus algorithm makes sure this will not have concurrency issues, as each transaction runs in a specified order
+    if(sender.accountBalance >= ammount){
+        //transfer money
+        sender.accountBalance -= ammount;
+        receiver.accountBalance += ammount;
+        //transfer ownership and holdership
+        shipment.owner = sender;
+        shipment.holder = sender;
+    }
+}
+
+function checkLocationFraud(newLocation, expectedArrivalLocation, shipment){
+    if(newLocation != expectedArrivalLocation){
+        let event = getFactory().newEvent('org.logistics.testnet', 'detectLocationFraud');
+        event.newLocation = newLocation;
+        event.expectedArrivalLocation = expectedArrivalLocation;
+        event.shipment = shipment;
+        emit(event);
+    }
+}
 
 /**
  * 
  * @param {org.logistics.testnet.UpdateShipment} updatedItems - the UpdateShipment transaction
  * @transaction
  */
-async function UpdateShipment(updatedItems) {
-    var newStatus = updatedItems.status;
-    var newHolder = updatedItems.newHolder;
-    var newLocation = updatedItems.newLocation;
-    var shipment = updatedItems.shipment;
+async function UpdateShipment(transactionItems) {
+    var newStatus = transactionItems.status;
+    var newHolder = transactionItems.newHolder;
+    var newLocation = transactionItems.newLocation;
+    var shipment = transactionItems.shipment;
+    var oldLocation = shipment.location;
 
     if(newStatus == 'DELIVERED'){
-        console.log('New Holder: ' + newHolder);
-        console.log('Contract buyer: ' + shipment.contract.buyer);
-        console.log('Contract: ' + shipment.contract);
         if(newHolder.id == shipment.contract.buyer.id){
-            
-            //Verify balance
-            if(validPayment(shipment)){
+            if(shipment.contract.payOnArrival){
+                //PAYMENT ON ARRIVAL
 
-                shipment.holder = newHolder;
-                shipment.status = newStatus;
-                shipment.newLocation = newLocation;
+                //Verify balance
+                if(validPayment(shipment, transactionItems)){
 
-                const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
-                await shipmentAssetRegistry.update(shipment);
+                    payOut(shipment.contract.buyer, shipment.contract.seller, shipment);
+                    
+                    shipment.status = newStatus;
+                    shipment.location = newLocation;
 
-                //Trigger PayOut transaction
-
-                 // create the manufacturer
-                const payout = factory.newResource(NS, 'PayOut', 'transactionID-222');
+                }else{
+                    throw 'Not enough money to make the payment transaction on delivery';
+                }
             }else{
-                throw 'Not enough money to make the payment transaction on delivery';
+                //NO PAYMENT ON ARRIVAL
+                shipment.status = newStatus;
+                shipment.location = newLocation;
+                shipment.owner = newHolder;
+                shipment.holder = newHolder;
             }
 
-            //Option 1
-            //payout(shipment);
-
-            //Option 2
-            //trigger ShipmentReceived transaction
-
-            //Option 3
-            //Do nothing, and say it can not update to delivered with this transaction
-            //In its place, to update the status to 'DELIVERED', the shipmentReceived transaction should be called -> who can call it? || Should be signed by the holder and the owner at the same time to work, but that feature is not yet implemented in Composer
-
-
-            if(newLocation != shipment.contract.expectedArrivalLocation){
-                let event = getFactory().newEvent('org.logistics.testnet', 'detectLocationFraud');
-                emit(event);
-            }
+            //check location fraud
+            checkLocationFraud(newLocation, shipment.contract.expectedArrivalLocation, shipment);
+            
         }else{
             throw 'Not delivering to the contract buyer!';
         }
     }
+
+    //UPDATE SHIPMENT
+    const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
+    await shipmentAssetRegistry.update(shipment);
 }
 
 /**
