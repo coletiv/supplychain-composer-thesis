@@ -1,82 +1,52 @@
 
 /* global getParticipantRegistry getAssetRegistry getFactory */
 
-/**
- * A shipment has been received by an importer
- * @param {org.logistics.testnet.ShipmentReceived} shipmentReceived - the ShipmentReceived transaction
- * @transaction
- */
-/*
-async function payOut(shipmentReceived) {  // eslint-disable-line no-unused-vars
+/* PROGRAMMATIC ACCESS CONTROL RULE EXAMPLES
 
-    const contract = shipmentReceived.shipment.contract;
-    const shipment = shipmentReceived.shipment;
-    let payOut = contract.unitPrice * shipment.unitCount;
+// CHECK PARTICIPANT TYPE
+ async function onPrivilegedTransaction(privilegedTransaction) {
+       let currentParticipant = getCurrentParticipant();
+       if (currentParticipant.getFullyQualifiedType() !== 'net.biz.digitalPropertyNetwork.PrivilegedPerson') {
+           throw new Error('Transaction can only be submitted by a privileged person');
+       }
+       // Current participant must be a privileged person to get here.
+   }
 
-    console.log('Received at: ' + shipmentReceived.timestamp);
-    console.log('Contract arrivalDateTime: ' + contract.arrivalDateTime);
+// CHECK PARTICIPANT ID
+   async function onPrivilegedTransaction(privilegedTransaction) {
+       let currentParticipant = getCurrentParticipant();
+       if (currentParticipant.getFullyQualifiedIdentifier() !== 'net.biz.digitalPropertyNetwork.Person#PERSON_1') {
+           throw new Error('Transaction can only be submitted by person 1');
+       }
+       // Current participant must be person 1 to get here.
+   }
 
-    // set the status of the shipment
-    shipment.status = 'ARRIVED';
+// CHECK OWNERSHIP OF ASSET
+   async function onPrivilegedTransaction(privilegedTransaction) {
+       // Get the owner of the asset in the transaction.
+       let assetOwner = privilegedTransaction.asset.owner;
+       let currentParticipant = getCurrentParticipant();
+       if (currentParticipant.getFullyQualifiedIdentifier() !== asset.owner.getFullyQualifiedIdentifier()) {
+           throw new Error('Transaction can only be submitted by the owner of the asset');
+       }
+       // Current participant must be the owner of the asset to get here.
+   }
 
-    // if the shipment did not arrive on time the payout is zero
-    if (shipmentReceived.timestamp > contract.arrivalDateTime) {
-        payOut = 0;
-        console.log('Late shipment');
-    } else {
-        // find the lowest temperature reading
-        if (shipment.temperatureReadings) {
-            // sort the temperatureReadings by centigrade
-            shipment.temperatureReadings.sort(function (a, b) {
-                return (a.centigrade - b.centigrade);
-            });
-            const lowestReading = shipment.temperatureReadings[0];
-            const highestReading = shipment.temperatureReadings[shipment.temperatureReadings.length - 1];
-            let penalty = 0;
-            console.log('Lowest temp reading: ' + lowestReading.centigrade);
-            console.log('Highest temp reading: ' + highestReading.centigrade);
+// CHECK PARTICIPANT CERTIFICATE
+   async function onPrivilegedTransaction(privilegedTransaction) {
+       let currentIdentity = getCurrentIdentity();
+       // Get the PEM encoded certificate from the current identity.
+       let certificate = currentIdentity.certificate;
+       // Perform testing on the PEM encoded certificate.
+       if (!certificate.match(/^----BEGIN CERTIFICATE----/)) {
+            throw new Error('Transaction can only be submitted by a person with a valid certificate');
+       }
+       // Current identity must have a valid certificate to get here.
+   }
 
-            // does the lowest temperature violate the contract?
-            if (lowestReading.centigrade < contract.minTemperature) {
-                penalty += (contract.minTemperature - lowestReading.centigrade) * contract.minPenaltyFactor;
-                console.log('Min temp penalty: ' + penalty);
-            }
 
-            // does the highest temperature violate the contract?
-            if (highestReading.centigrade > contract.maxTemperature) {
-                penalty += (highestReading.centigrade - contract.maxTemperature) * contract.maxPenaltyFactor;
-                console.log('Max temp penalty: ' + penalty);
-            }
-
-            // apply any penalities
-            payOut -= (penalty * shipment.unitCount);
-
-            if (payOut < 0) {
-                payOut = 0;
-            }
-        }
-    }
-
-    console.log('Payout: ' + payOut);
-    contract.grower.accountBalance += payOut;
-    contract.importer.accountBalance -= payOut;
-
-    console.log('Grower: ' + contract.grower.$identifier + ' new balance: ' + contract.grower.accountBalance);
-    console.log('Importer: ' + contract.importer.$identifier + ' new balance: ' + contract.importer.accountBalance);
-
-    // update the grower's balance
-    const growerRegistry = await getParticipantRegistry('org.logistics.testnet.Grower');
-    await growerRegistry.update(contract.grower);
-
-    // update the importer's balance
-    const importerRegistry = await getParticipantRegistry('org.logistics.testnet.Importer');
-    await importerRegistry.update(contract.importer);
-
-    // update the state of the shipment
-    const shipmentRegistry = await getAssetRegistry('org.logistics.testnet.Shipment');
-    await shipmentRegistry.update(shipment);
-}
 */
+
 
 function validPayment(shipment, transactionItems){
     const contract = shipment.contract;
@@ -119,18 +89,77 @@ function checkLocationFraud(newLocation, expectedArrivalLocation, shipment){
     }
 }
 
+function isAnyAssetBeingShipped(assets){
+    var shipment = query('getShipmentWhereCommodityExists', {commodities:assets});
+    console.log("Are assets being shipped query: " +  shipment);
+    // No shipments found means the assets dont belong to any shipment
+    if (shipment.length = 0){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+function supplyMemberExists(supplyChainMemberID){
+    if (supplyChainMemberID == '' || supplyChainMemberID == null){
+        return false;
+    }else{
+        const chainMemberRegistry = getParticipantRegistry('org.logistics.testnet.supplyChainMember');
+        return assetRegistry.exists(supplyChainMemberID);
+    }
+}
+
+/**
+ * 
+ * @param {org.logistics.testnet.getAssetsFromOwner} transactionParams - the CreateShipmentAndContract transaction
+ * @transaction
+ *
+async function getAssetsFromOwner(transactionParams){
+    console.log("Owner: " + transactionParams.shipmentOwner);
+
+     var shipment = query('selectShipmentByOwner', {owner:transactionParams.shipmentOwner} );
+     console.log(shipment);
+    //TODO: resolve the assets on the shipment
+    //{"where":{"include":"resolve"} 
+    //return query('selectShipmentByOwner', {owner: shipmentOwner } );
+
+
+    let event = getFactory().newEvent('org.logistics.testnet', 'CommodityQuery');
+    event.commodities = shipment;
+    emit(event);
+}
+*/
+
+
 /**
  * 
  * @param {org.logistics.testnet.CreateShipmentAndContract} shipmentAndContract - the CreateShipmentAndContract transaction
  * @transaction
  */
 async function CreateShipmentAndContract(shipmentAndContract){
+    //TODO: CHECK PERMISSIONS
+
 
     var factory = getFactory();
 
     var shipment = factory.newResource('org.logistics.testnet', 'ShipmentBatch', shipmentAndContract.shipmentId);
-
     var contract = factory.newResource('org.logistics.testnet', 'OrderContract', shipmentAndContract.orderId);
+
+    // CHECK IF BUYER+SELLER EXIST
+    if (!supplyMemberExists(shipmentAndContract.owner.gs1CompanyPrefix)){
+        throw 'The owner/seller of this shipment does not exist';
+    }else if (!supplyMemberExists(shipmentAndContract.buyer.gs1CompanyPrefix)){
+        throw 'The buyer of this shipment does not exist';
+    }
+
+    // Check if shipment owner is also the owner of all the assets
+    for (var i = 0; i<assetExchanged.length; i++){
+        if (assetExchanged.owner.gs1CompanyPrefix != shipmentAndContract.owner.gs1CompanyPrefix){
+            throw 'The shipment owner is not the owner of all the commodities in the shipment (check if all the commodities exist).'
+        }
+    }
+
+
 
     //MANDATORY SHIPMENT PARAMETERS
     shipment.shipmentId = shipmentAndContract.shipmentId;
@@ -138,7 +167,7 @@ async function CreateShipmentAndContract(shipmentAndContract){
     shipment.location = shipmentAndContract.location;
     shipment.owner = shipmentAndContract.owner;
     shipment.holder = shipmentAndContract.holder;
-    //TODO: CHECK IF ASSETS EXIST
+    
     shipment.assetExchanged = shipmentAndContract.assetExchanged;
     //OPTIONAL SHIPMENT PARAMETERS
     if (shipmentAndContract.status != '' && shipmentAndContract.status !=  null){
@@ -148,14 +177,19 @@ async function CreateShipmentAndContract(shipmentAndContract){
     }
     shipment.temperatureReadings = [];
 
+    
+    const chainMemberRegistry = getParticipantRegistry('org.logistics.testnet.supplyChainMember');
+    var buyerExists = chainMemberRegistry.exists(shipmentAndContract.buyer.gs1CompanyPrefix);
+    var sellerExists = chainMemberRegistry.exists(shipmentAndContract.owner.gs1CompanyPrefix);
+
     //MANDATORY CONTRACT PARAMETERS
     contract.orderId = shipmentAndContract.orderId;
-    //TODO: CHECK IF BUYER+SELLER EXIST
     contract.buyer = shipmentAndContract.buyer;
-    contract.seller = shipmentAndContract.seller;
+    contract.seller = shipmentAndContract.owner;
     contract.expectedArrivalLocation = shipmentAndContract.expectedArrivalLocation;
     contract.payOnArrival = shipmentAndContract.payOnArrival;
     contract.paymentPrice = shipmentAndContract.paymentPrice;
+
     //Checking that the actual arrival date is AFTER the current date
     var now = new Date();
     if (shipmentAndContract.arrivalDateTime <= now){
@@ -179,11 +213,15 @@ async function CreateShipmentAndContract(shipmentAndContract){
  * @transaction
  */
 async function UpdateShipment(transactionItems) {
+
+    //TODO: CHECK PERMISSIONS
+
     var newStatus = transactionItems.status;
     var newHolder = transactionItems.newHolder;
     var newLocation = transactionItems.newLocation;
     var shipment = transactionItems.shipment;
     var oldLocation = shipment.location;
+
 
     if(newStatus == 'DELIVERED'){
         if(newHolder.id == shipment.contract.buyer.id){
@@ -203,19 +241,34 @@ async function UpdateShipment(transactionItems) {
                 }
             }else{
                 //NO PAYMENT ON ARRIVAL
+
+                if (!supplyMemberExists(newHolder.gs1CompanyPrefix)){
+                    throw 'The new holder of this shipment does not exist';
+                }
+    }
+
                 shipment.status = newStatus;
                 shipment.location = newLocation;
                 shipment.owner = newHolder;
                 shipment.holder = newHolder;
+
+                //change owner of all assets individually
+                for(var i=0; i<shipment.assetExchanged.length; i++){
+                    shipment.assetExchanged[i].owner = newHolder;
+                }
+
             }
 
-            //check location fraud
             checkLocationFraud(newLocation, shipment.contract.expectedArrivalLocation, shipment);
             
         }else{
             throw 'Not delivering to the contract buyer!';
         }
     }
+
+    //UPDATE ASSETS
+    const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
+    await shipmentAssetRegistry.updateAll(shipment.assetExchanged);
 
     //UPDATE SHIPMENT
     const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
@@ -228,6 +281,9 @@ async function UpdateShipment(transactionItems) {
  * @transaction
  */
 async function ReportDamagedGood(damageReport) {
+
+    //TODO: CHECK PERMISSIONS
+
     var damagedGood = damageReport.damagedGood;
 
     //var arrayLength = damagedGoods.length;
@@ -246,11 +302,15 @@ async function ReportDamagedGood(damageReport) {
  * @transaction
  */
 async function TransformCommodities(transformation) {
+
+    //TODO: CHECK PERMISSIONS
+
     var inputProducts = transformation.commoditiesToBeConsumed;
     var outputProducts = transformation.commoditiesToBeCreated;
     var createdCommodities = [];
 
-    //TODO: CHECK SHIPMENT STATUS
+    if (isAnyAssetBeingShipped(inputProducts))
+        throw 'Can not transform products: 1 or more products are currently part of a shipment batch.';
 
     //TODO: CHECK IF IT IS THE OWNER OF THE INPUT PRODUCTS DOING THE TRANSACTION
     //TODO: OWNER OF CREATED PRODUCTS = OWNER OF INPUT PRODUCTS
@@ -278,7 +338,11 @@ async function TransformCommodities(transformation) {
     // Add the vehicles to the vehicle asset registry.
     commodityAssetRegistry.addAll(createdCommodities);
     commodityAssetRegistry.removeAll(inputProducts);
-    //addAll    redmoveAll
+
+    let event = getFactory().newEvent('org.logistics.testnet', 'CommodityTransformation');
+        event.oldCommodities = inputProducts;
+        event.newCommodities = createdCommodities;
+        emit(event);
 }
 
 /**
@@ -297,6 +361,7 @@ async function RevertTransformation(transformation) {
     // Maybe if the client app reads the transaction and sends back the items to revert;
 
     //UNFINISHED
+    // -> UNDOABLE
 
 }
 */
@@ -307,10 +372,23 @@ async function RevertTransformation(transformation) {
  * @transaction
  */
 async function TransferCommodityPossession(transfer) {
+
+    //TODO: CHECK PERMISSIONS
+
     try {
         var newHolder = transfer.newHolder;
-        var commodity = transfer.commodity;
         var oldHolder = transfer.commodity.holder;
+        var commodity = [transfer.commodity];
+
+        if (isAnyAssetBeingShipped(commodity))
+            throw 'Can not transfer possession: the product is currently part of a shipment batch.';
+
+        var currentShipments = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
+        var existsOw
+        for(var i=0; i<currentShipments.length; i++){
+
+        }
+
 
         // INTEGRITY CHECKS -> Refactor into a function
         if (newHolder == '')
@@ -404,7 +482,7 @@ async function temperatureReading(temperatureReading) { // eslint-disable-line n
     }
 
     // add the temp reading to the shipment
-    const shipmentRegistry = await getAssetRegistry('org.logistics.testnet.Shipment');
+    const shipmentRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
     await shipmentRegistry.update(shipment);
 }
 

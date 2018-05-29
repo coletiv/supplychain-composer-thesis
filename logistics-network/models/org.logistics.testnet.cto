@@ -56,6 +56,10 @@ transaction TemperatureReading extends ShipmentTransaction {
   o Double centigrade
 }
 
+transaction getAssetsFromOwner {
+  o String shipmentOwner
+}
+
 /**
  * We want to create a shipment and contract that are linked, but SEPARATE assets, so that they can have separate permissions. If they were all 1 asset it would not be possible, and even creating 2 assets with 2 different transactions, it is sometimes hard to link the shipment and contract manually; So, when creating a shipment, we automatically create the corresponding contract;
  */
@@ -76,7 +80,6 @@ transaction CreateShipmentAndContract {
   */
   o String orderId
   --> supplyChainMember buyer
-  --> supplyChainMember seller
   o Location expectedArrivalLocation
   o Boolean payOnArrival
   o DateTime arrivalDateTime
@@ -133,16 +136,8 @@ asset Commodity identified by GTIN {
   o String name
   o String description
   o ItemCondition itemCondition
+  --> supplyChainMember owner
 }
-
-/** Only to be used in case of Shipment=transportation of various batches from one destination to another; At the moment, shipment= end-to-end transport of a batch of items to its owner; so, this is more designed with the final customer in perspective
-
-asset Batch identified by batchId {
-  o String batchId
-  --> Commodity[] batchCommodities
-}
-*/
-
 
 /**
  * A shipment being tracked as an asset on the ledger
@@ -158,6 +153,16 @@ asset ShipmentBatch identified by shipmentId {
   --> OrderContract contract
   --> Commodity[] assetExchanged
 }
+
+
+/** Only to be used in case of Shipment=transportation of various batches from one destination to another; At the moment, shipment= end-to-end transport of a batch of items to its owner; so, this is more designed with the final customer in perspective
+
+asset Batch identified by batchId {
+  o String batchId
+  --> Commodity[] batchCommodities
+}
+*/
+
 
 /**
  * Defines a contract between 2 entities, for a order/shipment
@@ -201,7 +206,7 @@ abstract participant supplyChainMember identified by gs1CompanyPrefix {
   o String email
   o Address address
   o Double accountBalance
-  --> Commodity[] assets //not used at the moment
+  //--> Commodity[] assets //not used at the moment
 }
 
 participant Supplier extends supplyChainMember {
@@ -223,6 +228,17 @@ participant Retailer extends supplyChainMember {
 participant Customer extends supplyChainMember {
 
 }
+
+/**
+ * TODO: add an auditor participant role
+ */
+
+participant Auditor identified by auditorCompany{
+  o String auditorCompany
+  o String email
+  o Address address
+}
+
 /**
  * JUST FOR INITIALIZING A DEMO
  */
@@ -245,4 +261,24 @@ event changeOwnershipEvent{
 
 event detectLocationFraud{
 
+}
+
+event CommodityTransformation{
+  --> Commodity[] oldCommodities
+  --> Commodity[] newCommodities
+}
+
+event TradeNotification {
+    --> Commodity commodity
+}
+
+transaction RemoveHighQuantityCommodities {
+}
+
+event RemoveNotification {
+    --> Commodity commodity
+}
+
+event CommodityQuery {
+  --> Commodity[] commodities
 }
