@@ -226,7 +226,7 @@ async function UpdateShipment(transactionItems) {
     if(newStatus == 'DELIVERED'){
         if(newHolder.id == shipment.contract.buyer.id){
             if(shipment.contract.payOnArrival){
-                //PAYMENT ON ARRIVAL
+            //PAYMENT ON ARRIVAL
 
                 //Verify balance
                 if(validPayment(shipment, transactionItems)){
@@ -240,12 +240,12 @@ async function UpdateShipment(transactionItems) {
                     throw 'Not enough money to make the payment transaction on delivery';
                 }
             }else{
-                //NO PAYMENT ON ARRIVAL
+            //NO PAYMENT ON ARRIVAL
 
                 if (!supplyMemberExists(newHolder.gs1CompanyPrefix)){
                     throw 'The new holder of this shipment does not exist';
                 }
-    }
+            }
 
                 shipment.status = newStatus;
                 shipment.location = newLocation;
@@ -257,17 +257,18 @@ async function UpdateShipment(transactionItems) {
                     shipment.assetExchanged[i].owner = newHolder;
                 }
 
-            }
-
-            checkLocationFraud(newLocation, shipment.contract.expectedArrivalLocation, shipment);
             
+
+            
+        
         }else{
             throw 'Not delivering to the contract buyer!';
         }
     }
+        checkLocationFraud(newLocation, shipment.contract.expectedArrivalLocation, shipment);
 
     //UPDATE ASSETS
-    const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
+    const commodityAssetRegistry=await getAssetRegistry('org.logistics.testnet.Commodity');
     await shipmentAssetRegistry.updateAll(shipment.assetExchanged);
 
     //UPDATE SHIPMENT
