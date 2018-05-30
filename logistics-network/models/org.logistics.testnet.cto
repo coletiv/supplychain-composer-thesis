@@ -259,8 +259,11 @@ event changeOwnershipEvent{
 --> supplyChainMember oldHolder
 }
 
-event detectLocationFraud{
 
+event detectLocationFraud{
+o Location newLocation
+o Location expectedArrivalLocation
+--> ShipmentBatch shipment
 }
 
 event CommodityTransformation{
