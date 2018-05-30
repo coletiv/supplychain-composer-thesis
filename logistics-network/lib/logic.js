@@ -100,12 +100,35 @@ function isAnyAssetBeingShipped(assets){
     }
 }
 
-function supplyMemberExists(supplyChainMemberID){
-    if (supplyChainMemberID == '' || supplyChainMemberID == null){
+async function supplyMemberExists(supplyChainMember){
+  
+    if(supplyChainMember === undefined){
+        return false;
+    }
+console.log(supplyChainMember);
+
+console.log(supplyChainMember.getType());
+    var memberID = supplyChainMember.getIdentifier();
+    var memberType = supplyChainMember.getType();
+
+    if(memberID === undefined || memberID == '' || memberID === null ){
+        console.log("is false");
         return false;
     }else{
-        const chainMemberRegistry = getParticipantRegistry('org.logistics.testnet.supplyChainMember');
-        return assetRegistry.exists(supplyChainMemberID);
+
+        return getParticipantRegistry('org.logistics.testnet.' + memberType)
+        .then(function (participantRegistry) {
+        // Determine if the specific driver exists in the driver participant registry.
+        return participantRegistry.exists(memberID);
+        })
+        .then(function (exists) {
+        // Process the the boolean result.
+        console.log('It exists', exists);
+        })
+        .catch(function (error) {
+        // Add optional error handling here.
+        });
+        
     }
 }
 
@@ -145,16 +168,23 @@ async function CreateShipmentAndContract(shipmentAndContract){
     var shipment = factory.newResource('org.logistics.testnet', 'ShipmentBatch', shipmentAndContract.shipmentId);
     var contract = factory.newResource('org.logistics.testnet', 'OrderContract', shipmentAndContract.orderId);
 
+    
     // CHECK IF BUYER+SELLER EXIST
-    if (!supplyMemberExists(shipmentAndContract.owner.gs1CompanyPrefix)){
+    if (!supplyMemberExists(shipmentAndContract.owner)){
         throw 'The owner/seller of this shipment does not exist';
-    }else if (!supplyMemberExists(shipmentAndContract.buyer.gs1CompanyPrefix)){
+    }else if (!supplyMemberExists(shipmentAndContract.buyer)){
         throw 'The buyer of this shipment does not exist';
     }
 
+    var assetExchanged = shipmentAndContract.assetExchanged;
+
+    //TODO: resolve relationship
     // Check if shipment owner is also the owner of all the assets
     for (var i = 0; i<assetExchanged.length; i++){
-        if (assetExchanged.owner.gs1CompanyPrefix != shipmentAndContract.owner.gs1CompanyPrefix){
+
+        console.log("Asset exchanged resolved?: " + shipmentAndContract.assetExchanged[i]);
+
+        if (assetExchanged[i].owner.gs1CompanyPrefix != shipmentAndContract.owner.gs1CompanyPrefix){
             throw 'The shipment owner is not the owner of all the commodities in the shipment (check if all the commodities exist).'
         }
     }
@@ -167,7 +197,6 @@ async function CreateShipmentAndContract(shipmentAndContract){
     shipment.location = shipmentAndContract.location;
     shipment.owner = shipmentAndContract.owner;
     shipment.holder = shipmentAndContract.holder;
-    
     shipment.assetExchanged = shipmentAndContract.assetExchanged;
     //OPTIONAL SHIPMENT PARAMETERS
     if (shipmentAndContract.status != '' && shipmentAndContract.status !=  null){
@@ -176,11 +205,6 @@ async function CreateShipmentAndContract(shipmentAndContract){
         shipmentAndContract.status = 'WAITING';
     }
     shipment.temperatureReadings = [];
-
-    
-    const chainMemberRegistry = getParticipantRegistry('org.logistics.testnet.supplyChainMember');
-    var buyerExists = chainMemberRegistry.exists(shipmentAndContract.buyer.gs1CompanyPrefix);
-    var sellerExists = chainMemberRegistry.exists(shipmentAndContract.owner.gs1CompanyPrefix);
 
     //MANDATORY CONTRACT PARAMETERS
     contract.orderId = shipmentAndContract.orderId;
