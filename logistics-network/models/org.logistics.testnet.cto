@@ -72,7 +72,7 @@ transaction CreateShipmentAndContract {
   o ShipmentStatus status default = 'WAITING'
   o Location location
   --> supplyChainMember owner 
-  --> supplyChainMember holder //IN POSSESSION OF ...
+  //--> supplyChainMember holder //IN POSSESSION OF ... initially the owner
   // --> OrderContract contract
   --> Commodity[] assetExchanged
  /*

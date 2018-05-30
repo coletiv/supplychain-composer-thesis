@@ -174,15 +174,13 @@ async function CreateShipmentAndContract(shipmentAndContract){
         throw 'The owner/seller of this shipment does not exist';
     }else if (!supplyMemberExists(shipmentAndContract.buyer)){
         throw 'The buyer of this shipment does not exist';
-    }
+    } 
 
     var assetExchanged = shipmentAndContract.assetExchanged;
 
     //TODO: resolve relationship
     // Check if shipment owner is also the owner of all the assets
     for (var i = 0; i<assetExchanged.length; i++){
-
-        console.log("Asset exchanged resolved?: " + shipmentAndContract.assetExchanged[i]);
 
         if (assetExchanged[i].owner.gs1CompanyPrefix != shipmentAndContract.owner.gs1CompanyPrefix){
             throw 'The shipment owner is not the owner of all the commodities in the shipment (check if all the commodities exist).'
@@ -196,7 +194,7 @@ async function CreateShipmentAndContract(shipmentAndContract){
     shipment.trackingNumber = shipmentAndContract.trackingNumber;
     shipment.location = shipmentAndContract.location;
     shipment.owner = shipmentAndContract.owner;
-    shipment.holder = shipmentAndContract.holder;
+    shipment.holder = shipmentAndContract.owner;
     shipment.assetExchanged = shipmentAndContract.assetExchanged;
     //OPTIONAL SHIPMENT PARAMETERS
     if (shipmentAndContract.status != '' && shipmentAndContract.status !=  null){
