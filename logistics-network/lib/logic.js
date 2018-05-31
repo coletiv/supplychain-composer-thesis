@@ -1,4 +1,3 @@
-
 /* global getParticipantRegistry getAssetRegistry getFactory */
 
 /* PROGRAMMATIC ACCESS CONTROL RULE EXAMPLES
@@ -144,14 +143,27 @@ function checkLocationFraud(newLocation, expectedArrivalLocation, shipment){
     }
 }
 
-function isAnyAssetBeingShipped(assets){
-    var shipment = query('getShipmentWhereCommodityExists', {commodities:assets});
-    console.log("Are assets being shipped query: " +  shipment);
-    // No shipments found means the assets dont belong to any shipment
-    if (shipment.length = 0){
-        return false;
-    }else{
-        return true;
+async function isAnyAssetBeingShipped(assets){
+    try{
+        for(var i = 0; i< assets.length; i++){
+            console.log("Asset... " + assets[i].owner);
+        }
+    }catch(e){
+        throw 'Asset with ID ' + assets[i].getIdentifier() + ' does not exist';
+    }
+    for(var i = 0; i < assets.length;i++){
+        var assetIdentifier = 'resource:org.logistics.testnet.Commodity#' +  assets[i].GTIN;
+        console.log(assetIdentifier);
+        const shipment = await query('getShipmentWhereCommodityExists', {commodities:assetIdentifier});
+        console.log("Asset: " + assetIdentifier);
+        console.log(shipment);
+        console.log("Shipment size: " + shipment.length);
+        // No shipments found means the assets dont belong to any shipment
+        if (shipment.length == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
 
@@ -256,6 +268,8 @@ async function UpdateShipment(transactionItems) {
         newHolder = shipment.holder;
 
     const holderExists = await supplyMemberExists(newHolder);
+    if(!holderExists)
+        throw 'The specified holder does not exist.'
     console.log("Holder exists: " + holderExists);
 
     if(newStatus == 'DELIVERED'){
@@ -278,10 +292,6 @@ async function UpdateShipment(transactionItems) {
                 }
             }else{
             //NO PAYMENT ON ARRIVAL
-
-                if (!supplyMemberExists(newHolder.gs1CompanyPrefix)){
-                    throw 'The new holder of this shipment does not exist';
-                }
             }
 
                 shipment.status = newStatus;
@@ -324,7 +334,7 @@ async function UpdateShipment(transactionItems) {
  */
 async function ReportDamagedGood(damageReport) {
 
-    //TODO: CHECK PERMISSIONS
+    //TODO: CHECK PERMISSIONS: holder must be the same person reporting damage?
 
     var damagedGood = damageReport.damagedGood;
 
@@ -344,15 +354,26 @@ async function ReportDamagedGood(damageReport) {
  * @transaction
  */
 async function TransformCommodities(transformation) {
+    console.log()
 
     //TODO: CHECK PERMISSIONS
-
     var inputProducts = transformation.commoditiesToBeConsumed;
     var outputProducts = transformation.commoditiesToBeCreated;
     var createdCommodities = [];
 
-    if (isAnyAssetBeingShipped(inputProducts))
+    const beingShipped = await isAnyAssetBeingShipped(inputProducts);
+
+    console.log("Being shipped: " + beingShipped);
+    if (beingShipped)
         throw 'Can not transform products: 1 or more products are currently part of a shipment batch.';
+  
+    for(var i = 0; i<outputProducts.length; i++){
+     
+        const ownerExists = await supplyMemberExists(outputProducts[i].owner);
+       
+        if(!ownerExists)
+            throw 'Can not transform products. Unexistant owner of the output Commodity ' + outputProducts[i].getIdentifier();
+    }
 
     //TODO: CHECK IF IT IS THE OWNER OF THE INPUT PRODUCTS DOING THE TRANSACTION
     //TODO: OWNER OF CREATED PRODUCTS = OWNER OF INPUT PRODUCTS
@@ -368,7 +389,6 @@ async function TransformCommodities(transformation) {
       createdCommodities[i] = factory.newResource('org.logistics.testnet', 'Commodity', outputProducts[i].GTIN);
      
       createdCommodities[i].owner = outputProducts[i].owner;
-      createdCommodities[i].holder = outputProducts[i].holder;
       createdCommodities[i].type = outputProducts[i].type;
       createdCommodities[i].GTIN = outputProducts[i].GTIN;
       createdCommodities[i].name = outputProducts[i].name;
@@ -378,8 +398,8 @@ async function TransformCommodities(transformation) {
     }
 
     // Add the vehicles to the vehicle asset registry.
-    commodityAssetRegistry.addAll(createdCommodities);
-    commodityAssetRegistry.removeAll(inputProducts);
+    //commodityAssetRegistry.addAll(createdCommodities);
+    //commodityAssetRegistry.removeAll(inputProducts);
 
     let event = getFactory().newEvent('org.logistics.testnet', 'CommodityTransformation');
         event.oldCommodities = inputProducts;
