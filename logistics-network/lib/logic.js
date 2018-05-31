@@ -67,6 +67,12 @@ async function CreateShipmentAndContractAuxiliar(shipmentAndContract) {
     else {
         shipmentAndContract.status = 'WAITING';
     }
+
+    if (shipmentAndContract.message == '' || shipmentAndContract.message == null) {
+        shipmentAndContract.message = '';
+    }else{
+        shipment.message = shipmentAndContract.message;
+    }
     shipment.temperatureReadings = [];
     //MANDATORY CONTRACT PARAMETERS
     console.log("hi");
@@ -179,28 +185,7 @@ console.log(supplyChainMember.getType());
        
     }
 }
-
-/**
- * 
- * @param {org.logistics.testnet.getAssetsFromOwner} transactionParams - the CreateShipmentAndContract transaction
- * @transaction
- *
-async function getAssetsFromOwner(transactionParams){
-    console.log("Owner: " + transactionParams.shipmentOwner);
-
-     var shipment = query('selectShipmentByOwner', {owner:transactionParams.shipmentOwner} );
-     console.log(shipment);
-    //TODO: resolve the assets on the shipment
-    //{"where":{"include":"resolve"} 
-    //return query('selectShipmentByOwner', {owner: shipmentOwner } );
-
-
-    let event = getFactory().newEvent('org.logistics.testnet', 'CommodityQuery');
-    event.commodities = shipment;
-    emit(event);
-}
-*/
-
+ 
 
 /**
  * 
@@ -258,15 +243,24 @@ async function UpdateShipment(transactionItems) {
     //TODO: CHECK PERMISSIONS
     //console.log(newHolder.accountBalance);
 
-
+    var newHolder;
     var newStatus = transactionItems.status;
-    var newHolder = transactionItems.newHolder;
     var newLocation = transactionItems.newLocation;
     var shipment = transactionItems.shipment;
     var oldLocation = shipment.location;
 
+    // If the optional field "newHolder" is filled out
+    if(transactionItems.newHolder != '' && transactionItems.newHolder != null)
+         newHolder = transactionItems.newHolder;
+    else 
+        newHolder = shipment.holder;
+
+    const holderExists = await supplyMemberExists(newHolder);
+    console.log("Holder exists: " + holderExists);
 
     if(newStatus == 'DELIVERED'){
+        //CHECK IF NEW HOLDER EXISTS
+
         if(newHolder.id == shipment.contract.buyer.id){
             if(shipment.contract.payOnArrival){
             //PAYMENT ON ARRIVAL
@@ -298,27 +292,28 @@ async function UpdateShipment(transactionItems) {
                 //change owner of all assets individually
                 for(var i=0; i<shipment.assetExchanged.length; i++){
                     shipment.assetExchanged[i].owner = newHolder;
-                }
-
-            
-
-            
+                }           
         
         }else{
             throw 'Not delivering to the contract buyer!';
         }
+    }else{
+        shipment.status = newStatus;
+        shipment.location = newLocation;
+        shipment.holder = newHolder;
     }
-       
-    checkLocationFraud(newLocation, shipment.contract.expectedArrivalLocation, shipment);
+    
 
+    //checkLocationFraud(newLocation, shipment.contract.expectedArrivalLocation, shipment);
+    
     //UPDATE ASSETS
     const commodityAssetRegistry=await getAssetRegistry('org.logistics.testnet.Commodity');
-    //console.log(commodityAssetRegistry);
-    
+    console.log("Commodity registry: " + commodityAssetRegistry);
     await commodityAssetRegistry.updateAll(shipment.assetExchanged);
-
+    
     //UPDATE SHIPMENT
     const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
+    console.log("Shipment registry: " + shipmentAssetRegistry);
     await shipmentAssetRegistry.update(shipment);
 }
 
@@ -432,7 +427,7 @@ async function TransferCommodityPossession(transfer) {
             throw 'Can not transfer possession: the product is currently part of a shipment batch.';
 
         var currentShipments = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
-        var existsOw
+        
         for(var i=0; i<currentShipments.length; i++){
 
         }
@@ -462,55 +457,6 @@ async function TransferCommodityPossession(transfer) {
         throw error;
     }
 }
-
-
-
-/**
- * 
- * @param {org.logistics.testnet.CreateCommodity} commodity - the CreateCommodity transaction
- * @transaction
- */
-/*
-async function createCommodity(commodity) {
-
-    var owner = commodity.owner;
-    var holder = commodity.holder;
-    var GTIN = commodity.GTIN;
-
-    // INTEGRITY CHECKS
-    if (GTIN == '') {
-        throw 'GTIN can not be an empty string!';
-    }
-
-
-    // Get the vehicle asset registry.
-    return getAssetRegistry('org.logistics.testnet.Commodity')
-        .then(function (commodityAssetRegistry) {
-
-            // Get the factory for creating new asset instances.
-            var factory = getFactory();
-            // Create the vehicle.
-            //var safeMax = Number.MAX_SAFE_INTEGER;
-            //Math.floor((Math.random() * safeMax) + 1);
-            //var commodityId = 'COMMODITY_' + owner + getAll
-            var newCommodity = factory.newResource('org.logistics.testnet', 'Commodity', GTIN);
-            newCommodity.owner = owner;
-            newCommodity.holder = holder;
-            //console.log('test: ' + GTIN)
-            newCommodity.GTIN = GTIN;
-            newCommodity.name = 'Wood';
-            newCommodity.description = 'A piece of wood';
-            // Add the vehicle to the vehicle asset registry.
-            return commodityAssetRegistry.add(newCommodity);
-        })
-        .catch(function (error) {
-            console.log(error);
-            // Add optional error handling here.
-            throw error;
-        });
-}
-*/
-
 
 /**
  * A temperature reading has been received for a shipment
@@ -542,11 +488,27 @@ async function temperatureReading(temperatureReading) { // eslint-disable-line n
  */
 async function TestTransaction(testParameters){
 
-    const shipmentRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
-    console.log(shipmentRegistry);
+    var shipment = testParameters.shipment;
+    shipment.status = 'PACKING';
+    var commodity = testParameters.commodity;
+   commodity.itemCondition.status = 'CRITICAL';
+
+    //UPDATE SHIPMENT
+    const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
+    console.log("Shipment registry: " + shipmentAssetRegistry);
+    await shipmentAssetRegistry.update(shipment);
+    
+    //UPDATE COMMODITY
+    const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
+    console.log("Commodity registry: " + commodityAssetRegistry);
+    await commodityAssetRegistry.update(commodity);
+    
+
+    /*
     let event = getFactory().newEvent('org.logistics.testnet', 'TestEvent');
         event.eventString = 'Testing Notifications.'
         emit(event);
+    */
 }
 
 
@@ -557,6 +519,7 @@ async function TestTransaction(testParameters){
  */
 async function setupDemo(setupDemo) { // eslint-disable-line no-unused-vars
 
+    /*
     const factory = getFactory();
     const NS = 'org.logistics.testnet';
 
@@ -629,4 +592,5 @@ async function setupDemo(setupDemo) { // eslint-disable-line no-unused-vars
     // add the shipments
     const shipmentRegistry = await getAssetRegistry(NS + '.Shipment');
     await shipmentRegistry.addAll([shipment]);
+    */
 }

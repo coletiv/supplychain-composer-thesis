@@ -69,6 +69,7 @@ transaction CreateShipmentAndContract {
   */
   o String shipmentId
   o String trackingNumber
+  o String message
   o ShipmentStatus status default = 'WAITING'
   o Location location
   --> supplyChainMember owner 
@@ -92,6 +93,7 @@ transaction CreateShipmentAndContract {
  */
 transaction UpdateShipment extends ShipmentTransaction {
   o Location newLocation
+  o String message
   --> supplyChainMember newHolder
 }
 
@@ -121,8 +123,6 @@ transaction TransformCommodities {
 }
 
 /**
-
-
 transaction RevertTransformation {
   o Commodity[] commoditiesToRestore
   --> Commodity[] commoditiesToDelete
@@ -145,6 +145,7 @@ asset Commodity identified by GTIN {
 asset ShipmentBatch identified by shipmentId {
   o String shipmentId
   o String trackingNumber
+  o String message optional
   o ShipmentStatus status
   o Location location
   o TemperatureReading[] temperatureReadings optional
@@ -259,7 +260,6 @@ event changeOwnershipEvent{
 --> supplyChainMember oldHolder
 }
 
-
 event detectLocationFraud{
 o Location newLocation
 o Location expectedArrivalLocation
@@ -275,13 +275,6 @@ event TradeNotification {
     --> Commodity commodity
 }
 
-transaction RemoveHighQuantityCommodities {
-}
-
 event RemoveNotification {
     --> Commodity commodity
-}
-
-event CommodityQuery {
-  --> Commodity[] commodities
 }
