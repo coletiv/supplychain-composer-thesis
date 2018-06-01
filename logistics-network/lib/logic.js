@@ -169,17 +169,15 @@ async function isAnyAssetBeingShipped(assets){
 
 async function supplyMemberExists(supplyChainMember){
   
+
     if(supplyChainMember === undefined){
         return false;
     }
-console.log(supplyChainMember);
-
-console.log(supplyChainMember.getType());
+    
     var memberID = supplyChainMember.getIdentifier();
     var memberType = supplyChainMember.getType();
 
     if(memberID === undefined || memberID == '' || memberID === null ){
-        console.log("is false");
         return false;
     }else{
         return getParticipantRegistry('org.logistics.testnet.' + memberType)
@@ -439,36 +437,31 @@ async function TransferCommodityPossession(transfer) {
 
     //verify if newholder exists
     try {
-        var newHolder = transfer.newHolder;
-        var oldHolder = transfer.commodity.holder;
-        var commodity = [transfer.commodity];
+        var newOwner = transfer.newOwner;
+        var oldOwner = transfer.commodity.owner;
+        var commodity = transfer.commodity;
 
-        if (isAnyAssetBeingShipped(commodity))
+        const isBeingShipped = await isAnyAssetBeingShipped([commodity]);
+
+        if (isBeingShipped)
             throw 'Can not transfer possession: the product is currently part of a shipment batch.';
 
         var currentShipments = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
         
-        for(var i=0; i<currentShipments.length; i++){
-
-        }
-
-
         // INTEGRITY CHECKS -> Refactor into a function
-        if (newHolder == '')
-            throw 'GTIN can not be an empty string!';
-        else if (commodity == '')
-            throw 'commodity can not be an empty string!';
+        const ownerExists = await supplyMemberExists(newOwner);
+        if (!ownerExists)
+            throw 'The specified participant does not exist!';
 
-        transfer.commodity.holder = transfer.newHolder;
+        transfer.commodity.owner = transfer.newOwner;
         const commodityAssetRegistry = await getAssetRegistry('org.logistics.testnet.Commodity');
-        await commodityAssetRegistry.update(transfer.commodity);
-
+        await commodityAssetRegistry.update(commodity);
 
         // Emit an event for the change of ownership
         let event = getFactory().newEvent('org.logistics.testnet', 'changeOwnershipEvent');
         event.commodity = commodity;
-        event.oldHolder = oldHolder;
-        event.newHolder = newHolder;
+        event.oldOwner = oldOwner;
+        event.newOwner = newOwner;
         emit(event);
 
     } catch (error) {

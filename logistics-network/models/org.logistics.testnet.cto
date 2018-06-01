@@ -45,7 +45,7 @@ enum ShipmentStatus {
  */
 abstract transaction ShipmentTransaction {
   --> ShipmentBatch shipment
-  o ShipmentStatus status
+  
 }
 
 /**
@@ -56,9 +56,6 @@ transaction TemperatureReading extends ShipmentTransaction {
   o Double centigrade
 }
 
-transaction getAssetsFromOwner {
-  o String shipmentOwner
-}
 
 /**
  * We want to create a shipment and contract that are linked, but SEPARATE assets, so that they can have separate permissions. If they were all 1 asset it would not be possible, and even creating 2 assets with 2 different transactions, it is sometimes hard to link the shipment and contract manually; So, when creating a shipment, we automatically create the corresponding contract;
@@ -92,15 +89,16 @@ transaction CreateShipmentAndContract {
  * Transfer holdership of assets to another person and update the status of the shipment
  */
 transaction UpdateShipment extends ShipmentTransaction {
+  o ShipmentStatus status
   o Location newLocation
   o String message
-  --> supplyChainMember newHolder
+  --> supplyChainMember newHolder optional
 }
 
 // transfer possession to another person; final owner stays the same; check final owner
 transaction TransferCommodityPossession {
   --> Commodity commodity
-  --> supplyChainMember newHolder
+  --> supplyChainMember newOwner
 }
 
 
@@ -247,7 +245,8 @@ transaction SetupDemo {
 }
 
 transaction TestTransaction{
-
+--> ShipmentBatch shipment
+--> Commodity commodity
 }
 
 event TestEvent{
@@ -256,8 +255,8 @@ event TestEvent{
 
 event changeOwnershipEvent{
 --> Commodity commodity
---> supplyChainMember newHolder
---> supplyChainMember oldHolder
+--> supplyChainMember newOwner
+--> supplyChainMember oldOwner
 }
 
 event detectLocationFraud{
