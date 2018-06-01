@@ -316,13 +316,52 @@ async function UpdateShipment(transactionItems) {
     
     //UPDATE ASSETS
     const commodityAssetRegistry=await getAssetRegistry('org.logistics.testnet.Commodity');
-    console.log("Commodity registry: " + commodityAssetRegistry);
     await commodityAssetRegistry.updateAll(shipment.assetExchanged);
     
     //UPDATE SHIPMENT
     const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
-    console.log("Shipment registry: " + shipmentAssetRegistry);
     await shipmentAssetRegistry.update(shipment);
+}
+
+/**
+ * 
+ * @param {org.logistics.testnet.UpdateCommodity} update - the UpdateCommodity transaction
+ * @transaction
+ */
+async function UpdateCommodity(update) {
+
+    commodity = update.commodityToUpdate;
+
+    commodity.type = update.type;
+    commodity.name = update.name;
+    commodity.description = update.description;
+    commodity.itemCondition = update.itemCondition;
+
+    //UPDATE ASSET
+    const commodityAssetRegistry=await getAssetRegistry('org.logistics.testnet.Commodity');
+    await commodityAssetRegistry.update(commodity);
+}
+
+/**
+ * 
+ * @param {org.logistics.testnet.DeleteCommodity} data - the DeleteCommodity transaction
+ * @transaction
+ */
+async function DeleteCommodity(data) {
+
+    commodity = data.commodityToDelete;
+
+    //CHECK OWNER PERMISSION
+
+    //check if it isnt in ANY shipment;
+    const beingShipped = await isAnyAssetBeingShipped([commodity]);
+
+    if (beingShipped)
+        throw 'Can not transform products: 1 or more products are currently part of a shipment batch.';
+
+    //UPDATE ASSET
+    const commodityAssetRegistry=await getAssetRegistry('org.logistics.testnet.Commodity');
+    await commodityAssetRegistry.remove(commodity);
 }
 
 /**
@@ -355,6 +394,7 @@ async function TransformCommodities(transformation) {
     console.log()
 
     //TODO: CHECK PERMISSIONS
+    // ALL INPUT PRODUCTS MUST HAVE SAME OWNER - person calling this
     var inputProducts = transformation.commoditiesToBeConsumed;
     var outputProducts = transformation.commoditiesToBeCreated;
     var createdCommodities = [];
