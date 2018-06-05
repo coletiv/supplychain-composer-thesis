@@ -34,19 +34,58 @@ Therefore, the algorithms used by Bitcoin are not a defining feature of the bloc
 \label{fig:blockchain_workflow}
 \end{figure}
 
+\subsection{Immutability}
     This hash thus guarantees that the blocks are linked to each other, but it also guarantees the integrity of the block chain. If one block is altered, the hash on the block that follows it stops matching the block's. If we really wanted to change something on this  first block, we would have to alter the hash on the following block to match. But then, that second block would also have been altered, and we would have to change the hash on the third block to match, and so on. This means that the blockchain is immutable, as it is not possible to alter a single block without manually altering all the others. 
     
-    Going further on to explain how the data is actually added to the blockchain: first, it is important to notice that the blockchain itself exists only in the peer-to-peer network, and as such, is stored and extended by the nodes of the network. The nodes are machines that have the core code of the blockchain system and which receive and share among themselves the incoming information, also validating it according to the established rule set. All the nodes, if they are not malicious and actively attempting to change the contents of the chain, contain the same blockchain, as they all agree on its contents through a consensus algorithm. 
+\subsection{Consensus}
+    The blockchain and its data exists only in a \textbf{peer-to-peer network}, and as such, it is stored and extended by the nodes of the network, which form a topology between them. The nodes are machines that have the core code of the blockchain system and which receive and share among themselves the incoming information, in the form of blocks, validating it according to the established rule set. All the nodes, if they are not malicious and actively attempting to change the contents of the chain, contain the same blockchain structure and information, as they all agree on its contents through a consensus algorithm. 
     
-     The nodes that actually gather information from the peer-to-peer network (by receiving transactions from the nodes they are connected to), and then form blocks of information that they try adding to the blockchain are called miners. As they are doing all the hard word, they usually need some incentive to do so. Cryptocurrencies are virtual currencies that only exist on the blockchain they belong to, and they allow for a new monetary system to come into life. These currencies play an important role in blockchain, since they allow for miners to be rewarded. Without them, public blockchains would probably not work as well, which is why there are so many alternative currencies popping up, with the advent of this technology. 
+     Some nodes are open to the internet and the world, thus receiving information from outside the peer-to-peer network and disseminating it to the rest of the network's nodes. A subset of the nodes, called miners, will then gather the circulating information from the peer-to-peer network (by receiving transactions from the nodes they are connected to), and form blocks of information, which they try adding to the blockchain. Obviously, it is impossible for all the nodes to add their blocks at the same time, as each of them would then have a different version of the blockchain and they would get desynchronized. And so, the nodes must reach a consensus as to which block gets added next to the blockchain. For this very reason, the code of the blockchain must have both a consensus algorithm and also a block validation algorithm.
+     
+     In public blockchains, the mining nodes do all the hard work, and they usually need some incentive to do so. Cryptocurrencies are virtual currencies that only exist on the blockchain they belong to, and they allow for a new monetary system to come into life. These currencies play an important role in blockchain, since they allow for miners to be rewarded. Without them, public blockchains would probably not work as well, which is why there are so many alternative currencies popping up, with the advent of this technology. 
+     
+     Of course, this is just one of many ways to make a blockchain move forward successfully, and other types of consensus algorithms have been idealized, though most of the consensus algorithms in public blockchains will use cryptocurrencies as the prime incentive.
     
-    \subsection{Consensus}
-    Over time, each node aggregates the information it receives into a block. This block is not yet aggregated to the blockchain, rather, it is just stored locally on the node that created it. 
     
-    After creating the block locally, each node then attempts to extend the blockchain with its own block. Obviously, it is impossible for all the nodes to add their blocks at the same time, as each of them would then have a different version of the blockchain and they would get desynchronized. And so, the nodes must reach a consensus as to which block gets added next to the blockchain. For this very reason, the code of the blockchain must have both a consensus algorithm and also a block validation algorithm. The most commonly used consensus algorithm is \textbf{Proof of Work (PoW)}, though there are others, like the most used alternatives, \textbf{Proof of Stake (PoS)}, and \textbf{Proof of Activity (PoA)}. 
+\subsection{Private, Public and Hybrid Blockchains}
+
+    Blockchain, traditionally, is of public nature. But, as many institutions grew aware of the possible benefits of this technology, they started investing in it, and so appeared the private blockchains and the semi-private or consortium blockchains.
+    
+    \paragraph{Public Blockchains} When a blockchain is public, it is accessible to any user. Anyone is able to both read and validate information from it, as well as contribute to its extension by participating in the consensus process. They are secured by the economic incentives that are given to the miners, in the form of cryptocurrency tokens. These blockchains can be  considered fully decentralized and have no access control. Every user is at the same level.
+    
+    \paragraph{Private Blockchains} These are usually owned by some organization and have access control, restricting write access to certain peers inside the organization. Read access might be restricted or not, according to the organization's goals. These blockchains, unlike public ones, might not require cryptocurrency or incentives, as the maintenance of the blockchain is done by the organization who owns it, and so they have all the interest in having nodes that can run the consensus process. In the end, this is a more centralized version of the blockchain, as the nodes are concentrated under the ownership of the organization. This also gives the advantage that alterations to the blockchain are easier to achieve, if so is desired (though it subtracts from the actual meaning and concept of an immutable blockchain). It is usually more efficient than public blockchains, being able of achieving a higher number of transactions processed per second.
+    
+    \paragraph{Consortium blockchains} They are a kind of hybrid blockchain, though closer to a private blockchain. They are controlled by many different organizations, and the consensus process is handled by pre-selected nodes from the organizations. This consensus might involve, for example, at least a certain percentage of the nodes agreeing on something (e.g.: if there are 15 fixed nodes, require at least 10 to sign the block). The permissions to read might be public or otherwise permissioned, and as such, this can also be considered a partially decentralized blockchain.
+    % TODO: INCLUDE QUOTE
+   % “So far there has been little emphasis on the distinction between consortium blockchains and fully private blockchains, although it is important: the former provides a hybrid between the ‘low-trust’ provided by public blockchains and the ‘single highly-trusted entity’ model of private blockchains, whereas the latter can be more accurately described as a traditional centralized system with a degree of cryptographic auditability attached.”[2] 
+
+%--> Hyperledger composer leans more towards the consortium permissioned blockchain type
+    \subsection{Types of Consensus Mechanisms and Algorithms}
+    
+     The most commonly used consensus algorithm is \textbf{Proof of Work (PoW)}, though there are others, like the most used alternatives, \textbf{Proof of Stake (PoS)}, and \textbf{Proof of Activity (PoA)}. We showcase some of the algorithms in table %TODO: PUT REFERENCE 2.1.
+    
+    \begin{table}[]
+\centering
+\begin{tabular}{l|r|r|}
+\cline{2-3}
+                                                                                                  & \multicolumn{1}{l|}{{\color[HTML]{343434} \textbf{Starting}}} & \multicolumn{1}{l|}{{\color[HTML]{343434} \textbf{Ending}}} \\ \hline
+\multicolumn{1}{|l|}{{\color[HTML]{343434} 1. Literature Review}}                                 & 1 Jan 2018                                                    & 9 Feb 2018                                                  \\ \hline
+\multicolumn{1}{|l|}{{\color[HTML]{343434} 2. Decide on the features and design the model}}       & 10 Feb 2018                                                   & 5 Mar 2018                                                  \\ \hline
+\multicolumn{1}{|l|}{{\color[HTML]{343434} 3. Create a small integration project}}                & 6 Mar 2018                                                    & 15 Apr 2018                                                 \\ \hline
+\multicolumn{1}{|l|}{{\color[HTML]{343434} 4. Evaluate its applicability and performance}}        & 16 Apr 2018                                                   & 29 Apr 2018                                                 \\ \hline
+\multicolumn{1}{|l|}{{\color[HTML]{343434} 5. Recalibrate the model's values, given the results}} & 30 Apr 2018                                                   & 14 May 2018                                                 \\ \hline
+\multicolumn{1}{|l|}{{\color[HTML]{343434} 6. Finalize the dissertation document}}                & 15 May 2018                                                   & 22 Jun 2018                                                 \\ \hline
+\end{tabular}
+\caption{Work plan description for figure \ref{fig:gantt_chart}}
+\label{table:gantt_chart}
+\end{table}
+    
     
     In short, PoW works by making the nodes spend computational power until they can find out a number that satisfies a certain rule. % Explain hash stuff about PoW. 
-    When a node finds that number, it is allowed to extend the blockchain with the block it previously created. So, when this happens, and as this is a peer-to-peer network, this node transmits to all the others the new blockchain with the added block. This block has the number found by the creator node, so that the other nodes can confirm themselves that the creator node rightfully worked to mine and add this block to the chain. They will also do standard validation checks on the block, to guarantee that everything is in order. Upon positively verifying a block, all the other nodes implicitly add it to their version of the blockchain, by including its hash in the next block they try to create. 
+    When a node finds that number, it is allowed to extend the blockchain with the block it previously created. So, when this happens, and as this is a peer-to-peer network, this node transmits to all the others the new blockchain with the added block.
+    %in general, it is assumed that the longest valid chain held by the nodes is the correct one.
+    %Creator includes reward in the block. Other nodes validate that this was a valid attempt at creating a block. Done.
+    This block has the number found by the creator node, so that the other nodes can confirm themselves that the creator node rightfully worked to mine and add this block to the chain. They will also do standard validation checks on the block, to guarantee that everything is in order. Upon positively verifying a block, all the other nodes implicitly add it to their version of the blockchain, by including its hash in the next block they try to create. 
     %Explain incentives to do the mining
     It is also worth to notice that not all nodes work at the same speed, or are active at the same time. This means that some nodes might not be up to date, and might have difficulties catching up to the current blockchain, as it might not correspond to their outdated version. So, in general, it is assumed that the longest valid chain held by the nodes is the correct one. This way, a node in these conditions can simply query other nodes to find out what the current blockchain is, and continue working from there.
     
@@ -62,15 +101,7 @@ Therefore, the algorithms used by Bitcoin are not a defining feature of the bloc
 %\paragraph{Public Key Cryptography}
 %\paragraph{Other aspects and concerns}
 
-\section{Private, Public and Hybrid Blockchains}
 
-    Blockchain, traditionally, is of public nature. But, as many institutions grew aware of the possible benefits of this technology, they started investing in it, and so appeared the private blockchains and the semi-private or consortium blockchains.
-    
-    \paragraph{Public Blockchains} When a blockchain is public, it is accessible to any user. Anyone is able to both read and validate information from it, as well as contribute to its extension by participating in the consensus process. They are secured by the economic incentives that are given to the miners, in the form of cryptocurrency tokens. These blockchains can be  considered fully decentralized and have no access control. Every user is at the same level.
-    
-    \paragraph{Private Blockchains} These are usually owned by some organization and have access control, restricting write access to certain peers inside the organization. Read access might be restricted or not, according to the organization's goals. These blockchains, unlike public ones, might not require cryptocurrency or incentives, as the maintenance of the blockchain is done by the organization who owns it, and so they have all the interest in having nodes that can run the consensus process. In the end, this is a more centralized version of the blockchain, as the nodes are concentrated under the ownership of the organization. This also gives the advantage that alterations to the blockchain are easier to achieve, if so is desired (though it subtracts from the actual meaning and concept of an immutable blockchain). It is usually more efficient than public blockchains, being able of achieving a higher number of transactions processed per second.
-    
-    \paragraph{Consortium blockchains} They are a kind of hybrid blockchain, though closer to a private blockchain. They are controlled by many different organizations, and the consensus process is handled by pre-selected nodes from the organizations. This consensus might involve, for example, at least a certain percentage of the nodes agreeing on something (e.g.: if there are 15 fixed nodes, require at least 10 to sign the block). The permissions to read might be public or otherwise permissioned, and as such, this can also be considered a partially decentralized blockchain.
 
 
 
