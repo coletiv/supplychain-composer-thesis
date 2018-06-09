@@ -14,6 +14,7 @@ enum ItemStatus {
   o GOOD
   o DAMAGED
   o CRITICAL
+  o LOST
 }
 /**
  * Transformation types for a product
@@ -35,7 +36,6 @@ enum ShipmentStatus {
   o SHIPPED_IN_TRANSIT
   o CANCELED
   o DELIVERED
-  o RECEIVED
   o LOST
 }
 
@@ -119,6 +119,25 @@ transaction TransformCommodities {
   --> Commodity[] commoditiesToBeConsumed
   o Commodity[] commoditiesToBeCreated
 }
+
+/**
+ * Updates a commodity's details, excluding owner and GTIN
+ */
+transaction UpdateCommodity {
+  --> Commodity commodityToUpdate
+  o ProductType type
+  o String name
+  o String description
+  o ItemCondition itemCondition
+}
+
+/**
+ * Updates a commodity's details, excluding owner and GTIN
+ */
+transaction DeleteCommodity {
+  --> Commodity commodityToDelete
+}
+
 
 /**
 transaction RevertTransformation {
@@ -270,10 +289,6 @@ event CommodityTransformation{
   --> Commodity[] newCommodities
 }
 
-event TradeNotification {
-    --> Commodity commodity
-}
-
-event RemoveNotification {
-    --> Commodity commodity
+event ShipmentUpdate  {
+  --> ShipmentBatch shipment
 }

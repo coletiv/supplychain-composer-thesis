@@ -321,6 +321,12 @@ async function UpdateShipment(transactionItems) {
     //UPDATE SHIPMENT
     const shipmentAssetRegistry = await getAssetRegistry('org.logistics.testnet.ShipmentBatch');
     await shipmentAssetRegistry.update(shipment);
+
+    //EMIT UPDATE EVENT
+    let event = getFactory().newEvent('org.logistics.testnet', 'ShipmentUpdate');
+        event.shipment = shipment;
+        emit(event);
+
 }
 
 /**

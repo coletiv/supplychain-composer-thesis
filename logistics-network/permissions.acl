@@ -14,14 +14,51 @@ rule NetworkAdminSystem {
     action: ALLOW
 }
 
-rule PedroHasPowers {
-    description: "Pedro Customer shall be omnipotent"
-    participant: "org.logistics.testnet.Customer"
-    operation: ALL
-    resource: "**"
-    action: ALLOW
+rule AuditorAllowReadAll {
+  description: "Auditor can read everything"
+  participant: "org.logistics.testnet.Auditor"
+  operation: READ
+  resource: "org.logistics.**"
+  action: ALLOW
 }
 
+rule AuditorDenyActions {
+  description: "Auditor can not submit any transaction."
+  participant: "org.logistics.testnet.Auditor"
+  operation: CREATE, DELETE, UPDATE
+  resource: "org.hyperledger.composer.system.**"
+  action: DENY
+}
+
+rule ParticipantAllowReadSystem {
+  description: "Participants can access the system"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: READ
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule ParticipantReadSelf {
+  description: "Participants can their own info"
+  participant(p): "org.hyperledger.composer.system.Participant"
+  operation: READ
+  resource(r): "org.hyperledger.composer.system.Participant"
+  condition: (r.getIdentifier() == p.getIdentifier()  && r.getFullyQualifiedType() == p.getFullyQualifiedType())
+  action: ALLOW
+}
+
+rule MembersReadOwnShipment {
+  description: "Any supply chain member can read the shipment batches they own, hold or are buying."
+  participant(p): "org.hyperledger.composer.system.Participant"
+  operation: READ
+  resource(r): "org.logistics.testnet.ShipmentBatch"
+  condition: (r.owner.getIdentifier() == p.getIdentifier() || r.holder.getIdentifier() == p.getIdentifier() || r.contract.buyer.getIdentifier() == p.getIdentifier())
+  action: ALLOW
+}
+
+
+
+// ALL, CREATE, DELETE, READ, UPDATE
 
 /*
 participant types:
