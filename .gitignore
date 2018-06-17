@@ -20,4 +20,4 @@
 *.toc
 
 *.dvi
-thesis.pdf
+thesis.pdf *.gz
