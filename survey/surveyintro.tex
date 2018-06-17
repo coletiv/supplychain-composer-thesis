@@ -1,0 +1,114 @@
+
+The survey was written during the months of March and April, 2018, with results being collected from the end of April up until the mid of June. The purpose, methodology and results of the survey are analyzed in this chapter, leading to the validation of the issues mentioned in the previous chapters. The survey and analysis done here also serves as a basis for the requirements that were used to build a Proof-of-Concept (PoC) prototype. 
+
+%Maybe push this later to the next chapter instead?
+However, due to various factors, the survey and collection of results was delayed from the initial planning, resulting in the collection of results only being completed in June. Thus, the PoC used some assumptions from both the background analysis and the few initial answers from the survey, and kept iterating the requirements based on the new answers received during the development. 
+
+%Filipe's Comment: <em vez de tentar justificar porque é que a survey apareceu tarde, explicaria apenas que os resultados não chegaram a tempo de informar todas as decisões de design e implementação>
+
+\section{Purpose and Target}
+Even though the survey was delayed, the answers given are still important in the end. The main purpose of this survey, as stated in \ref{sec:survey-approach}, was to give a response to the question we are focusing on: \textbf{"What supply chain issues and requirements do the experts really find the most important?"}. 
+
+This is done by dividing the survey into groups of questions: some about the issues of supply chain, some about the points of improvement as well as the opinions applicability of Blockchain as a system for supply chain management. Together, these allow for an opinion to be formed about the quantitative measurements of the importance of each issue, as well as a qualitative collection of requirements.
+
+The survey is aimed at people with knowledge in the area of Supply Chains, and optionally Blockchain. The combination of knowledge in both areas is relevant for the questions that focus Blockchain applicability. However, having low knowledge about Blockchain is also relevant, so that the bias towards this architecture is reduced. %The Blockchain knowledge in this study was also part of the questions inquired, and has an approximately normal distribution, which means the sample
+
+\section{Methodology}
+This section describes how the data was collected and analyzed. It gives a brief overview of what questions were asked, how they were grouped, the objectives of each question, along with the type of answers used.
+
+% who are the targets - supply chain experts;
+% Methodology: what we are doing - an only survey;  
+%how we are doing it - spreading it through social channels;
+
+\subsection{Data Collection}
+The data for the survey was collected by sharing the survey with professionals of the supply chain area, through contact with related companies, personal contacts, social networks like LinkedIn, Reddit and conversation groups. 
+
+The collected sample size was 25. Even though these are answers from knowledgeable people, the sample size is not very significant, so the margin of error for this study is higher than if it were otherwise. 
+
+
+The questions of they survey can be roughly grouped into four main groups of questions. Each of the groups has similar questions, with a distinct purpose.
+  
+\begin{enumerate}
+
+%TODO: maybe it is 5 questions after all?
+\item \textbf{Statistical group 1 (4 questions) - General Information}
+	\begin{itemize}
+	\item \textbf{Questions} - Information about the respondent's contact with supply chain, role in the industry, years of experience and number of employees in the current company (if in a job related to supply chain).
+    \item \textbf{Conclusions Expected} - Characterization of the respondent's, especially in order to validate the relevance of their profiles.
+	\end{itemize}
+    
+\item \textbf{Statistical group 2 (4 questions) - Blockchain Knowledge and Opinions}
+	\begin{itemize}
+	\item \textbf{Questions} - Questions about the general knowledge of Blockchain technology, opinions about Blockchain cryptocurrencies and their usefulness in various contexts, as well as Blockchain regulation and the effect of GDPR on Blockchain technology.
+    \item \textbf{Conclusions Expected} - Get a vision on the need or not of cryptocurrencies for Blockchain related architectures, as well as the impact of regulations on this technology.
+	\end{itemize}
+    
+\item \textbf{Statistical group 3 (10 questions) - Supply chain Points of Focus and Problems}
+	\begin{itemize}
+    \item \textbf{Questions} - Questions to rate affirmations that deal with supply chain issues, focusing on the level of agreement that the participants have with the affirmations. Most of the affirmations correlate supply chain major issues with the points of failure that might underlie them; The others rate specific problems in an importance scale or by percentage of occurrence.
+    \item \textbf{Conclusions Expected} - Validation of the issues that affect the supply chain management metrics the most, as per the opinion of specialists.
+	\end{itemize}
+    
+\item \textbf{Statistical group 4 (4 questions) - Supply Chain Points of Improvement and Applicability of Blockchain Technology} 
+	\begin{itemize}
+    \item \textbf{Questions} - The first half of these questions serves to prioritize the importance of some supply chain issues, as well as the importance of some functionalities that supply chain information systems should feature. The second half of the questions ranks the use cases and benefits that Blockchain could bring to supply chain management.
+    \item \textbf{Conclusions Expected} - This is the main point of the survey, and from here, the most important information towards the conclusions we want from the survey is gathered, which consists in the supply chain issues leading to Blockchain system requirements.
+	\end{itemize}
+    
+\end{enumerate}
+
+%Extra possible hypothesis, involving correlations (POSSIBLE DELETE THIS FROM THIS SECTION):
+%\begin{enumerate}
+%\item The employees who have good or very good blockchain knowledge give significantly different answers to the Blockchain applicability requirements to a supply chain. (divide the answers into 2 groups (for each requirement?), use chi-squared test or t-test?) -> chi-squared is for categorical data, t-test more for continuous data, by using means, so it depends, really, but chi-squared is the one to use here?
+%\item The employees who have good or very good blockchain knowledge give significantly different answers to the blockchain regulation questions. (divide the answers into 2 groups, use chi-squared test or t-test?)
+%\end{enumerate}
+
+ % Should I leave the below paragraph here or move it to section 6.2.2?
+\par Most of the important questions use statements with the Likert scale in the answer, from 1 to 5, where 1 means "Strongly Disagree" and 5 means "Strongly Agree". In this survey the middle of the scale, 3, is "Neutral" or "Neither Agree nor Disagree" and there was a separate answer with "Do not know". Therefore we can classify this 1 to 5 scale as \textbf{ORDINAL}, since all of the values directly relate to a scale of increasing agreement. Additionally, some of the other questions also use a scale of importance from 1 to 5, while the remaining questions mostly have nominal answers (meaning that the group of answers for a question are fixed, qualitative and not numerical). 
+
+\subsection{Data Analysis}
+
+%What is done with the data: what questions do we really want to answer with the collected data?
+
+% TODO: What kind of statistical analysis are we conducting to get the results we want - report better
+ 
+The analysis of the answers is done through bar graphics (some with frequency polygon), and using mostly the \textbf{measures of central tendency or location},  \textbf{measures of central spread, scale or dispersion} and \textbf{measures of skewness and kurtosis}. The metrics used to analyze the data set and reach some conclusions, as well as the way they are interpreted in this study are detailed in table \ref{metrics-table}.
+
+
+%% PUT THESE INTO A TABLE AND EXPLAIN A LITTLE BETTER WHICH ONES ARE USED, WHEN AND WHY
+
+% TODO: change table caption
+
+%%%%%%%%%%%% TABLE START%%%%%%%%%%%%%%
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{metrics-table}
+\begin{tabular}{@{}l|l|l|@{}}
+\cmidrule(l){2-3}
+                                                                                                                              & Metrics                                                                & Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \\ \midrule
+\multicolumn{1}{|l|}{\multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Measures of \\ Central Tendency \\ or Location\end{tabular}}} & \textbf{Mean}                                                          & \begin{tabular}[c]{@{}l@{}}The mean represents the most probable value. In this\\ survey, with the use of scales with a lower and upper \\ bounds, the mean has the roles of representing the \\ average value of agreement, importance and other\\  measures.Normally, when the skewness of a distribution\\ is high, the meaning of the mean may get distorted by \\ the existence of outlier values. However, since the scales\\  have a low range, with a lower and upper bound on the\\  answer values, this is not much of a concern. Therefore, \\ even in cases of skewness, the mean can be a useful metric.\end{tabular} \\ \cmidrule(l){2-3} 
+\multicolumn{1}{|l|}{}                                                                                                        & \textbf{Median}                                                        & \begin{tabular}[c]{@{}l@{}}Value of the 50\% percentile, for numerical answers. Half \\ the answers are above this value and half are below, \\ pointing to a central tendency around this value. This is \\ a good metric to use, especially in skewed distributions \\ where there are outliers in the collected values, since the\\ meaning of the mean may get slightly distorted by the \\ outlier values.\end{tabular}                                                                                                                                                                                                       \\ \cmidrule(l){2-3} 
+\multicolumn{1}{|l|}{}                                                                                                        & \textbf{Mode}                                                          & \begin{tabular}[c]{@{}l@{}}Most frequent response. Though it represents the most \\ popular answers, by itself the metric means nothing else,\\ as there might be answers almost as popular or not.\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                   \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Measures of\\ Spread, Scale or\\ Dispersion\end{tabular}}}    & \textbf{\begin{tabular}[c]{@{}l@{}}Standard \\ Deviation\end{tabular}} & \begin{tabular}[c]{@{}l@{}}Quantifies the variation within the data set, by showing \\ how much the distribution spreads to either sides of the\\ center. A high value for the standard deviation means\\ that there are a lot of values away from the mean, from \\ which can be concluded that there isn't a general \\ consensus on a certain answers.A low value means that \\ there is consensus, since  all the values of the data set are \\ bundled more closely together.\end{tabular}                                                                                                                                    \\ \cmidrule(l){2-3} 
+\multicolumn{1}{|l|}{}                                                                                                        & \textbf{Range}                                                         & \begin{tabular}[c]{@{}l@{}}Difference between highest and lowest value of the data set.\\ Together with the standard deviation, indicates the dispersion \\ of the value of the answers. A range of 0 means that a\\ question had the same  value for all responses, for instance.\\ This metric ignores the frequency with which each answer \\ was given, that's why it must be coupled with the standard \\ deviation to be relevant.\end{tabular}                                                                                                                                                                              \\ \midrule
+\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Measures of\\ Skewness and \\ Kurtosis\end{tabular}}                          & \textbf{Skewness}                                                      & \begin{tabular}[c]{@{}l@{}}This metric indicates the lack of symmetry in a distribution, \\ where the results bunch up in one side of the distribution. \\ For instance, negative skewness values indicate a skew to \\ the left: the values bunch up  at the right end of the distribution \\ and the left tail is long, indicating there are outliers in the lower \\ values.\end{tabular}                                                                                                                                                                                                                                       \\ \bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%% TABLE END %%%%%%%%%%%%%%%%%%%%%
+
+
+%TODO
+To classify if the skew of the distribution is high or not, there is a measure that can be calculated, the skewness standard error, with the following formula: 
+$\sqrt\frac{6*N*(N-1)}{(N-2)*(N+1)*(N+3))}$, where $N = sample size$.
+
+For a sample size of 25, the Skewness Standard Error is 0,463683501
+.
+%Extreme values indicate loooong tails;

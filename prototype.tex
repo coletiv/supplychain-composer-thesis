@@ -1,0 +1,312 @@
+\chapter{Software Engineering - Architectural Design and Implementation of a Prototype}
+\label{chap:prototype}
+\minitoc \mtcskip \noindent 
+
+%TODO: somewhere in the 1st or 2nd sections, or even here, talk about the survey timeline and how it affected the choice of framework and requirements
+
+\section{Framework Comparison and Choice}
+\subsection{Pre-requirements Elicited from the Survey}
+
+\subsection{Framework Choice}
+
+%Use part of the state of the art/background research here to discuss Composer+Fabric as the tools to choose over the others
+
+%Answer the 2nd subthesis - "what supply chain issues and requirements do the experts really find the most important?"
+
+\section{Requirements}
+
+LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERESSA OU MUDAR DE SITIO
+
+
+
+\subsection{Project Drivers}
+
+Project Drivers
+	1. Purpose of the Product
+
+	This platform is a proof of concept which intends to show that the requirements hereby mentioned are implementable up to a certain degree and that these requirements meet most, if not all, the specific needs of today's supply chains. The product should be extendable such that any company can build integration modules for their own software, which their employees can use.
+	
+	“Sometime in the not-to-distant future, a submarine will sink. An air defense missile will detonate far from its intended target. [sic] directly result from a \$2 counterfeit electronic tucked deep within a billion-dollar military technology.”
+	
+	"Reminds me of a scandal last year in the Netherlands with eggs that were contaminated with fipronil:
+	
+	http://www.dw.com/en/fipronil-in-eggs-dutch-police-arrest-two-suspects/a-40043017
+	
+	This had a huge impact. All eggs were removed from the shelves throughout the country. While only a small part was actually affected. In addition, it was no longer possible to verify in which products the eggs had been processed. Those products have remained in stores. The government, controlling authorities, shops and end-users would have benefited enormously if Blockchain had been used throughout the chain."
+	
+\subsection{Client, Customer, Stakeholders}
+	
+	As a proof of concept, this project would benefit any industry which uses supply chain, but more particularly, it would be directed towards any company which wishes to integrate their own information systems (i.e. ERPs and so on) with this ledger, such as to maintain a common information transmission channel with their partners, as well as to have more permanent records of their transactions. Stakeholders for this system can be listed as:
+    \begin{itemize}
+		\item Supply Chain Executives
+			§ Manufacturing companies, Suppliers, Distributors, Retailers - so that they can have their partners information more readily available, therefore speeding up the transmission of goods;
+		\item The consumer - the consumers are able to track their goods, for example
+		\item Auditors/Certification Authorities - 1 single system is a lot easier to audit from a single entry point
+	\end{itemize}
+	3. Users of the Product
+		\begin{itemize}
+		\item Integration developers - the developers in charge of connecting their companies system to this system.
+		\item Supply Chain members - Customs Officers and employees - to register incoming and outgoing products on the blockchain (through their integration module?), distribution delivery employees - to register deliveries (through their integration module?), etc.
+		\item System administrators.
+	\end{itemize}
+
+\subsection{Project Constraints}
+
+	1. Mandated Constraints
+    \begin{itemize}
+		\item The product shall represent a Proof of Concept (PoC), such that it must accurately simulate some of the variables, which include the number of nodes needed for the system to work, their distribution, the transaction load, number of products and companies (TBD).
+		\item The node number and distribution of the nodes might be subject to budget and time constraints, as it depends on external services, such as Amazon Web Services (AWS).
+		\item The data sets used to reproduce this proof of concept are based on the data from projects such as OriginTrail, among others, and are adapted and created by the developer of this PoC.
+		\item The data will follow the GS1 EPCIS standards and specifications for data formatting, as possible (https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf).
+		\item The product shall have well defined APIs that allow for incoming and outgoing data to circulate between the ledger and external systems, namely ERPs.
+		\item Any software frameworks used will be open source. This project will use Hyperledger Fabric and Hyperledger Composer.
+		\item A company/trading partner wishing to join the supply chain's blockchain ledger must comply with the GS1 standards, namely by having a globally recognized identification (GS1 Company Prefix) and the company's locations must also be globally and uniquely identified.
+		\item TODO: Should I allow companies without the GS1 prefix for themselves and for their locations/warehouses/etc? 
+        \end{itemize}
+	2. Naming Conventions and Definitions
+		\par PoC - Proof of Concept
+		\par SLA - Service Level Agreement
+		\par Other glossary terms, acronyms and whatever.
+		
+	3. Relevant Facts and Assumptions
+		\par N/A - Random stuff that is not put anywhere else, basically
+	
+Functional Requirements Drivers
+	1. Scope of the Work
+		\par This project is being developed as a Proof of Concept for the Master Dissertation titled "title\_here".
+		\par The objective is to build a product that can enhance the discipline of supply chain management, by making the data more easily accessible, reducing synchronization time, improving integration, and providing a tool that assists in guaranteeing end to end traceability.
+	2. Scope of the Product
+		\par This project encompasses the development of a blockchain ledger and respective integration endpoints. The ledger will be designed to accommodate transactional data from a supply chain, and it will also be possible to execute smart contracts to manage the assets registered in the transactions.
+		\par The process of extracting data from the ERP systems and forwarding it to the system's node endpoints, as well as the process of sending data from the ledger to the ERP are out of the scope of this project. External systems must themselves build their own integration modules. APIs for this are provided, and the data is standardized, to facilitate the task (TODO: talk about how the data is actually formatted, what file type, what is inside the file).
+		\par TODO: Build use case diagram
+	
+\subsection{Functional  Requirements}
+	• The system shall have a defined set of roles ("which ones" is a topic to discuss)
+		\par Regulatory Entity
+		\par Admin
+		\par Supply Chain Member
+			§ Supplier  (does it make sense for these categories to be associated with an entity? Or should an entity just be a supply chain member, and the specific role it plays depends on the transaction: i.e. on one transaction it can be a supplier and on a different one a manufacturer - else, it could also be a limitation of the system. Imagine that a company has 2 different businesses - does that entail them as being 1 entity that has 2 different possible roles in the transactions, or a different entity for each role?).
+			§ Manufacturer
+			§ Distributor
+			§ Retailer
+			§ Customer
+			§ OR  Buyer and Seller
+		
+	• Transactions
+		\par User Class 1 - The System
+			§ The system shall record a new transaction for each action which is intended to change the state of an asset (which actions is a topic to discuss - reporting that an item was sent, received, altered, lost, etc).
+			§ The system shall maintain an immutable list of the transactions that took place, in the form of blocks
+			§ The system shall allow for a large entry of many transactions, corresponding to the synchronization process of a company uploading their data. (send batch of transactions?)
+			§ The system shall assign each asset related transaction at least 1 asset and  at least 1 entity.
+			§ The system shall assign each transaction a timestamp.
+			§ The system shall have different channels to support separate sets of permissions, such that information is available to different groups of users, so that sensible information from a group of companies might be hidden from others.
+			§ The system shall be able to detect any mismatches in product characteristics or points of entry/exit, and notify the entities responsible for the product.
+				□ Example: Product was sent with destination Hong Kong. Product was then actually received in Kuala Lumpur. They check in the item, and the system detects the expected destination is different from the actual one.
+		
+		\par User Class 2 - Admin
+			§ The admin shall be able to revert a fraudulent transaction (not sure if it is possible, investigate further) inserted with the wrong details or by someone without permissions, but access to the system.
+				□ Not revert the transaction: revert its effects, but manually; as it is not possible to access transactions in runtime/backend, it is very hard or even impossible to write code that, given a transaction, it automatically reverts it; if the transaction content were possible to be accessed, it'd be possible, but a revert function would have to be written for every single custom transaction possible;
+			§ The admin shall be able to create and delete new ledger channels.
+			§ The admin shall be able to create new network participants.
+			§ The admin shall be able to update the details of the participants, including their balance.
+				□ Ideally, a new standalone audited role should exist for this, and verified processes could make use of this role to update the balances;
+			§ The admin shall be able to deploy new assets;
+			§ The admin can update any details from the existing assets, according to the defined access control rules
+		
+		\par User Class 3 - Supply Chain Member
+		For this user, all of the following requirements are only doable in case the specific actor has the specific permissions, since these permissions might vary from company to company
+			§ The members shall be able to query and obtain the steps through which a particular product has gone, effectively tracing the product from origin up to where it is at the moment of the query. --> Not possible on the current version of composer, only through a weird "hack" which messes up the possibility of receiving notifications
+			§ The members shall be able to query what is the current entity possessing an asset.
+				\par In the current model, na asset does not have a relation to the owner; the asset is part of a shipment, and the shipment has na owner; In code, it is possible to retrieve, but not in hyperledger's query language;
+				\par INSTEAD… BELOW
+			§ The members shall be able to query both "THE OWNER/HOLDER" and "THE ASSETS" involved in a specific shipment (giving the shipment ID) - Retrieve shipment info, owner info and assets info by Shipment ID
+				□ Loopback filter: "{"where": {"shipmentId":"resource:org.logistics.testnet.ShipmentBatch\#001"}, "include":"resolve"}" 
+				□ Not sure how access control is applied to this so that the specific owner, holder and buyer can see it
+				□ SEE LINE ABOVE AS A LIMITATION 
+			§ The members shall be able to query the shipments and assets of a specific participant (giving the participant ID). - Retrieve shipment info, owner info and assets info by Participant(owner) ID
+				□ Use Loopback filter: "{"where": {"owner":"resource:org.logistics.testnet.Supplier\#0805"}, "include":"resolve"}"  
+				□ "include":"resolve" is essential
+			§ The members shall be able to query the entity that possesses a specific asset (new) - Retrieve asset and owner info by Participant (owner) ID
+				□ LOOPBACK filter doesnt work here: composer doesn't have the "inq" filter which is kind of like a "CONTAINS" to check if an array has a certain object
+				□ Have to change the model to adapt to this, and assets now possess the owner as a data field
+			§ The members can check shipment status, location and item status of the shipments they are a buyer of contractually - Retrieve shipment information (including assets) by giving the buyer ID.
+				□ "{"where": {"contract.buyer":"resource:org.logistics.testnet.Customer\#8774"}, "include":"resolve"}"  
+			§ The members can check the damaged goods transactions for the goods they own;
+			§ The members shall be able to input into the system any alteration to the product: transformation, damage reports, upgrades.
+			§ The members shall be able to input into the system the arrival or departure of a product.
+			§ The members shall be able to transform a product into a new one.
+			§ The members shall be able to divide products into multiple more products.
+			§ The members shall be able to join multiple products into new ones.
+			§ The members shall be able to change companies (IMPORTANT - should this be here?)
+			§ ORDER TRACKING
+			§ INPUT XLM FILE THAT IS GS1 VALID (VALIDATOR FROM ORIGINTRAIL COULD BE USED)
+
+
+		\par User Class 4 - Regulatory Entity
+			§ The regulatory entity shall be able to query and obtain the steps through which a particular product has gone, effectively tracing the product from origin up to where it is at the moment of the query.
+				□ Impossible atm :(
+			§  The regulatory entity shall be able to query the transactions of a certain company.
+				□ Possible :)
+			
+		
+	• Privacy and Identity Management
+		\par User Class 1 - The System
+			§ The system shall record a new transaction for each action which is intended to change the state of an asset.
+			§ The system shall define different permissions for each role.
+				□ The system shall give access to a user for a certain action, if he has the permission.
+				□ The system shall restrict access to a user for a certain action, if he does not have the permission.
+			§ The system shall assign each user a role.
+		
+		\par User Class 2 - Admin
+			§ The admin shall have the permission to change the roles of the other users.
+				□ Revoke identity and issue a new one
+			§ The admin shall have the permission to give others the permission to change roles.
+				□ Also fulfilled
+		
+		\par User Class 3 - Supply Chain Member
+			§ The members that have the permission to change roles shall be able to change other members roles, but not their own.
+
+	• Chaincode
+
+		\par User Class 1 - The System
+			§ The system shall execute any chaincode that is called by any member of the blockchain who has permissions on the specific channel that this action is executed in.
+			§ The system should trigger some pre-programmed events
+		\par User Class 3 - Supply Chain Member
+			§ The members shall have the ability to call upon existing contract code.
+			§ The members shall have the ability to write  and deploy their own contractual agreements on the blockchain (not sure if the deployment should be done by an admin or something). This can be used to implement SLAs, for instance, and eventually, it can be used with IoT, to track a product's state along its journey. Example: if a medicine pill was stored at the wrong temperature, the information would be sent to the blockchain, and the pharmaceutical company receiving it could immediately know something is wrong with it.
+			
+			§ Extra requirement: The members shall be able to hold a cryptocurrency, with a static equivalence to real money, so that they can transfer it in contracts, such as to enable payments, fines and be able to settle agreements. (benefit of not needing human decision to settle agreements; if it's on a contract, it is followed thoroughly, which also makes it faster, a benefit of blockchain which is mostly overlooked). Hyperledger Fabric does not, by default, support a cryptocurrency.
+
+Permissions - Access control rules:
+	• Transactions
+		\par CreateShipmentAndContract
+			§ Anyone (but a customer?) can call this to have a shipment and a contract made;
+		\par ReportDamagedGood
+			§ Only the holder of a commodity shall be able to submit a damage report for that commodity
+		\par TemperatureReading
+			§ Only the holder of a commodity shall be able to submit a temperature reading for that commodity (how to do it in case of IoT? -> Prepare the device with the needed business cards)
+		\par TransferCommodityPossession
+			§ Only the owner of a commodity shall be able to transfer the ownership. This commodity can not be part of a shipment at the moment of the transferrence. 
+		\par TransformCommodities
+			§ Only the owner of the commodities shall be able to transform them, and he may specify a new owner if he so desires (risky choice, maybe); All transformed commodities in a transaction must have the same owner; (I can comment 1 single line to make this transaction not change owner)
+		\par UpdateShipment
+			§ Only the holder of a shipment may be able to update its details
+		\par UpdateCommodity
+			§ Only the owner of a commodity can update it with this transaction
+		\par DeleteCommodity
+			§ Only the owner of a commodity can delete it
+		\par Others
+	• Assets
+		\par Commodity
+			§ Create
+				□ Any supply chain member can create commodities, as well as admins; auditors can not;
+			§ Read
+				□ A supply chain member can only read the commodities it owns or holds; Auditors and admins can read any commodity;
+			§ Update
+				□ A supply chain member can directly update the commodities it owns; admins can update any commodity;
+			§ Delete
+				□ Only the admin can delete commodities through this function;
+		\par OrderContract
+			§ Create
+				□ No one but admin can create
+			§ Read
+				□ The buyer and the seller can read it; the admin and the auditor can as well
+			§ Update
+				□ Only the admin can update the contract;
+			§ Delete
+				□ Only the admin can delete a contract;
+		\par ShipmentBatch
+			§ Create
+				□ Only the admin can create a shipmentbatch
+			§ Read
+				□ Only the owner, holder and contract buyer can read the shipment; The admin and auditor can as well;
+			§ Update
+				□ Only the admin can update the shipment;
+			§ Delete
+				□ Only the admin can delete the shipment;
+	• Participants
+		\par Supply Members
+			§ No one but admin has permissions to Create, delete or update
+			§ Auditor can read any participant; participants can read their own details
+		\par Auditor
+			§ Auditor can read own details; 
+			§ no one but admin can create, delete or update auditors;
+		
+
+	1. Data Requirements
+		\par The data is divided into Master Data and Transactional Data
+		\par The Master Data relates to Products/Assets and Entities, being more generalist and fixed, for those pairs;
+		\par The Transactional Data relates to the movement of assets through the supply chain, including shipment information, product batch, etc;
+		\par For the specific data formats: https://wiki.hyperledger.org/\_media/groups/requirements/hyperledger\_-\_supply\_chain\_traceability-\_anti\_counterfeiting.pdf
+		\par TODO: Build diagrams for the data classes/entities (only with better knowledge of Hyperledger architecture programming wise)
+		
+		
+
+\subsection{Non Functional Requirements Drivers}
+
+Overall, the product should follow these parameters:
+
+	1. Look and feel
+		\par N/A
+	2. Usability
+		\par The available product, corresponding APIs  and documentation should be clear enough to allow for the developers to perform the implementation of an oracle, which is a piece of software that connects the blockchain to another external product, serving as a means of pulling and pushing information from and to the blockchain and from and to the external system (ERP, for instance).
+	3. Performance
+		\par Speed and latency: The throughput and latency on Hyperledger have already been tested, and the throughput is not expected to be as high as in a centralized data system. But, overall, the time to synchronize the information from one company to another might increase; The goal is to make the product be as fast as needed to support the businesses, even if it does not have better performance than other alternatives, since what we are looking for here is the addition of new functionalities (shared ledger);
+		\par Precision and accuracy: The product shall record the data just as it was entered, and the predictions as to whether a product has any mismatching entries shall always be justifiable;
+		\par Reliability and availability: The product shall not always be available unless all of the nodes fail at once, which is almost impossible, unless a coordinated attack were to happen; If some of the nodes happen to fail, the response time of the system might be lower than expected;
+		\par Scalability: The product should scale to hundreds of companies, which would require a similar number of nodes;
+	4. Maintainability and portability
+		\par The product is expected to run on Linux based systems, compatible with the Docker, nodejs and golang versions that Hyperledger Fabric uses. More specifically, the AWS services have servers with the required setup for this (granted, the nodes still have to be installed). For testing purposes, Windows based systems that are compatible can also be used.* I need to make sure of this *
+		\par Creating new nodes or moving an existing one should be an easy process, without much complication, other than starting the node software on the environment, and closing an existing one, if needed.
+	5. Security
+		\par Privacy: The system must ensure appropriate visibility of transactions and products, which might be privacy sensitive; sharing some data would pose a threat or could possibly have negative effects for some of the companies; otherwise, transactions should also be secure, authenticated and verifiable;
+		\par Immutability: No one (but the admin) can make changes to the contents of the ledger;
+	6. Legal
+		\par "Traceability and its relation to the law (e.g., regulatory law, international law etc.) has a profound effect upon many products. In the case of diamonds, conflict minerals or rare earth derived material several international agreements and global law governing these items. Ensuing traceability of these products can literally mean the difference between supporting terrorist groups or supporting those who need good jobs to provide for their family. "
+		\par The ledger might be subject to verification from competent legal authorities or auditors;
+
+\subsection{Project Issues}
+	1. Open Issues
+		\par The architecture of Hyperledger Fabric and Composer are complex and not completely studied yet, which may lead to deviations from the requirements or alterations at some point.
+		\par Again, these softwares are open source, constantly evolving, and Composer is still in the Incubation phase, so it is not a complete product that can be relied upon for everything. In this 
+		case, it is a PoC, so a risk is being taken.
+		\par TODO: Generic blockchain issues
+	
+	2. Off-the-shelf Solutions
+		\par There are already some projects in this area, but none of them are ready for use yet. The ones that exist are in their early stages and focus on specific problems. Some are traceability only, some are finance only, and between them, they all differ in how they solve the problem.
+			§ OriginTrail (custom protocol, main network will run on Ethereum)
+			§ Everledger (on Hyperledger)
+			
+	3. New Problems
+		\par User Problems: 
+			§ For a new company that is trying to use the product, they have to take the time to understand the API and develop their own oracle to synchronize all the data. 
+		\par Limitations in the Implementation Environment:
+			§ We do not yet know up to how many companies this will be able to scale.
+		
+	4. Risks
+		\par "A multitude of trust issues could stem from external data when the Blockchain is functioning as expected. Even simple provenance issues such as inaccurate time stamps or improperly geotagging of products have the possibility of causing a catastrophic event (e.g., customers dying or taking ill from listeria that has found its way to your company's’ spinach or an F-35 crashing due to counterfeit microchips). In this concept, the Digital Identity of the data provider outside the Blockchain environment can be made known which can be trusted to ensure the data provider has been identified in the event issues arise with the data. Again, there is no provenance, accuracy or other DLT mechanism to ensure valid data has been introduced to the system from an external source. A Data Oracle can be one example of an invalid external source where this risk would need to be identified and mitigated."
+		\par TODO: be more specific
+		
+	5. Costs
+		\par Maintaining the blockchain running requires little to no cost, as only a few dozen nodes might be needed at most, depending on the scale, and each of them might be operated by different companies.
+		\par The development itself and testing might run into cost troubles in the aspects that require the simulation to be faithful to reality, such has having lots of servers distributed geographically running at the same time (requiring expensive services like AWS).
+	6. User Documentation
+		\par N/A
+	7. Waiting Room
+Future Requirements/Could be done: Financial aspect/Including loans and insurance
+
+\section{Design and Implementation}
+\subsection{Model Design - Composer Business Network}
+Mention how the .cto file was designed, listing all the classes, participants, transaction types and event types, and why it was decided they were necessary. Include class diagram
+
+\section{Results and Validation}
+
+\subsection{Requirements Validation}
+
+\subsection{Limitations}
+% List of limitations
+
+% List the disadvantages of this architecture (maybe next section)
+	%(i.e. Relational DB limitations have to be offset by the use of EXTRA software that can grab the data and index it in a way that is easier to query and make more extensive queries)
+
+\section{Conclusions}

@@ -113,7 +113,7 @@ Maybe this subsection is already what is described in the sections that follow, 
 
 Hyperledger is an open-source effort hosted by The Linux Foundation, which aims to further improve the concept of blockchain to be used in many different contexts. 
 
-More specifically, one of the Hyperledger projects, Hyperledger Fabric, initially contributed by IBM, tries to address some of the open issues of the existing frameworks, like Ethereum. Hyperledger Fabric is an open source framework to build permissioned (and private or consortium) blockchains usable in industry, and, while it shares some similarities with Ethereum, it also has many differences.
+More specifically, one of the Hyperledger projects, Hyperledger Fabric, initially contributed by IBM, tries to address some of the open issues of the existing frameworks, like Ethereum. Hyperledger Fabric is an open source framework to build permissioned (private or consortium) blockchains usable in industry, and, while it shares some similarities with Ethereum, it also has many differences. 
 
 \subsection{Chaincode}
 Hyperledger possesses a form of smart contracts, which it names \textit{chaincode}. Similarly to Ethereum, the chaincode programs are event driven programs which run on the ledger, changing the ledger's state when executed, thus being able to move assets around. It can be said that this works much like a state machine.
@@ -126,7 +126,7 @@ Being able to use general-purpose languages to code smart contracts is an advant
 %\todo{fcorreia: I was happy with the current level of detail; may be worth expanding if you think the next sections/chapters will need more context than the one you are already giving now.}
 
 \subsection{Architectural Revision}
-The latest version of Fabric, v1.0, has a totally revised architecture from the previous version, v0.6. These changes in architecture originated from changes in the requirements, as well as to better address some other underlying issues of the technology.
+The latest version of Fabric, v1.1, has a totally revised architecture from some of the previous versions, like v0.6. These changes in architecture originated from changes in the requirements, as well as to better address some other underlying issues of the technology.
 
 The previous version (v0.6) shared similarities with other blockchain systems, in that it had an order-execute architecture, which combines consensus and execution of transactions, in this order. In the order-execute architecture, after a block is assembled and mined (agreed upon), all other nodes will execute its transactions sequentially.
 This was a simple architecture, but it has several liabilities when used in a permissioned blockchain like Hyperledger. Some of the most notable issues are:
@@ -136,8 +136,8 @@ This was a simple architecture, but it has several liabilities when used in a pe
 \item Hard-coded consensus: there is no "one-size-fits-all" solution, protocols vary immensely in performance and functionality, and having alternatives and adaptation to specific use cases is essential;
 \item Confidentiality of execution: sometimes, smart contract logic is intended to be restricted, only to be run by some nodes, though the state should be propagated to all nodes in the end; this architecture does not allow for such a restriction
 \end{itemize}
-
-A detailed architectural specification of Fabric's revised version 1.0 can be found in the documentation section of Fabric's website \cite{FabricDocArch} \cite{IBMResearch2017}. Other articles have been produced by IBM researchers \cite{Cachin2016} \cite{Vukolic2017}, as well as numerous presentations, detailing the general architectural problems and solutions of this technology.
+%TODO: CHECK IF LINKS STILL WORK
+A detailed architectural specification of Fabric's revised version 1.1 can be found in the documentation section of Fabric's website \cite{FabricDocArch} \cite{IBMResearch2017}. Other articles have been produced by IBM researchers \cite{Cachin2016} \cite{Vukolic2017}, as well as numerous presentations, detailing the general architectural problems and solutions of this technology.
 
 This revised version follows instead an "Execute-Order-Validate" implementation, which tackles the above mentioned issues, and, according to Fabric's documentation, the advantages this reviewed architecture brings are \textbf{scalability}, \textbf{confidentiality}, \textbf{consensus modularity} and \textbf{chaincode trust flexibility}.
 %I do not really understand the term they use "chaincode trust flexibility", it just looks like they didn't know how to name the characteristic and made something up...
@@ -146,7 +146,7 @@ This revised version follows instead an "Execute-Order-Validate" implementation,
 \label{hyperledger_architecture}
 In Fabric, transactions are of two types: either \textbf{deployment transactions}, which create new chaincode, or \textbf{invoke transactions}, which perform operations on the deployed chaincode. 
 
-Being a permissioned blockchain, any node which wants to interact with transactions is required to authenticate itself and have an identity. Transactions and data are therefore restricted to certain participants of the network. The data partitioning mechanism used to control this is called a \textbf{channel}. Users can belong to a channel, having visibility of these transactions, and the consensus will happen only within the channel and its members. This also means that there is one ledger (set of transactions plus the state) per channel.
+Being a permissioned blockchain, any node which wants to interact with transactions is required to authenticate itself and have an identity. Transactions and data are therefore restricted to certain participants of the network. The data partitioning mechanism used to control this is called a \textbf{channel}. Users can belong to a channel, having visibility of these transactions, and the consensus will happen only within the channel and its members. This also means that there is one ledger (set of transactions plus the state) per channel. The channels themselves have defined sets of rules for what actions each participant can execute.
 
 Besides the existence of permissioned channels, the other main difference in this revised architecture is the way in which consensus works. The following definitions correspond to steps in the consensus mechanism, which are needed to better understand this consensus mechanic.
 
@@ -184,6 +184,8 @@ In a simplified way, the workflow of the consensus, as shown in Figure \ref{fig:
 \end{figure}
 
 Compared to other blockchains, this consensus mechanism has some advantages, though its application is somewhat limited to some use cases. Table \ref{table:consensus_comparison} summarizes some points of difference between a blockchain using Proof of work and one, like Hyperledger, using a BFT state machine consensus.
+
+
 %%%%%%%%%%%%%%%% TABELA COMPARATIVA %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Please add the following required packages to your document preamble:
@@ -214,6 +216,47 @@ Compared to other blockchains, this consensus mechanism has some advantages, tho
 
 
 In brief conclusion, Hyperledger allows for a permissioned blockchain which sacrifices some decentralization for scalability and performance. By using a different consensus mechanism, most of the issues of public blockchains vanish. Furthermore, data access must be authorized, such that sensitive data in a channel is protected, one of the requirements for data in supply chains. Thus, Hyperledger Fabric's features are adequate for SCM's requirements in a way that is difficult to achieve in public blockchains.
+
+\section{Hyperledger Composer}
+
+Hyperledger Composer is another tool which works together with Fabric to allow for an easier approach to modeling a blockchain network. It is actually a higher level abstraction of Fabric, which allows for a big reduction in the lines of code written and simplifies the whole process of building a business network and deploying it, as well as the process of managing the identities of the network's participants. 
+
+It features a nice and intuitive graphical user interface to manage all of its components, and it also features a REST server to expose the blockchain to outside applications.
+
+\subsection{Business Network}
+
+A business network is a model of all the data in the blockchain, which includes all the objects, functions, transactions and identities that will connect to each other and be saved on the ledger. It is basically an abstraction of the chaincode that will be installed onto Fabric.
+
+Composer features a custom modeling language which makes it easier to define a business network. It is divided into 4 main components, as can be seen in figure \ref{fig:composer_abstraction}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.40]{media/Composer-Diagram.png}
+\caption[Hyperledger Composer abstraction over Fabric]{Hyperledger Composer abstraction over Fabric. Available in Composer's documents \cite{ComposerIntro}}
+\label{fig:composer_abstraction}
+\end{figure}
+
+\paragraph{Model File} This is where all the main data components are defined. \textbf{Assets} are the main "objects" that are handled in transactions, and they can represent a variety of things. One example can be a "car". \textbf{Participants} are the types of people that will be participating in the network. One example participant can be "Customer", which will have fields like "Balance" and "Name". An instance of a participant can be linked to a real identity of a person using the blockchain. \textbf{Transactions} are the most important data object. They model what actions can be taken, and they usually have some data fields associated, which act as the input of the transaction. An example of a transaction can be "BuyCar", which could have as parameters the car ID, and a participant could then call this transaction, if they had the permission to do so. All these 3 components, Assets, Participants and Transactions have their own registry. While the Assets and Participants registries are mutable, the Transactions registry is not.
+
+\paragraph{Script File} This file contains all the functions that define how a transaction behaves and what kind of data it processes and outputs. It can also have additional auxiliary functions.
+
+\paragraph{Access Control} This is where the access rules are defined. These rules include restrictions on who can invoke which transactions, who can read the data, and many other permissions.
+
+\paragraph{Query File} This file includes some queries that can retrieve information from the blockchain. This information might include any assets, participants or transaction history, and it is also subject to the access control rules. These queries are both exposed to outside applications through the composer REST server and to the Script file functions.
+
+%TODO: MENTION EVENTS
+
+All of these components can be compiled into one file (.bna), which is then deployed onto Fabric.
+
+\subsection{Authentication and Identities}
+
+Hyperledger Composer also features identity management. An identity is a digital certificate and private key, in the form of an account which can interact with the blockchain network. Within a certain business network, an identity can even be bound to a certain instance of a Participant type. For example, if there is a participant type called "Customer", an instance of that participant called "Customer1" can be created, which can then be bound to some real person's account. That person will then be able to interact with the blockchain, but will be bound by whatever access rules the participant "Customer" is bound by. 
+
+In order to make identity management easier, Composer has a feature called "Business Network Cards". These cards are files which can are associated with an identity and a network, and also act as a private key. If a user possesses a card, they can import it to prove their identity and start interacting with the blockchain.
+
+\subsection{Fabric Topology}
+
+Composer also has configuration files for some of Fabric's properties. It possesses files to determine which organizations exist and which kind of nodes they possess, along with their mapping. It also has a definition for the endorsement policies.
 
 
 \section{Corda}
@@ -259,7 +302,7 @@ Valenta \cite{Valenta2017} concisely describes the main points of difference bet
 
 He concluded that Ethereum is more of a general purpose platform, while Fabric tries a different solution, adaptable to a different set of problems. Fabric is flexible and customizable in ways that the other frameworks aren't. On the other end, Corda  was designed with one specific application in mind, financial services, and it is rigid in that sense, which actually made its architecture a lot more simple compared to Fabric's. It is also arguable that Hyperledger can be tailored to resemble Corda, due to its modularity, as Corda is not really a competitor of Hyperledger, but rather a complement. 
 
-\paragraph{Hyperledger vs Corda} In one sense, Corda has more of an out-of-the box experience, while with Fabric, the logic would have to be implemented. It all comes down to what kind of system we want to build, and what are its the final objectives, functionalities and requirements
+\paragraph{Hyperledger vs Corda} In one sense, Corda has more of an out-of-the box experience, while with Fabric, the logic would have to be implemented. Composer does make Fabric more user-friendly, but it is still hard to setup and configure, compared to Corda. It all comes down to what kind of system we want to build, and what are its the final objectives, functionalities and requirements.
 
 \paragraph{Ethereum vs Hyperledger} Also, as already pointed out in Section \ref{hyperledger_architecture}, a permissioned ledger like in Hyperledger might better fit the supply chain industry requirements than Ethereum, though one solution does not discard the other. Another important aspect to distinguish is also the difference in performance between these platforms.
 

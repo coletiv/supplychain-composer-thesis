@@ -212,7 +212,7 @@
 	\ \\ 
 	\ \\ 
 	\Huge \textsf{\textbf{Supply Chain Management  with Blockchain Technologies:}} \\
-	\huge \textsf{\textbf{A case study}} \\
+	%\huge \textsf{\textbf{A case study}} \\
 
 	\vspace{4pc}
 	%\includegraphics[scale=0.40]{media/layout/ornament} \\

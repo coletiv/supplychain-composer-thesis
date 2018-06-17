@@ -57,13 +57,7 @@ The second part of the problem deals, in a more technical way, with the lack of 
 \section{Similar existing applications}
 Some projects which try to fit blockchain as a solution for improving SCM have already emerged, or are in being worked on. This section explores some of these applications.
 
-\subsection{IBM and Maersk's Demo}
-IBM, together with Maersk, just recently launched an innovative project which aims to create an open platform, using Hyperledger, for information sharing on a large scale \cite{A.P.MOLLER-MAERSK}.
 
-It is an open platform, which features a shipping information pipeline and paperless trade. It deals mostly with the transportation of goods and automating all the processes associated with it.
-
-%\todo{fcorreia: nothing more to say about this? would be interesting to know in which way it compares with your goals and with the other similar applications}
-%It was just announced and they have no articles explaining it yet...
 
 \subsection{CargoX}
 %\todo{fcorreia: something that would be great to have in the document (but probably not here) is an analysis of relevant concepts within the domain of supply chain management; possibly including a domain model.}
@@ -77,13 +71,66 @@ These characteristics make it an extremely valuable document, which must be tran
 
 CargoX uses Ethereum's smart contracts to put these paper documents into the blockchain. It has a built in token system that allows to exchange the document's ownership immediately after payment \cite{CargoX2017}.
 
+\subsubsection{Relevance and Applicability}
+It is a very specific solution for a very specific problem. It is a concept that could be integrated in a broader solution, and should fit the needs of this dissertation partially, in theory. The execution of the concept, however, seems to be lackluster in that it uses a public blockchain for extremely valuable documents. It also uses a token system that seems designed to move currency around more than the documents themselves.
+
+The idea of transmitting documents is an integral part of information integration, especially when these documents prove the ownership of something, and blockchain seems to be a good idea to digitize that proof of ownership in a way that can be traced.
+
 \subsection{Eximchain}
 Eximchain is an all-round solution, which acts as a ledger, recording historical data and transactions, as an inventory management tool and also provides financial applications, by means of smart contracts. It was developed using a fork of Ethereum, Quorum, which is a permissioned version of Ethereum, focused on enterprise use, which means Eximchain runs on its own network \cite{Huertas2017}.
 
-\subsection{OriginTrail}
-Like CargoX, origintrail operates on the Ethereum network, and has its own tokens. It synchronizes all supply chain data in the platform, and uses these tokens as an incentive.
 
-Its objective is to ensure traceability of the products as they move from supplier to retailer, all while ensuring the data is not tampered with. The tokens serve as a way to exchange data ownership, as well as to make reviews on a reputation system. \cite{Rakic2017}
+The smart contracts of Eximchain allow for the transmission of finances and verification of the validity of orders placed. All the data from these transactions, which include the transmission of goods, is recorded onto the ledger, allowing suppliers to prove their reliability to deliver. 
+
+
+At the same time, the inventory, as well as all the goods, as are tracked across the supply chain with small delay, with the information being accessible seamlessly among partners. This allows for more accurate supply and demand predictions, especially if the information is directly integrated with forecasting systems.
+
+\subsubsection{Relevance and Applicability}
+This application seems to focus on the most important points of supply chain management: the tracking of goods by the enterprises, the financial process of transmitting those goods and the integration of this information. These applications are highly practical and resonates with the goals that this dissertation tries to achieve, which are exactly to turn SCM more efficient by making the information readily available.
+
+\subsection{OriginTrail}
+Like CargoX, OriginTrail operates on the Ethereum network, and has its own ERC20 tokens. It synchronizes all supply chain data in the platform, and uses these tokens as an incentive. Underlying the use of the Ethereum network, OriginTrail has a custom network topology protocol designed as a privacy-layer, which can be seen in figure \ref{fig:origintrail_network}. This network uses zero-knowledge methods to validate data without making it accessible. This custom protocol consists of Data Holder (DH) and Data Creator (DC) nodes working together to receive, transmit, store and process the information. The data is communicated to the blockchain, where people with OriginTrail tokens can interact with it.
+
+The main objective of the project is to ensure traceability of the products as they move from supplier to retailer, all while ensuring the data is not tampered with, which means this project has a high focus on privacy. The tokens serve as a way to exchange data ownership, as well as to make reviews on a reputation system. \cite{Rakic2017}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{media/origin_trail_network.jpg}
+\caption[Overview of the OriginTrail network]{Overview of the OriginTrail network. Available in \cite{OriginTrailTechno}}
+\label{fig:origintrail_network}
+\end{figure}
+
+\subsubsection{Relevance and Applicability}
+This solution specializes more in the tracking of the goods, especially so that the public can know where their products are coming from, as well as the companies. This allows for higher integrity and authenticity of the products. A good example of a use case is in situations where a bad product is detected and batch recalls need to be made. With this tracking, a specific batch can be identified and removed, whereas without the tracking, product providers as well as the product buyers would have to get rid of substantially higher amounts of that product, leading to a loss of revenue.
+
+Though it is a more specialized solution, it is important not to ignore the aspect it focuses on. This can be one of the easiest methods to save money by integrating the supply chain with the blockchain.
+
+
+\subsection{Ambrosus}
+Ambrosus focuses on tracking the quality of the goods transported during shipments, specializing in the food and pharmaceutical industries. Not only does it track shipments throughout the entire supply chain lifecycle, it also uses the Internet-of-Things (IoT), through sensors, to communicate quality metrics of the products in real-time to the blockchain. 
+
+The enterprises can then query this data and retrieve it immediately to their own databases, effectively achieving a better quality assurance. It is also provides enforceable proof of the quality or, if otherwise, the lack of it.
+
+Like OriginTrail, Ambrosus also has its own protocol, called AMB-NET, which hosts smart-contracts and comunicates with the Ethereum blockchain.
+
+\subsubsection{Relevance and Applicability}
+This is another project with a more narrow scope, specializing in the tracking of the quality by using IoT. It is something that the other projects are not implementing, but it is important nonetheless. To some industries, it is even more important than any other feature, which makes quality-tracking a \textbf{must} in a supply chain management blockchain project.
+
+%TODO: TALK ABOUT MODUM.IO
+
+\subsection{IBM and Maersk's Demo}
+IBM, together with Maersk, just recently launched an innovative project which aims to create an open platform, using Hyperledger, for information sharing on a large scale \cite{A.P.MOLLER-MAERSK}.
+
+It is an open platform, which features a shipping information pipeline and paperless trade. It deals mostly with the transportation of goods and automating all the processes associated with it. 
+
+\subsubsection{Relevance and Applicability}
+
+Although it has a similar purpose to the one of this thesis, there have been reports of companies discontent with this platform, since it does not focus on the industry as a whole and ensure common standards. Instead, it is a platform designed to meet IBM and Maersk's expectations. Other than this, there has been very little information about it yet or about any progress made.
+
+%TODO: PUT A REFERENCE HERE FROM WHERE I READ THIS
+
+%\todo{fcorreia: nothing more to say about this? would be interesting to know in which way it compares with your goals and with the other similar applications}
+%It was just announced and they have no articles explaining it yet...
 
 \section{Designing a Blockchain-based Supply Chain}
 %CHECK https://modum.io/system/

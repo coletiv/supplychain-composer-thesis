@@ -64,30 +64,34 @@ Therefore, the algorithms used by Bitcoin are not a defining feature of the bloc
     
      The most commonly used consensus algorithm is \textbf{Proof of Work (PoW)}, though there are others, like the most used alternatives, \textbf{Proof of Stake (PoS)}, and \textbf{Proof of Activity (PoA)}. We showcase some of the algorithms in table %TODO: PUT REFERENCE 2.1.
     
-    \begin{table}[]
+%%%%%%%%%%% TABLE
+
+%TODO: FIX THIS
+
+% Please add the following required packages to your document preamble:
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\begin{table}[]
 \centering
-\begin{tabular}{l|r|r|}
-\cline{2-3}
-                                                                                                  & \multicolumn{1}{l|}{{\color[HTML]{343434} \textbf{Starting}}} & \multicolumn{1}{l|}{{\color[HTML]{343434} \textbf{Ending}}} \\ \hline
-\multicolumn{1}{|l|}{{\color[HTML]{343434} 1. Literature Review}}                                 & 1 Jan 2018                                                    & 9 Feb 2018                                                  \\ \hline
-\multicolumn{1}{|l|}{{\color[HTML]{343434} 2. Decide on the features and design the model}}       & 10 Feb 2018                                                   & 5 Mar 2018                                                  \\ \hline
-\multicolumn{1}{|l|}{{\color[HTML]{343434} 3. Create a small integration project}}                & 6 Mar 2018                                                    & 15 Apr 2018                                                 \\ \hline
-\multicolumn{1}{|l|}{{\color[HTML]{343434} 4. Evaluate its applicability and performance}}        & 16 Apr 2018                                                   & 29 Apr 2018                                                 \\ \hline
-\multicolumn{1}{|l|}{{\color[HTML]{343434} 5. Recalibrate the model's values, given the results}} & 30 Apr 2018                                                   & 14 May 2018                                                 \\ \hline
-\multicolumn{1}{|l|}{{\color[HTML]{343434} 6. Finalize the dissertation document}}                & 15 May 2018                                                   & 22 Jun 2018                                                 \\ \hline
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{|l|l|l|}
+\hline
+Type                                                                       & Overview                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     & Better Used In                                                                           \\ \hline
+Proof of Work (PoW)                                                        & \begin{tabular}[c]{@{}l@{}}In short, PoW works by making the nodes spend \\ computational power until they can find out a hash \\ that satisfies a certain rule, for a certain block. When \\ a node finds this hash, it is allowed to extend the \\ blockchain with that block. The node transmits the \\ new blockchain to all the other nodes. It is assumed \\ that the longed valid chain (where all blocks have \\ valid mininghashes and valid contents) held by any \\ block is the correct one. Additionally, the creator of \\ a block includes a reward for themselves in the block.\end{tabular} & \begin{tabular}[c]{@{}l@{}}Public Blockchains\\ (Bitcoin, alt coins)\end{tabular}        \\ \hline
+Proof of Stake (PoS)                                                       & \begin{tabular}[c]{@{}l@{}}In PoS, the "miners" stake their cryptocurrency \\ tokens as a bet, on which block they want to \\ include in the blockchain. By doing so, they \\ actively have a chance to mint that block \\ proportional to the number of tokens they \\ stake. This makes it so that any participant of the \\ network has in its best interest to be honest. The \\ higher their stake, the more invested in the \\ network they are. PoS is less wasteful than PoW, \\ which consumes a lot of energy in computational \\ power.\end{tabular}                                              & \begin{tabular}[c]{@{}l@{}}Public Blockchains,\\ Consortium \\ Blockchains\end{tabular}  \\ \hline
+\begin{tabular}[c]{@{}l@{}}Proof of Authority\\ (PoA)\end{tabular}         & \begin{tabular}[c]{@{}l@{}}The transactions are validated, aggregated into blocks \\ and put into the blockchain by approved known nodes,\\  which act like "admins" and are the source of truth \\ for the system. This is a more centralized kind of \\ consensus.\end{tabular}                                                                                                                                                                                                                                                                                                                            & Private Blockchains                                                                      \\ \hline
+\begin{tabular}[c]{@{}l@{}}Proof of Elapsed\\ Time (PoET)\end{tabular}     & \begin{tabular}[c]{@{}l@{}}Every participant in the network is assigned a random\\  amount of time to wait, and the first participant to \\ finish waiting gets to commit the next block.\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                       & \begin{tabular}[c]{@{}l@{}}Private Blockchains,\\ Consortium \\ Blockchains\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Byzantine Fault \\ Tolerance (BFT)\end{tabular} & \begin{tabular}[c]{@{}l@{}}There are many algorithms for this kind of consensus.\\ One is Practical BFT (PBFT), with pre-selected nodes \\ selecting and ordering the transactions.\end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                             & \begin{tabular}[c]{@{}l@{}}Private Blockchains,\\ Consortium \\ Blockchains\end{tabular} \\ \hline
 \end{tabular}
-\caption{Work plan description for figure \ref{fig:gantt_chart}}
-\label{table:gantt_chart}
 \end{table}
-    
-    
-    In short, PoW works by making the nodes spend computational power until they can find out a number that satisfies a certain rule. % Explain hash stuff about PoW. 
-    When a node finds that number, it is allowed to extend the blockchain with the block it previously created. So, when this happens, and as this is a peer-to-peer network, this node transmits to all the others the new blockchain with the added block.
-    %in general, it is assumed that the longest valid chain held by the nodes is the correct one.
-    %Creator includes reward in the block. Other nodes validate that this was a valid attempt at creating a block. Done.
-    This block has the number found by the creator node, so that the other nodes can confirm themselves that the creator node rightfully worked to mine and add this block to the chain. They will also do standard validation checks on the block, to guarantee that everything is in order. Upon positively verifying a block, all the other nodes implicitly add it to their version of the blockchain, by including its hash in the next block they try to create. 
-    %Explain incentives to do the mining
-    It is also worth to notice that not all nodes work at the same speed, or are active at the same time. This means that some nodes might not be up to date, and might have difficulties catching up to the current blockchain, as it might not correspond to their outdated version. So, in general, it is assumed that the longest valid chain held by the nodes is the correct one. This way, a node in these conditions can simply query other nodes to find out what the current blockchain is, and continue working from there.
+
+
+
+%%%%%%%%%%% TABLE END
+
+
+ .
     
     \subsection{Transparency}
    The blockchain is not only available to the mining nodes in the network. Though they are the ones who actively interact with the chain in order to make it grow, if the chain is public, anyone can view the records and verify the authenticity of the data. This is the property of transparency. In private or permissioned blockchains, it might happen that only certain actors have access to certain records, according to the access control rules set by the organization or set of organizations that manage it. This is done with the help of sets of asymmetric key pairs and a public key infrastructure.
@@ -100,10 +104,6 @@ Therefore, the algorithms used by Bitcoin are not a defining feature of the bloc
 %\paragraph{Hashing}
 %\paragraph{Public Key Cryptography}
 %\paragraph{Other aspects and concerns}
-
-
-
-
 
 \section{Applications}
 
