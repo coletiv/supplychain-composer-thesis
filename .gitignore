@@ -21,3 +21,4 @@
 *.dvi
 thesis.pdf
 *.gz
+*.synctex
