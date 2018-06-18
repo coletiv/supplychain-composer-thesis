@@ -211,7 +211,7 @@
 	\ \\ 
 	\ \\ 
 	\ \\ 
-	\Huge \textsf{\textbf{Supply Chain Management  with Blockchain Technologies:}} \\
+	\Huge \textsf{\textbf{Supply Chain Management with Blockchain Technologies}} \\
 	%\huge \textsf{\textbf{A case study}} \\
 
 	\vspace{4pc}
@@ -226,7 +226,7 @@
 	\ \\
 	Scientific Supervision by \\
 	\ \\
-	Filipe Alexandre Pais de Figueiredo Correia, Professor Auxiliar Convidado \\
+	Filipe Alexandre Pais de Figueiredo Correia, Professor Auxiliar \\
 	Departmento de Engenharia Informática \\
 
 	\vspace{4pc}
