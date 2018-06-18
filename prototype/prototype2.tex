@@ -50,6 +50,9 @@ LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERES
 		\item TODO: Should I allow companies without the GS1 prefix for themselves and for their locations/warehouses/etc? 
         \end{itemize}
         \subsection*{2. Naming Conventions and Definitions}
+
+        \todo{fcorreia: isto devia aparecer talvez no início do documento, num glossário geral}
+
 		\par PoC - Proof of Concept
 		\par SLA - Service Level Agreement
 		\par Other glossary terms, acronyms and whatever.
@@ -60,7 +63,8 @@ LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERES
 
 \subsection{Functional Requirements Drivers}
 \subsection*{1. Scope of the Work}
-		\par This project is being developed as a Proof of Concept for the Master Dissertation titled "title\_here".
+		\par This project is being developed as a Proof of Concept for the Master Dissertation titled "title\_here". \todo{fcorreia: como isto está incluído na tese, não acho que precises de repetir o título aqui}
+
 		\par The objective is to build a product that can enhance the discipline of supply chain management, by making the data more easily accessible, reducing synchronization time, improving integration, and providing a tool that assists in guaranteeing end to end traceability.
 \subsection*{2. Scope of the Product}
 		\par This project encompasses the development of a blockchain ledger and respective integration endpoints. The ledger will be designed to accommodate transactional data from a supply chain, and it will also be possible to execute smart contracts to manage the assets registered in the transactions.
@@ -69,7 +73,9 @@ LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERES
 	
 \subsection*{3. Functional  Requirements}
 \begin{itemize}
-	\item The system shall have a defined set of roles ("which ones" is a topic to discuss)
+	\item The system shall have a defined set of roles ("which ones" is a topic to discuss) 
+	\todo{fcorreia: queres dizer os utilizadores do sistema terão estes papeis, e não o sistema, certo?}
+
 		\par Regulatory Entity
 		\par Admin
         \par Supply Chain Member
@@ -82,7 +88,9 @@ LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERES
 			\item OR  Buyer and Seller
 		\end{itemize}
     \item Transactions
-        \par User Class 1 - The System
+        \par User Class 1 - The System 
+        \todo{fcorreia: porque "codificar" os vários tipos de utilizador/papeis como "user class 1,2,3, etc"?}
+        \todo{fcorreia: estás a considerar "the system" como um tipo de utilizador? não é um dos tipos de utilizador que aparece na lista em cima}
         \begin{itemize}
 			\item The system shall record a new transaction for each action which is intended to change the state of an asset (which actions is a topic to discuss - reporting that an item was sent, received, altered, lost, etc).
 			\item The system shall maintain an immutable list of the transactions that took place, in the form of blocks
@@ -250,8 +258,8 @@ Permissions - Access control rules:
 
 Overall, the product should follow these parameters:
 \begin{enumerate}
-	\item Look and feel
-		\par N/A
+	\item Look and feel 
+		\par N/A \todo{fcorreia: nem incluiria este ponto...}
     \item  Usability
 		\par The available product, corresponding APIs  and documentation should be clear enough to allow for the developers to perform the implementation of an oracle, which is a piece of software that connects the blockchain to another external product, serving as a means of pulling and pushing information from and to the blockchain and from and to the external system (ERP, for instance).
     \item  Performance
@@ -264,7 +272,7 @@ Overall, the product should follow these parameters:
 		\par Creating new nodes or moving an existing one should be an easy process, without much complication, other than starting the node software on the environment, and closing an existing one, if needed.
     \item  Security
 		\par Privacy: The system must ensure appropriate visibility of transactions and products, which might be privacy sensitive; sharing some data would pose a threat or could possibly have negative effects for some of the companies; otherwise, transactions should also be secure, authenticated and verifiable;
-		\par Immutability: No one (but the admin) can make changes to the contents of the ledger;
+		\par Immutability: No one (but the admin) can make changes to the contents of the ledger; \todo{fcorreia: numa blockchain, nem mesmo um admin o pode fazer, certo?}
     \item  Legal
 		\par "Traceability and its relation to the law (e.g., regulatory law, international law etc.) has a profound effect upon many products. In the case of diamonds, conflict minerals or rare earth derived material several international agreements and global law governing these items. Ensuing traceability of these products can literally mean the difference between supporting terrorist groups or supporting those who need good jobs to provide for their family. "
 		\par The ledger might be subject to verification from competent legal authorities or auditors;
