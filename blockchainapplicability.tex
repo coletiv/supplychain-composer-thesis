@@ -7,12 +7,14 @@ This chapter presents an overview of how the blockchain might apply to the indus
 
 The purpose of this chapter is, given all the information already presented, to present some topics that might unify the topics of blockchain and supply chain into one, to ascertain if they are a good fit.
 
+\todo{fcorreia: repetição de "presented" e "present"}
+
 \section{Advantages of Blockchain in Supply Chain}
 
 Some of the advantages blockchain would bring to supply chain, over other solutions:
 
 \begin{itemize}
-\item \textbf{Less error prone}: reduction in errors on manual data entries, especially when combined with IoT and other automated processes; any other kind of error that manages to find its way into the system is easily traceable.
+\item \textbf{Less error prone}: reduction in errors on manual data entries, especially when combined with IoT and other automated processes; any other kind of error that manages to find its way into the system is easily traceable. \todo{fcorreia: hmmm, isto parecem-me coisas distintas. o uso de processos automatizados não é estritamente dependente de se estar a usar uma BC... Os erros humanos podem acontecer mesmo que se use uma BC (com a agravante que se calhar até poderão ser mais difíceis de corrigir)}
 \item \textbf{Enhanced security of transactions}: not only is the ledger immutable, attempts at fraud are easily detected.
 \item \textbf{Improved tracking}: the ledger is easy to analyze and delivers the results really fast, making it possible to know the status of any order or asset at any time.
 \item \textbf{Improved consumer trust}: blockchain could allow users to check the provenance of their products, developing a relationship of trust with the suppliers.
@@ -35,13 +37,16 @@ In this sense, if the blockchain technology manages to improve the information f
 \section{Challenges of Blockchain Application to Supply Chain}
 
 The reverse side of the coin is that Blockchain is not always the amazing solution that is prophesied. Blockchain itself is a topic in research and, while some of its applications and advantages are quite obvious, many of its disadvantages are overlooked, and these might be crucial when making the decision to apply blockchain to a supply chain.
+
+\todo{fcorreia: pode ser "amazing" para o contexto certo (parece funcionar razoavelmente bem para as bitcoins pelo menos). eu diria que a questão é mais que não é uma boa solução para *todos* os contextos.}
+
 %Check image from the other article
 %Other article talking about the throughput and latency trade-off.
 \subsection{Technical Limitations and Scalability Concerns}
 The technical limitations include, but are not limited to: throughput, latency, size and bandwidth and security.
 
 \begin{itemize}
-\item \textbf{Throughput}: Current blockchain technologies, even in private deployments, such as Hyperledger, have a high throughput, but not as high as certain centralized systems. This is one of the main concerns in supply chain, that a blockchain can't process the information quite as fast as the current systems, which could lead to a decrease in performance and further delays. As in any distributed system, though, the decrease in speed is often the price to pay for decentralization in supply chain. Ultimately, while the flow of information inside one specific company might be lower than before, the flow between different companies, which were previously not integrated, might actually be much faster than before. It is not fair to compare the speed of a centralized system with the speed of a distributed ledger, since the latter offers more functionality and disperses the information further where the former couldn't. A slower dispersion of information globally, through various entities, is, in this case, preferred to a fast dispersion only locally, through an organization's system or its closest associates.
+\item \textbf{Throughput}: Current blockchain technologies, even in private deployments, such as Hyperledger, have a high throughput, but not as high as certain centralized systems. This is one of the main concerns in supply chain, that a blockchain can't process the information quite as fast as the current systems, which could lead to a decrease in performance and further delays. As in any distributed system, though, the decrease in speed is often the price to pay for decentralization in supply chain. Ultimately, while the flow of information inside one specific company might be lower than before, the flow between different companies, which were previously not integrated, might actually be much faster than before. It is not fair to compare the speed of a centralized system with the speed of a distributed ledger, since the latter offers more functionality and disperses the information further where the former couldn't. A slower dispersion of information globally, through various entities, is, in this case, preferred to a fast dispersion only locally, through an organization's system or its closest associates. \todo{fcorreia: fico com a sensação depois de ler este paragrafo que a palavra "tradeoff" devia aparecer aqui algures}
 \item \textbf{Latency}: Similarly to throughput, and related to it as well, the latency of a transaction is something to take into account. With some blockchain deployments, like Bitcoin, each transaction might take a long time to validate, and this time might depend on the fees paid as well. This is mitigated by permissioned platforms such as Hyperledger, which have low latency, even in the presence of a high number of transactions, and possess no currency or fees to worry about.
 \item \textbf{Size}: The more transactions are processed and information stored in the blockchain, the bigger it actually grows. In the current context, if we were to deploy a global blockchain for all the supply chains, it would probably grow way too large in a small amount of time, which would not be sustainable in the long run. In a more limited scope, however, it would probably not be as big of a problem. There is also a lot of research in the optimization of blockchain size.
 \item \textbf{Security}: One concern for blockchains in general is how security is handled. This issue is more important in the case of public blockchains with PoW consensus. In the case of supply chains, there are many alternatives, and possibly having a public PoW blockchain is not the optimal one, so this is not the main security aspect to worry about. There is, however, another aspect to take into account, which is the fact that the hash functions being used at the moment might be broken in some years. If this were to happen, the immutability property of a blockchain would be broken and any prospects of proving the provenance of products or their traceability would lose their groundwork.
@@ -72,7 +77,7 @@ These characteristics make it an extremely valuable document, which must be tran
 CargoX uses Ethereum's smart contracts to put these paper documents into the blockchain. It has a built in token system that allows to exchange the document's ownership immediately after payment \cite{CargoX2017}.
 
 \subsubsection{Relevance and Applicability}
-It is a very specific solution for a very specific problem. It is a concept that could be integrated in a broader solution, and should fit the needs of this dissertation partially, in theory. The execution of the concept, however, seems to be lackluster in that it uses a public blockchain for extremely valuable documents. It also uses a token system that seems designed to move currency around more than the documents themselves.
+It is a very specific solution for a very specific problem. It is a concept that could be integrated in a broader solution, and should fit the needs of this dissertation partially, in theory. The execution of the concept, however, seems to be lackluster in that it uses a public blockchain for extremely valuable documents. \todo{fcorreia: clarificar porque é que isto é má ideia. Acho que a questão não será necessariamente o serem "valiosos"... } It also uses a token system that seems designed to move currency around more than the documents themselves.
 
 The idea of transmitting documents is an integral part of information integration, especially when these documents prove the ownership of something, and blockchain seems to be a good idea to digitize that proof of ownership in a way that can be traced.
 
@@ -148,7 +153,7 @@ Blockchain is not always a one-size-fits-all solution, and its use must be caref
 As seen in the previously mentioned projects, like CargoX, Eximchain and OriginTrail, each of them followed their own purpose and goals, and each of them has a different set of features that allows them to achieve these goals. Similarly, these are some of the key components that a blockchain possesses, and the respective features that must be decided upon:
 
 \paragraph{Information Storage}
-The most basic and important feature of a blockchain is the ability to save data, which is then considered immutable, as well as registering any important events. As such, information storage is a must in supply chain. It also makes possible Inventory Management possible (though it's implementation is out of the blockchain's scope), traceability and provenance of products.
+The most basic and important feature of a blockchain is the ability to save data, which is then considered immutable, as well as registering any important events. As such, information storage is a must in supply chain. \todo{fcorreia: "is a must" é um pouco informal de mais} It also makes Inventory Management possible (though it's \todo{fcorreia: its} implementation is out of the blockchain's scope), traceability and provenance of products.
       
 \paragraph{Ledger and Transactions}
 Similarly, allowing for transactions and their recording onto the chain might be important, especially in what accounts for payments between businesses.
