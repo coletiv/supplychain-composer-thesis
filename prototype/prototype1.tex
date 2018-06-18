@@ -10,21 +10,42 @@ In addition to the requirements from the previous chapter, the performance analy
 The requirements for the choice of a framework can be partially derived from the most important functionalities pointed out on the results of the survey.
 
 
-The most important functionalities were:
+These were:
 \begin{itemize}
-	\item Interoperability between systems - though it was not pointed out to be a point of improvement, it still ranked as a highly needed functionality in information systems, which leads to the conclusion that current systems might already be interoperable up to a certain extent.
-	\item Security according to the latest security requirements - relates to fraud detection
-	\item Real-time tracking and sharing of information - relates to traceability
-	\item Controlled access for the users - relates to fraud detection
+	\item \textbf{Interoperability between systems} - though it was not pointed out to be a point of improvement, it still ranked as a highly needed functionality in information systems, which leads to the conclusion that current systems might already be interoperable up to a certain extent.
+	\item \textbf{Security according to the latest security requirements}
+	\item \textbf{Real-time tracking and sharing of information}
+	\item \textbf{Controlled access for the users}
 \end{itemize}
 
 
-One thing that stands out is the fact that these functionalities correlate directly to the points of focus from this thesis: \textbf{synchronization, security and tracking}.  From section 6.3.4, it was also ascerted that the improvement of information privacy in supply chains was not very important in itself. Maybe it is something that the current systems already do well, but as we can see, \textbf{there are still some outstanding concerns which deal with other security aspects that still need to be taken care of}. Traceability, access control and fraud detection seem to rank high on the requirements.
+One thing that stands out is the fact that these functionalities correlate directly to the points of focus from this thesis: \textbf{synchronization, security and tracking}.  From section 6.3.4, it was also ascerted that the improvement of information privacy in supply chains was not very important in itself. Maybe it is something that the current systems already do well, but as we can see, \textbf{there are still some outstanding concerns which deal with other security aspects that still need to be taken care of}: traceability, access control and fraud detection seem to rank high on the requirements for such a system.
 
 \textbf{Thus, the selected framework should support a highly controlled environment, where the actions each user takes should be properly authorized and tracked}.
 
 
+NEXT:
+
+\begin{itemize}
+	\item Talk about how a private blockchain better supports the security Requirements, since these are some of the requirements that might restrict the choice of framework;
+	\item Talk about how, for a private blockchain, a cryptocurrency is not needed unless the use case specifically requires it; we did find out that people liked the "Financial applications" part of applying blockchain to the supply chain, but that does not directly involve a native cryptocurrency, as it can be simulated in our design for the business network.
+	
+\end{itemize}
+
 \subsection{Framework Choice}
+
+In this section:
+
+\begin{enumerate}
+	\item Talk about the balance out the need for a good with performance with the need to satisfy the above requirements. 
+	\item The requirements are roughly: private blockchain with good security development; contract enforcement; financial transactions;
+	\item Talk about how, for instance, the need for a highly permissioned, controllable and trackable system rules out Ethereum and some other public frameworks in exchange for private frameworks.
+	\item Talk about how, for instance, the need for traceability rules out choices like Corda, which focuses only on the financial transactions and contracts.
+	\item Finally, the need for increased global processing speed (rated 4th as a benefit, after reduction of fraud and better traceability), combined with the fact that hyperledger was more efficient than Ethereum, makes our choice point to Hyperledger Fabric.
+\end{enumerate}
+
+
+
 
 %Use part of the state of the art/background research here to discuss Composer+Fabric as the tools to choose over the others
 
