@@ -4,9 +4,13 @@
 
 This chapter focuses on explaining the objectives of this thesis, by defining the statements that are being defended, as well as the approach that will be taken to determine whether these statements are valid or not.
 
+\todo{fcorreia: dizer que vais "defender" uma afirmação não me parece a melhor forma de colocar as coisas. poderias dizer que vais "defender" uma hipótese, mas isso não bate certo com várias coisas que tens para a frente, por isso não aconselharia a ir por aí. acho que o mais fácil seria dar a volta a esta frase e a algumas outras que possam aparecer a seguir para evitar a palavra "defender". Em vez disto, podes dizer por exemplo que "this chapter focuses on explaining the objectives of this work, by defining the thesis statement, as well as the approach that will be taken to determine whether these statements are valid or not.}
+
 After having previously mentioned some background information about Blockchain technology and frameworks, as well as about supply chain management and supply chain issues, it is now time to focus on what these issues mean. Therefore, a possible way to overcome these issues through the means of Blockchain technology shall be formulated and tested.
 
 \section{Objectives}
+
+\todo{fcorreia: Evita a ausência de texto entre títulos de secção e o título da primeira das suas subsecções (e.g., esta secção, mas há outras)}
 
 \subsection{Main Points of Focus}
 \label{sec:points-of-focus}
@@ -16,7 +20,9 @@ In SCM, a product's life cycle can be roughly divided into the many phases the p
 
 \textbf{The improvement of the management of this life cycle is the main objectives of this thesis. This improvement, however, has many points of focus. Some were already briefly introduced in sections \ref{supply_chains} and \ref{supply_chain_challenges}, from which we can extract the following points as the most important.}
 
-\todo{fcorreia: Concordância entre plural e singular ("is" vs "objectives")}
+\todo{fcorreia: Concordância entre plural e singular ("is" vs "objectives"). Deves começar com letra maiuscula sempre que forem nomes de elementos do documento, como "Sections 1.1", "Figure xpto"}
+
+\todo{fcorreia: dizer que "extrais" estes pontos a partir dos anteriores pode dar a entender que antes já falaste de tudo isto (e de mais ainda), embora na realidade agora é que vás estar a detalhar.}
 
 % Assumptions? Some statements about supply chain efficiency;
 \begin{itemize}
@@ -31,6 +37,9 @@ One thing is certain: the world around us moves quickly, and in the freneticism 
 Many times, the data from a company is synchronized with its own servers and software, in protocols and data formats that can only be understood by that specific piece of software. If many companies share this same software, then they can easily integrate the information between themselves.
 
 The real problem occurs when the companies have no common ground and the data is not transmittable in an automatic way, leading to a lot of unnecessary manual work to export the data from one system and import it into another. Though there may be many causes for this, the logic assumption would be that this problem may be originated mainly the following:
+
+\todo{fcorreia: "from" the following?}
+
 \begin{itemize}
 \item \textbf{Lack of development of data integration standards in the supply chain industry.}
 \item \textbf{Lack of a common technology to store all data, from where each company could have their own software extract the information from.}
@@ -40,36 +49,53 @@ The real problem occurs when the companies have no common ground and the data is
 %Tracking - specify why it is important
 During a product's lifetime, a lot of alterations occur, and sometimes, the records about the origins of the products are lost, falsified, or flat out not registered. This leads to unreliability in the goods the consumers use everyday, and sometimes even to safety hazards. Often, the products are not what they were originally meant to be, or do not comply with quality standards.
 
+\todo{fcorreia: não tanto nos goods, mais na informação sobre eles, certo? ou a ideia principal nessa frase é que isto tem reprecursões nos proprios artigos?}
+
+\todo{fcorreia: não me é obvio de que forma é que podem surgir daqui safety hazards, nem de que forma eles "are not what they were originally meant to be". Tens referências para aqui?}
+
 For this reason, it is of the utmost importance that the products are tracked since their origin, right up until the delivery to the final customer, as well as the conditions they are shipped in and the transformations they suffer.
 
 \item \textbf{Security}
 %Security - specify why it is important
 This point is one of the most important to deal with, as security is comprised of many aspects, such as: who to authorize to access the information and how to restrict this, what authentication methods should be used, how to accurately detect and prevent fraud, etc. 
 
-Information in a supply chain is highly sensitive and not only should the people who access it be controlled, but also the people who generate it. On one hand, most enterprises (or groups of enterprises) compete amongst themselves to make the most sales, the most deliveries and have the fastest product cycles. \textbf{All the information that is generated in the process might be too sensitive to share, in order to keep the edge on the competition}.
+Information in a supply chain is highly sensitive and not only should the people who access it be controlled, but also the people who generate it. \todo{fcorreia: em vez de dizer que as pessoas têm de ser controladas, eu diria que o acesso à informação tem de ser controlado} On one hand, most enterprises (or groups of enterprises) compete amongst themselves to make the most sales, the most deliveries and have the fastest product cycles. \textbf{All the information that is generated in the process might be too sensitive to share, in order to keep the edge on the competition}.
 On the other hand, \textbf{the information that is generated and inserted into any system should also be controlled and verified, in order to prevent both human error and fraud attempts}.
 
+\todo{fcorreia: não me é claro de que forma é que estas duas partes "on the one hand ... on the other hand" se opõe... Em todo o caso, poderia ser útil uma referência aqui, se tiveres.}
+
 On the other hand
+
+\todo{fcorreia: ficou perdido este "on the other hand"? :-)}
 \end{itemize}
 
 \subsection{Possible Solutions}
 % Mention a possible solution that might or not be better
-While these previous points of focus are not problems themselves, their improvement will greatly benefit any industry as well as the consumers of these industries. As such, the actual problem here can be narrowed down to \textbf{finding a way to satisfy these needs for improvement through technological means.}
+While these previous points of focus are not problems in themselves, their improvement will greatly benefit any industry as well as the consumers of these industries. As such, the actual problem here can be narrowed down to \textbf{finding a way to satisfy these needs for improvement through technological means.}
 
-Some of the most common and traditional solutions include distributed databases, a commonly debated paradigm. Recently, cloud-based solutions for integrating supply chain software, as well as enterprise planning software have been taking the lead. While these might satisfy the need to store the data in a way that can be easily retrieved, they are sometimes costly and have a rather narrow scope of integration. Distributed databases are not very scalable if we take think about maintaining the data of hundreds of companies. The same can be said of cloud-based solutions. Scalability is not the only concern, security is as well. These technologies, however, are already being used, and it is time to analyze if there is a \textbf {good alternative}.%BACK THIS UP WITH REFERENCES
+Some of the most common and traditional solutions include distributed databases, a commonly debated paradigm. \todo{fcorreia: mais que databases, eu diria "distributed systems"} Recently, cloud-based solutions for integrating supply chain software, as well as enterprise planning software have been taking the lead. \todo{fcorreia: há referências?} While these might satisfy the need to store the data in a way that can be easily retrieved, they are sometimes costly and have a rather narrow scope of integration. Distributed databases are not very scalable if we take think about maintaining the data of hundreds of companies \todo{fcorreia: o que é que querias dizer com "scalable" aqui? muitas vezes tornam-se sistemas mais distribuídos precisamente como forma de os escalar. E muitas vezes comaça-se a usar a cloud precisamente com o mesmo objetivo.}. The same can be said of cloud-based solutions. Scalability is not the only concern, security is as well. These technologies, however, are already being used, and it is time to analyze if there is a \textbf {good alternative}.%BACK THIS UP WITH REFERENCES
 
 So, is there any other tool or technology that can be applied to SCM, in order to satisfy the need for improvement, one that is scalable, as well as secure?
 In many ways, Blockchain is similar to a distributed database, and it can even be integrated with the cloud for a mixed solution (the best of both worlds?), so there is a need to investigate if it might or might not be a fit solution for this optimization problem.
 
+\todo{fcorreia: esta secção precisa de levar uma volta. eu falaria brevemente (possivelmente fazendo referências para o capitulo do SotA) do software que já existe para SCM, e da forma que tenta resolver os mesmos problemas que estás a tentar resolver. acho que não vale a pena sequer entrar pelos "distributed systems/databases", a não ser que tenhas no SotA detalhes sobre SCMS que usam esse tipo de tecnologias.}
+
 \subsection{Thesis Statement}
 \label{subsec:thesis-statement}
 The main objective has already been defined: to improve the security traits, tracking of goods and processes, information synchronization, and possibly speed of delivery of the supply chain, along with other minor attributes. A seemingly good alternative that stands out is Blockchain. What remains to be answered, though, is if these attributes are really the right requirements to focus on, and if Blockchain can really fill them, as a distributed architecture.
+
+\todo{fcorreia: a parte "if these attributes are really the right requirements to focus on" é mais uma consequência do resto do trabalho. acho que só deve aparecer mais tarde, e ser apresentado como uma forma de validar a abordagem}
 
 % MAIN THESIS we are defending defined here
 %TODO: SHOULD IT BE IN QUESTION FORM, OR AFFIRMATION?
 Therefore, the main statement that this thesis defends is: 
 
 \par \textbf{\textit{"Is Blockchain a good architectural design for the Supply Chain Management domain?"}}
+
+\todo{fcorreia: uma thesis statement normalmente é uma afirmação e não uma pergunta. eu reescreveria desta forma, diz-me o que achas:\\
+Therefore, the thesis that underlies this work is that:\\
+\par \textbf{\textit{"Blockchain a good architectural design for the Supply Chain Management domain"}}.\\
+E a seguir já estás a dizer que há várias assunções por trás disto, e explicas quais são, o que me parece mto bem. }
 
 % THESIS branches: all the possibilities that might happen
 This statement may be based on many assumptions, which gives rise to some more questions. For instance, we are assuming that the points of focus from section \ref{sec:points-of-focus} are really the most important ones, given the background information that was collected.
@@ -82,6 +108,8 @@ Thus, the questions that need to be answered first, in order to reach a conclusi
 \end{enumerate}
 
 These questions are sequential, meaning that, in order to answer one of them, we have to answer the previous question. Only in the end can we reach a definitive conclusion, though the sub-conclusions are also interesting to analyze and a contribute themselves to this area.
+
+\todo{fcorreia: sim e não. idealmente sim, mas na prática, não era exequível ficar à espera da resposta a uma para responder à seguinte, nem foi isso que fizeste no teu trabalho. O que podes dizer é que as respostas a cada uma destas perguntas informam a resposta às perguntas seguintes, e que na prática isto pode ser feito de forma iterativa.}
 
 \section{Approach}
 % What if no possibility works or we can't ascertain the main possibility? Check other ones!
@@ -96,6 +124,8 @@ To answer these questions from section \ref{subsec:thesis-statement}, the work o
 \item \textbf{Software Engineering - Architectural Design and Implementation of a Prototype}
 \end{enumerate}
 
+\todo{fcorreia: estes prefixos parecem-me redundantes}
+
 % Each one focuses on supporting a specific part of the thesis statement;
 Each of these focuses on reaching a conclusion towards the answers that underlie the thesis statement.
 
@@ -107,8 +137,11 @@ The first question to answer in order to reach any conclusion is \textbf{\textit
 %TODO: should the verbs be in the past, present or future here?
 % What did you choose to do?
 The proposed way that was chosen to get an answer was an online \textbf{survey}. The survey serves the following purposes:
+
+\todo{fcorreia: aqui diria "used" em vez de "chosen", para não levantar perguntas. No capitulo sobre isto, mais abaixo, certifica-te de que mencionas que não foi possível conduzir entrevistas com peritos (por exemplo), o que teria sido fixe para complementar os resultados do survey.}
+
 \begin{itemize}
-\item Collecting quantitative data on the relevance of the issues that supply chain management suffers from as well. 
+\item Collecting quantitative data on the relevance of the issues that supply chain management suffers from as well. \todo{fcorreia: as well?}
 \item Collecting quantitative and qualitative data on which are the major points of improvement and compare their relative importance.
 \item Collecting quantitative and qualitative data on which issues and improvement points the experts think Blockchain can help the most with, and which are already taken care of by other solutions.
 \item Correlate some of the data collected in the previous point and reach some extra conclusions that might help decide on the validity of the results.
@@ -117,9 +150,11 @@ The proposed way that was chosen to get an answer was an online \textbf{survey}.
 % Why did you choose it?
 It was designed to be answered by people with experience in the field of Supply Chain, with knowledge about Blockchain being optional but appreciated. These are the opinions that have the most importance on this field, and these are also the people that interact with the systems in question and can more accurately pinpoint the points of failure and improvement.
 
+\todo{fcorreia: o It do inicio do paragrafo não está perto do ultimo uso de "survey". talvez substituir por "The survey"?}
+
 The survey was distributed over the internet, through relevant media and social forums, as well as through direct contact with professionals from the area. It was shared on some telegram channels of projects that apply Blockchain to the supply chain (most of which mentioned in the state of the art), on Reddit, through their supply chain and logistics forums, as well as on supply chain focused forum websites. It was also distributed to professionals through messages on LinkedIn (with a focus on managers), personally and through email.
 
-In conclusion, the goal of the survey is to validate some assumptions and direct the dissertation towards the most important of the supply chain management problems.
+In conclusion, the goal of the survey is to validate some assumptions and direct the dissertation towards the most important \todo{(aspects?)} of the supply chain management problems.
 
 \subsection{Software Engineering - Architectural Design and Implementation of a Prototype}
 % The prototype will serve to support "...", along with the requirements that were written based on the background research and literature review; (do i have to rewrite part of the requirements?) 
@@ -128,17 +163,23 @@ In conclusion, the goal of the survey is to validate some assumptions and direct
 Having answered the question about which are the most important aspects of supply chain to focus on improving, this section is focused on applying this knowledge to answer the other two final questions: \textbf{\textit{"What is the Blockchain tool or framework most adequate to the development of an architecture that can support these requirements?"}} and 
 \textbf{\textit{"Is it possible to build a feasible architectural design, by using such a tool implement all these requirements?"}}
 
+\todo{fcorreia: eu evitaria o "Having answered ...", porque isto se faz normalmente de forma mais iterativa e até porque na realidade a coisa não aconteceu de forma assim tão sequêncial como a frase dá a entender. A frase pode comçar diretamente com "this section is focused on applying the knowledge of which are the most important aspects ...."}
+
 The state of the art already provided some information towards the answer to the first of these questions, through the comparison of frameworks. Therefore, and taking the results of the survey into account, a brief analysis is undertaken to make a decision.
 
+\todo{fcorreia: em vez de apenas "The state of the art", eu diria "The state of the art review documented in Chapter xpto"}
+
 Finally, and to answer the final question about the possibility and feasibility of building a blockchain-based architectural design for supply chain management, a software engineering approach is undertaken, using the chosen platform. 
+
+\todo{fcorreia: *todo* o teu trabalho pode ser visto como "software engineering" :-) Em vez disso eu falaria na contrução de um protótipo }
 
 %TODO: justify the choice of platform by the ease of use as well?
 
 This approach is divided into the following phases:
 \begin{enumerate}
 \item \textbf{Requirement Elicitation and validation} - through the literature review research and survey results 
-\item \textbf{Design} - using the requirements, building a model that can implement these
-\item \textbf{Implementation} - program the system according to the design, as close as possible without alterations
+\item \textbf{Design} - using the requirements, building a model that can implement these \todo{fcorreia: these... ?}
+\item \textbf{Implementation} - program the system according to the design, as close as possible without alterations \todo{fcorreia: porque a parte depois da virgula? é normal que o design tivesse sido alterado enquanto implementavas. não vale a pena gastar energia a explicar de que forma evoluiu ao longo do tempo, mas tb não vale a pena dizer que não evoluiu}
 \item \textbf{Validation} - check if the built system satisfies the initial requirements fully, and if otherwise, explaining why not
 \end{enumerate}
 
@@ -152,6 +193,8 @@ After this approach is finished, the results are analyzed qualitatively, as to w
 \subsection{Conclusions}
 
 After having answered all of the three questions that underlie the thesis statement, it is possible to give an answer, though future work may eventually bring different answers, since Blockchain is a technology which is seeing great and fast developments.
+
+\todo{fcorreia: se não houver mais o que concluir defenderia não incluir secção de conclusões neste capitulo}
 
 % Comments to pay attention to!
 
