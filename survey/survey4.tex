@@ -1,6 +1,10 @@
 
 \subsection{Group 4 - Supply Chain Standalone Points of Improvement and Blockchain+SC points of Applicability and Improvement}
 
+The first goal for this part of the survey is to find out the points of improvement for supply chain. What is being questioned are not the issues of the supply chain themselves, which were already asked, but what parts of supply chain, even though they may already work well, could work even better.
+
+The second goal is to find out more about the requirements that an information system must have to satisfy the needs of SCM. This includes ranking the functionalities of an information system for their importance. Many of these functionalities probably relate to the points of improvement found here, as well as to the supply chain issues described in section \ref{sec-supplychainissues}.
+
 %Problema: há varios graficos para mostrar, mas alguns deles, como o da figura 6.1, têm varias (7 a 8) distribuições para mostrar, onde cada uma delas tem os seus valores das metricas.
 
 %2 EM 1
@@ -8,12 +12,22 @@
 
 %TODO: VALE A PENA DIVIDIR EM VARIAS IMAGENS?
 
+For the sake of simplifying the ranking process for both the \textit{"points of improvement"} and \textit{"functionalities of an information system"}, a division into groups of importance shall be done according to the observed results. The importance scale went from 1 to 5, but most of the mean scores were between 3 and 4.5. 
+
+Therefore, the following classification for the lists of results will be adopted: 
+
+\begin{itemize}
+    \item \textbf{Mean 	$\geq$ 4} - High priority or importance
+    \item \textbf{3.5 $\leq$ Mean $<$ 4} - Medium importance 
+    \item \textbf{Mean $<$ 3.5} - Low importance
+\end{itemize}
+
 \subsection*{1 - Rank the importance of some aspects which Supply Chains aim to improve.}
  
 (Placeholder image. Should i divide it in more images?)
 
 \todo{fcorreia: sim, está muito pequeno para se ler assim. talvez quatro ou cinco destes gráficos lado a lado fiquem ok...}
-
+%TODO: fix captions
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.35]{media/importance_SC_improvement_points.png}
@@ -43,17 +57,34 @@
 
 %%%%%%%% TABLE END %%%%%%%%%%%%%%%%
 
+In this category, pretty much all the options had a range of 3 and deviations close to 1, which is to be expected. Traceability had the highest skew value, as there seemed to be some dissent, as a few outlier values pushed the mean to be lower than the median. However, it still rated the highest, by importance. 
+
+The importance ranking described as before follows below:
+
 \begin{enumerate}
-    \item Traceability - Give explanation about how important Traceability is, taking into account these values; informal explanation that it is a really high agreement, since the mode and median are both 5; not only is it the most popular choice, but it was also chosen by 50\% of the people. At the same time, the mean shows us that average popularity is 4.4. The answer has a range of 3, with the values 2 through 5 being selected as the extremes. This means there was either someone dissatisfied, or they had a bad day; etc etc, give more explanations? Or is this ok?
-    \item Development of Industry Standards - REPEAT AS ABOVE
-    \item Fraud Detection
-    \item Automated Information Sharing
-    \item Better Information Privacy
-    \item Delivery Schedules
-    \item Supply Control
+    \item \textbf{High importance} - "Traceability", "Supply Control", "Fraud Detection";
+    \item \textbf{Medium importance} - "Delivery Schedules", "Automated Information Sharing", "Development of Industry Standards"
+    \item \textbf{Low importance} - "Better Information Privacy"
 \end{enumerate}
-    
-    All 7 improvement aspects where studied: rank them by the 3 with highest mean? Highest median? Combination of both (how to combine?)  ?
+
+\par \textbf{Conclusions: }
+%Points of failure from before: traceability, inventory management is ESSENTIAL
+\begin{itemize}
+
+    \item It had already been concluded from the previous set of questions in \ref{sec-supplychainissues} that inventory management was an essential discipline to SCM, so it was expected that \textit{Supply Control} would be rated highly as a point of improvement, which it did. The same can be said about \textit{Traceability}: it was expected to rank highly, since it is related to both quality assurance and availability of information, two other issues that were validated in the previous set of questions. At the same time, \textit{Fraud Detection} was also highly ranked, which can be explained by its relation to traceability and quality compliance and control. \textbf{Traceability helps to avoid fraud and, at the same time, fraud detection also relates to quality control and compliance, since avoiding fraud is all about making sure that the products circulating the supply chain are authentic and have good quality.} With this in mind, it is only natural that Fraud Detection is considered important, together with traceability.
+
+\textbf{In conclusion, from the 3 most important items, 2 of them depend directly on the third one, traceability, which makes traceability the most important point of improvement in the supply chain.}
+
+\item From the items that got rated as medium importance, 2 of them relate to synchronization improvement: \textit{Automated Information Sharing} and \textit{Development of Industry Standard}. The last point, \textit{Delivery Schedules} also relates to Supply Control, though it is less generic.
+
+\textbf{In conclusion, though system synchronization is not as important as traceability or some of the other items that depend on traceability, it is still a welcome improvement which comes in second place to the others.}
+
+
+\item Finally, the lowest ranking item was \textit{Better Information Privacy}. This comes as a surprise, since security was a big focus on the background research for supply chain management. 
+
+\textbf{The conclusion we can take from this item being rated the lowest, is that it might be a concern that the current systems already take care of, therefore it does not have much space for improvement.}
+\end{itemize}
+
 
 %2 EM 1https://www.overleaf.com/13104200fnmytzmhwtck#
 %GRAFICOS DOS BLOCKCHAIN POINTS OF APPLICABILITY
@@ -76,8 +107,8 @@
 \cline{2-7}
                                                                                                                                                 & \multicolumn{1}{l|}{Mode} & \multicolumn{1}{l|}{Median} & \multicolumn{1}{l|}{Mean} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Standard\\  Deviation\end{tabular}} & \multicolumn{1}{l|}{Range} & \multicolumn{1}{l|}{Skewness} \\ \hline
 \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Interoperability Between \\ Systems (ERPs, MES, \\ and other information systems)\end{tabular}} & 5                         & 4,5                         & 4,2917                    & 0,8587                                                                             & 3                          & -1,0813                       \\ \hline
-\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Development of Industry\\ Standards\end{tabular}}                                               & 5                         & 5                           & 4,3333                    & 1,0495                                                                             & 3                          & -1,4862                       \\ \hline
-\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Standardized Process Interfaces \\ (Data Processing and APIs)\end{tabular}}                     & 4                         & 3                           & 3,3200                    & 1,1804                                                                             & 3                          & -0,3558                       \\ \hline
+\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Security according to the\\  latest security requirements \end{tabular}}                                               & 5                         & 5                           & 4,3333                    & 1,0495                                                                             & 3                          & -1,4862                       \\ \hline
+\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Standardized Process Interfaces \\ (Data Processing and APIs)\end{tabular}}                     & 4                         & 3                           & 3,3200                    & 1,1804                                                                             & 4                          & -0,3558                       \\ \hline
 \multicolumn{1}{|l|}{Standardized Data Formats}                                                                                                 & 4                         & 4                           & 3,6000                    & 0,9574                                                                             & 3                          & -0,3096                       \\ \hline
 \multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Real-time tracking and sharing \\ of information with partners\end{tabular}}                    & 5                         & 4                           & 4,1600                    & 0,9434                                                                             & 3                          & -0,6664                       \\ \hline
 \multicolumn{1}{|l|}{Monitoring and controlling events}                                                                                         & 5                         & 3                           & 3,4800                    & 1,1944                                                                             & 3                          & 0,0513                       \\ \hline
@@ -86,66 +117,48 @@
 \end{tabular}
 \end{table}
 
-%%%% TABLE END %%%%%%%%%%
 
-%GRAFICO DA ULTIMA PERGUNTA DE RATE THE AFFIRMATION, A VER COM BLOCKCHAIN E INFORMATION SYSTEMS
+The same as before, the range of answers is pretty much 3 for all options but 2 of them. The mean and mediam of the items are also a close approximation of each other, which happens because the skew in most cases is  not very high (only for the Interoperability and Security items was it higher than 1). The skew is highest on the items that also had the highest mean. This happens because, even though these items are the most popular, there are always a few answers from people who disagree. However, this is to be ignored, given the low deviation and given that the median and mean are very close to each other in every case. Therefore, the mean can still be used here to classify the importance.
 
-\subsection*{3 - Rate the affirmations about the use of information systems}
+The importance ranking described as before follows below:
 
-\textbf{Affirmations: }
 \begin{enumerate}
-\item Traceability of assets in a supply
-chain can be efficiently achieved
-with the present processes and
-technologies (excluding blockchain).
-\item A private blockchain, operated by a group
-of companies can be a good alternative to 
-the cloud in terms of information security,
-since the information is hosted by these
-companies
-\item If an information system suffers a 
-decrease in total processing power, but
-has increased security and automatic
-information integration with other
-systems, this is a good trade-of.
+    \item \textbf{High importance} - "Security according to the latest requirements", "Interoperability Between Systems", "Real-time tracking and sharing of information", "Controlled access for the users";
+    \item \textbf{Medium importance} - "Standardized Data Formats"
+    \item \textbf{Low importance} - "Monitoring and controlling events", "Standardized Process Interfaces", "Option to add information as attachment"
 \end{enumerate}
 
+\par \textbf{Conclusions: }
+\begin{itemize}
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.60]{media/affirmations_SC_info_systems.png}
-\caption["Rate the affirmations about the use of information systems."]{"Rate the affirmations about the use of information systems."}
-\label{fig:affirmations_SC_info_systems}
-\end{figure}
+    \item 2 of the high importance items actually relate to security, namely access control and following security requirements. This contrasts with the point of improvement from the previous set of questions \textit{"Better information privacy"}, which was rated the lowest in relative importance. There seems to be a disparity between the importance of the functionality and the importance of the improvement, which might mean that the functionality is important but already good enough as it is.
+    
+    \textbf{The conclusion we can take is that keeping security up to date still seems to be considered important, but on aspects other than privacy (which is already fulfilled) such as access control, which relates to authorization and authentication.}
 
-%%%%%% TABLE BEGIN %%%%%%%%%%%%%%%%
+    \item The other 2 high importance functionalities were about interoperability between systems, and tracking and sharing information. Tracking and sharing information relates to traceability and information synchronization, while interoperability relates only to synchronization.
 
-\begin{table}[h]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{l|c|c|c|c|c|c|}
-\cline{2-7}
-                                                                                                                                        & \multicolumn{1}{l|}{Mode} & \multicolumn{1}{l|}{Median} & \multicolumn{1}{l|}{Mean} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Standard\\  Deviation\end{tabular}} & \multicolumn{1}{l|}{Range} & \multicolumn{1}{l|}{Skewness} \\ \hline
-\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Afirmation 1 - Traceability\\ is already achievable without\\ blockchain.\end{tabular}} & 4                         & 4                           & 3,6522                    & 0,7751                                                                             & 3                          & 0,0812                        \\ \hline
-\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Afirmation 2 - Private\\ blockchain as alternative\\ to the cloud.\end{tabular}}        & 4                         & 4                           & 3,5652                    & 1,1610                                                                             & 4                          & -0,9364                       \\ \hline
-\multicolumn{1}{|l|}{\begin{tabular}[c]{@{}l@{}}Afirmation 3 - Trade\\ processing speed for security\\ and integration.\end{tabular}}   & 1                         & 2                           & 2,300                     & 1,3018                                                                             & 4                          & 0,4898                        \\ \hline
-\end{tabular}
-\end{table}
+    \textbf{Though these points, which relate to synchronization scored high as a functionality, the points of improvement they relate to only scored as medium in the previous sections, namely \textit{"Automated Information Sharing"} and \textit{"Development of Industry Standards"}. Thus, integrating the information is seen as an important aspect to have,but not one that needs improvement over the current status.}
 
-%%%%%% TABLE END %%%%%%%%%%%%%%%%%
+\item Most of the items rated as having medium or low importance do not necessarily stand out nor do they have important conclusions to be taken. The one thing that stands out is that \textit{"Monitoring and controlling events"} rated as a low importance functionality, even though traceability rated high as a point of improvement, which does not make a lot of sense, since traceability also means having the means to monitor what is happening.
 
-\subsection*{4 - Blockchain adoption expectations for the supply chain and Impact of the GDPR on Blockchain}
+
+\end{itemize}
+
+%%%% TABLE END %%%%%%%%%%
+
+\subsection*{3 - Blockchain applicability to the supply chain}
  
+%CHANGE IMAGES TO THE 2 GRAPHICS ABOUT USE CASES OF BC+SC AND BENEFITS OF BC+SC
+
 (Placeholder image. Should i divide it in more images?)
 
 \begin{figure}[ht]
     %\makebox[2pt]{}
 
-	\resfig{blockchain_regulate_sc}{Supply chain expectations for Blockchain}
-    \resfig{gdpr_blockchain}{Does GDPR limit the use of Blockchain?}
+	\resfig{blockchain_usecases_sc}{Blockchain use cases for the supply chain}
+    \resfig{blockchain_application_benefits}{Blockchain benefits for the supply chain}
     
-      \caption{Blockchain expectation for adoption in supply chain and impact of GDPR on this application.}
+      \caption{Blockchain use cases and benefits for the supply chain.}
     \label{fig:group4_graphics}
 \end{figure}
 
