@@ -1,93 +1,64 @@
+\section{Requirements Specification}
+\label{sec:requirements-specs}
+\todo{pedro:put IEEE reference in this paragraph}
+\todo{pedro: specify that the requirements here used differ slighlty, because the survey took a bit to collect the results}
+This section specifies the requirements for the software that was built using Hyperledger Fabric and Composer. The design, implementation and validation of these requirements is the subject of the following chapters.
 
-\section{Requirements}
+The structure for this specification will somewhat resemble the organization of IEEE 830-1998 requirements specification standard \ref{}, but in a simplified way, without some of the unneeded clutter and information. The specification is divided in the following way:
+\begin{enumerate}
+	\item Introduction - Product purpose, scope, overview and users;
+	\item Requirements - Specific requirements including functional requirements, non-functional or quality requirements, and design constraints.
+\end{enumerate}
 
-LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERESSA OU MUDAR DE SITIO
+\subsection{Introduction - Project Drivers}
 
-\todo{fcorreia: não te restrinjas ao template da Volere. isto podia ser tão simples quanto uma lista de user-stories.}
-
-
-\subsection{Project Drivers}
-
-	\subsection*{1. Purpose of the Product}
-
-	This platform is a proof of concept which intends to show that the requirements hereby mentioned are implementable up to a certain degree and that these requirements meet most, if not all, the specific needs of today's supply chains. The product should be extendable such that any company can build integration modules for their own software, which their employees can use.
-	
-	“Sometime in the not-to-distant future, a submarine will sink. An air defense missile will detonate far from its intended target. [sic] directly result from a \$2 counterfeit electronic tucked deep within a billion-dollar military technology.”
-	
-	"Reminds me of a scandal last year in the Netherlands with eggs that were contaminated with fipronil:
-	
-	http://www.dw.com/en/fipronil-in-eggs-dutch-police-arrest-two-suspects/a-40043017
-	
-	This had a huge impact. All eggs were removed from the shelves throughout the country. While only a small part was actually affected. In addition, it was no longer possible to verify in which products the eggs had been processed. Those products have remained in stores. The government, controlling authorities, shops and end-users would have benefited enormously if Blockchain had been used throughout the chain."
-	
-    \subsection*{2. Client, Customer, Stakeholders}
-	
-	As a proof of concept, this project would benefit any industry which uses supply chain, but more particularly, it would be directed towards any company which wishes to integrate their own information systems (i.e. ERPs and so on) with this ledger, such as to maintain a common information transmission channel with their partners, as well as to have more permanent records of their transactions. Stakeholders for this system can be listed as:
-    \begin{itemize}
-		\item Supply Chain Executives
-			\item Manufacturing companies, Suppliers, Distributors, Retailers - so that they can have their partners information more readily available, therefore speeding up the transmission of goods;
-		\item The consumer - the consumers are able to track their goods, for example
-		\item Auditors/Certification Authorities - 1 single system is a lot easier to audit from a single entry point
-	\end{itemize}
-	3. Users of the Product
-		\begin{itemize}
-		\item Integration developers - the developers in charge of connecting their companies system to this system.
-		\item Supply Chain members - Customs Officers and employees - to register incoming and outgoing products on the blockchain (through their integration module?), distribution delivery employees - to register deliveries (through their integration module?), etc.
-		\item System administrators.
-	\end{itemize}
-
-\subsection{Project Constraints}
-
-\subsection*{1. Mandated Constraints}
-    \begin{itemize}
-		\item The product shall represent a Proof of Concept (PoC), such that it must accurately simulate some of the variables, which include the number of nodes needed for the system to work, their distribution, the transaction load, number of products and companies (TBD).
-		\item The node number and distribution of the nodes might be subject to budget and time constraints, as it depends on external services, such as Amazon Web Services (AWS).
-		\item The data sets used to reproduce this proof of concept are based on the data from projects such as OriginTrail, among others, and are adapted and created by the developer of this PoC.
-		\item The data will follow the GS1 EPCIS standards and specifications for data formatting, as possible (https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf).
-		\item The product shall have well defined APIs that allow for incoming and outgoing data to circulate between the ledger and external systems, namely ERPs.
-		\item Any software frameworks used will be open source. This project will use Hyperledger Fabric and Hyperledger Composer.
-		\item A company/trading partner wishing to join the supply chain's blockchain ledger must comply with the GS1 standards, namely by having a globally recognized identification (GS1 Company Prefix) and the company's locations must also be globally and uniquely identified.
-		\item TODO: Should I allow companies without the GS1 prefix for themselves and for their locations/warehouses/etc? 
-        \end{itemize}
-        \subsection*{2. Naming Conventions and Definitions}
-
-        \todo{fcorreia: isto devia aparecer talvez no início do documento, num glossário geral}
-
-		\par PoC - Proof of Concept
-		\par SLA - Service Level Agreement
-		\par Other glossary terms, acronyms and whatever.
-		
-        \subsection*{3. Relevant Facts and Assumptions}
-		\par N/A - Random stuff that is not put anywhere else, basically
-	
-
-\subsection{Functional Requirements Drivers}
 \subsection*{1. Scope of the Work}
-		\par This project is being developed as a Proof of Concept for the Master Dissertation titled "title\_here". \todo{fcorreia: como isto está incluído na tese, não acho que precises de repetir o título aqui}
+		\par This project is being developed as a Proof-of-concept to validate the feasibility of implementing of a supply chain-based blockchain using Hyperledger Fabric and Composer. It does not represent what a fully developed project would act or look like.
 
-		\par The objective is to build a product that can enhance the discipline of supply chain management, by making the data more easily accessible, reducing synchronization time, improving integration, and providing a tool that assists in guaranteeing end to end traceability.
+		\par Therefore, the objective is to showcase a product concept that can enhance the discipline of supply chain management, according to the results of the survey, by making the data more easily accessible, reducing synchronization time, improving integration and security, and providing a tool that assists in guaranteeing end-to-end traceability.
+
 \subsection*{2. Scope of the Product}
-		\par This project encompasses the development of a blockchain ledger and respective integration endpoints. The ledger will be designed to accommodate transactional data from a supply chain, and it will also be possible to execute smart contracts to manage the assets registered in the transactions.
-		\par The process of extracting data from the ERP systems and forwarding it to the system's node endpoints, as well as the process of sending data from the ledger to the ERP are out of the scope of this project. External systems must themselves build their own integration modules. APIs for this are provided, and the data is standardized, to facilitate the task (TODO: talk about how the data is actually formatted, what file type, what is inside the file).
-		\par TODO: Build use case diagram
+		\par This PoC encompasses the development of a Hyperledger Composer business network accompanied by the respective Hyperledger Fabric node topology. The business network itself is comprised of the blockchain ledger model and respective integration endpoints. The ledger will be designed to accommodate transactional data from a supply chain, and it will also be possible to execute smart contracts, in the form of transactions, to manage both assets and the identities of the participants.
+		\par The process of extracting data from the ERP systems and forwarding it to the system's node endpoints, as well as the process of sending data from the ledger to the ERP are out of the scope of this PoC. External systems must themselves build their own integration modules. Building the needed APIs for this is a task of this project, as well as the standardization of the data, with the aim of facilitating future integration tasks.
 	
-\subsection*{3. Functional  Requirements}
-\begin{itemize}
-	\item The system shall have a defined set of roles ("which ones" is a topic to discuss) 
-	\todo{fcorreia: queres dizer os utilizadores do sistema terão estes papeis, e não o sistema, certo?}
-
-		\par Regulatory Entity
-		\par Admin
-        \par Supply Chain Member
-        \begin{itemize}
-			\item Supplier  (does it make sense for these categories to be associated with an entity? Or should an entity just be a supply chain member, and the specific role it plays depends on the transaction: i.e. on one transaction it can be a supplier and on a different one a manufacturer - else, it could also be a limitation of the system. Imagine that a company has 2 different businesses - does that entail them as being 1 entity that has 2 different possible roles in the transactions, or a different entity for each role?).
-			\item  Manufacturer
-			\item Distributor
-			\item Retailer
-			\item Customer
-			\item OR  Buyer and Seller
+    \subsection*{3. Client, Customer, Stakeholders}
+	
+	 This project would benefit any industry which uses supply chain, but more particularly, it would be directed towards any company which wishes to integrate their own information systems (i.e. ERPs and so on) with this ledger, such as to maintain a common underlying information transmission channel with their partners, as well as to have more permanent records of their transactions. 
+	 
+	 Possible stakeholders for this system and the benefits they have are listed as:
+    \begin{itemize}
+		\item Supply Chain Executives, Managers and common employees
+			\item Manufacturing companies, Suppliers, Distributors, Retailers - the executives and managers represent all of these company types; these companies can have their partners information more readily available, therefore speeding up the transmission of goods and increasing trust;
+		\item The consumer - the consumers may be able to track some of their goods to a more precise level;
+		\item Auditors and certification Authorities - easy single entry points for auditors to collect their information from;
+	\end{itemize}
+	These are some examples of typical users of the Product:
+	\begin{itemize}
+		\item Supply Chain members - the employees from all types of companies will be the most common users, and they may register incoming and outgoing products on the blockchain (through their companies own integration module); distribution delivery employees may, for instance, register deliveries, etc.
+		\item Auditors - they will use the network to view information from the companies and make sure everything appears to be running correctly and without fraud.
+		\item System administrators - to control the network, help solve any issues that come up and do the needed maintenance.
+		\item Integration developers - the developers in charge of connecting their companies system to this system.
+	\end{itemize}
+	%TODO: check if the system actor is really needed
+	Each user shall have defined roles assigned within the system, according to their needs. These roles, along with the system itself, are the actors of the system:
+		\begin{itemize}
+			\item Auditor
+			\item Admin
+			\item Supply Chain Member
+			\begin{itemize}
+				\item Supplier  %(does it make sense for these categories to be associated with an entity? Or should an entity just be a supply chain member, and the specific role it plays depends on the transaction: i.e. on one transaction it can be a supplier and on a different one a manufacturer - else, it could also be a limitation of the system. Imagine that a company has 2 different businesses - does that entail them as being 1 entity that has 2 different possible roles in the transactions, or a different entity for each role?).
+				\item  Manufacturer
+				\item Distributor
+				\item Retailer
+				\item Customer
 		\end{itemize}
-    \item Transactions
+	\end{itemize}
+\subsection{Functional Requirements Drivers}
+	
+\subsection*{1. Functional  Requirements}
+
+	
+     Transactions
         \par User Class 1 - The System 
         \todo{fcorreia: porque "codificar" os vários tipos de utilizador/papeis como "user class 1,2,3, etc"?}
         \todo{fcorreia: estás a considerar "the system" como um tipo de utilizador? não é um dos tipos de utilizador que aparece na lista em cima}
@@ -154,7 +125,7 @@ LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERES
 			\item  The regulatory entity shall be able to query the transactions of a certain company. Possible :)
         \end{itemize}
 		
-    \item Privacy and Identity Management
+	Privacy and Identity Management
     \begin{itemize}
         \item User Class 1 - The System
         \begin{itemize}
@@ -176,7 +147,7 @@ LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERES
             \item The members that have the permission to change roles shall be able to change other members roles, but not their own.
         \end{itemize}
     \end{itemize}
-	\item Chaincode
+	Chaincode
     \begin{itemize}
         \item User Class 1 - The System
             \begin{itemize}
@@ -191,7 +162,7 @@ LISTAR REQUISITOS AQUI. DIVIDIR COMO NO VOLERE TEMPLATE? TIRAR O QUE NAO INTERES
             \item Extra requirement: The members shall be able to hold a cryptocurrency, with a static equivalence to real money, so that they can transfer it in contracts, such as to enable payments, fines and be able to settle agreements. (benefit of not needing human decision to settle agreements; if it's on a contract, it is followed thoroughly, which also makes it faster, a benefit of blockchain which is mostly overlooked). Hyperledger Fabric does not, by default, support a cryptocurrency.
             \end{itemize}
     \end{itemize}
-\end{itemize}
+
 
 Permissions - Access control rules:
 \begin{itemize}
@@ -245,6 +216,7 @@ Permissions - Access control rules:
         \end{itemize}
 \end{itemize}	
 
+\subsection*{2. Data Requirements}
 	1. Data Requirements
 		\par The data is divided into Master Data and Transactional Data
 		\par The Master Data relates to Products/Assets and Entities, being more generalist and fixed, for those pairs;
@@ -254,7 +226,7 @@ Permissions - Access control rules:
 		
 		
 
-\subsection{Non Functional Requirements Drivers}
+\subsection*{3. Non Functional Requirements Drivers}
 
 Overall, the product should follow these parameters:
 \begin{enumerate}
@@ -278,7 +250,20 @@ Overall, the product should follow these parameters:
 		\par The ledger might be subject to verification from competent legal authorities or auditors;
 \end{enumerate}
 
-\subsection{Project Issues}
+\subsection*{4. Mandated Constraints}
+    \begin{itemize}
+		\item The product shall represent a Proof of Concept (PoC), such that it must accurately simulate some of the variables, which include the number of nodes needed for the system to work, their distribution, the transaction load, number of products and companies (TBD).
+		\item The node number and distribution of the nodes might be subject to budget and time constraints, as it depends on external services, such as Amazon Web Services (AWS).
+		\item The data sets used to reproduce this proof of concept are based on the data from projects such as OriginTrail, among others, and are adapted and created by the developer of this PoC.
+		\item The data will follow the GS1 EPCIS standards and specifications for data formatting, as possible (https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf).
+		\item The product shall have well defined APIs that allow for incoming and outgoing data to circulate between the ledger and external systems, namely ERPs.
+		\item Any software frameworks used will be open source. This project will use Hyperledger Fabric and Hyperledger Composer.
+		\item A company/trading partner wishing to join the supply chain's blockchain ledger must comply with the GS1 standards, namely by having a globally recognized identification (GS1 Company Prefix) and the company's locations must also be globally and uniquely identified.
+		\item TODO: Should I allow companies without the GS1 prefix for themselves and for their locations/warehouses/etc? 
+        \end{itemize}
+        
+
+\subsection*{Project Issues}
 \begin{enumerate}
 	\item Open Issues
 		\par The architecture of Hyperledger Fabric and Composer are complex and not completely studied yet, which may lead to deviations from the requirements or alterations at some point.
