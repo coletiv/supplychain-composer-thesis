@@ -42,6 +42,7 @@ The structure for this specification will somewhat resemble the organization of 
 	%TODO: check if the system actor is really needed
 	Each user shall have defined roles assigned within the system, according to their needs. These roles, along with the system itself, are the actors of the system:
 		\begin{itemize}
+			\item System
 			\item Auditor
 			\item Admin
 			\item Supply Chain Member
@@ -57,12 +58,8 @@ The structure for this specification will somewhat resemble the organization of 
 	
 \subsection*{1. Functional  Requirements}
 
-	
-     Transactions
-        \par User Class 1 - The System 
-        \todo{fcorreia: porque "codificar" os vários tipos de utilizador/papeis como "user class 1,2,3, etc"?}
-        \todo{fcorreia: estás a considerar "the system" como um tipo de utilizador? não é um dos tipos de utilizador que aparece na lista em cima}
-        \begin{itemize}
+		\par User Class 1 - The System 
+		\begin{itemize}
 			\item The system shall record a new transaction for each action which is intended to change the state of an asset (which actions is a topic to discuss - reporting that an item was sent, received, altered, lost, etc).
 			\item The system shall maintain an immutable list of the transactions that took place, in the form of blocks
 			\item The system shall allow for a large entry of many transactions, corresponding to the synchronization process of a company uploading their data. (send batch of transactions?)
@@ -71,7 +68,14 @@ The structure for this specification will somewhat resemble the organization of 
 			\item The system shall have different channels to support separate sets of permissions, such that information is available to different groups of users, so that sensible information from a group of companies might be hidden from others.
 			\item The system shall be able to detect any mismatches in product characteristics or points of entry/exit, and notify the entities responsible for the product.
 			Example: Product was sent with destination Hong Kong. Product was then actually received in Kuala Lumpur. They check in the item, and the system detects the expected destination is different from the actual one.
-        \end{itemize}
+			\item The system shall record a new transaction for each action which is intended to change the state of an asset.
+			\item The system shall define different permissions for each role.
+				□ The system shall give access to a user for a certain action, if he has the permission.
+				□ The system shall restrict access to a user for a certain action, if he does not have the permission.
+			\item The system shall assign each user a role.
+			\item The system shall execute any chaincode that is called by any member of the blockchain who has permissions on the specific channel that this action is executed in.
+            \item The system should trigger some pre-programmed events
+		\end{itemize}
         \par User Class 2 - Admin
         \begin{itemize}
 			\item The admin shall be able to revert a fraudulent transaction (not sure if it is possible, investigate further) inserted with the wrong details or by someone without permissions, but access to the system.
@@ -82,11 +86,19 @@ The structure for this specification will somewhat resemble the organization of 
 				□ Ideally, a new standalone audited role should exist for this, and verified processes could make use of this role to update the balances;
 			\item The admin shall be able to deploy new assets;
 			\item The admin can update any details from the existing assets, according to the defined access control rules
+			\item The admin shall have the permission to change the roles of the other users.
+				(Revoke identity and issue a new one)
+			\item The admin shall have the permission to give others the permission to change roles.
+				 (Also fulfilled)
 		\end{itemize}
 		\par User Class 3 - Supply Chain Member
         For this user, all of the following requirements are only doable in case the specific actor has the specific permissions, since these permissions might vary from company to company.
         
-        \begin{itemize}
+		\begin{itemize}
+			\item The members that have the permission to change roles shall be able to change other members roles, but not their own.
+			\item The members shall have the ability to call upon existing contract code.
+			\item The members shall have the ability to write  and deploy their own contractual agreements on the blockchain (not sure if the deployment should be done by an admin or something). This can be used to implement SLAs, for instance, and eventually, it can be used with IoT, to track a product's state along its journey. Example: if a medicine pill was stored at the wrong temperature, the information would be sent to the blockchain, and the pharmaceutical company receiving it could immediately know something is wrong with it.
+            \item Extra requirement: The members shall be able to hold a cryptocurrency, with a static equivalence to real money, so that they can transfer it in contracts, such as to enable payments, fines and be able to settle agreements. (benefit of not needing human decision to settle agreements; if it's on a contract, it is followed thoroughly, which also makes it faster, a benefit of blockchain which is mostly overlooked). Hyperledger Fabric does not, by default, support a cryptocurrency.
 			\item The members shall be able to query and obtain the steps through which a particular product has gone, effectively tracing the product from origin up to where it is at the moment of the query. --> Not possible on the current version of composer, only through a weird "hack" which messes up the possibility of receiving notifications
 			\item The members shall be able to query what is the current entity possessing an asset.
 				\par In the current model, na asset does not have a relation to the owner; the asset is part of a shipment, and the shipment has na owner; In code, it is possible to retrieve, but not in hyperledger's query language;
@@ -125,43 +137,7 @@ The structure for this specification will somewhat resemble the organization of 
 			\item  The regulatory entity shall be able to query the transactions of a certain company. Possible :)
         \end{itemize}
 		
-	Privacy and Identity Management
-    \begin{itemize}
-        \item User Class 1 - The System
-        \begin{itemize}
-			\item The system shall record a new transaction for each action which is intended to change the state of an asset.
-			\item The system shall define different permissions for each role.
-				□ The system shall give access to a user for a certain action, if he has the permission.
-				□ The system shall restrict access to a user for a certain action, if he does not have the permission.
-			\item The system shall assign each user a role.
-		\end{itemize}
-        \item User Class 2 - Admin
-    \begin{itemize}
-			\item The admin shall have the permission to change the roles of the other users.
-				(Revoke identity and issue a new one)
-			\item The admin shall have the permission to give others the permission to change roles.
-				 (Also fulfilled)
-		\end{itemize}
-        \item User Class 3 - Supply Chain Member
-        \begin{itemize}
-            \item The members that have the permission to change roles shall be able to change other members roles, but not their own.
-        \end{itemize}
-    \end{itemize}
-	Chaincode
-    \begin{itemize}
-        \item User Class 1 - The System
-            \begin{itemize}
-			\item The system shall execute any chaincode that is called by any member of the blockchain who has permissions on the specific channel that this action is executed in.
-            \item The system should trigger some pre-programmed events
-            \end{itemize}
-        \item User Class 3 - Supply Chain Member
-            \begin{itemize}
-			\item The members shall have the ability to call upon existing contract code.
-			\item The members shall have the ability to write  and deploy their own contractual agreements on the blockchain (not sure if the deployment should be done by an admin or something). This can be used to implement SLAs, for instance, and eventually, it can be used with IoT, to track a product's state along its journey. Example: if a medicine pill was stored at the wrong temperature, the information would be sent to the blockchain, and the pharmaceutical company receiving it could immediately know something is wrong with it.
-			
-            \item Extra requirement: The members shall be able to hold a cryptocurrency, with a static equivalence to real money, so that they can transfer it in contracts, such as to enable payments, fines and be able to settle agreements. (benefit of not needing human decision to settle agreements; if it's on a contract, it is followed thoroughly, which also makes it faster, a benefit of blockchain which is mostly overlooked). Hyperledger Fabric does not, by default, support a cryptocurrency.
-            \end{itemize}
-    \end{itemize}
+	
 
 
 Permissions - Access control rules:
