@@ -7,7 +7,7 @@ This section specifies the requirements for the software that was built using Hy
 The structure for this specification will somewhat resemble the organization of IEEE 830-1998 requirements specification standard \ref{}, but in a simplified way, without some of the unneeded clutter and information. The specification is divided in the following way:
 \begin{enumerate}
 	\item Introduction - Product purpose, scope, overview and users;
-	\item Requirements - Specific requirements including functional requirements, non-functional or quality requirements, and design constraints.
+	\item Requirements - Specific requirements including functional requirements, non-functional or quality requirements, permission list and design constraints.
 \end{enumerate}
 
 \subsection{Introduction - Project Drivers}
@@ -35,15 +35,15 @@ The structure for this specification will somewhat resemble the organization of 
 	These are some examples of typical users of the Product:
 	\begin{itemize}
 		\item Supply Chain members - the employees from all types of companies will be the most common users, and they may register incoming and outgoing products on the blockchain (through their companies own integration module); distribution delivery employees may, for instance, register deliveries, etc.
-		\item Auditors - they will use the network to view information from the companies and make sure everything appears to be running correctly and without fraud.
+		\item Regulatory Entity - the auditors that will use the network to view information from the companies and make sure everything appears to be running correctly and without fraud.
 		\item System administrators - to control the network, help solve any issues that come up and do the needed maintenance.
 		\item Integration developers - the developers in charge of connecting their companies system to this system.
 	\end{itemize}
 	%TODO: check if the system actor is really needed
 	Each user shall have defined roles assigned within the system, according to their needs. These roles, along with the system itself, are the actors of the system:
 		\begin{itemize}
-			\item System
-			\item Auditor
+			\item System - Hyperledger Fabric and Composer have certain behaviours that can be adjusted, which makes it possible for the system itself to be an actor with specific requirements it shall be able to satisfy.
+			\item Regulatory Entity
 			\item Admin
 			\item Supply Chain Member
 			\begin{itemize}
@@ -58,147 +58,122 @@ The structure for this specification will somewhat resemble the organization of 
 	
 \subsection*{1. Functional  Requirements}
 
-		\par User Class 1 - The System 
+To simplify reading and to save space, the functional requirements list consists of a small explanation at the beggining, followed by each requirement, with the ID and description. Since Hyperledger Fabric and Composer are being used, the requirements have some terms specific to the software, such as asset registry, transaction registry, participants, etc.
+
+\todo{pedro: na secção state of the art do composer, pôr referencia da documentacao}
+		\par \textbf{The System}
+		 The system itself needs to be able to record aggregate all of the data into blocks; the data consists of transactions, which are the actions undertaken in the system, and there should be registries for the network participants and assets as well. It is important that the information from these transactions can be made visible and that they can be invoked by the participants which have the permissions to do so. At the same time, the system should be able to handle multiple organizations joining the ledger, inserting all of their current data to the system, as well as extracting it to their own systems when needed. 
+		
+		Identity management, consensus, access control, synchronization of information are all be concerns of the system and how it is programatically written. Some of these concerns are already partially supported by Hyperledger, but the remaining have to be implemented. In the end, the system used itself already has a lot of support for the elicited requirements from the survey.
 		\begin{itemize}
-			\item The system shall record a new transaction for each action which is intended to change the state of an asset (which actions is a topic to discuss - reporting that an item was sent, received, altered, lost, etc).
-			\item The system shall maintain an immutable list of the transactions that took place, in the form of blocks
-			\item The system shall allow for a large entry of many transactions, corresponding to the synchronization process of a company uploading their data. (send batch of transactions?)
-			\item The system shall assign each asset related transaction at least 1 asset and  at least 1 entity.
-			\item The system shall assign each transaction a timestamp.
-			\item The system shall have different channels to support separate sets of permissions, such that information is available to different groups of users, so that sensible information from a group of companies might be hidden from others.
-			\item The system shall be able to detect any mismatches in product characteristics or points of entry/exit, and notify the entities responsible for the product.
-			Example: Product was sent with destination Hong Kong. Product was then actually received in Kuala Lumpur. They check in the item, and the system detects the expected destination is different from the actual one.
-			\item The system shall record a new transaction for each action which is intended to change the state of an asset.
-			\item The system shall define different permissions for each role.
-				□ The system shall give access to a user for a certain action, if he has the permission.
-				□ The system shall restrict access to a user for a certain action, if he does not have the permission.
-			\item The system shall assign each user a role.
-			\item The system shall execute any chaincode that is called by any member of the blockchain who has permissions on the specific channel that this action is executed in.
-            \item The system should trigger some pre-programmed events
+			\item S1 - The system shall allow the execution of chaincode transactions.
+			\item S2 - The system shall record all user actions, including transactions, into a registry with the identification of the user and action performed. %including transactions which deal with for each action which is intended to change the state of an asset %(which actions is a topic to discuss - reporting that an item was sent, received, altered, lost, etc).
+			\item S3 - The system shall maintain an immutable list of all the past transactions, in the form of blocks.
+			\item S4 - The system shall allow for the submission of a transaction batch, with many transactions at once (possibly corresponding to the synchronization process of a company uploading their data, for instance).
+			\item S5 - The system shall assign each transaction a timestamp.
+			\item S6 - The system shall allow for the definition of multiple channels/sub-ledgers, to support separate sets of permissions and separate the information of different organizations.% in order for the information to be available to different groups of users ( so that sensible information from a group of companies might be hidden from others).
+			\item S7 - The system shall be able to emit notification events.
+			\item S8 - The system shall be programmed to be able to detect any mismatches that might constitute fraud: for instance, a product being received in a location different than the one where it was supposed to show up.
+			%Example: Product was sent with destination Hong Kong. Product was then actually received in Kuala Lumpur. They check in the item, and the system detects the expected destination is different from the actual one.
+			%\item S8 - The system shall record a new transaction for each action which is intended to change the state of an asset.
+			\item S9 - The system shall define different permissions for each role and for some specific identities, including permissions for invoking transactions and reading the data on the ledger.
+			\item S10 - The system shall be able to define different permissions for specific identities.
+				%□ The system shall give access to a user for a certain action, if he has the permission.
+				%□ The system shall restrict access to a user for a certain action, if he does not have the permission.
+			%\item S9 - The system shall assign each user a role.
+			\item S11 - The system shall be able to expose all of the actions that users can undertake in the form of a REST API.
+			
 		\end{itemize}
-        \par User Class 2 - Admin
-        \begin{itemize}
-			\item The admin shall be able to revert a fraudulent transaction (not sure if it is possible, investigate further) inserted with the wrong details or by someone without permissions, but access to the system.
-				□ Not revert the transaction: revert its effects, but manually; as it is not possible to access transactions in runtime/backend, it is very hard or even impossible to write code that, given a transaction, it automatically reverts it; if the transaction content were possible to be accessed, it'd be possible, but a revert function would have to be written for every single custom transaction possible;
-			\item The admin shall be able to create and delete new ledger channels.
-			\item The admin shall be able to create new network participants.
-			\item The admin shall be able to update the details of the participants, including their balance.
-				□ Ideally, a new standalone audited role should exist for this, and verified processes could make use of this role to update the balances;
-			\item The admin shall be able to deploy new assets;
-			\item The admin can update any details from the existing assets, according to the defined access control rules
-			\item The admin shall have the permission to change the roles of the other users.
-				(Revoke identity and issue a new one)
-			\item The admin shall have the permission to give others the permission to change roles.
-				 (Also fulfilled)
-		\end{itemize}
-		\par User Class 3 - Supply Chain Member
-        For this user, all of the following requirements are only doable in case the specific actor has the specific permissions, since these permissions might vary from company to company.
+        
+		\par \textbf{Supply Chain Member}
+        For the supply chain member users, all of the following requirements are only doable in case the specific actor has the specific permissions, as was mentioned in requirement \textbf{S9}. In this system, the supply chain members need to be able to manage their assets and shipments. All of the actions need to be recorded onto the immutable ledger, which means that any action happens by the invocation of a transactions. Therefore, the users can invoke transactions for pretty much every action they need to do: to create, edit, delete assets, interact with shipments, deploy contractual agreements, check the status of assets and shipments. All of these actions will ensure both the data management and information tracking and traceability aspects that were so popular in the survey. The financial aspect and enforceable contracts requirements are also included in these requirements.
         
 		\begin{itemize}
-			\item The members that have the permission to change roles shall be able to change other members roles, but not their own.
-			\item The members shall have the ability to call upon existing contract code.
-			\item The members shall have the ability to write  and deploy their own contractual agreements on the blockchain (not sure if the deployment should be done by an admin or something). This can be used to implement SLAs, for instance, and eventually, it can be used with IoT, to track a product's state along its journey. Example: if a medicine pill was stored at the wrong temperature, the information would be sent to the blockchain, and the pharmaceutical company receiving it could immediately know something is wrong with it.
-            \item Extra requirement: The members shall be able to hold a cryptocurrency, with a static equivalence to real money, so that they can transfer it in contracts, such as to enable payments, fines and be able to settle agreements. (benefit of not needing human decision to settle agreements; if it's on a contract, it is followed thoroughly, which also makes it faster, a benefit of blockchain which is mostly overlooked). Hyperledger Fabric does not, by default, support a cryptocurrency.
-			\item The members shall be able to query and obtain the steps through which a particular product has gone, effectively tracing the product from origin up to where it is at the moment of the query. --> Not possible on the current version of composer, only through a weird "hack" which messes up the possibility of receiving notifications
-			\item The members shall be able to query what is the current entity possessing an asset.
-				\par In the current model, na asset does not have a relation to the owner; the asset is part of a shipment, and the shipment has na owner; In code, it is possible to retrieve, but not in hyperledger's query language;
-				\par INSTEAD… BELOW
-            \item The members shall be able to query both "THE OWNER/HOLDER" and "THE ASSETS" involved in a specific shipment (giving the shipment ID) - Retrieve shipment info, owner info and assets info by Shipment ID.
-                \begin{itemize}
-				\item Loopback filter: "{"where": {"shipmentId":"resource:org.logistics.testnet.ShipmentBatch\#001"}, "include":"resolve"}" 
-				\item  Not sure how access control is applied to this so that the specific owner, holder and buyer can see it
-                \item  SEE LINE ABOVE AS A LIMITATION 
-                \end{itemize}
-            \item The members shall be able to query the shipments and assets of a specific participant (giving the participant ID). - Retrieve shipment info, owner info and assets info by Participant(owner) ID
-            \begin{itemize}
-            \item  Use Loopback filter: "{"where": {"owner":"resource:org.logistics.testnet.Supplier\#0805"}, "include":"resolve"}"  
-            \item  "include":"resolve" is essential
-            \end{itemize}
-            \item The members shall be able to query the entity that possesses a specific asset (new) - Retrieve asset and owner info by Participant (owner) ID
-            \begin{itemize}
-				 \item LOOPBACK filter doesnt work here: composer doesn't have the "inq" filter which is kind of like a "CONTAINS" to check if an array has a certain object
-                 Have to change the model to adapt to this, and assets now possess the owner as a data field
-            \end{itemize}
-			\item The members can check shipment status, location and item status of the shipments they are a buyer of contractually - Retrieve shipment information (including assets) by giving the buyer ID --->  "{"where": {"contract.buyer":"resource:org.logistics.testnet.Customer\#8774"}, "include":"resolve"}"  
-			\item The members can check the damaged goods transactions for the goods they own;
-			\item The members shall be able to input into the system any alteration to the product: transformation, damage reports, upgrades.
-			\item The members shall be able to input into the system the arrival or departure of a product.
-			\item The members shall be able to transform a product into a new one.
-			\item The members shall be able to divide products into multiple more products.
-			\item The members shall be able to join multiple products into new ones.
-			\item The members shall be able to change companies (IMPORTANT - should this be here?)
-			\item ORDER TRACKING
-			\item INPUT XLM FILE THAT IS GS1 VALID (VALIDATOR FROM ORIGINTRAIL COULD BE USED)
+			\item SCM2 - The members shall have the ability to invoke transactions.
+			\item SCM2 - The members shall have the ability to read the information of assets, other people and transactions, according to their permissions.
+			\item SCM3 - The members shall have the ability to write and deploy their own contractual agreements on the blockchain. % (not sure if the deployment should be done by an admin or something). This can be used to implement SLAs, for instance, and eventually, it can be used with IoT, to track a product's state along its journey. Example: if a medicine pill was stored at the wrong temperature, the information would be sent to the blockchain, and the pharmaceutical company receiving it could immediately know something is wrong with it.
+        
+			\item SCM4 - The members shall be able to query and obtain the steps through which a particular product has gone, effectively tracing the product from origin up to where it is at the moment of the query.%--> Not possible on the current version of composer, only through a weird "hack" which messes up the possibility of receiving notifications
+			\item SCM5 - The members shall be able to query what is the current entity possessing an asset.
+				%\par In the current model, na asset does not have a relation to the owner; the asset is part of a shipment, and the shipment has na owner; In code, it is possible to retrieve, but not in hyperledger's query language;
+				%\par INSTEAD… BELOW
+
+			\item SCM6 - The members shall be able to create assets.
+			\item SCM7 - The members shall be able to edit or delete the assets they own.
+			\item SCM8 - The members shall be able to create shipments with the assets they own.
+			\item SCM9 - The members shall be able to attach contracts to their shipments.
+            \item SCM10 - The members shall be able to query all the information of a specific shipment, including the owner, holder and assets involved in the shipment. % (giving the shipment ID) - Retrieve shipment info, owner info and assets info by Shipment ID.
+                %\begin{itemize}
+				%\item Loopback filter: "{"where": {"shipmentId":"resource:org.logistics.testnet.ShipmentBatch\#001"}, "include":"resolve"}" 
+				%\item  Not sure how access control is applied to this so that the specific owner, holder and buyer can see it
+                %\item  SEE LINE ABOVE AS A LIMITATION 
+                %\end{itemize}
+            \item SCM11 - The members shall be able to query the shipments owned by a specific user. % (giving the participant ID). - Retrieve shipment info, owner info and assets info by Participant(owner) ID
+            %\begin{itemize}
+            %\item  Use Loopback filter: "{"where": {"owner":"resource:org.logistics.testnet.Supplier\#0805"}, "include":"resolve"}"  
+            %\item  "include":"resolve" is essential
+            %\end{itemize}
+            \item SCM12 - The members shall be able to query the user that possesses a specific asset, if they have the permission to do so. % (new) - Retrieve asset and owner info by Participant (owner) ID
+            %\begin{itemize}
+				 %\item LOOPBACK filter doesnt work here: composer doesn't have the "inq" filter which is kind of like a "CONTAINS" to check if an array has a certain object
+                % Have to change the model to adapt to this, and assets now possess the owner as a data field
+            %\end{itemize}
+			\item SCM13 - The members can check a shipment status, location and the status of all the item status included in the shipment, given that they are either the buyer, seller or current holder of the shipment. %s they are a buyer of contractually - Retrieve shipment information (including assets) by giving the buyer ID --->  "{"where": {"contract.buyer":"resource:org.logistics.testnet.Customer\#8774"}, "include":"resolve"}"  
+			\item SCM14 - The members shall be able to submit item damage reports into the system for the assets in the shipments that they hold;
+			\item SCM15 - The members shall be able to update the shipments, along with the status, for the shipments they hold.
+			\item SCM16 - The members shall be able to edit their identity;% (IMPORTANT - should this be here?)
+			\item SCM17 - The members shall be able to input an XML file with a standardized format in order to submit data automatically;
+			\item SCM18 - The members shall be able to hold a cryptocurrency, in the form of a balance, with a static equivalence to real money, so that they can transfer it in contracts, in order to enable payments, fines and to settle contractual agreements. %(benefit of not needing human decision to settle agreements; if it's on a contract, it is followed thoroughly, which also makes it faster, a benefit of blockchain which is mostly overlooked). Hyperledger Fabric does not, by default, support a cryptocurrency.
         \end{itemize}
 
-        \par User Class 4 - Regulatory Entity
+		\par \textbf{Regulatory Entity}
+		
+		The auditor is a role essential to manual fraud detection, as well as to ensure that the system is working well and as intended. As such, the auditor needs to be able to have full read access to the system.
+
         \begin{itemize}
-			\item The regulatory entity shall be able to query and obtain the steps through which a particular product has gone, effectively tracing the product from origin up to where it is at the moment of the query.  Impossible atm :(
-			\item  The regulatory entity shall be able to query the transactions of a certain company. Possible :)
+			\item RE1 - The regulatory entity shall be able to query and obtain the steps through which a particular product has gone, effectively tracing the product from origin up to where it is at the moment of the query.  %Impossible atm :(
+			\item RE2 - The regulatory entity shall be able to query all the transactions, participants and assets in the system. %Possible :)
         \end{itemize}
 		
-	
-
-
-Permissions - Access control rules:
-\begin{itemize}
-    \item Transactions
-        \begin{itemize}
-		\item CreateShipmentAndContract - Anyone (but a customer?) can call this to have a shipment and a contract made;
-		\item ReportDamagedGood - Only the holder of a commodity shall be able to submit a damage report for that commodity
-		\item TemperatureReading - Only the holder of a commodity shall be able to submit a temperature reading for that commodity (how to do it in case of IoT? -> Prepare the device with the needed business cards)
-		\item TransferCommodityPossession - Only the owner of a commodity shall be able to transfer the ownership. This commodity can not be part of a shipment at the moment of the transferrence. 
-		\item TransformCommodities - Only the owner of the commodities shall be able to transform them, and he may specify a new owner if he so desires (risky choice, maybe); All transformed commodities in a transaction must have the same owner; (I can comment 1 single line to make this transaction not change owner)
-		\item UpdateShipment - Only the holder of a shipment may be able to update its details
-		\item UpdateCommodity - Only the owner of a commodity can update it with this transaction
-		\item DeleteCommodity - Only the owner of a commodity can delete it
+		\par \textbf{Admin}
+		
+		The admin is an essential part of the ecossystem that the blockchain will support. Any node maintenance, any problem, will have to be solved by an admin. The admin is also the entry point for users to join the network, as well as an authority that can help fight fraud and make the system more secure and controlled. The identity management mechanisms, which include authentication and authorization are managed by the admin, making the admin an essential user for the enforcement of the elicited requirements.
+		
+		\begin{itemize}
+			\item A1 - The admin shall be able to revert the effects of certains transactions, by submitting a transaction that has the opposite effect of a given transaction. % (not sure if it is possible, investigate further) inserted with the wrong details or by someone without permissions, but access to the system.
+				%□ Not revert the transaction: revert its effects, but manually; as it is not possible to access transactions in runtime/backend, it is very hard or even impossible to write code that, given a transaction, it automatically reverts it; if the transaction content were possible to be accessed, it'd be possible, but a revert function would have to be written for every single custom transaction possible;
+			\item A2 - The admin shall be able to create and delete new ledger channels.
+			\item A3 - The admin shall be able to create a network identity card for a user.
+			\item A4 - The admin shall be able to assign a user's network identity card to an instance of a virtual participant of the network. E.g.John's card ca be associated to the network participant Auditor\#21.
+			\item A5 - The admin shall be able to update the details of the participants, including their initial balance.
+				% Ideally, a new standalone audited role should exist for this, and verified processes could make use of this role to update the balances;
+			\item A6 - The admin shall be able to create, edit or delete assets;
+			\item A7 - The admin shall be able to submit any transaction;
+			\item A8 - The admin shall have the permission to change the roles of the other users.
+				%(Revoke identity and issue a new one)
+			\item A9 - The admin shall have the permission to give others the permission to change roles.
+				 %(Also fulfilled)
 		\end{itemize}
-    \item Assets
-        \begin{itemize}
-        \item Commodity
-            \begin{itemize}
-			\item Create - Any supply chain member can create commodities, as well as admins; auditors can not;
-			\item Read - A supply chain member can only read the commodities it owns or holds; Auditors and admins can read any commodity;
-			\item Update - A supply chain member can directly update the commodities it owns; admins can update any commodity;
-            \item Delete - Only the admin can delete commodities through this function;
-            \end{itemize}
-        \item OrderContract
-            \begin{itemize}
-			\item Create - No one but admin can create
-			\item Read - The buyer and the seller can read it; the admin and the auditor can as well
-			\item Update - Only the admin can update the contract;
-            \item Delete - Only the admin can delete a contract;
-            \end{itemize}
-        \item ShipmentBatch
-            \begin{itemize}
-			\item Create - Only the admin can create a shipmentbatch
-			\item Read - Only the owner, holder and contract buyer can read the shipment; The admin and auditor can as well;
-			\item Update - Only the admin can update the shipment;
-            \item Delete - Only the admin can delete the shipment;
-            \end{itemize}
-        \end{itemize}
-    \item Participants
-        \begin{itemize}
-        \item Supply Members
-            \begin{itemize}
-			\item No one but admin has permissions to Create, delete or update
-            \item Auditor can read any participant; participants can read their own details
-            \end{itemize}
-        \item Auditor
-            \begin{itemize}
-			\item Auditor can read own details; 
-            \item no one but admin can create, delete or update auditors;
-            \end{itemize}
-        \end{itemize}
-\end{itemize}	
+
+These requirements were written having in mind the architecture of the Hyperledger projects, as well as the needs of a supply chain. They are also loosely written because they are iterated on during the implementation phase of the proof-of-concept.
+
+%TODO: talk about the data standardization as well as about the need for interoperability.
 
 \subsection*{2. Data Requirements}
-	1. Data Requirements
-		\par The data is divided into Master Data and Transactional Data
-		\par The Master Data relates to Products/Assets and Entities, being more generalist and fixed, for those pairs;
-		\par The Transactional Data relates to the movement of assets through the supply chain, including shipment information, product batch, etc;
-		\par For the specific data formats: https://wiki.hyperledger.org/\_media/groups/requirements/hyperledger\_-\_supply\_chain\_traceability-\_anti\_counterfeiting.pdf
-		\par TODO: Build diagrams for the data classes/entities (only with better knowledge of Hyperledger architecture programming wise)
+
+Another important part of the requirements which is not in itself an action undertaken by the users, is the form in which the data is formatted. One of the main objectives of building a blockchain system transversal to a whole supply chain, is to make the data as standardized as possible, so that any organization can easily import or export the data from the ledger to their systems and still have it in formats that any organization's system can understand. 
+
+As such, research was undertaken, and the following data requirements were built, based on the standards from the GS1 organization, an organization which builds global supply chain standards.
+
+\begin{itemize}
+	\item The data is divided into Master Data and Transactional Data.
+	\item The Master Data relates to Products/Assets and Entities, being more generalist and fixed, for those pairs. It includes the location number (for the location), the entities name, country and address data, as well as the asset's weight, name, identification number (GTIN).
+	\item The Transactional Data relates to the movement of assets through the supply chain, in the form of transactions. It includes the "when" part of the transactions, such as the planned date, expected dates and actual dates of a shipment, for instance.
+	\item \par For the specific data formats: https://wiki.hyperledger.org/\_media/groups/requirements/hyperledger\_-\_supply\_chain\_traceability-\_anti\_counterfeiting.pdf
+\end{itemize}
+		\todo{pedro: put the link as a reference}
+
+In a real system, all these data requirements would have to be implemented in a perfect way, with all the parameters, but this project, only being a proof-of-concept will use the minimum number of data fields deemed necessary for the implementation and basic functionalities of the system.
 		
 		
 
@@ -206,8 +181,6 @@ Permissions - Access control rules:
 
 Overall, the product should follow these parameters:
 \begin{enumerate}
-	\item Look and feel 
-		\par N/A \todo{fcorreia: nem incluiria este ponto...}
     \item  Usability
 		\par The available product, corresponding APIs  and documentation should be clear enough to allow for the developers to perform the implementation of an oracle, which is a piece of software that connects the blockchain to another external product, serving as a means of pulling and pushing information from and to the blockchain and from and to the external system (ERP, for instance).
     \item  Performance
@@ -220,11 +193,14 @@ Overall, the product should follow these parameters:
 		\par Creating new nodes or moving an existing one should be an easy process, without much complication, other than starting the node software on the environment, and closing an existing one, if needed.
     \item  Security
 		\par Privacy: The system must ensure appropriate visibility of transactions and products, which might be privacy sensitive; sharing some data would pose a threat or could possibly have negative effects for some of the companies; otherwise, transactions should also be secure, authenticated and verifiable;
-		\par Immutability: No one (but the admin) can make changes to the contents of the ledger; \todo{fcorreia: numa blockchain, nem mesmo um admin o pode fazer, certo?}
-    \item  Legal
+		\par Immutability: No one can make changes to the contents of the ledger;
+	\item  Legal
+		\par The ledger might be subject to verification from competent legal authorities or auditors, and it must also comply with certain laws, such as the european global data protection regulations (GDPR);
 		\par "Traceability and its relation to the law (e.g., regulatory law, international law etc.) has a profound effect upon many products. In the case of diamonds, conflict minerals or rare earth derived material several international agreements and global law governing these items. Ensuing traceability of these products can literally mean the difference between supporting terrorist groups or supporting those who need good jobs to provide for their family. "
-		\par The ledger might be subject to verification from competent legal authorities or auditors;
+		
 \end{enumerate}
+
+\todo{pedro: será que devia mesmo representar os nos e a sua distribuiçao?}
 
 \subsection*{4. Mandated Constraints}
     \begin{itemize}
@@ -235,9 +211,10 @@ Overall, the product should follow these parameters:
 		\item The product shall have well defined APIs that allow for incoming and outgoing data to circulate between the ledger and external systems, namely ERPs.
 		\item Any software frameworks used will be open source. This project will use Hyperledger Fabric and Hyperledger Composer.
 		\item A company/trading partner wishing to join the supply chain's blockchain ledger must comply with the GS1 standards, namely by having a globally recognized identification (GS1 Company Prefix) and the company's locations must also be globally and uniquely identified.
-		\item TODO: Should I allow companies without the GS1 prefix for themselves and for their locations/warehouses/etc? 
+		%\item TODO: Should I allow companies without the GS1 prefix for themselves and for their locations/warehouses/etc? 
         \end{itemize}
         
+\todo{pedro:decidir se deixo aqui os project issues ou se mudo de sitio}
 
 \subsection*{Project Issues}
 \begin{enumerate}
@@ -265,8 +242,8 @@ Overall, the product should follow these parameters:
     \item Costs
 		\par Maintaining the blockchain running requires little to no cost, as only a few dozen nodes might be needed at most, depending on the scale, and each of them might be operated by different companies.
 		\par The development itself and testing might run into cost troubles in the aspects that require the simulation to be faithful to reality, such has having lots of servers distributed geographically running at the same time (requiring expensive services like AWS).
-    \item User Documentation
-		\par N/A
+   % \item User Documentation
+	%	\par N/A
     \item Waiting Room Future Requirements/Could be done: Financial aspect/Including loans and insurance
 
 \end{enumerate}

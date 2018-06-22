@@ -1,11 +1,68 @@
 \section{Design and Implementation}
 \subsection{Model Design - Composer Business Network}
+
+%Explain that a deployed business network is a ledger that works for a group of companies that wants to form a blockchain for their own supply chain; the network is only as global or as specific as they want it. The designed network here is intended to work for any number of companies 
+
 \begin{itemize}
 \item Business Network Model - Mention how the .cto file was designed, listing all the classes, participants, transaction types and event types, and why it was decided they were necessary. Include class diagram, if needed, and coding decisions.
 \item Business Network Deployment - Explain how it works in the background through fabric, the nodes, the consensus and the option do define endorsement policy (which was the default as per this design, since no requirements were elicited that required otherwise); Include deployment (physical) diagram and explain the decisions made.
 \item Identity management - Creating identities, associating them to the participants, etc. (MAYBE THIS IS BETTER OFF IN THE BACKGROUND/STATE OF THE ART SECTION ABOUT COMPOSER)
 \item Tutorial/Show-off the functionalities of some kind? Include this on the 1st point?
 \end{itemize}
+
+
+
+Permissions - Access control rules:
+\begin{itemize}
+    \item Transactions
+        \begin{itemize}
+		\item CreateShipmentAndContract - Anyone (but a customer?) can call this to have a shipment and a contract made;
+		\item ReportDamagedGood - Only the holder of a commodity shall be able to submit a damage report for that commodity
+		\item TemperatureReading - Only the holder of a commodity shall be able to submit a temperature reading for that commodity (how to do it in case of IoT? -> Prepare the device with the needed business cards)
+		\item TransferCommodityPossession - Only the owner of a commodity shall be able to transfer the ownership. This commodity can not be part of a shipment at the moment of the transferrence. 
+		\item TransformCommodities - Only the owner of the commodities shall be able to transform them, and he may specify a new owner if he so desires (risky choice, maybe); All transformed commodities in a transaction must have the same owner; (I can comment 1 single line to make this transaction not change owner)
+		\item UpdateShipment - Only the holder of a shipment may be able to update its details
+		\item UpdateCommodity - Only the owner of a commodity can update it with this transaction
+		\item DeleteCommodity - Only the owner of a commodity can delete it
+		\end{itemize}
+    \item Assets
+        \begin{itemize}
+        \item Commodity
+            \begin{itemize}
+			\item Create - Any supply chain member can create commodities, as well as admins; auditors can not;
+			\item Read - A supply chain member can only read the commodities it owns or holds; Auditors and admins can read any commodity;
+			\item Update - A supply chain member can directly update the commodities it owns; admins can update any commodity;
+            \item Delete - Only the admin can delete commodities through this function;
+            \end{itemize}
+        \item OrderContract
+            \begin{itemize}
+			\item Create - No one but admin can create
+			\item Read - The buyer and the seller can read it; the admin and the auditor can as well
+			\item Update - Only the admin can update the contract;
+            \item Delete - Only the admin can delete a contract;
+            \end{itemize}
+        \item ShipmentBatch
+            \begin{itemize}
+			\item Create - Only the admin can create a shipmentbatch
+			\item Read - Only the owner, holder and contract buyer can read the shipment; The admin and auditor can as well;
+			\item Update - Only the admin can update the shipment;
+            \item Delete - Only the admin can delete the shipment;
+            \end{itemize}
+        \end{itemize}
+    \item Participants
+        \begin{itemize}
+        \item Supply Members
+            \begin{itemize}
+			\item No one but admin has permissions to Create, delete or update
+            \item Auditor can read any participant; participants can read their own details
+            \end{itemize}
+        \item Auditor
+            \begin{itemize}
+			\item Auditor can read own details; 
+            \item no one but admin can create, delete or update auditors;
+            \end{itemize}
+        \end{itemize}
+\end{itemize}	
 
 \todo{fcorreia: incluir aqui o modelo de entidades de domínio?}
 
