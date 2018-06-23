@@ -89,7 +89,7 @@ To simplify reading and to save space, the functional requirements list consists
         For the supply chain member users, all of the following requirements are only doable in case the specific actor has the specific permissions, as was mentioned in requirement \textbf{S9}. In this system, the supply chain members need to be able to manage their assets and shipments. All of the actions need to be recorded onto the immutable ledger, which means that any action happens by the invocation of a transactions. Therefore, the users can invoke transactions for pretty much every action they need to do: to create, edit, delete assets, interact with shipments, deploy contractual agreements, check the status of assets and shipments. All of these actions will ensure both the data management and information tracking and traceability aspects that were so popular in the survey. The financial aspect and enforceable contracts requirements are also included in these requirements.
         
 		\begin{itemize}
-			\item SCM2 - The members shall have the ability to invoke transactions.
+			\item SCM1 - The members shall have the ability to invoke transactions.
 			\item SCM2 - The members shall have the ability to read the information of assets, other people and transactions, according to their permissions.
 			\item SCM3 - The members shall have the ability to write and deploy their own contractual agreements on the blockchain. % (not sure if the deployment should be done by an admin or something). This can be used to implement SLAs, for instance, and eventually, it can be used with IoT, to track a product's state along its journey. Example: if a medicine pill was stored at the wrong temperature, the information would be sent to the blockchain, and the pharmaceutical company receiving it could immediately know something is wrong with it.
         
@@ -237,7 +237,7 @@ Overall, the product should follow these parameters:
 		
     \item Risks
 		\par "A multitude of trust issues could stem from external data when the Blockchain is functioning as expected. Even simple provenance issues such as inaccurate time stamps or improperly geotagging of products have the possibility of causing a catastrophic event (e.g., customers dying or taking ill from listeria that has found its way to your company's’ spinach or an F-35 crashing due to counterfeit microchips). In this concept, the Digital Identity of the data provider outside the Blockchain environment can be made known which can be trusted to ensure the data provider has been identified in the event issues arise with the data. Again, there is no provenance, accuracy or other DLT mechanism to ensure valid data has been introduced to the system from an external source. A Data Oracle can be one example of an invalid external source where this risk would need to be identified and mitigated."
-		\par TODO: be more specific
+		\todo{pedro: mudar a quote}
 		
     \item Costs
 		\par Maintaining the blockchain running requires little to no cost, as only a few dozen nodes might be needed at most, depending on the scale, and each of them might be operated by different companies.
