@@ -80,7 +80,7 @@ query getCommodityOwner {
   description: "Get the owner of a commodity"
   statement:
       SELECT org.logistics.testnet.Commodity
-          WHERE (owner == _$owner)
+          WHERE (GTIN == _$GTIN)
 }
 
 query getShipmentWhereCommodityExists{
