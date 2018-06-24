@@ -230,15 +230,54 @@ Additionally, some transaction invocations would be more secure if they could ha
 
 
 \subsection{Network Topology and Deployment}
-\todo{fcorreia: incluir aqui o modelo de entidades de domínio?}
+
+Composer also features network topology design, which includes choosing the organizations running the network, how many nodes each organization hosts and what types of nodes and the endorsement policy. This is especially useful to quantitatively test the efficiency metrics and scaling of the system, depending on the topological setup. Such measurements are important to compare this system with other possible architectures.
+
+However, the scope of this project covers mostly the qualitative and functional part of building the network, with the aim of finding out if the requirements can successfully be implemented and work as intended, independently of how the network scales and independently of how other architectures behave. Especially in the case of Hyperledger Composer, the implementation so far works, either with just 1 node,nd, even though there was no implementation of a big topological network of nodes, some speculation or with a small number of them. 
+
+With that in mi and thought were given as to how a proper network should look like. Figure \ref{fig:fabric_topology}, taken from the Fabric documentation, exemplifies how a small supply chain topology would be organized.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.50]{media/fabric_topology.png}
+    \caption[Example fabric topology for 3 organizations.]{Example fabric topology for 3 organizations.}
+    \label{fig:fabric_topology}
+\end{figure}
+
+\todo{Corrigir isto melhor, corrigir localizaçao da figura e por uma referencia na figura. http://hyperledger-fabric.readthedocs.io/en/release-1.1/peers/peers.html}
+
 
 %Mention the file for consensus, the file for node topology and for endorsement.
 %Deployment diagram explaining how a full network would work.
 
-Business Network Deployment - Explain how it works in the background through fabric, the nodes, the consensus and the option do define endorsement policy (which was the default as per this design, since no requirements were elicited that required otherwise); Include deployment (physical) diagram and explain the decisions made.
+%Business Network Deployment - Explain how it works in the background through fabric, the nodes, the consensus and the option do define endorsement policy (which was the default as per this design, since no requirements were elicited that required otherwise); Include deployment (physical) diagram and explain the decisions made.
 
 \subsection{Integrating Existing Systems and Building External Applications}
 
-%Briefly mention the API
+The synchronization requirements were another strong focus points, an issue that deals a lot with building points of access for several external applications to use while importing, exporting data and interacting with the blockchain.
 
-\todo{fcorreia: nalgum lado (aqui?) fazer considerações sobre o contexto arquitetural em que esta blockchain poderia funcionar. Há outros sistemas que interligariam com a blockchain? quais? qual é a "fonte de verdade" da inforação, é a própria blockchain ou são outros sistemas (e a blockchain é só uma forma de integrar os vários sistemas com alguns atributos que pretendemos)?}
+\subsubsection*{Architectural Context Considerations}
+
+An important task of architectural design is identifying where blockchain is in the middle of everything. It was already laid out that it can be used by other applications as the source of truth. \textbf{Architecturally, this may mean that blockchain might be used as the lowest layer} of a network, and that it can even be the support for more than 1 network. 
+
+All the other data layers would get the information from the blockchain, and inject their information to the blockchain, when needed. The upper layers could organize and treat information however they want, as long as they could retrieve it securely. This way, it would even be possible to make up for the shortcomings of the query language of Composer, by retrieving the Blockchain data to a higher level layer application and have that application organize the data in a way that would make it more accessible. Of course, building these upper layers is all up to the developers of each company and application that wants to interact with the blockchain. 
+
+Figure \ref{fig:architectural_diagram} shows an idealization of what such an architectural layer design would look like. From oracles extracting and inserting big chunks of data periodically, to applications using the blockchain directly as their data storage source, the possibilities for the layers above the blockchain network are many, and not even limited to what can be seen in the figure.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.40]{media/architectural_diagram.png}
+    \caption[Architectural layer representation of Blockchain Integration with other systems.]{Architectural layer representation of Blockchain Integration with other systems.}
+    \label{fig:architectural_diagram}
+\end{figure}
+
+\textbf{The integration part of this project deals with defining secure and authenticated points of access for the upper layers to have access to.}
+
+\subsubsection*{REST Server API and Authentication}
+Composer already features a ready-to-start API server, which includes all the transaction invocations, queries and CRUD operations. Authentication, using identity card files, is also included in the REST server's functionalities.
+
+It is also possible to write a custom REST server for composer, using Angular applications, but the default server has the necessary features.
+
+\subsubsection*{Node-RED Integration}
+Node-RED is useful to connect the blockchain to an IoT network of devices, especially in case we want to achieve traceability of product conditions or quickly scan products. It can also be used to subscribe to network events.
+\todo{pedro: more node-red stuff? or not really?}
