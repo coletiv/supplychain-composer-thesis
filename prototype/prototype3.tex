@@ -150,62 +150,83 @@ Another problem that this can bring, other than having the trouble of changing t
 \subsection{Composer Business Network - Identity Management and Access Control}
 
 Creating a model design for the network with all the previously explained items grants the needed basic functionalities for the system to work, but it misses one of the most important aspects from the requirements: \textbf{the security and access control}.
+
+\todo{pedro: explicar melhor identity management no background do composer}
+As previously explained in section \ref{sec:composer-background}, Composer features the concept of Participant, a network instance of the class that represents a user, but it also features identity cards, which are files that function as the private key and identification card for a real person. An identity card and an instance of a participant can be linked to each other.
+
+The control rules are written to reflect what actions are allowed to certain participant class types, to specific participant instances, and even to specific identity cards. 
+
+%There are 2 ways to \textbf{manage access control in the Composer framework:}
+%\begin{itemize}
+ %   \item Access Control File - 
+  %  \item Programmatic Control in the Transaction Scripts - 
+%\end{itemize} focus o
 %Identity management - Creating identities, associating them to the participants, etc. (MAYBE THIS IS BETTER OFF IN THE BACKGROUND/STATE OF THE ART SECTION ABOUT COMPOSER)
 
+A set of access control rules was designed with the requirements in mind, so that only certain people can access certain sensible pieces of information, and so that not everyone can manage other people's data. 
 
-Permissions - Access control rules:
-\begin{itemize}
-    \item Transactions
+ All of these rules were implemented in a mixture of two methods. The first is by using the access control composer language and \textit{.acl} file. The second is to program the transactional scripts to check the identity and data of the person invoking the transaction and then throw errors if the invoker should not have access.
+
+ \textbf{The designed permissions are sectioned by items}, namely the \textbf{transactional data and invocations}, the \textbf{asset data and its CRUD actions} and the \textbf{participant data and its CRUD actions}. The following list features a series of these items, with their name, action and access control rule. The admin identity card is has full access, so it will be mostly ommited from these rules.
+
+\textbf{Permissions and access control rules:}
+\par
+\par \textbf{Transactions - Invoke}
         \begin{itemize}
-		\item CreateShipmentAndContract - Anyone (but a customer?) can call this to have a shipment and a contract made;
-		\item ReportDamagedGood - Only the holder of a commodity shall be able to submit a damage report for that commodity
-		\item TemperatureReading - Only the holder of a commodity shall be able to submit a temperature reading for that commodity (how to do it in case of IoT? -> Prepare the device with the needed business cards)
-		\item TransferCommodityPossession - Only the owner of a commodity shall be able to transfer the ownership. This commodity can not be part of a shipment at the moment of the transferrence. 
-		\item TransformCommodities - Only the owner of the commodities shall be able to transform them, and he may specify a new owner if he so desires (risky choice, maybe); All transformed commodities in a transaction must have the same owner; (I can comment 1 single line to make this transaction not change owner)
-		\item UpdateShipment - Only the holder of a shipment may be able to update its details
-		\item UpdateCommodity - Only the owner of a commodity can update it with this transaction
-		\item DeleteCommodity - Only the owner of a commodity can delete it
+		\item CreateShipmentAndContract - Allowed for every participant and identity, excluding the \textbf{customer} participant types;
+		\item ReportDamagedGood - Allowed only for the holder of a shipment with the specified commodity;
+		\item TemperatureReading - Allowed only for the holder of the shipment with the temperature being read; %-> Prepare the device with the needed business cards)
+		\item TransferCommodityPossession - Allowed only for the owner of the commodity.% This commodity can not be part of a shipment at the moment of the transferrence. 
+		\item TransformCommodities - Allowed only for the owner of all the commodities that are input arguments. %Therefore, all transformed commodities in a transaction must have the same owner;%, and he may specify a new owner if he so desires % (I can comment 1 single line to make this transaction not change owner)
+		\item UpdateShipment - Allowed only for the holder of a shipment;
+		\item UpdateCommodity - Allowed only for the owner of a commodity;
+		\item DeleteCommodity - Allowed only for the owner of a commodity;
 		\end{itemize}
-    \item Assets
+    \par \textbf{Assets}
         \begin{itemize}
         \item Commodity
             \begin{itemize}
-			\item Create - Any supply chain member can create commodities, as well as admins; auditors can not;
-			\item Read - A supply chain member can only read the commodities it owns or holds; Auditors and admins can read any commodity;
-			\item Update - A supply chain member can directly update the commodities it owns; admins can update any commodity;
-            \item Delete - Only the admin can delete commodities through this function;
+			\item Create - Allowed for supply chain member participant type;
+			\item Read - Allowed for supply chain member participant type who owns the commodity being read; allowed for the auditor participant type;
+			\item Update - Allowed for supply chain member participant type who owns the commodity being Updated;
+            \item Delete - Admin only;
             \end{itemize}
         \item OrderContract
             \begin{itemize}
-			\item Create - No one but admin can create
-			\item Read - The buyer and the seller can read it; the admin and the auditor can as well
-			\item Update - Only the admin can update the contract;
-            \item Delete - Only the admin can delete a contract;
+			\item Create, Update, Delete - Admin only;
+			\item Read - Allowed for the buyer and seller of the contract; allowed for the auditor participant type;
             \end{itemize}
         \item ShipmentBatch
             \begin{itemize}
-			\item Create - Only the admin can create a shipmentbatch
-			\item Read - Only the owner, holder and contract buyer can read the shipment; The admin and auditor can as well;
-			\item Update - Only the admin can update the shipment;
-            \item Delete - Only the admin can delete the shipment;
+			\item Create, Update, Delete - Admin only;
+			\item Read - Allowed for the owner and holder of a shipment, as well as the buyer in the shipment's contract; allowed for the auditor participant type;
             \end{itemize}
         \end{itemize}
-    \item Participants
+    \par \textbf{Participants}
         \begin{itemize}
         \item Supply Members
             \begin{itemize}
-			\item No one but admin has permissions to Create, delete or update
-            \item Auditor can read any participant; participants can read their own details
+			\item Create, Update, Delete - Admin only;
+            \item Read - Allowed for the auditor participant type; allowed for a participant's own details;
             \end{itemize}
         \item Auditor
             \begin{itemize}
-			\item Auditor can read own details; 
-            \item no one but admin can create, delete or update auditors;
+            \item Create, Update, Delete - Admin only;
+			\item Read - Auditor can read own details; 
             \end{itemize}
         \end{itemize}
-\end{itemize}	
 
- % talk about lack of control for multisig? important for when 2 ppl should approve a transaction between them
+So, these rules reflect some basic facts. Auditors can read anything in the network, while admins can read, update, delete, create or invoke anything. The common users are subject to reading only details from themselves and the assets they are associated to in some way (buyer, owner, holder, etc). In the same way, they are also limited on the transactions they can invoke based on these associations. 
+
+Finally, the CRUD actions that the supply chain members can execute for the assets and participants are also pretty limited, in order to \textbf{maintain system integrity}. This was essential since Composer does not, by default, make some essential integrity checks on the CRUD actions. For instance, when updating an asset's reference to another asset, Composer does not verify if the new reference actually points to an existing instance of an object, which is the reason for why some custom transactions were designed, such as \textit{UpdateCommodity}.
+
+Though all of these access rules were designed, not all were implemented in time, but the ones that were implemented were tested and worked flawlessly.
+
+\subsubsection*{Conclusions and Security Concerns }
+
+In an ending note, identity management is a complex thing in the Composer framework, not only because of the rule design, but also because of how it can be bypassed by \textbf{human error and social engineering}. Nothing, but the immutability of the ledger records, is granted, especially when there is an admin that can control the system.
+
+Additionally, some transaction invocations would be more secure if they could have a multiple signature from many parties. One such transaction could be the \textit{UpdateShipment} transaction. when an item is being delivered to its buyer, it should be made sure that the transaction was acknowledged by both parties, so that the payment could be confirmed securely. \textbf{Such a thing is not yet permitted by this framework and constitutes a grave security fault, therefore not satisfying the security requirements completely}.
 
 
 \subsection{Network Topology and Deployment}
