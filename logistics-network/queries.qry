@@ -1,0 +1,95 @@
+
+query selectShipmentByID {
+  description: "Select all shipments based on their ID"
+  statement:
+      SELECT org.logistics.testnet.ShipmentBatch
+          WHERE (shipmentId == _$shipmentId)
+}
+
+query selectShipmentByOwner {
+  description: "Select all shipments based on their Owner"
+  statement:
+      SELECT org.logistics.testnet.ShipmentBatch
+          WHERE (owner == _$owner)
+}
+
+query selectShipmentByHolder {
+  description: "Select all shipments based on their Holder"
+  statement:
+      SELECT org.logistics.testnet.ShipmentBatch
+          WHERE (holder == _$holder)
+}
+
+query selectShipmentByCountry {
+  description: "Select all shipments based on their Holder"
+  statement:
+      SELECT org.logistics.testnet.ShipmentBatch
+          WHERE (location.address.country == _$country)
+}
+
+query selectShipmentByTrackingcode {
+  description: "Select shipment based on tracking code"
+  statement:
+      SELECT org.logistics.testnet.ShipmentBatch
+          WHERE (trackingNumber == _$trackingNumber)
+}
+
+query getHistorianRecords {
+  description: "All transactions recorded"
+  statement: SELECT org.hyperledger.composer.system.HistorianRecord
+
+}
+
+//  all transactions submitted by person X
+query getHistorianByPerson {
+  description: "Get all historian records by participant"
+  statement: SELECT org.hyperledger.composer.system.HistorianRecord
+  WHERE (transactionType == _$participantInvoking)
+}
+
+// ALl transactions of type X;
+query getHistorianByType {
+  description: "Get all Historian records by type"
+  statement: SELECT org.hyperledger.composer.system.HistorianRecord
+  WHERE (transactionType == _$type)
+}
+
+//Get damaged goods transactions
+query getDamagedGoodsTransaction {
+  description: "Get all transactions associated with damaged goods"
+  statement: 
+  SELECT org.logistics.testnet.ReportDamagedGood
+  WHERE (damagedGood == _$damagedGood)
+}
+
+//Get damaged goods transactions
+query getCreatedShipmentsTransactions {
+  description: "Get all transactions associated with damaged goods"
+  statement: 
+  SELECT org.logistics.testnet.CreateShipmentAndContract
+}
+
+//Get damaged goods transactions
+query getCommoditiesTransformations {
+  description: "Get all transactions associated with damaged goods"
+  statement: 
+  SELECT org.logistics.testnet.TransformCommodities
+}
+
+query getCommodityOwner {
+  description: "Get the owner of a commodity"
+  statement:
+      SELECT org.logistics.testnet.Commodity
+          WHERE (owner == _$owner)
+}
+
+query getShipmentWhereCommodityExists{
+  description: "Get the shipment where a certain commodity is included"
+  statement:
+      SELECT org.logistics.testnet.ShipmentBatch
+          WHERE (assetExchanged CONTAINS _$commodities)
+}
+
+//get damaged goods reports
+
+
