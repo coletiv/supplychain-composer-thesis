@@ -1,33 +1,33 @@
 
-query selectShipmentByID {
+query getShipmentByID {
   description: "Select all shipments based on their ID"
   statement:
       SELECT org.logistics.testnet.ShipmentBatch
           WHERE (shipmentId == _$shipmentId)
 }
 
-query selectShipmentByOwner {
+query getShipmentByOwner {
   description: "Select all shipments based on their Owner"
   statement:
       SELECT org.logistics.testnet.ShipmentBatch
           WHERE (owner == _$owner)
 }
 
-query selectShipmentByHolder {
+query getShipmentByHolder {
   description: "Select all shipments based on their Holder"
   statement:
       SELECT org.logistics.testnet.ShipmentBatch
           WHERE (holder == _$holder)
 }
 
-query selectShipmentByCountry {
-  description: "Select all shipments based on their Holder"
+query getShipmentByCountry {
+  description: "Select all shipments based on their country"
   statement:
       SELECT org.logistics.testnet.ShipmentBatch
           WHERE (location.address.country == _$country)
 }
 
-query selectShipmentByTrackingcode {
+query getShipmentByTrackingcode {
   description: "Select shipment based on tracking code"
   statement:
       SELECT org.logistics.testnet.ShipmentBatch
@@ -62,16 +62,16 @@ query getDamagedGoodsTransaction {
   WHERE (damagedGood == _$damagedGood)
 }
 
-//Get damaged goods transactions
+//Get shipment creation transactions
 query getCreatedShipmentsTransactions {
-  description: "Get all transactions associated with damaged goods"
+  description: "Get all transactions associated with creating shipment and contracts"
   statement: 
   SELECT org.logistics.testnet.CreateShipmentAndContract
 }
 
-//Get damaged goods transactions
+//Get transformation of goods transactions
 query getCommoditiesTransformations {
-  description: "Get all transactions associated with damaged goods"
+  description: "Get all transactions associated with transforming goods"
   statement: 
   SELECT org.logistics.testnet.TransformCommodities
 }
