@@ -44,7 +44,7 @@ query getHistorianRecords {
 query getHistorianByPerson {
   description: "Get all historian records by participant"
   statement: SELECT org.hyperledger.composer.system.HistorianRecord
-  WHERE (transactionType == _$participantInvoking)
+  WHERE (participantInvoking == _$participantInvoking)
 }
 
 // ALl transactions of type X;
