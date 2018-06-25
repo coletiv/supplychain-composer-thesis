@@ -71,17 +71,17 @@ To simplify reading and to save space, the functional requirements list consists
 			\item S3 - The system shall maintain an immutable list of all the past transactions, in the form of blocks.
 			\item S4 - The system shall allow for the submission of a transaction batch, with many transactions at once (possibly corresponding to the synchronization process of a company uploading their data, for instance).
 			\item S5 - The system shall assign each transaction a timestamp.
-			\item S6 - The system shall allow for the definition of multiple channels/sub-ledgers, to support separate sets of permissions and separate the information of different organizations.% in order for the information to be available to different groups of users ( so that sensible information from a group of companies might be hidden from others).
+			\item S6 - The system shall allow for the definition of multiple channels/sub-ledgers, to support separate sets of permissions and separate the information of different organizations in Composer.% in order for the information to be available to different groups of users ( so that sensible information from a group of companies might be hidden from others).
 			\item S7 - The system shall be able to emit notification events.
 			\item S8 - The system shall be programmed to be able to detect any mismatches that might constitute fraud: for instance, a product being received in a location different than the one where it was supposed to show up.
 			%Example: Product was sent with destination Hong Kong. Product was then actually received in Kuala Lumpur. They check in the item, and the system detects the expected destination is different from the actual one.
 			%\item S8 - The system shall record a new transaction for each action which is intended to change the state of an asset.
 			\item S9 - The system shall define different permissions for each role and for some specific identities, including permissions for invoking transactions and reading the data on the ledger.
-			\item S10 - The system shall be able to define different permissions for specific identities.
 				%□ The system shall give access to a user for a certain action, if he has the permission.
 				%□ The system shall restrict access to a user for a certain action, if he does not have the permission.
 			%\item S9 - The system shall assign each user a role.
-			\item S11 - The system shall be able to expose all of the actions that users can undertake in the form of a REST API.
+			\item S10 - The system shall be able to expose all of the actions that users can undertake in the form of a REST API.
+			\item S11 - The system shall be able to authenticate users through a REST API.
 			
 		\end{itemize}
         
@@ -176,8 +176,8 @@ As such, research was undertaken, and the following data requirements were built
 In a real system, all these data requirements would have to be implemented in a perfect way, with all the parameters, but this project, only being a proof-of-concept will use the minimum number of data fields deemed necessary for the implementation and basic functionalities of the system.
 		
 		
-
-\subsection*{3. Non Functional Requirements Drivers}
+\subsection{Non-Functional Requirements Drivers}
+\subsection*{1. Non Functional Requirements Drivers}
 
 Overall, the product should follow these parameters:
 \begin{enumerate}
@@ -189,11 +189,12 @@ Overall, the product should follow these parameters:
 		\par Reliability and availability: The product shall not always be available unless all of the nodes fail at once, which is almost impossible, unless a coordinated attack were to happen; If some of the nodes happen to fail, the response time of the system might be lower than expected;
 		\par Scalability: The product should scale to hundreds of companies, which would require a similar number of nodes;
     \item  Maintainability and portability
-		\par The product is expected to run on Linux based systems, compatible with the Docker, nodejs and golang versions that Hyperledger Fabric uses. More specifically, the AWS services have servers with the required setup for this (granted, the nodes still have to be installed). For testing purposes, Windows based systems that are compatible can also be used.* I need to make sure of this *
+		\par The product is expected to run on Linux based systems, compatible with the Docker, nodejs and golang versions that Hyperledger Fabric uses. More specifically, the AWS services have servers with the required setup for this (granted, the nodes still have to be installed). For testing purposes, Windows based systems that are compatible can also be used.\todo{pedro:* I need to make sure of this *}
 		\par Creating new nodes or moving an existing one should be an easy process, without much complication, other than starting the node software on the environment, and closing an existing one, if needed.
     \item  Security
 		\par Privacy: The system must ensure appropriate visibility of transactions and products, which might be privacy sensitive; sharing some data would pose a threat or could possibly have negative effects for some of the companies; otherwise, transactions should also be secure, authenticated and verifiable;
 		\par Immutability: No one can make changes to the contents of the ledger;
+		\par Authorization: All changes to any data should be approved by the people that possess the data or will be affected by these changes directly. A shipment delivery transaction should, for instance, be approved by both the person delivering and the person receiving the shipment
 	\item  Legal
 		\par The ledger might be subject to verification from competent legal authorities or auditors, and it must also comply with certain laws, such as the european global data protection regulations (GDPR);
 		\par "Traceability and its relation to the law (e.g., regulatory law, international law etc.) has a profound effect upon many products. In the case of diamonds, conflict minerals or rare earth derived material several international agreements and global law governing these items. Ensuing traceability of these products can literally mean the difference between supporting terrorist groups or supporting those who need good jobs to provide for their family. "
@@ -202,7 +203,7 @@ Overall, the product should follow these parameters:
 
 \todo{pedro: será que devia mesmo representar os nos e a sua distribuiçao?}
 
-\subsection*{4. Mandated Constraints}
+\subsection*{2. Mandated Constraints}
     \begin{itemize}
 		\item The product shall represent a Proof of Concept (PoC), such that it must accurately simulate some of the variables, which include the number of nodes needed for the system to work, their distribution, the transaction load, number of products and companies (TBD).
 		\item The node number and distribution of the nodes might be subject to budget and time constraints, as it depends on external services, such as Amazon Web Services (AWS).
@@ -216,7 +217,7 @@ Overall, the product should follow these parameters:
         
 \todo{pedro:decidir se deixo aqui os project issues ou se mudo de sitio}
 
-\subsection*{Project Issues}
+\subsection*{3. Project Issues}
 \begin{enumerate}
 	\item Open Issues
 		\par The architecture of Hyperledger Fabric and Composer are complex and not completely studied yet, which may lead to deviations from the requirements or alterations at some point.
