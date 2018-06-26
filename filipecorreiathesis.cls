@@ -158,7 +158,7 @@
 
 \newcounter{cPage}
 \newcommand\optref[1]{%
- \refstepcounter{cPage}\label{current\thecPage}%
+~\refstepcounter{cPage}\label{current\thecPage}%
  \ifthenelse{\equal{\pageref{#1}}{\pageref{current\thecPage}}}%
   {}{~(p.~\pageref{#1})}%
 }
@@ -167,7 +167,7 @@
 \newcommand\figureref[1]{Figure~\ref{#1}\optref{#1}}
 \newcommand\tableref[1]{Table~\ref{#1}\optref{#1}}
 \newcommand\chapterref[1]{Chapter~\ref{#1} (p.~\pageref{#1})}
-\newcommand\sectionref[1]{\textsection~\ref{#1}\optref{#1}}
+\newcommand\sectionref[1]{\textSection~\ref{#1}\optref{#1}}
 \newcommand\appendixref[1]{Appendix~\ref{#1} (p.~\pageref{#1})}
 
 %%

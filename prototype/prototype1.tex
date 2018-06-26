@@ -4,13 +4,13 @@ Following the conclusions and requirements elicited in the previous chapter, it 
 
 In order to make a good choice for the framework, there is a need to make a mixed analysis that focuses on the most important functionalities that an information system should feature as well as what use cases are most viable for applying blockchain to the supply chain. %TODO: reference the chapter instead
 
-In addition to the requirements from the previous chapter, the performance analysis from chapter \ref{sec-performance-comparison} should also be taken into account. %TODO: reference the chapter instead
+In addition to the requirements from the previous chapter, the performance analysis from Chapter~\ref{sec-performance-comparison} should also be taken into account. %TODO: reference the chapter instead
 
 \subsection{Framework Requirements Elicited from the Survey}
 
-The requirements for the choice of a framework can be partially derived from the most important functionalities pointed out on the results of the survey, in table \ref{table:elicited-requirements-survey}. These functionalities are directly based on some points of focus from this thesis: \textbf{synchronization, security and tracking or traceability}, so it is based on these attributes that the framework should also be selected.   
+The requirements for the choice of a framework can be partially derived from the most important functionalities pointed out on the results of the survey, in Table~\ref{table:elicited-requirements-survey}. These functionalities are directly based on some points of focus from this thesis: \textbf{synchronization, security and tracking or traceability}, so it is based on these attributes that the framework should also be selected.   
 
-\par \textbf{Security}: From section \ref{sec-survey-improvement-functionalities}, it was ascerted that the improvement of information privacy in supply chains was not very important in itself. Maybe it is something that the current systems already do well, but as we can see, \textbf{there are still some outstanding concerns which deal with other security aspects that still need to be taken care of}: access control and fraud detection seem to rank high on the requirements for such a system. \textbf{Thus, the selected framework should support a highly controlled environment, where the actions each user takes should be properly authorized and there are good authentication mechanisms. Some fraud verification checks should be supported}.
+\par \textbf{Security}: From Section~\ref{sec-survey-improvement-functionalities}, it was ascerted that the improvement of information privacy in supply chains was not very important in itself. Maybe it is something that the current systems already do well, but as we can see, \textbf{there are still some outstanding concerns which deal with other security aspects that still need to be taken care of}: access control and fraud detection seem to rank high on the requirements for such a system. \textbf{Thus, the selected framework should support a highly controlled environment, where the actions each user takes should be properly authorized and there are good authentication mechanisms. Some fraud verification checks should be supported}.
 
 \par \textbf{Traceability}: For the traceability requirements, the proposed system should be able to track all information, including changes in the system, registries of assets, transactions, network participants and organizations. It should also be open to outside regulatory entities, so that they can look into the system for auditing. Additionaly, sanity checks and other fraud-detection operations should be possible, possibly through smart-contract functionality. \textbf{Thus, the selected framework must support the management of data in the form of assets, entities and organizations, which should be accessible only to specific entities, including auditors}.
 
@@ -19,7 +19,7 @@ The requirements for the choice of a framework can be partially derived from the
 \par \textbf{Transaction Enforcement and Financial domain}: There is interest in financial applications, and cryptocurrencies are a part of this. However, for financial applications to be possible in the supply chain using blockchain, a native blockchain cryptocurrency is not necessarily needed, as cryptocurrencies can be simulated using balances, depending on the design of the blockchain network. For this, and other functionalities to work, smart contract functionality should exist, though. \textbf{Thus, the selected framework should either have a native cryptocurrency, or allow for the design of some kind of digital balance or token. Additionaly, it should support smart contracts}.
 
 
-This information is summarized in table \ref{table-framework-requirements}.
+This information is summarized in Table~\ref{table-framework-requirements}.
 %% Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 \begin{table}[]
@@ -57,7 +57,7 @@ Crossing these requirements with the capabilities of the frameworks presented in
 \textbf{From a requirements perspective, Hyperledger fits pratically all of the requirements}, if we assume that financial transactions can be simulated within the network. Ethereum has the setbacks of cost and security, while Corda has the setback of lacking asset management and traceability.
 
 
-To make the framework decision final, a performance comparison should also be used.  Based on previously published studies, which were mentioned in \ref{sec-performance-comparison}, Hyperledger has a lower latency, execution time and higher throughput than Ethereum. All while being cheaper to maintain and satisfying more requirements than any of the other analysed frameworks.
+To make the framework decision final, a performance comparison should also be used.  Based on previously published studies, which were mentioned in~\ref{sec-performance-comparison}, Hyperledger has a lower latency, execution time and higher throughput than Ethereum. All while being cheaper to maintain and satisfying more requirements than any of the other analysed frameworks.
 
 \par The question \textbf{"What is the Blockchain tool or framework most adequate to the development of an architecture that can support these requirements?"} can finally be answered. From the analyzed tools, Hyperledger Fabric, together with Hyperledger Composer, seems to be the tool that both satisfies the most requirements and has higher performance and lower costs, being the most adequate of the analyzed tools for the development of an architecture for supply chain.
 

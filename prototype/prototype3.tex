@@ -55,7 +55,7 @@ Both the auditor and the supply chain member participant types have as attribute
 
 Another integral component of the system are the assets, for the asset management aspect of the supply chain. If traceability of products is to be achieved, these products need to be modeled as assets, so that the network can register which ones exist, their status, and any changes that happen.
 
-The proposed assets in this model were: \textbf{Commodity}, \textbf{ShipmentBatch} and \textbf{Contract}. Each of them serves a purpose. A diagram with the assets and their relationships to the participants and each other can be found in Figure \ref{fig:participant_asset}.
+The proposed assets in this model were: \textbf{Commodity}, \textbf{ShipmentBatch} and \textbf{Contract}. Each of them serves a purpose. A diagram with the assets and their relationships to the participants and each other can be found in Figure~\ref{fig:participant_asset}.
 
 \par \textbf{Commodity} - Represents a single product being exchanged, with all its attributes, including the product ID (GTIN), name, description, item status and even the ID of the person who owns it (a participant of the network).
 \par \textbf{ShipmentBatch} - Represents a physical shipment, that a buyer orders from a seller. The shipment includes all the tracking information, including tracking number,a shipment status and location. Additionaly, the shipment  has an array of the Commodity items included in it, as well as information on who is the current physical holder of the shipment and owner (other participants). When a shipment is created, since it has an origin and a destination along with other sensible data and shipment conditions, it makes sense that a contract is generated, therefore the shipment also has a contract associated.
@@ -142,7 +142,7 @@ To make up for this, some changes in the model had to be made. Originally, the \
     \caption[Examplification of the non-relational model problem in the Hyperledger Projects.]{Examplification of the non-relational model problem in the Hyperledger Projects.}
     \label{fig:relational_problem}
 \end{figure}
-Figure \ref{fig:relational_problem} illustrates the problem anc changes to the developed model that had to be made to adapt to it. The \textit{Commodity} was adapted to have a \textit{Owner} data attribute so that it is easier to query the owner of a commodity. This pretty simple query would be a lot harder to accomplish in Composer, and anything more complex or having more tables than this would be pretty much impossible to do without exporting all the data to another system that could organize it and query it in a different way. 
+Figure~\ref{fig:relational_problem} illustrates the problem anc changes to the developed model that had to be made to adapt to it. The \textit{Commodity} was adapted to have a \textit{Owner} data attribute so that it is easier to query the owner of a commodity. This pretty simple query would be a lot harder to accomplish in Composer, and anything more complex or having more tables than this would be pretty much impossible to do without exporting all the data to another system that could organize it and query it in a different way. 
 
 Another problem that this can bring, other than having the trouble of changing the model, is the integrity issues that can be caused in the data. Anytime that the owner of a shipment is changed, the owner of the commodity also has to be changed in the code. If the owner of a commodity was not changed in the code, then it would be inconsistent with the owner of the shipment, who in reality should also own the commodity. \textbf{If a programmer consistently adds attributes to classes to make up for the weak Composer queries, eventually they might forget to make a change similar to this one and the system might lose integrity}.
 
@@ -152,7 +152,7 @@ Another problem that this can bring, other than having the trouble of changing t
 Creating a model design for the network with all the previously explained items grants the needed basic functionalities for the system to work, but it misses one of the most important aspects from the requirements: \textbf{the security and access control}.
 
 \todo{pedro: explicar melhor identity management no background do composer}
-As previously explained in section \ref{sec:composer-background}, Composer features the concept of Participant, a network instance of the class that represents a user, but it also features identity cards, which are files that function as the private key and identification card for a real person. An identity card and an instance of a participant can be linked to each other.
+As previously explained in Section~\ref{sec:composer-background}, Composer features the concept of Participant, a network instance of the class that represents a user, but it also features identity cards, which are files that function as the private key and identification card for a real person. An identity card and an instance of a participant can be linked to each other.
 
 The control rules are written to reflect what actions are allowed to certain participant class types, to specific participant instances, and even to specific identity cards. 
 
@@ -235,7 +235,7 @@ Composer also features network topology design, which includes choosing the orga
 
 However, the scope of this project covers mostly the qualitative and functional part of building the network, with the aim of finding out if the requirements can successfully be implemented and work as intended, independently of how the network scales and independently of how other architectures behave. Especially in the case of Hyperledger Composer, the implementation so far works, either with just 1 node,nd, even though there was no implementation of a big topological network of nodes, some speculation or with a small number of them. 
 
-With that in mi and thought were given as to how a proper network should look like. Figure \ref{fig:fabric_topology}, taken from the Fabric documentation, exemplifies how a small supply chain topology would be organized.
+With that in mi and thought were given as to how a proper network should look like. Figure~\ref{fig:fabric_topology}, taken from the Fabric documentation, exemplifies how a small supply chain topology would be organized.
 
 \begin{figure}[h]
     \centering
@@ -262,7 +262,7 @@ An important task of architectural design is identifying where blockchain is in 
 
 All the other data layers would get the information from the blockchain, and inject their information to the blockchain, when needed. The upper layers could organize and treat information however they want, as long as they could retrieve it securely. This way, it would even be possible to make up for the shortcomings of the query language of Composer, by retrieving the Blockchain data to a higher level layer application and have that application organize the data in a way that would make it more accessible. Of course, building these upper layers is all up to the developers of each company and application that wants to interact with the blockchain. 
 
-Figure \ref{fig:architectural_diagram} shows an idealization of what such an architectural layer design would look like. From oracles extracting and inserting big chunks of data periodically, to applications using the blockchain directly as their data storage source, the possibilities for the layers above the blockchain network are many, and not even limited to what can be seen in the figure.
+Figure~\ref{fig:architectural_diagram} shows an idealization of what such an architectural layer design would look like. From oracles extracting and inserting big chunks of data periodically, to applications using the blockchain directly as their data storage source, the possibilities for the layers above the blockchain network are many, and not even limited to what can be seen in the figure.
 
 \begin{figure}[h]
     \centering
