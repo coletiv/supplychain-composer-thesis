@@ -1,16 +1,17 @@
-\chapter{Blockchain Frameworks}
+%\chapter{Blockchain Frameworks}
+\section{Blockchain Frameworks}
 \label{chap:blockchain-frameworks}
 
 \minitoc \mtcskip \noindent
 
 There are several frameworks to build blockchains, as well as platforms to participate in already existing ones. A blockchain does not have to be built from scratch, as there is already a lot of work done in this area. This chapter goes into detail, explaining some of the most important frameworks, and their applicability to certain cases.
 
-\section{Ethereum}
+\subsection{Ethereum}
 
 With the purpose of building a blockchain that does more than just provide a currency system, the Ethereum project was developed and launched in 2014. A white paper, written by Vitalik Buterin was released explaining the concepts and inner-workings of this platform, and its popularity has been growing ever since. Citing Buterin's paper, Ethereum has the intent to \textit{"allow developers to create arbitrary consensus-based applications that have the
 scalability, standardization, feature-completeness, ease of development and interoperability" } \cite{Buterin2014}.
 
-\subsection{Smart Contracts}
+\subsubsection{Smart Contracts}
 In short, Ethereum is a blockchain platform that implements a Turing-complete programming language, allowing for the existence of code stored in the form of "contracts". This allows for the practical existence of Smart Contracts, a concept first proposed by Nick Szabo in 1996 \cite{szabo1996smart}. According to Szabo, \textit{"a smart contract is a set of promises, specified in digital form, including protocols within which the parties perform on these promises"}. 
 
 %\todo{fcorreia: in the above citation: make "A" lowercase and move the final mark to after the closing double quote. I'd also check this in the remaining citations of document.}
@@ -27,11 +28,11 @@ Unlike with Bitcoin, Ethereum's blockchain saves, not only the transactions, but
 %contract account receives a message its code activates, allowing it to read and write to internal storage and
 %send other messages or create contracts in turn.
 
-\subsection{Currency}
+\subsubsection{Currency}
 
 The interesting aspect of Ethereum, however, is that the code from these applications or contracts is executed by the peer-to-peer network nodes, making Ethereum a globally available computer. Of course, with computational power comes a price. Each time a function from a contract is called, someone's computer, a mining node, is doing all the computations, and for each line of code, an agreed fee must be paid. As such, Ethereum has its own cryptocurrency, by the name of Ether, and which is essential to fuel the network.
 
-\subsection{Consensus}
+\subsubsection{Consensus}
 
 At the moment, Ethereum is still using PoW as the consensus protocol, in a similar fashion to Bitcoin. There are projects currently trying to move Ethereum to PoS, such as Casper \cite{Buterin2017}. PoS is a consensus protocol with a different paradigm, in which the block mining process is roughly based on trust, on the fact that the miner has a certain stake or investment (like cryptocurrency) in the network, and so it is in their best benefit to be an honest node. 
 
@@ -41,7 +42,7 @@ The benefit of PoS over PoW is that there isn't as much "waste" of computational
 %It's still wasted power, it has no other purpose than artificially limiting each node's influence (while there are other mechanisms  which do the same and don't use any power). The computation itself just finds a nonce that serves no other purpose. If we were talking about Primecoin or other applications which use PoW to find nonces which are prime numbers and so on, then it would not  be a waste.
 
 
-\subsection{Performance and Scalability Issues}
+\subsubsection{Performance and Scalability Issues}
 
 %\todo{fcorreia: \textbackslash{}paragraph is used for single paragraphs; something like a \textbackslash{}subsubsection would make more sense here, but that's a bit too many "sub"s already (harder for the reader to keep the context of where he is in mind). Maybe the best approach here is to just have the paragraphs with no further sectioning. You can highlight the important terms in bold (like you are already doing sometimes).}
 
@@ -68,7 +69,7 @@ Besides latency and throughput, most blockchains are facing the problem that the
 This easily becomes a security problem for public blockchains, as the power will be concentrated among the few nodes who can store the blockchain. In Ethereum, every node has to store and process all transactions as well as store the entire state of the blockchain \cite{Scherer2017}, hence, this is an important issue to address. 
 
 
-\subsection{Proposed Solutions}
+\subsubsection{Proposed Solutions}
 
 Solutions to the above mentioned issues of the above mentioned issues have already been proposed and are being tested. Some of these are Raiden, Casper, Sharding and Plasma.
 
@@ -93,11 +94,12 @@ Sharding is a solution that aims to increase the throughput of Ethereum. It acts
 Raiden is a solution that allows for off-chain transfers of tokens to happen outside the blockchain, on a side-channel, in a secure way, using cryptography to build \textit{balance proofs} \cite{Hees}. This way, for a certain number of transactions, a side channel can be opened, the transactions are performed, and, at the end, the channel is closed and the transactions are submitted onto the chain. Raiden implements the protocol that provides the routing between the nodes and all other functionalities that make this possible.
 
 \paragraph{Plasma - Throughput scalability}
-Plasma uses smart contracts to build hierarchical side chains, that can be thought of as children of the main blockchain. These chains process information as a normal chain would, being governed by their own rules and constraints, and it is even possible to revert transactions within them, as they have a smaller scope and are built apart from the main chain. These child chains can then relay information back to the main blockchain. Theoretically, there is no limit to the number of chains, allowing for great scalability. \cite{Poon2017}
+Plasma uses smart contracts to build hierarchical side chains, that can be thought of as children of the main blockchain. These chains process information as a normal chain would, being governed by their own rules and constraints, and it is even possible to revert transactions within them, as they have a smaller scope and are built apart from the main chain. These child chains can then relay information back to the main blockchain. Theoretically, there is no limit to the number of chains, allowing for great scalability \cite{Poon2017}.
 
 \break
 
 
+\todo{pedro: explain that ethereum might be expensive to use, but it can be used privately?}
 \iffalse
 \subsection{Usability}
 - Explain that, though there is a main ethereum network, it can also be deployed privately
@@ -109,13 +111,13 @@ Maybe this subsection is already what is described in the sections that follow, 
 - Talk about Eth possible applicability, because of the fact it might be expensive;
 \fi
 
-\section{Hyperledger Fabric}
+\subsection{Hyperledger Fabric}
 
 Hyperledger is an open-source effort hosted by The Linux Foundation, which aims to further improve the concept of blockchain to be used in many different contexts. 
 
 More specifically, one of the Hyperledger projects, Hyperledger Fabric, initially contributed by IBM, tries to address some of the open issues of the existing frameworks, like Ethereum. Hyperledger Fabric is an open source framework to build permissioned (private or consortium) blockchains usable in industry, and, while it shares some similarities with Ethereum, it also has many differences. 
 
-\subsection{Chaincode}
+\subsubsection{Chaincode}
 Hyperledger possesses a form of smart contracts, which it names \textit{chaincode}. Similarly to Ethereum, the chaincode programs are event driven programs which run on the ledger, changing the ledger's state when executed, thus being able to move assets around. It can be said that this works much like a state machine.
 
 A big difference to Ethereum, though, is the language used in the chaincode. Programs are written in Go, with support for other languages like Java to be implemented. The code is deployed using an isolated VM, through a Docker container. 
@@ -125,7 +127,7 @@ Being able to use general-purpose languages to code smart contracts is an advant
 %\todo{pedro: explicar mais a fundo o conceito?}
 %\todo{fcorreia: I was happy with the current level of detail; may be worth expanding if you think the next sections/chapters will need more context than the one you are already giving now.}
 
-\subsection{Architectural Revision}
+\subsubsection{Architectural Revision}
 The latest version of Fabric, v1.1, has a totally revised architecture from some of the previous versions, like v0.6. These changes in architecture originated from changes in the requirements, as well as to better address some other underlying issues of the technology.
 
 The previous version (v0.6) shared similarities with other blockchain systems, in that it had an order-execute architecture, which combines consensus and execution of transactions, in this order. In the order-execute architecture, after a block is assembled and mined (agreed upon), all other nodes will execute its transactions sequentially.
@@ -142,7 +144,7 @@ A detailed architectural specification of Fabric's revised version 1.1 can be fo
 This revised version follows instead an "Execute-Order-Validate" implementation, which tackles the above mentioned issues, and, according to Fabric's documentation, the advantages this reviewed architecture brings are \textbf{scalability}, \textbf{confidentiality}, \textbf{consensus modularity} and \textbf{chaincode trust flexibility}.
 %I do not really understand the term they use "chaincode trust flexibility", it just looks like they didn't know how to name the characteristic and made something up...
 
-\subsection{System Architecture and Consensus}
+\subsubsection{System Architecture and Consensus}
 \label{hyperledger_architecture}
 In Fabric, transactions are of two types: either \textbf{deployment transactions}, which create new chaincode, or \textbf{invoke transactions}, which perform operations on the deployed chaincode. 
 
@@ -222,13 +224,13 @@ Compared to other blockchains, this consensus mechanism has some advantages, tho
 
 In brief conclusion, Hyperledger allows for a permissioned blockchain which sacrifices some decentralization for scalability and performance. By using a different consensus mechanism, most of the issues of public blockchains vanish. Furthermore, data access must be authorized, such that sensitive data in a channel is protected, one of the requirements for data in supply chains. Thus, Hyperledger Fabric's features are adequate for SCM's requirements in a way that is difficult to achieve in public blockchains.
 
-\section{Hyperledger Composer}
+\subsection{Hyperledger Composer}
 \label{sec:composer-background}
 Hyperledger Composer is another tool which works together with Fabric to allow for an easier approach to modeling a blockchain network. It is actually a higher level abstraction of Fabric, which allows for a big reduction in the lines of code written and simplifies the whole process of building a business network and deploying it, as well as the process of managing the identities of the network's participants. 
 
 It features a nice and intuitive graphical user interface to manage all of its components, and it also features a REST server to expose the blockchain to outside applications.
 
-\subsection{Business Network}
+\subsubsection{Business Network}
 
 \todo:{pedro: compor um pouco do state of the art do composer com mais informacao sobre exatamente o que é uma business network, que é um modelo que pode ser deployed quantas vezes se quiser, mas cada deployment num conjunto de nós diferente é basicamente um ledger diferente. Explicar que o mesmo design de uma business network pode ter a sua topologia e permissões modificadas para adaptar a outra supply chain, um grande beneficio desta ferramenta. Explain that a deployed business network is a ledger that works for a group of companies that wants to form a blockchain for their own supply chain; }
 
@@ -236,12 +238,12 @@ It features a nice and intuitive graphical user interface to manage all of its c
 
 A business network is a model of all the data in the blockchain, which includes all the objects, functions, transactions and identities that will connect to each other and be saved on the ledger. It is basically an abstraction of the chaincode that will be installed onto Fabric.
 
-Composer features a custom modeling language which makes it easier to define a business network. It is divided into 4 main components, as can be seen in figure \ref{fig:composer_abstraction}.
+Composer features a custom modeling language which makes it easier to define a business network. It is divided into 4 main components, as can be seen in Figure \ref{fig:composer_abstraction}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.40]{media/Composer-Diagram.png}
-\caption[Hyperledger Composer abstraction over Fabric]{Hyperledger Composer abstraction over Fabric. Available in Composer's documents \cite{ComposerIntro}}
+\caption[Hyperledger Composer abstraction over Fabric]{Hyperledger Composer abstraction over Fabric. Available in Composer's documents \cite{ComposerIntro}.}
 \label{fig:composer_abstraction}
 \end{figure}
 
@@ -257,18 +259,18 @@ Composer features a custom modeling language which makes it easier to define a b
 
 All of these components can be compiled into one file (.bna), which is then deployed onto Fabric.
 
-\subsection{Authentication and Identities}
+\subsubsection{Authentication and Identities}
 
 Hyperledger Composer also features identity management. An identity is a digital certificate and private key, in the form of an account which can interact with the blockchain network. Within a certain business network, an identity can even be bound to a certain instance of a Participant type. For example, if there is a participant type called "Customer", an instance of that participant called "Customer1" can be created, which can then be bound to some real person's account. That person will then be able to interact with the blockchain, but will be bound by whatever access rules the participant "Customer" is bound by. 
 
 In order to make identity management easier, Composer has a feature called "Business Network Cards". These cards are files which can are associated with an identity and a network, and also act as a private key. If a user possesses a card, they can import it to prove their identity and start interacting with the blockchain.
 
-\subsection{Fabric Topology}
+\subsubsection{Fabric Topology}
 
 Composer also has configuration files for some of Fabric's properties. It possesses files to determine which organizations exist and which kind of nodes they possess, along with their mapping. It also has a definition for the endorsement policies.
 
 
-\section{Corda}
+\subsection{Corda}
 Corda's take on blockchains vastly differs from Ethereum or Hyperledger. Traditionally, banks have their own ledger, but Corda wants to unify these ledger's into one, claiming that it improves the cost and efficiency. Corda focuses solely on providing a distributed ledger for financial services, where financial agreements can be recorded and managed, available to any financial institution\cite{Brown2016}. 
 
 This is a very specific purpose, which means that Corda's application on Supply Chains would be rather limited, to fixing payments and agreements, perhaps. Even Corda's own smart contracts are pretty limited in what they allow, in comparison to Ethereum's, since they don't allow for all the freedom of computation that
@@ -279,7 +281,7 @@ This is a very specific purpose, which means that Corda's application on Supply 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.16]{media/corda_shared_ledger.png}
-\caption[Corda's vision on a Shared Ledger]{Corda's vision on a Shared Ledger. Available in Corda's White Paper \cite{Brown2016}}
+\caption[Corda's vision on a Shared Ledger]{Corda's vision on a Shared Ledger. Available in Corda's White Paper \cite{Brown2016}.}
 \label{fig:shared_ledger}
 \end{figure}
 
@@ -295,7 +297,7 @@ There are some other important concepts to understand how Corda works:
 %\todo{pedro: listar as features/functionalities do Corda? http://prntscr.com/ibws9p}
 %\todo{fcorreia: those look more like high-level goals of Corda, not exactly features. Some of them sound relevant enough for a mention here, but I'm not sure if all do.}
 
-\subsection{CorDapps}
+\subsubsection{CorDapps}
 CorDapps are distributed applications running on the Corda platform. The concepts of State Objects, Transaction Protocols, among others, all fit into these distributed applications.
 
 The functionality of these applications is, however, rather limited, since a CorDapp's ultimate goal is to program a specific agreement, which will then lead to updates on the ledger. So, similarly to a "smart contract", the execution of CorDapp's leads to transactions which change the state of the ledger, fixing immutable agreements into the blockchain.
@@ -305,7 +307,7 @@ These applications have code, just like a smart contract would. But, while a nor
 As with Ethereum, Corda also uses a virtual machine. In this case it is the Java Virtual Machine (JVM), and the applications are written in Java.
 
 
-\section{Comparison}
+\subsection{Comparison}
 Comparison's between these three platforms are recurrent, though Hyperledger and Corda might have more in common with each other than with Ethereum. 
 Valenta \cite{Valenta2017} concisely describes the main points of difference between these frameworks, with a focus on the consensus process and general characteristics of the frameworks. 
 
@@ -317,7 +319,7 @@ He concluded that Ethereum is more of a general purpose platform, while Fabric t
 
 
 
-\subsection{Performance}
+\subsubsection{Performance}
 \label{sec-performance-comparison}
 The difference in performance of various blockchain platforms is a crucial topic to address, that might lead to choosing one platform over another, with similar functionalities. In the case of Supply Chain, it might be important to measure the difference in performance of Ethereum and Hyperledger, for instance. 
 
@@ -329,7 +331,7 @@ In every test performed, Hyperledger had a higher throughput, lower latency and 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.75]{media/average_latency_frameworks.png}
-\caption[Comparison of average latency between Ethereum and Hyperledger, with growing number of transactions]{Comparison of average latency between Ethereum and Hyperledger, with growing number of transactions. Available in \cite{Pongnumkul2017}}
+\caption[Comparison of average latency between Ethereum and Hyperledger, with growing number of transactions]{Comparison of average latency between Ethereum and Hyperledger, with growing number of transactions. Available in \cite{Pongnumkul2017}.}
 \label{fig:latency_comparison}
 \end{figure}
 

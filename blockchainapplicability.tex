@@ -5,18 +5,16 @@
 
 This chapter presents an overview of how the blockchain might apply to the industry in general and supply chain in particular. It goes on to describe the general advantages of using blockchain, with a focus on how it might positively affect SCM, as well as the disadvantages and challenges the integration of blockchain might face. Some applications that are already trying to merge the concepts of blockchain and Supply Chain are presented. Finally, an overview of some design alternatives are given, which will be the basis for the design analysis  and decisions later on. 
 
-The purpose of this chapter is, given all the information already presented, to present some topics that might unify the topics of blockchain and supply chain into one, to ascertain if they are a good fit.
-
-\todo{fcorreia: repetição de "presented" e "present"}
+The purpose of this chapter is to present some topics that might unify the topics of blockchain and supply chain into one, to ascertain if they are a good fit.
 
 \section{Advantages of Blockchain in Supply Chain}
 \label{sec:advantes-blockchain}
 Some of the advantages blockchain would bring to supply chain, over other solutions:
 
 \begin{itemize}
-\item \textbf{Less error prone}: reduction in errors on manual data entries, especially when combined with IoT and other automated processes; any other kind of error that manages to find its way into the system is easily traceable. \todo{fcorreia: hmmm, isto parecem-me coisas distintas. o uso de processos automatizados não é estritamente dependente de se estar a usar uma BC... Os erros humanos podem acontecer mesmo que se use uma BC (com a agravante que se calhar até poderão ser mais difíceis de corrigir)}
+\item \textbf{Less error prone}: reduction in errors on manual data entries, especially when combined with IoT and other automated processes;
 \item \textbf{Enhanced security of transactions}: not only is the ledger immutable, attempts at fraud are easily detected.
-\item \textbf{Improved tracking}: the ledger is easy to analyze and delivers the results really fast, making it possible to know the status of any order or asset at any time.
+\item \textbf{Improved tracking}: the ledger is easy to analyze and delivers the results really fast, making it possible to know the status of any order or asset at any time; at the same time, any error, either accidental or on purpose, that manages to find its way into the system is easily traceable.
 \item \textbf{Improved consumer trust}: blockchain could allow users to check the provenance of their products, developing a relationship of trust with the suppliers.
 \item \textbf{Reduced costs}: \textbf{reduced governance costs} for exchanging info and etc, allowing for higher efficiency and faster times at processing the information (enhancing cost effectiveness); \textbf{reduced internal management costs}, increasing efficiency and sustaining competitiveness; \textbf{reduced product or service costs}, creating competitive advantage and barriers to competition, reduced supply chain lead times and increased flexibility in supply chain design. %[21].
 \item \textbf{Internal supply chain trust}: It is important that the elements of a supply chain trust the information that comes and goes from each other, and blockchain allows this to happen.
@@ -27,19 +25,15 @@ Some of the advantages blockchain would bring to supply chain, over other soluti
 
 This last point is one of the most important aspects, which is often overlooked in favor of other more obvious functionalities.
 
-As described by Panayides \cite{Panayides2009}, co-operation and trust are the key in improving supply chain performance and innovativeness, increasing the quality and leading to benefits for all parties involved. Similarly, Yeung \cite{Yeung2009} managed to find a relation between trust and a higher supply chain integration. In the context of supply chains, trust might be defined as not only loyalty, but also reliability. This last aspect is very important, because it measures just how much you can expect from your partners in a supply chain. And when you need information quickly, trust in the form of reliability is a very important asset to have.
+Informally speaking, a business knows it can easily access its own data at any time, so there is usually a lot of self trust. Therefore, businesses trust and rely a lot on themselves, but not always on others. Trust means being cooperative and relying on other business for the needed data, and believing that this data is also error-free. 
 
-%\todo{fcorreia: "trust" can mean several things. 2hat does it mean to "trust" information? is it that elements of a supply chain don't trust that the information comes from the source that they think it does? is it that they don't trust that the network doesn't drop any information? or is it that they don't trust that the *people* upstream in the supply chain record all the information accurately? My best guess would be that this last question is the relevant one in the context of supply chains, but I don't think that a blockchain would help that much here. WDYT?}
-%It's all of them, actually... If you're a business, you only trust your own information and you only rely on yourself, you don't expect others to be 100% cooperative and fully functioning all the time. 
+As described by Panayides \cite{Panayides2009}, co-operation and trust are the key in improving supply chain performance and innovativeness, increasing the quality and leading to benefits for all parties involved. Similarly, Yeung \cite{Yeung2009} managed to find a relation between trust and a higher supply chain integration. In the context of supply chains, \textbf{trust might be defined as not only loyalty, but also reliability}. This last aspect is very important, because it measures just how much you can expect from your partners in a supply chain. And when you need information quickly, trust in the form of reliability is a very important asset to have.
 
 In this sense, if the blockchain technology manages to improve the information flow in a supply chain, while maintaining security and trust between parties (at least at a technical level), then it follows that, just as concluded by Panayides and Yeung, the supply chain itself will have an improvement in performance, since the parties involved don't have to worry as much about these aspects or any power struggles. Therefore, \textbf{trust seems to be a key factor in building an efficient and effective supply chain}.
 
 \section{Challenges of Blockchain Application to Supply Chain}
 
-
-The reverse side of the coin is that Blockchain is not always the amazing solution that is prophesied. Blockchain itself is a topic in research and, while some of its applications and advantages are quite obvious, many of its disadvantages are overlooked, and these might be crucial when making the decision to apply blockchain to a supply chain.
-
-\todo{fcorreia: pode ser "amazing" para o contexto certo (parece funcionar razoavelmente bem para as bitcoins pelo menos). eu diria que a questão é mais que não é uma boa solução para *todos* os contextos.}
+The reverse side of the coin is that Blockchain is not always as good a solution as it is prophesied. Blockchain itself is a topic in research and, while some of its applications and advantages are quite obvious, many of its disadvantages are overlooked, and these might be crucial when making the decision to apply blockchain to a supply chain.
 
 %Check image from the other article
 %Other article talking about the throughput and latency trade-off.
@@ -47,7 +41,8 @@ The reverse side of the coin is that Blockchain is not always the amazing soluti
 The technical limitations include, but are not limited to: throughput, latency, size and bandwidth and security.
 
 \begin{itemize}
-\item \textbf{Throughput}: Current blockchain technologies, even in private deployments, such as Hyperledger, have a high throughput, but not as high as certain centralized systems. This is one of the main concerns in supply chain, that a blockchain can't process the information quite as fast as the current systems, which could lead to a decrease in performance and further delays. As in any distributed system, though, the decrease in speed is often the price to pay for decentralization in supply chain. Ultimately, while the flow of information inside one specific company might be lower than before, the flow between different companies, which were previously not integrated, might actually be much faster than before. It is not fair to compare the speed of a centralized system with the speed of a distributed ledger, since the latter offers more functionality and disperses the information further where the former couldn't. A slower dispersion of information globally, through various entities, is, in this case, preferred to a fast dispersion only locally, through an organization's system or its closest associates. \todo{fcorreia: fico com a sensação depois de ler este paragrafo que a palavra "tradeoff" devia aparecer aqui algures}
+\item \textbf{Throughput}: Current blockchain technologies, even in private deployments, such as Hyperledger, have a high throughput, but not as high as certain centralized systems. This is one of the main concerns in supply chain, that a blockchain can't process the information quite as fast as the current systems, which could lead to a decrease in performance and further delays. As in any distributed system, though, the decrease in speed is often the price to pay for decentralization in supply chain. Ultimately, while the flow of information inside one specific company might be lower than before, the flow between different companies, which were previously not integrated, might actually be much faster than before. It is not fair to compare the speed of a centralized system with the speed of a distributed ledger, since the latter offers more functionality and disperses the information further where the former couldn't. A slower dispersion of information globally, through various entities, is, in this case, preferred to a fast dispersion only locally, through an organization's system or its closest associates.
+In conclusion, there might be a tradeoff between throughput and functionality, with higher functionality and integration being achieved at the cost of throughput.
 \item \textbf{Latency}: Similarly to throughput, and related to it as well, the latency of a transaction is something to take into account. With some blockchain deployments, like Bitcoin, each transaction might take a long time to validate, and this time might depend on the fees paid as well. This is mitigated by permissioned platforms such as Hyperledger, which have low latency, even in the presence of a high number of transactions, and possess no currency or fees to worry about.
 \item \textbf{Size}: The more transactions are processed and information stored in the blockchain, the bigger it actually grows. In the current context, if we were to deploy a global blockchain for all the supply chains, it would probably grow way too large in a small amount of time, which would not be sustainable in the long run. In a more limited scope, however, it would probably not be as big of a problem. There is also a lot of research in the optimization of blockchain size.
 \item \textbf{Security}: One concern for blockchains in general is how security is handled. This issue is more important in the case of public blockchains with PoW consensus. In the case of supply chains, there are many alternatives, and possibly having a public PoW blockchain is not the optimal one, so this is not the main security aspect to worry about. There is, however, another aspect to take into account, which is the fact that the hash functions being used at the moment might be broken in some years. If this were to happen, the immutability property of a blockchain would be broken and any prospects of proving the provenance of products or their traceability would lose their groundwork.
@@ -63,10 +58,8 @@ The second part of the problem deals, in a more technical way, with the lack of 
 \section{Similar existing applications}
 Some projects which try to fit blockchain as a solution for improving SCM have already emerged, or are in being worked on. This section explores some of these applications.
 
-
-
 \subsection{CargoX}
-%\todo{fcorreia: something that would be great to have in the document (but probably not here) is an analysis of relevant concepts within the domain of supply chain management; possibly including a domain model.}
+
 CargoX delivers a solution for making the Bill of Lading (B/L) documents digital.  To give some context: in a supply chain, many times, the products are delivered by cargo ships, inside containers. The B/L document has the same value as the value of the goods that are declared on it, serving the following functions:
 \begin{itemize}
 \item It is a receipt that acknowledges the loading of the products.
@@ -78,9 +71,14 @@ These characteristics make it an extremely valuable document, which must be tran
 CargoX uses Ethereum's smart contracts to put these paper documents into the blockchain. It has a built in token system that allows to exchange the document's ownership immediately after payment \cite{CargoX2017}.
 
 \subsubsection{Relevance and Applicability}
-It is a very specific solution for a very specific problem. It is a concept that could be integrated in a broader solution, and should fit the needs of this dissertation partially, in theory. The execution of the concept, however, seems to be lackluster in that it uses a public blockchain for extremely valuable documents. \todo{fcorreia: clarificar porque é que isto é má ideia. Acho que a questão não será necessariamente o serem "valiosos"... } It also uses a token system that seems designed to move currency around more than the documents themselves.
+It is a very specific solution for a very specific problem. It is a concept that could be integrated in a broader solution, and should fit the needs of this dissertation partially, in theory. 
 
-The idea of transmitting documents is an integral part of information integration, especially when these documents prove the ownership of something, and blockchain seems to be a good idea to digitize that proof of ownership in a way that can be traced.
+The execution of the concept, however, seems to be lackluster in that it uses a public blockchain, Ethereum, for extremely valuable documents. 
+One one hand, might bring about security issues, or even other problems. If Ethereum were to suffer a 51\% attack or any other kind of attack, the whole project would be compromised, along with the bills of lading. 
+
+On the other hand, the project uses a token system that seems designed to monetize a concept and also to move currency around more than the documents themselves.
+
+In the end, the idea of transmitting documents is an integral part of information integration, especially when these documents prove the ownership of something, and blockchain, depending on the execution, might be a good idea to digitize that proof of ownership in a way that can be traced. 
 
 \subsection{Eximchain}
 Eximchain is an all-round solution, which acts as a ledger, recording historical data and transactions, as an inventory management tool and also provides financial applications, by means of smart contracts. It was developed using a fork of Ethereum, Quorum, which is a permissioned version of Ethereum, focused on enterprise use, which means Eximchain runs on its own network \cite{Huertas2017}.
@@ -95,14 +93,14 @@ At the same time, the inventory, as well as all the goods, as are tracked across
 This application seems to focus on the most important points of supply chain management: the tracking of goods by the enterprises, the financial process of transmitting those goods and the integration of this information. These applications are highly practical and resonates with the goals that this dissertation tries to achieve, which are exactly to turn SCM more efficient by making the information readily available.
 
 \subsection{OriginTrail}
-Like CargoX, OriginTrail operates on the Ethereum network, and has its own ERC20 tokens. It synchronizes all supply chain data in the platform, and uses these tokens as an incentive. Underlying the use of the Ethereum network, OriginTrail has a custom network topology protocol designed as a privacy-layer, which can be seen in figure \ref{fig:origintrail_network}. This network uses zero-knowledge methods to validate data without making it accessible. This custom protocol consists of Data Holder (DH) and Data Creator (DC) nodes working together to receive, transmit, store and process the information. The data is communicated to the blockchain, where people with OriginTrail tokens can interact with it.
+Like CargoX, OriginTrail operates on the Ethereum network, and has its own ERC20 tokens. It synchronizes all supply chain data in the platform, and uses these tokens as an incentive. Underlying the use of the Ethereum network, OriginTrail has a custom network topology protocol designed as a privacy-layer, which can be seen in Figure \ref{fig:origintrail_network}. This network uses zero-knowledge methods to validate data without making it accessible. This custom protocol consists of Data Holder (DH) and Data Creator (DC) nodes working together to receive, transmit, store and process the information. The data is communicated to the blockchain, where people with OriginTrail tokens can interact with it.
 
-The main objective of the project is to ensure traceability of the products as they move from supplier to retailer, all while ensuring the data is not tampered with, which means this project has a high focus on privacy. The tokens serve as a way to exchange data ownership, as well as to make reviews on a reputation system. \cite{Rakic2017}
+The main objective of the project is to ensure traceability of the products as they move from supplier to retailer, all while ensuring the data is not tampered with, which means this project has a high focus on privacy. The tokens serve as a way to exchange data ownership, as well as to make reviews on a reputation system \cite{Rakic2017}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{media/origin_trail_network.jpg}
-\caption[Overview of the OriginTrail network]{Overview of the OriginTrail network. Available in \cite{OriginTrailTechno}}
+\caption[Overview of the OriginTrail network.]{Overview of the OriginTrail network. Available in \cite{OriginTrailTechno}.}
 \label{fig:origintrail_network}
 \end{figure}
 
@@ -122,8 +120,6 @@ Like OriginTrail, Ambrosus also has its own protocol, called AMB-NET, which host
 \subsubsection{Relevance and Applicability}
 This is another project with a more narrow scope, specializing in the tracking of the quality by using IoT. It is something that the other projects are not implementing, but it is important nonetheless. To some industries, it is even more important than any other feature, which makes quality-tracking a \textbf{must} in a supply chain management blockchain project.
 
-%TODO: TALK ABOUT MODUM.IO
-
 \subsection{IBM and Maersk's Demo}
 IBM, together with Maersk, just recently launched an innovative project which aims to create an open platform, using Hyperledger, for information sharing on a large scale \cite{A.P.MOLLER-MAERSK}.
 
@@ -131,12 +127,7 @@ It is an open platform, which features a shipping information pipeline and paper
 
 \subsubsection{Relevance and Applicability}
 
-Although it has a similar purpose to the one of this thesis, there have been reports of companies discontent with this platform, since it does not focus on the industry as a whole and ensure common standards. Instead, it is a platform designed to meet IBM and Maersk's expectations. Other than this, there has been very little information about it yet or about any progress made.
-
-%TODO: PUT A REFERENCE HERE FROM WHERE I READ THIS
-
-%\todo{fcorreia: nothing more to say about this? would be interesting to know in which way it compares with your goals and with the other similar applications}
-%It was just announced and they have no articles explaining it yet...
+Although it has a similar purpose to the one of this thesis, there have been reports of companies discontent with this platform, since it does not focus on the industry as a whole and ensure common standards. Instead, it is a platform designed to meet IBM and Maersk's expectations. Other than this, there has been very little information about it yet or about any progress made \cite{Andersen2018}.
 
 \section{Designing a Blockchain-based Supply Chain}
 %CHECK https://modum.io/system/
@@ -154,14 +145,11 @@ Blockchain is not always a one-size-fits-all solution, and its use must be caref
 As seen in the previously mentioned projects, like CargoX, Eximchain and OriginTrail, each of them followed their own purpose and goals, and each of them has a different set of features that allows them to achieve these goals. Similarly, these are some of the key components that a blockchain possesses, and the respective features that must be decided upon:
 
 \paragraph{Information Storage}
-The most basic and important feature of a blockchain is the ability to save data, which is then considered immutable, as well as registering any important events. As such, information storage is a must in supply chain. \todo{fcorreia: "is a must" é um pouco informal de mais} It also makes Inventory Management possible (though it's \todo{fcorreia: its} implementation is out of the blockchain's scope), traceability and provenance of products.
+The most basic and important feature of a blockchain is the ability to save data, which is then considered immutable, as well as registering any important events. As such, information storage might be important in the supply chain. It also makes Inventory Management possible (though its implementation is out of the blockchain's scope), traceability and provenance of products.
       
 \paragraph{Ledger and Transactions}
 Similarly, allowing for transactions and their recording onto the chain might be important, especially in what accounts for payments between businesses.
   
 \paragraph{Smart Contracts}
 Finally, smart contracts have the potential to be an important part of SCM. In the applications we described, smart contracts were used to transfer ownership of either data or products through tokens. This is just one of the many possible uses. Other smart contract uses include tracking items by their location or condition, automatically updating the status on the blockchain and reacting to any important events by notifying the organization responsible for the items. Another possible functionality is the automation of payments upon delivery. In the end, smart contracts allow for virtually any application, since they are code, programs being run on the blockchain, and so, they are one of the components of blockchain with the most potential for new and innovative features to be developed upon.
-        
-%\todo{fcorreia: Something that could be fun to have in this section is a diagram depicting the different concerns that you have to consider and how these different concerns affect each other. For an example, take a look at the diagram in page 3 of this paper: \url{http://blog.invisivel.net/wp-content/papercite-data/pdf/ferreira_core_2010.pdf}}
-
 

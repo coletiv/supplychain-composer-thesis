@@ -1,11 +1,7 @@
-\chapter{Blockchain}
+\chapter{Blockchain Technologies}
 \label{chap:blockchain}
 
 \minitoc \mtcskip \noindent
-
-\todo{fcorreia: estou a achar que não há uma justificação forte para ter este capitulo separado do seguinte. É certo que o seguinte tem uma parte de background e outra que que pode ser considerada quase revisão do SotA, mas não me choca tê-las como um único capitulo. o que te parece?}
-
-\todo{fcorreia: que tal chamar a este capitulo qq coisa como "Blockchain Technologies"?}
 
 This chapter introduces the most important concepts of blockchain which are essential for its applications. It interleaves the features of blockchain with its applicability to supply chain, by highlighting both the disadvantages and disadvantages, of blockchain in general and in particular to SCM, as well as any existing models for the integration of blockchain with SCM.
 
@@ -23,7 +19,7 @@ In each of these areas, there are many ways in which blockchain can be used, be 
 %\paragraph{Original blockchain}    
 The original blockchain, Bitcoin, was developed with the purpose of creating a distributed online payment system without the need for a financial institution or any other centralized trusted third party to verify the transactions. It even has its own currency, made up from digital tokens that represent real money, a concept which is now commonly known as a cryptocurrency.
 
-Eventually, this concept evolved into something more, and new uses, other than online transactions, emerged from the blockchain technology. As described by Marc Pilkington \cite{Pilkington2015}, \textit{"the essence of the blockchain is informational before being economic or monetary, conducive to many emerging and increasingly popular token-free blockchains."}
+Eventually, this concept evolved into something more, and new uses, other than online transactions, emerged from the blockchain technology. As described by Marc Pilkington \cite{Pilkington2015}, \textit{"the essence of the blockchain is informational before being economic or monetary, conducive to many emerging and increasingly popular token-free blockchains"}.
 
 Therefore, the algorithms used by Bitcoin are not a defining feature of the blockchain technology, but merely one of the many possible applications.
     
@@ -60,28 +56,25 @@ Therefore, the algorithms used by Bitcoin are not a defining feature of the bloc
     \paragraph{Private Blockchains} These are usually owned by some organization and have access control, restricting write access to certain peers inside the organization. Read access might be restricted or not, according to the organization's goals. These blockchains, unlike public ones, might not require cryptocurrency or incentives, as the maintenance of the blockchain is done by the organization who owns it, and so they have all the interest in having nodes that can run the consensus process. In the end, this is a more centralized version of the blockchain, as the nodes are concentrated under the ownership of the organization. This also gives the advantage that alterations to the blockchain are easier to achieve, if so is desired (though it subtracts from the actual meaning and concept of an immutable blockchain). It is usually more efficient than public blockchains, being able of achieving a higher number of transactions processed per second.
     
     \paragraph{Consortium blockchains} They are a kind of hybrid blockchain, though closer to a private blockchain. They are controlled by many different organizations, and the consensus process is handled by pre-selected nodes from the organizations. This consensus might involve, for example, at least a certain percentage of the nodes agreeing on something (e.g.: if there are 15 fixed nodes, require at least 10 to sign the block). The permissions to read might be public or otherwise permissioned, and as such, this can also be considered a partially decentralized blockchain.
-    % TODO: INCLUDE QUOTE
-   % “So far there has been little emphasis on the distinction between consortium blockchains and fully private blockchains, although it is important: the former provides a hybrid between the ‘low-trust’ provided by public blockchains and the ‘single highly-trusted entity’ model of private blockchains, whereas the latter can be more accurately described as a traditional centralized system with a degree of cryptographic auditability attached.”[2] 
 
+    Consortium and private blockchains are not that different. According to Vitalik Buterin, \cite{Buterin2015}, \textit{"so far there has been little emphasis on the distinction between consortium blockchains and fully private blockchains, although it is important: the former provides a hybrid between the ‘low-trust’ provided by public blockchains and the ‘single highly-trusted entity’ model of private blockchains, whereas the latter can be more accurately described as a traditional centralized system with a degree of cryptographic auditability attached"}.
 %--> Hyperledger composer leans more towards the consortium permissioned blockchain type
     \subsection{Types of Consensus Mechanisms and Algorithms}
     
-     The most commonly used consensus algorithm is \textbf{Proof of Work (PoW)}, though there are others, like the most used alternatives, \textbf{Proof of Stake (PoS)}, and \textbf{Proof of Activity (PoA)}. We showcase some of the algorithms in table %TODO: PUT REFERENCE 2.1.
+     The most commonly used consensus algorithm is \textbf{Proof of Work (PoW)}, though there are others, like the most used alternatives, \textbf{Proof of Stake (PoS)}, and \textbf{Proof of Activity (PoA)}. We showcase some of the algorithms in Table \ref{table:consensus_comparison}.
     
 
-\todo{fcorreia: diminuir ao tamanho de letra da tabela, e eventualmente dimensão máxima de certas colunas, para a fazer caber nas margens.}
+\todo{fcorreia: diminuir ao tamanho de letra da tabela, e eventualmente dimensão máxima de certas colunas, para a fazer caber nas margens.} %FIX THE TABLE, BASICALLY
 
 %%%%%%%%%%% TABLE
-
-%TODO: FIX THIS
 
 % Please add the following required packages to your document preamble:
 % \usepackage[normalem]{ulem}
 % \useunder{\uline}{\ul}{}
 \begin{table}[]
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{Comparison between different consensus mechanisms.}
+\label{table:consensus_comparison}
 \begin{tabular}{|l|l|l|}
 \hline
 Type                                                                       & Overview                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     & Better Used In                                                                           \\ \hline
@@ -97,10 +90,7 @@ Proof of Stake (PoS)                                                       & \be
 
 %%%%%%%%%%% TABLE END
 
-
- .
-    
-    \subsection{Transparency}
+\subsection{Transparency}
    The blockchain is not only available to the mining nodes in the network. Though they are the ones who actively interact with the chain in order to make it grow, if the chain is public, anyone can view the records and verify the authenticity of the data. This is the property of transparency. In private or permissioned blockchains, it might happen that only certain actors have access to certain records, according to the access control rules set by the organization or set of organizations that manage it. This is done with the help of sets of asymmetric key pairs and a public key infrastructure.
     
 % Talk about merkle tree - is it necessary?
@@ -116,10 +106,8 @@ Proof of Stake (PoS)                                                       & \be
 
     In general, blockchains are applied in different ways, from public ledgers to private, in a continuum, according to the specific needs. Many of them even apply the concept of smart contracts. Vitalik himself suggested some possible applications of Ethereum, and many more have been idealized, with some even being successfully applied. Here are some examples of areas where the benefits of introducing blockchain have been studied.
     
-\todo{fcorreia: era interessante incluir referências para cada uma destas áreas de aplicação que se seguem}
 
-%\todo{It could make sense to mention, for each of the aread below, the key properties of a blockchain that it expectedly benefits from.}
-% In the frameworks chapter, it is mentioned a bit better than here
+%{It could make sense to mention, for each of the aread below, the key properties of a blockchain that it expectedly benefits from.} -> In the frameworks chapter, it is mentioned a bit better than here, but it is probably not essential for what we want here. We already decided that SCM is our focus
 
     \begin{itemize}
      \item Identity/Record Management - like in a notary, documents are validated and recorded.
