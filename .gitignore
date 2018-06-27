@@ -15,10 +15,8 @@
 *.mlt* 
 *.mtc* 
 *.out
-*.pdf
 *.thm 
 *.toc
 *.dvi
-thesis.pdf
 *.gz
 *.synctex
