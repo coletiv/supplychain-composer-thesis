@@ -220,7 +220,7 @@
 
 	\large \@author \normalsize
 	\vspace{1pc} \\
-	January 2018
+	June 2018
 	\ \\
 	\vfill
 	\ \\

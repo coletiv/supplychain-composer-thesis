@@ -75,11 +75,10 @@ The proposed assets in this model were: \textbf{Commodity}, \textbf{ShipmentBatc
 \subsubsection*{Transactions and Transactional Scripts}
 The way that the participants an interact with the network and with the assets is through transactions. \textbf{Transactions are the chaincode functions with certain parameters invoked by a user of the network} (how a user can invoke a transaction is another matter, also discussed in the following sections). So, while the participants and assets model the users and data storage of the system, \textbf{the transactions model the behaviour of the network}, by accessing the participant and asset registries and making changes. Any transaction invocation is always recorded in an immutable historical record.
 
-\todo{pedro: por figura nos anexos E e codigo tambem, e referenciar + por algumas cenas em bold}
 All the creation, deletion and update transactions are already supported by default by Composer, but all other behaviour needs to be modeled, and sometimes, even these default transactions should be made restricted and replaced by custom made ones, to ensure system integrity.
 
 
-The transactions that were modeled for this network, with all their parameters can be seen in Figure X, from the annexes, and their code is in Y. What follows is a list of these transactions with their descriptions:
+The transactions that were modeled for this network, are featured in the following list, with their descriptions: 
 \begin{itemize}
     \item \textbf{CreateShipmentAndContract} - creates a shipment and the associated contract at the same time, for a certain set of parameters, which includes a buyer, seller, the commodities to include in the shipment, etc.
     \item \textbf{UpdateShipment} - update a shipment's tracking status, location and optionally pass it over to a new holder. In case the shipment is being delivered to the buyer, if a payment was established in the contract, it is automatically done. \textbf{Emits a "possible fraud" event when a shipment does not arrive on the expected location, and a normal event warning that the shipment was updated as well}.
@@ -90,6 +89,8 @@ The transactions that were modeled for this network, with all their parameters c
     \item \textbf{TransferCommodityPossession} - transfer the ownership of a commodity to a different participant of the network, but only if the commodity is not currently part of any shipment. \textbf{Emits an event warning about the change of ownership}.
     \item \textbf{TemperatureReading} - Finally, and to ensure full product condition traceability, temperature readings can be inserted into the system. A shipment can log an array of temperature readings, and each time this transaction is called for a shipment, a reading can be inserted into the array.
 \end{itemize}
+
+Additionally, the transactions, with all their parameters can be seen in Figure~\ref{fig:full_class_diagram}, from appendix~\ref{chap:appendix-b}.
 
 %\item Tutorial/Show-off the functionalities of some kind? Include this on the 1st point?
 \subsubsection*{Queries}

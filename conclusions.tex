@@ -2,9 +2,13 @@
 \label{chap:conclusions}
 \minitoc \mtcskip \noindent
 
+The work done so far can be aggregated to reach some conclusions. This chapter summarizes these conclusions to reach a final conclusion in the overview. The difficulties that molded the trajectory of this dissertation are alo described.
+
+Finally, this chapter features important content in the form of a list of contributions of this dissertation, which interlace with the possible future work. More research can be done in this area and hopefully some of it based on the findings from this thesis.
+
 \section{Overview}
 
-All the work and contributions of this dissertation aim towards proving whether the following statement is valid or not: \textbf{\textit{"Blockchain a good architectural design for the Supply Chain Management domain."}}
+All the work and contributions of this dissertation aim towards proving whether the following statement, introduced in chapter~\ref{chap:supply-chain-problems} is valid or not: \textbf{\textit{"Blockchain is a good architectural design for the Supply Chain Management domain"}}.
 
  For this reason, 3 questions were formulated in the problem statement:
 \begin{enumerate}
@@ -19,13 +23,12 @@ Chapter~\ref{chap:survey} provided the answer to the first question. Chapter~\re
 \subsection*{Thesis Statement}
 \par We have almost all of the pieces to reach a final conclusion towards the main thesis statement. However, there is still the need for the expression "a good architectural design for the SCM domain" to be clarified. \textbf{What exactly does it mean for an architectural design to be good for some domain?} 
 
-If we were to compare a new architectural design against other existing designs for that same domain, then a new design could be considered good if it could cover all of the functionalities of the other designs and have some additional ones or be more efficient. But it was already determined that \textbf{the focus of this thesis statement was not to compare this architecture to others, but to evaluate it objectively and not relatively}. Therefore, a good design could be one that objectively covers all of the most important elicited requirements.
+If we were to compare a new architectural design against other existing designs for that same domain, then a system based on a new design could be considered good if it could cover all of the functionalities of the other designs and have some additional ones or be more efficient. But it was already determined that \textbf{the focus of this thesis statement was not to compare this architecture to others, but to evaluate it according to the requirements}. Therefore, a good design could be one that objectively covers all of the most important elicited requirements.
 
-\par The chosen framework had the possibility of satisfying the most requirements, out of all the frameworks. Even so, by answering the last question, it was concluded that the proposed design, even while choosing the most convenient tool possible, could only fill the requirements partially, with some important requirements not being fully achievable at the present moment.
+\par The chosen framework had the possibility of satisfying the most requirements, out of all the frameworks. Even so, by answering the last question, it was concluded that the proposed design, even while choosing the most convenient tool possible, could only fill the requirements partially.
 
-
-\emph{Therefore, if a good design is one that must be able to satisfy all of the requirements, then Blockchain is not a good architecture for the supply chain management domain.}
-
+%vspace
+\emph{Therefore, if a good design is one that must be able to satisfy all of the requirements, then it is not certain that Blockchain is a good architecture for the supply chain management domain, since not all of them were satisfied.}
 
 However, this does not mean Blockchain is not useful, since it can still partially fill some important requirements. \textbf{The fact that by itself, it might not be good enough to satisfy all the requirements, does not mean it cannot be used together with the current architectures} to fill in some gaps. Blockchain can still be applied as an aid and enhancement to some information system functionalities. For instance, financial transactions was a requirement that was fulfilled and listed very high on the requirements from the survey. No other present architecture uses this functionality, but through Blockchain, it can be implemented.
 
@@ -34,26 +37,19 @@ It is important that a conclusion was reached, but it is also important to look 
 
 These contributions might be useful for future research:
 
+%\todo{pedro: explicar porque sao importantes cada uma das contribuicoes}
 \begin{itemize}
-	\item \textbf{Background Analysis} 
-	\begin{itemize}
-		\item Analysis of the issues and challenges that supply chain management functionalities faces
-		\item Analysis and comparison of different blockchain development frameworks and networks
-		\item Research on important design considerations for SCM and for blockchain
-	\end{itemize}
 	\item \textbf{Survey Research and Analysis of Expert Opinions}
 	\begin{itemize}
 		\item Validation by the experts of the most important supply chain issues, supply chain points of improvement, information system features that a supply chain needs and the most wanted blockchain use cases for supply chain management
-		\item List of requirements for a blockchain-based supply chain management software, grouped by area
+		\item List of requirements for a blockchain-based supply chain management software, grouped by area %\todo{pedro: poucos resultados = pode ter visao parcial do que sao os requisitos}
 	\end{itemize}
 	\item \textbf{Software Engineering Artifacts}
 	\begin{itemize}
-		\item Organized List of Framework Requirements and Framework Evaluation
-		\item Requirements Specification document
-		\item Architectural design, including a Hyperledger Composer model, a Prototype implementation and a validation of the feasibility of the requirements
+		\item Framework Evaluation and Architectural design, including a Hyperledger Composer model, a Prototype implementation and a validation of the feasibility of the requirements
 	\end{itemize}
-	\item \textbf{Analysis of limitations of the Hyperledger Composer framework}
-	\item \textbf{Final considerations and analysis of the feasibility of using Blockchain as an architectural design for Supply Chain Management}
+	%\item \textbf{Analysis of limitations of the Hyperledger Composer framework}
+	%\item \textbf{Final considerations and analysis of the feasibility of using Blockchain as an architectural design for Supply Chain Management}
 \end{itemize}
 
 %{fcorreia: I'd expect to see here a list of contributions of your thesis. You do mention them, but a) I think they would be clearer to read as a list, b) you may be currently missing a few. I see at least 3 or 4, for example: a study of important design considerations for SCMSs, a study of important design considerations for blockchains, a prototype, an analysis of the benefits and liabilities of supporting a SCMS with a blockchain}
@@ -63,30 +59,31 @@ These contributions might be useful for future research:
 
 The work done in this research was not always linear, even though the logic is made to be linear. Since the beggining of the research, questions arised as to what points should be focused, what work would make the contributions important enough to reach a good conclusion. 
 
-One of the initial difficulties that most impacted the research was the lack of a quantitative baseline to compare the proposed project to. There are many other projects that attempt to, in one way or another, enhance the capabilities of supply chain by applying blockchain, some even showcased in the literature review. However, none had publicly available efficiency metrics that could be used for this project to be compared to. A lot of developers and companies were contacted to try to collect more data from the existing projects, to establish a baseline but the contacts did not fall through in a satisfactory way. 
+One of the initial difficulties that most impacted the research was the lack of a quantitative baseline to compare the proposed design to. There are many other projects that attempt to, in one way or another, enhance the capabilities of supply chain by applying blockchain as an architecture, some even showcased in the literature review. However, none had publicly available efficiency metrics that could be used for this project to be compared to. Many developers and companies were contacted to try to collect more data from the existing projects, to establish a baseline but the contacts did not fall through in a satisfactory way. 
 
 In the same way, some supply chain companies were contacted to the purpose of establishing a quantitative baseline for the needs of supply chain. This could have included, for example, knowing how many products a company shipped per a certain amount of time, since this data could lead to interesting conclusions. But none had the specific data needed or the interest to maintain a continuous working relationship for the purposes of this research.
 
-Thus, one of the biggest difficulties for this dissertation was the lack of partnerships and difficulty in establishing and maintaining contacts interested in contributing to the research. This was also one of the aspects that a lot of time in this dissertation was put into, without fruitful results to show for the effort done.
+Thus, one of the biggest difficulties for this dissertation was the lack of partnerships and difficulty in establishing and maintaining contacts interested in contributing to the research. %This was also one of the aspects that a lot of time in this dissertation was put into, without fruitful results to show for the effort done.
 
+Another difficulty was that the frameworks used are not very mature. Some had their development abandoned, while others are still in development, with unstable code, and there are always new versions being released, which sometimes changed the way the features worked.
 
-Another difficulty was that the frameworks used are not very mature. Some had their development abandoned, while others are still in development, with some bugs, and there are always new versions being released, which sometimes changed the way the features worked.
-
-Finally, without a comparison baseline, the survey was developed, as a way to get expert knowledge in a more indirect way. But getting experts to answer the survey was not easy. The expected profile for the participants of the survey was not a common one, and the survey had to be shared through specific channels, often times being completely ignored.
+Finally, without a comparison baseline, the survey was developed, as a way to get expert knowledge in a more indirect way. But getting experts to answer the survey was not easy. The expected profile for the participants of the survey was not a common one, and the survey had to be shared through specific channels, often times having a relatively low answer rate.
 
 \section{Future Work}
 
-The work here done was much more introductory in nature, and explored the requirements and their satisfaction as a whole. Additionaly, the maturity of the tools used was questionable. This research can be used as the groundwork for more important conclusions and contributions to be reached.
+The work here done was introductory in nature, and explored the requirements and their satisfaction as a whole. Additionaly, the maturity of the tools used was questionable. This research can be used as the groundwork for more important conclusions and contributions to be reached.
 
 Future work might include:
 \begin{itemize}
+	\item Gather requirements through other means, such as interviews and top-of-the-market tools for supply chain management.
 	\item Taking specific requirements from the most important requirements on the list and research on using blockchain to successfully apply them as enhancements:
 	\begin{itemize}
 		\item Financial applications, payments and contractual agreements.
 		\item "Applying Blockchain as a financial alternative in the Supply Chain", for instance, can be a topic of research, among others.
 	\end{itemize}
 	\item Research and attempt to use different frameworks to fulfill the same requirements that were elicited in this dissertation.
-    \item Build a more complete topological network for the proof-of-concept, thouroughly analyze the performance and compare it to other systems and architectures.
+	\item Build a more complete topological network for the proof-of-concept, thouroughly analyze the performance and compare it to other systems and architectures, including systems different from Blockchain.
+	
 \end{itemize} 
 
 %Nao usar situaçoes hipoteticas
