@@ -1,10 +1,8 @@
 \section{Requirements Specification}
 \label{sec:requirements-specs}
-\todo{pedro:put IEEE reference in this paragraph}
-\todo{pedro: specify that the requirements here used differ slighlty, because the survey took a bit to collect the results}
-This section specifies the requirements for the software that was built using Hyperledger Fabric and Composer. The design, implementation and validation of these requirements is the subject of the following chapters.
+From the survey, a list of high level requirements was defined, but these requirements need to be refined into more detailed requirements, if they are to give origin to a design and implementation. As it was already mentioned, in theory, the survey would have to be finished before the requirements were written, but in practice, the work was done more iterativelly.
 
-The structure for this specification will somewhat resemble the organization of IEEE 830-1998 requirements specification standard~\ref{}, but in a simplified way, without some of the unneeded clutter and information. The specification is divided in the following way:
+The structure for this specification will somewhat resemble the organization of IEEE 830-1998 requirements specification standard~\ref{720574}, but in a simplified way, without some of the unneeded clutter and information. The specification is divided in the following way:
 \begin{enumerate}
 	\item Introduction - Product purpose, scope, overview and users;
 	\item Requirements - Specific requirements including functional requirements, non-functional or quality requirements, permission list and design constraints.
@@ -196,14 +194,13 @@ Overall, the product should follow these parameters:
 		
 \end{enumerate}
 
-\todo{pedro: será que devia mesmo representar os nos e a sua distribuiçao?}
 
 \subsection*{2. Mandated Constraints}
     \begin{itemize}
 		\item The product shall represent a Proof of Concept (PoC), such that it must accurately simulate some of the variables, which include the number of nodes needed for the system to work, their distribution, the transaction load, number of products and companies (TBD).
 		\item The node number and distribution of the nodes might be subject to budget and time constraints, as it depends on external services, such as Amazon Web Services (AWS).
 		\item The data sets used to reproduce this proof of concept are based on the data from projects such as OriginTrail, among others, and are adapted and created by the developer of this PoC.
-		\item The data will follow the GS1 EPCIS standards and specifications for data formatting, as possible (https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf).
+		\item The data will follow the GS1 EPCIS standards~\footnote{\url{https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf}} and specifications for data formatting, as possible.
 		\item The product shall have well defined APIs that allow for incoming and outgoing data to circulate between the ledger and external systems, namely ERPs.
 		\item Any software frameworks used will be open source. This project will use Hyperledger Fabric and Hyperledger Composer.
 		\item A company/trading partner wishing to join the supply chain's blockchain ledger must comply with the GS1 standards, namely by having a globally recognized identification (GS1 Company Prefix) and the company's locations must also be globally and uniquely identified.
