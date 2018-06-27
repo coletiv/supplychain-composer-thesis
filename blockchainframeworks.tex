@@ -1,6 +1,6 @@
 %\chapter{Blockchain Frameworks}
 \section{Blockchain Frameworks}
-\label{chap:blockchain-frameworks}
+\label{sec:blockchain-frameworks}
 
 \minitoc \mtcskip \noindent
 
@@ -166,9 +166,6 @@ In a simplified way, the workflow of the consensus, as shown in Figure~\ref{fig:
 Compared to other blockchains, this consensus mechanism has some advantages, though its application is somewhat limited to some use cases. Table~\ref{table:consensus_comparison} summarizes some points of difference between a blockchain using Proof of work and one, like Hyperledger, using a BFT state machine consensus.
 
 
-
-\todo{fcorreia: reduzir tamanho de letra da tabela seguinte}
-
 %%%%%%%%%%%%%%%% TABELA COMPARATIVA %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Please add the following required packages to your document preamble:
@@ -202,7 +199,7 @@ In brief conclusion, Hyperledger allows for a permissioned blockchain which sacr
 
 \subsection{Hyperledger Composer}
 \label{sec:composer-background}
-Hyperledger Composer is another tool which works together with Fabric to allow for an easier approach to modeling a blockchain network. It is actually a higher level abstraction of Fabric, which allows for a big reduction in the lines of code written and simplifies the whole process of building a business network and deploying it, as well as the process of managing the identities of the network's participants. 
+Hyperledger Composer is another tool which works together with Fabric to allow for an easier approach to modeling a blockchain network. It is actually a higher level abstraction of Fabric, which allows for a big reduction in the lines of code written and simplifies the whole process of building a business network and deploying it, as well as the process of managing the identities of the network's participants. The whole documentation for the project is continuously being updated at their website~\cite{LinuxFoundation2018}.
 
 It features a nice and intuitive graphical user interface to manage all of its components, and it also features a REST server to expose the blockchain to outside applications.
 
@@ -223,15 +220,13 @@ If a business network model is deployed multiple times with a different sets of 
 
 The 4 main components: 
 
-\paragraph{Model File} This is where all the main data components are defined. \textbf{Assets} are the main "objects" that are handled in transactions, and they can represent a variety of things. One example can be a "car". \textbf{Participants} are the types of people that will be participating in the network. One example participant can be "Customer", which will have fields like "Balance" and "Name". An instance of a participant can be linked to a real identity of a person using the blockchain. \textbf{Transactions} are the most important data object. They model what actions can be taken, and they usually have some data fields associated, which act as the input of the transaction. An example of a transaction can be "BuyCar", which could have as parameters the car ID, and a participant could then call this transaction, if they had the permission to do so. All these 3 components, Assets, Participants and Transactions have their own registry. While the Assets and Participants registries are mutable, the Transactions registry is not.
+\paragraph{Model File} This is where all the main data components are defined. \textbf{Assets} are the main "objects" that are handled in transactions, and they can represent a variety of things. One example can be a "car". \textbf{Participants} are the types of people that will be participating in the network. One example participant can be "Customer", which will have fields like "Balance" and "Name". An instance of a participant can be linked to a real identity of a person using the blockchain. \textbf{Transactions} are the most important data object. They model what actions can be taken, and they usually have some data fields associated, which act as the input of the transaction. An example of a transaction can be "BuyCar", which could have as parameters the car ID, and a participant could then call this transaction, if they had the permission to do so. All these 3 components, Assets, Participants and Transactions have their own registry. While the Assets and Participants registries are mutable, the Transactions registry is not. Additionaly, another type of object can be defined in this file, \textbf{Events}, which can be emited by transactions and subscribed by applications which can handle them, for instance, to generate notifications.
 
 \paragraph{Script File} This file contains all the functions that define how a transaction behaves and what kind of data it processes and outputs. It can also have additional auxiliary functions.
 
 \paragraph{Access Control} This is where the access rules are defined. These rules include restrictions on who can invoke which transactions, who can read the data, and many other permissions.
 
 \paragraph{Query File} This file includes some queries that can retrieve information from the blockchain. This information might include any assets, participants or transaction history, and it is also subject to the access control rules. These queries are both exposed to outside applications through the composer REST server and to the Script file functions.
-
-%TODO: MENTION EVENTS
 
 All of these components can be compiled into one file (.bna), which is then deployed onto Fabric.
 
@@ -249,10 +244,7 @@ Composer also has configuration files for some of Fabric's properties. It posses
 \subsection{Corda}
 Corda's take on blockchains vastly differs from Ethereum or Hyperledger. Traditionally, banks have their own ledger, but Corda wants to unify these ledger's into one, claiming that it improves the cost and efficiency. Corda focuses solely on providing a distributed ledger for financial services, where financial agreements can be recorded and managed, available to any financial institution\cite{Brown2016}. 
 
-This is a very specific purpose, which means that Corda's application on Supply Chains would be rather limited, to fixing payments and agreements, perhaps. Even Corda's own smart contracts are pretty limited in what they allow, in comparison to Ethereum's, since they don't allow for all the freedom of computation that
-
-%\todo{fcorreia: I'm not sure I understood what you mean to say here. Couldn't we use corda's code base or use it as a framework to deploy/operate a private blockchain applied to other domains? Reading corda's docs I see that they "sell" it as "a distributed ledger platform designed to record, manage and automate legal agreements between business partners", which sounds pretty generic.}
-%No, we couldn't. It's contracts don't run the same code as Ethereum's contracts do, in that it can do anything. It is actually pretty limited
+This is a very specific purpose, which means that Corda's application on Supply Chains would be rather limited, to fixing payments and agreements, perhaps. Even Corda's own smart contracts are pretty limited in what they allow, in comparison to Ethereum's, since they don't allow for all the freedom of computation. In theory, Corda is limited to the financial and legal contracts domain, with the functionality for custom contracts being very limited.
 
 \begin{figure}[h]
 \centering

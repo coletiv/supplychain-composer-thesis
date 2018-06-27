@@ -1,23 +1,17 @@
+The opinions of experts from a field can be highly valuable for research to achieve valuable contributions for that field. The optimal way to validate the issues of the supply chain would be to interview experts in a formal way. However, there were difficulties in this aspect, especially because most of the contacts did not go through and a lot of time and effort put into this was not fruitful. Therefore, since expert knowledge was still necessary, it was decided that a survey would be a more efficient method of gathering opinions and results.
+
 The survey was written during the months of March and April, 2018, with results being collected from the end of April up until the mid of June. The purpose, methodology and results of the survey are analyzed in this chapter, leading to the validation of the issues mentioned in the previous chapters. The survey and analysis done here also serves as a basis for the requirements that were used to build a Proof-of-Concept (PoC) prototype. 
 
 However, due to various factors, the survey and collection of results was delayed from the initial planning, resulting in the collection of results only being completed in June. Thus, the PoC used some assumptions from both the background analysis and the few initial answers from the survey, and kept iterating the requirements based on the new answers received during the development. 
 
-%Filipe's Comment: <em vez de tentar justificar porque é que a survey apareceu tarde, explicaria apenas que os resultados não chegaram a tempo de informar todas as decisões de design e implementação>
-
-\todo{pedro: explain LATER why the survey was late}
-
-
 \section{Purpose and Target}
 Even though the survey was delayed, the answers given are still important in the end. The main purpose of this survey, as stated in~\ref{sec:survey-approach}, was to give a response to the question we are focusing on: \textbf{"What supply chain issues, improvements and requirements do the experts really find the most important?"}. 
 
-\todo{fcorreia: aqui, ou algures, precisas de explicar que o objetivo era que a tua abordagem fosse guiada por necessidades da prática atual no domínio das SCs. Reconheceu-se que o importante seria obter esse conhecimento a partir de peritos da área. Mostrando-se impossível ter acesso direto a essas pessoaos, a forma arranjada para obter esse conhecimento foi usando um survey}
+
 
 This is done by dividing the survey into groups of questions: some about the issues of supply chain, some about the points of improvement as well as the opinions applicability of Blockchain as a system for supply chain management. Together, these allow for an opinion to be formed about the quantitative measurements of the importance of each issue, as well as a qualitative collection of requirements.
 
-The survey is aimed at people with knowledge in the area of Supply Chains, and optionally Blockchain. The combination of knowledge in both areas is relevant for the questions that focus Blockchain applicability. However, having low knowledge about Blockchain is also relevant, so that the bias towards this architecture is reduced. %The Blockchain knowledge in this study was also part of the questions inquired, and has an approximately normal distribution, which means the sample
-
-\todo{fcorreia: sobre a ultima frase: sim e não. ter conhecimento de BC não quer dizer que se seja fanboy :-) pode simplesmente tanto querer dizer que se está bem informado como querer dizer que se está mal informado...}
-
+The survey is aimed at people with knowledge in the area of Supply Chains, and optionally Blockchain. The combination of knowledge in both areas is relevant for the questions that focus Blockchain applicability. However, having low knowledge about Blockchain is also relevant, so that the answers are more diversified for both sides, thus reducing the bias. %The Blockchain knowledge in this study was also part of the questions inquired, and has an approximately normal distribution, which means the sample
 
 \section{Methodology}
 This section describes how the data was collected and analyzed. It gives a brief overview of what questions were asked, how they were grouped, the objectives of each question, along with the type of answers used.
@@ -38,27 +32,26 @@ The questions of the survey can be roughly grouped into four main groups of ques
 
 \begin{enumerate}
 
-%TODO: maybe it is 5 questions after all?
-\item \textbf{Statistical group 1 (4 questions) - General Information}
+\item \textbf{Question Group 1 - General Information}
 	\begin{itemize}
 	\item \textbf{Questions} - Information about the respondent's contact with supply chain, role in the industry, years of experience and number of employees in the current company (if in a job related to supply chain).
     \item \textbf{Conclusions Expected} - Characterization of the respondent's, especially in order to validate the relevance of their profiles.
     \todo{fcorreia: estes "conclusions expected" são mais "goals", certo?}
 	\end{itemize}
     
-\item \textbf{Statistical group 2 (4 questions) - Blockchain Knowledge and Opinions}
+\item \textbf{Question Group 2 - Blockchain Knowledge and Opinions}
 	\begin{itemize}
 	\item \textbf{Questions} - Questions about the general knowledge of Blockchain technology, opinions about Blockchain cryptocurrencies and their usefulness in various contexts, as well as Blockchain regulation and the effect of GDPR on Blockchain technology.
     \item \textbf{Conclusions Expected} - Get a vision on the need or not of cryptocurrencies for Blockchain related architectures, as well as the impact of regulations on this technology.
 	\end{itemize}
     
-\item \textbf{Statistical group 3 (10 questions) - Supply chain Points of Focus and Problems}
+\item \textbf{Question Group 3 - Supply chain Points of Focus and Problems}
 	\begin{itemize}
     \item \textbf{Questions} - Questions to rate affirmations that deal with supply chain issues, focusing on the level of agreement that the participants have with the affirmations. Most of the affirmations correlate supply chain major issues with the points of failure that might underlie them; The others rate specific problems in an importance scale or by percentage of occurrence.
     \item \textbf{Conclusions Expected} - Validation of the issues that affect the supply chain management metrics the most, as per the opinion of specialists.
 	\end{itemize}
     
-\item \textbf{Statistical group 4 (4 questions) - Supply Chain Points of Improvement and Applicability of Blockchain Technology} 
+\item \textbf{Question Group 4 - Supply Chain Points of Improvement and Applicability of Blockchain Technology} 
 	\begin{itemize}
     \item \textbf{Questions} - The first half of these questions serves to prioritize the importance of some supply chain issues, as well as the importance of some functionalities that supply chain information systems should feature. The second half of the questions ranks the use cases and benefits that Blockchain could bring to supply chain management.
     \item \textbf{Conclusions Expected} - This is the main point of the survey, and from here, the most important information towards the conclusions we want from the survey is gathered, which consists in the supply chain issues leading to Blockchain system requirements.
@@ -78,8 +71,6 @@ The questions of the survey can be roughly grouped into four main groups of ques
 \subsection{Data Analysis}
 
 %What is done with the data: what questions do we really want to answer with the collected data?
-
-% TODO: What kind of statistical analysis are we conducting to get the results we want - report better
  
 The analysis of the answers is done through bar graphs and using mostly the \textbf{measures of central tendency or location},  \textbf{measures of central spread, scale or dispersion} and \textbf{measures of skewness and kurtosis}. The metrics used to analyze the data set and reach some conclusions, as well as the way they are interpreted in this study are detailed in Table~\ref{metrics-table}.
 

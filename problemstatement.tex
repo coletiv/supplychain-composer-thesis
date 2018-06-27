@@ -2,28 +2,21 @@
 \label{chap:supply-chain-problems}
 \minitoc \mtcskip \noindent 
 
-This chapter focuses on explaining the objectives of this thesis, by defining the statements that are being defended, as well as the approach that will be taken to determine whether these statements are valid or not.
-
-\todo{fcorreia: dizer que vais "defender" uma afirmação não me parece a melhor forma de colocar as coisas. poderias dizer que vais "defender" uma hipótese, mas isso não bate certo com várias coisas que tens para a frente, por isso não aconselharia a ir por aí. acho que o mais fácil seria dar a volta a esta frase e a algumas outras que possam aparecer a seguir para evitar a palavra "defender". Em vez disto, podes dizer por exemplo que "this chapter focuses on explaining the objectives of this work, by defining the thesis statement, as well as the approach that will be taken to determine whether these statements are valid or not.}
+This chapter focuses on explaining the objectives of this thesis, by defining the thesis statement, as well as the approach that will be taken to determine whether the statements and underlying assumptions are valid or not.
 
 After having previously mentioned some background information about Blockchain technology and frameworks, as well as about supply chain management and supply chain issues, it is now time to focus on what these issues mean. Therefore, a possible way to overcome these issues through the means of Blockchain technology shall be formulated and tested.
 
 \section{Objectives}
 
-\todo{fcorreia: Evita a ausência de texto entre títulos de secção e o título da primeira das suas subsecções (e.g., esta secção, mas há outras)}
+This section introduces the focus points of the research content and the objectives of the research work.
 
 \subsection{Main Points of Focus}
 \label{sec:points-of-focus}
-In SCM, a product's life cycle can be roughly divided into the many phases the product goes through, down from the raw materials up until the finished product ends in the hands of a consumer. Starting in the raw materials, these undergo iterations of processing and shipment, traveling from one place to another, while being transformed in successively more refined products \todo{fcorreia: da forma como está escrito dás a entender que é obrigatório serem transformados. na frase que vêm a seguir tentas clarificar isso, mas pode ser confuso se os leitores tiverem percebido o contrário nesta frase} and changing owners. This holds true for any product in any kind of industry, and even the simplest of products which might not require any processing (for instance, fresh produce), have to be shipped from their place of origin to the place where they will be sold.
+In SCM, a product's life cycle can be roughly divided into the many phases the product goes through, down from the raw materials up until the finished product ends in the hands of a consumer. Starting in the raw materials, most products undergo iterations of processing and shipment, traveling from one place to another, while being transformed in successively more refined versions and changing owners. This holds true for any product in any kind of industry, and even the simplest of products which might not require any processing (for instance, fresh produce), have to be shipped from their place of origin to the place where they will be sold.
 
 
-\textbf{The improvement of the management of this life cycle is one of the main objectives of this thesis. This improvement, however, has many points of focus. Some were already briefly introduced in Sections~\ref{supply_chains} and~\ref{supply_chain_challenges}, from which we can extract the following points as the most important.}
+\textbf{The improvement of the management of this life cycle is one of the main objectives of this thesis. This improvement, however, has many points of focus. Some were already briefly introduced in Sections~\ref{supply_chains} and~\ref{supply_chain_challenges}, from which the following points are summarized as being important:}
 
-\todo{fcorreia: Concordância entre plural e singular ("is" vs "objectives"). Deves começar com letra maiuscula sempre que forem nomes de elementos do documento, como "Sections 1.1", "Figure xpto"}
-
-\todo{fcorreia: dizer que "extrais" estes pontos a partir dos anteriores pode dar a entender que antes já falaste de tudo isto (e de mais ainda), embora na realidade agora é que vás estar a detalhar.}
-
-% Assumptions? Some statements about supply chain efficiency;
 \begin{itemize}
 % Speed of delivery
 \item \textbf{Speed of delivery}
@@ -35,9 +28,7 @@ One thing is certain: the world around us moves quickly, and in the freneticism 
 %Synchronization - specify why it is important
 Many times, the data from a company is synchronized with its own servers and software, in protocols and data formats that can only be understood by that specific piece of software. If many companies share this same software, then they can easily integrate the information between themselves.
 
-The real problem occurs when the companies have no common ground and the data is not transmittable in an automatic way, leading to a lot of unnecessary manual work to export the data from one system and import it into another. Though there may be many causes for this, the logic assumption would be that this problem may be originated mainly the following:
-
-\todo{fcorreia: "from" the following?}
+The real problem occurs when the companies have no common ground and the data is not transmittable in an automatic way, leading to a lot of unnecessary manual work to export the data from one system and import it into another. Though there may be many causes for this, the logic assumption would be that this problem may be originated mainly from the following:
 
 \begin{itemize}
 \item \textbf{Lack of development of data integration standards in the supply chain industry.}
@@ -63,9 +54,6 @@ On the other hand, \textbf{the information that is generated and inserted into a
 
 \todo{fcorreia: não me é claro de que forma é que estas duas partes "on the one hand ... on the other hand" se opõe... Em todo o caso, poderia ser útil uma referência aqui, se tiveres.}
 
-On the other hand
-
-\todo{fcorreia: ficou perdido este "on the other hand"? :-)}
 \end{itemize}
 
 \subsection{Possible Solutions}
@@ -86,15 +74,9 @@ The main objective has already been defined: to improve the security traits, tra
 \todo{fcorreia: a parte "if these attributes are really the right requirements to focus on" é mais uma consequência do resto do trabalho. acho que só deve aparecer mais tarde, e ser apresentado como uma forma de validar a abordagem}
 
 % MAIN THESIS we are defending defined here
-%TODO: SHOULD IT BE IN QUESTION FORM, OR AFFIRMATION?
 Therefore, the main statement that this thesis defends is: 
 
 \par \textbf{\textit{"Blockchain a good architectural design for the Supply Chain Management domain."}}
-
-\todo{fcorreia: uma thesis statement normalmente é uma afirmação e não uma pergunta. eu reescreveria desta forma, diz-me o que achas:\\
-Therefore, the thesis that underlies this work is that:\\
-\par \textbf{\textit{"Blockchain a good architectural design for the Supply Chain Management domain"}}.\\
-E a seguir já estás a dizer que há várias assunções por trás disto, e explicas quais são, o que me parece mto bem. }
 
 % THESIS branches: all the possibilities that might happen
 This statement may be based on many assumptions, which gives rise to some more questions. For instance, we are assuming that the points of focus from Section~\ref{sec:points-of-focus} are really the most important ones, given the background information that was collected.
@@ -105,8 +87,6 @@ Thus, the questions that need to be answered first, in order to reach a conclusi
 \item \textbf{What is the Blockchain tool or framework most adequate to the development of an architecture that can support these requirements?}
 \item \textbf{Is it possible to build a feasible architectural design, by using such a tool, to implement all these requirements?}
 \end{enumerate}
-
-\todo{pedro: compor a 3a pergunta, em alguns sitios falta virgula e o "to"}
 
 These questions are sequential, meaning that, in order to answer one of them, we have to answer the previous question. Only in the end can we reach a definitive conclusion, though the sub-conclusions are also interesting to analyze and a contribute themselves to this area.
 
@@ -122,10 +102,8 @@ These questions are sequential, meaning that, in order to answer one of them, we
 To answer these questions from Section~\ref{subsec:thesis-statement}, the work of this dissertation was divided into two main parts, each of them comprising a chapter:
 \begin{enumerate}
 \item \textbf{Survey Research - Supply Chain Issues Validation and Requirements Elicitation}
-\item \textbf{Software Engineering - Architectural Design and Implementation of a Prototype}
+\item \textbf{Research Validation - Design and Implementation of a Prototype}
 \end{enumerate}
-
-\todo{fcorreia: estes prefixos parecem-me redundantes}
 
 % Each one focuses on supporting a specific part of the thesis statement;
 Each of these focuses on reaching a conclusion towards the answers that underlie the thesis statement.
@@ -135,31 +113,24 @@ Each of these focuses on reaching a conclusion towards the answers that underlie
 % The survey will serve to support "..." and take conclusions about whether "..."
 The first question to answer in order to reach any conclusion is \textbf{\textit{"What supply chain issues, improvements and requirements do the experts really find the most important?"}}. As already mentioned, the other questions depend on the answers that we reach for this question.
 
-%TODO: should the verbs be in the past, present or future here?
-% What did you choose to do?
-The proposed way that was chosen to get an answer was an online \textbf{survey}. The survey serves the following purposes:
-
-\todo{fcorreia: aqui diria "used" em vez de "chosen", para não levantar perguntas. No capitulo sobre isto, mais abaixo, certifica-te de que mencionas que não foi possível conduzir entrevistas com peritos (por exemplo), o que teria sido fixe para complementar os resultados do survey.}
-%TODO: FIX THESE STATEMENTS BELOW TO WHAT IT IS NOW
+The proposed way that was used to get an answer was an online \textbf{survey}. The survey serves the following purposes:
 
 \begin{itemize}
-\item Collecting quantitative data on the relevance of the issues that supply chain management suffers from as well. \todo{fcorreia: as well?}
+\item Collecting quantitative data on the relevance of the issues that supply chain management suffers from.
 \item Collecting quantitative and qualitative data on which are the major points of improvement and compare their relative importance.
-\item Collecting quantitative and qualitative data on which issues and improvement points the experts think Blockchain can help the most with, and which are already taken care of by other solutions.
+\item Collecting quantitative and qualitative data on which use cases the experts think Blockchain can be more useful to accomplish.
 \item Collecting quantitative and qualitative data on which the functionalities that supply chain requires of information systems and blockchain.
 \item Correlate some of the data collected in the previous point and reach some extra conclusions that might help decide on the validity of the results.
 \end{itemize}
 
 % Why did you choose it?
-It was designed to be answered by people with experience in the field of Supply Chain, with knowledge about Blockchain being optional but appreciated. These are the opinions that have the most importance on this field, and these are also the people that interact with the systems in question and can more accurately pinpoint the points of failure and improvement.
-
-\todo{fcorreia: o It do inicio do paragrafo não está perto do ultimo uso de "survey". talvez substituir por "The survey"?}
+The survey was designed to be answered by people with experience in the field of Supply Chain, with knowledge about Blockchain being optional but appreciated. These are the opinions that have the most importance on this field, and these are also the people that interact with the systems in question and can more accurately pinpoint the points of failure and improvement.
 
 The survey was distributed over the internet, through relevant media and social forums, as well as through direct contact with professionals from the area. It was shared on some telegram channels of projects that apply Blockchain to the supply chain (most of which mentioned in the state of the art), on Reddit, through their supply chain and logistics forums, as well as on supply chain focused forum websites. It was also distributed to professionals through messages on LinkedIn (with a focus on managers), personally and through email.
 
-In conclusion, the goal of the survey is to validate some assumptions and direct the dissertation towards the most important \todo{(aspects?)} of the supply chain management problems.
+In conclusion, the goal of the survey is to validate some assumptions and direct the dissertation towards the most important supply chain management problems.
 
-\subsection{Software Engineering - Architectural Design and Implementation of a Prototype}
+\subsection{Research Validation - Design and Implementation of a Prototype}
 % The prototype will serve to support "...", along with the requirements that were written based on the background research and literature review; (do i have to rewrite part of the requirements?) 
 
 %TODO: should the verbs be in the past, present or future here?
@@ -168,21 +139,15 @@ Having answered the question about which are the most important aspects of suppl
 
 \todo{fcorreia: eu evitaria o "Having answered ...", porque isto se faz normalmente de forma mais iterativa e até porque na realidade a coisa não aconteceu de forma assim tão sequêncial como a frase dá a entender. A frase pode comçar diretamente com "this section is focused on applying the knowledge of which are the most important aspects ...."}
 
-The state of the art already provided some information towards the answer to the first of these questions, through the comparison of frameworks. Therefore, and taking the results of the survey into account, a brief analysis is undertaken to make a decision.
+The state of the art review documented in Chapters~\ref{chap:blockchain} and~\ref{chap:blockchain-applicability} already provided some information towards the answer to the first of these questions, through the comparison of frameworks. Therefore, and taking the results of the survey into account, a brief analysis is undertaken to make a decision.
 
-\todo{fcorreia: em vez de apenas "The state of the art", eu diria "The state of the art review documented in Chapter xpto"}
-
-Finally, and to answer the final question about the possibility and feasibility of building a blockchain-based architectural design for supply chain management, a software engineering approach is undertaken, using the chosen platform. 
-
-\todo{fcorreia: *todo* o teu trabalho pode ser visto como "software engineering" :-) Em vez disso eu falaria na contrução de um protótipo }
-
-%TODO: justify the choice of platform by the ease of use as well?
+Finally, and to answer the final question about the possibility and feasibility of building a blockchain-based architectural design for supply chain management, the implementation of a proof-of-concept is undertaken, using the chosen platform. 
 
 This approach is divided into the following phases:
 \begin{enumerate}
 \item \textbf{Requirement Elicitation and validation} - through the literature review research and survey results 
-\item \textbf{Design} - using the requirements, building a model that can implement these \todo{fcorreia: these... ?}
-\item \textbf{Implementation} - program the system according to the design, as close as possible without alterations \todo{fcorreia: porque a parte depois da virgula? é normal que o design tivesse sido alterado enquanto implementavas. não vale a pena gastar energia a explicar de que forma evoluiu ao longo do tempo, mas tb não vale a pena dizer que não evoluiu}
+\item \textbf{Design} - using the requirements, building a model that can implement the elicited requirements
+\item \textbf{Implementation} - program the system according to the design
 \item \textbf{Validation} - check if the built system satisfies the initial requirements fully, and if otherwise, explaining why not
 \end{enumerate}
 

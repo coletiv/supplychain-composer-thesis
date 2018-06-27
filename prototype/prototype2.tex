@@ -39,7 +39,7 @@ The structure for this specification will somewhat resemble the organization of 
 		\item System administrators - to control the network, help solve any issues that come up and do the needed maintenance.
 		\item Integration developers - the developers in charge of connecting their companies system to this system.
 	\end{itemize}
-	%TODO: check if the system actor is really needed
+
 	Each user shall have defined roles assigned within the system, according to their needs. These roles, along with the system itself, are the actors of the system:
 		\begin{itemize}
 			\item System - Hyperledger Fabric and Composer have certain behaviours that can be adjusted, which makes it possible for the system itself to be an actor with specific requirements it shall be able to satisfy.
@@ -60,7 +60,6 @@ The structure for this specification will somewhat resemble the organization of 
 
 To simplify reading and to save space, the functional requirements list consists of a small explanation at the beggining, followed by each requirement, with the ID and description. Since Hyperledger Fabric and Composer are being used, the requirements have some terms specific to the software, such as asset registry, transaction registry, participants, etc.
 
-\todo{pedro: na secção state of the art do composer, pôr referencia da documentacao}
 		\par \textbf{The System}
 		 The system itself needs to be able to record aggregate all of the data into blocks; the data consists of transactions, which are the actions undertaken in the system, and there should be registries for the network participants and assets as well. It is important that the information from these transactions can be made visible and that they can be invoked by the participants which have the permissions to do so. At the same time, the system should be able to handle multiple organizations joining the ledger, inserting all of their current data to the system, as well as extracting it to their own systems when needed. 
 		
@@ -157,21 +156,17 @@ To simplify reading and to save space, the functional requirements list consists
 
 These requirements were written having in mind the architecture of the Hyperledger projects, as well as the needs of a supply chain. They are also loosely written because they are iterated on during the implementation phase of the proof-of-concept.
 
-%TODO: talk about the data standardization as well as about the need for interoperability.
-
 \subsection*{2. Data Requirements}
 
 Another important part of the requirements which is not in itself an action undertaken by the users, is the form in which the data is formatted. One of the main objectives of building a blockchain system transversal to a whole supply chain, is to make the data as standardized as possible, so that any organization can easily import or export the data from the ledger to their systems and still have it in formats that any organization's system can understand. 
 
-As such, research was undertaken, and the following data requirements were built, based on the standards from the GS1 organization, an organization which builds global supply chain standards.
+As such, research was undertaken, and the following data requirements were built, based on the standards from the GS1 organization~\footnote{\url{https://wiki.hyperledger.org/\_media/groups/requirements/hyperledger\_-\_supply\_chain\_traceability-\_anti\_counterfeiting.pdf}}, an organization which builds global supply chain standards.
 
 \begin{itemize}
 	\item The data is divided into Master Data and Transactional Data.
 	\item The Master Data relates to Products/Assets and Entities, being more generalist and fixed, for those pairs. It includes the location number (for the location), the entities name, country and address data, as well as the asset's weight, name, identification number (GTIN).
 	\item The Transactional Data relates to the movement of assets through the supply chain, in the form of transactions. It includes the "when" part of the transactions, such as the planned date, expected dates and actual dates of a shipment, for instance.
-	\item \par For the specific data formats: https://wiki.hyperledger.org/\_media/groups/requirements/hyperledger\_-\_supply\_chain\_traceability-\_anti\_counterfeiting.pdf
 \end{itemize}
-		\todo{pedro: put the link as a reference}
 
 In a real system, all these data requirements would have to be implemented in a perfect way, with all the parameters, but this project, only being a proof-of-concept will use the minimum number of data fields deemed necessary for the implementation and basic functionalities of the system.
 		
