@@ -112,7 +112,7 @@ To simplify reading and to save space, the functional requirements list consists
             %\end{itemize}
             \item SCM12 - The members shall be able to query the user that possesses a specific asset, if they have the permission to do so. % (new) - Retrieve asset and owner info by Participant (owner) ID
             %\begin{itemize}
-				 %\item LOOPBACK filter doesnt work here: composer doesn't have the "inq" filter which is kind of like a "CONTAINS" to check if an array has a certain object
+				 %\item LOOPBACK filter doesnt work here: composer does not have the "inq" filter which is kind of like a "CONTAINS" to check if an array has a certain object
                 % Have to change the model to adapt to this, and assets now possess the owner as a data field
             %\end{itemize}
 			\item SCM13 - The members can check a shipment status, location and the status of all the item status included in the shipment, given that they are either the buyer, seller or current holder of the shipment. %s they are a buyer of contractually - Retrieve shipment information (including assets) by giving the buyer ID --->  "{"where": {"contract.buyer":"resource:org.logistics.testnet.Customer\#8774"}, "include":"resolve"}"  
@@ -120,7 +120,7 @@ To simplify reading and to save space, the functional requirements list consists
 			\item SCM15 - The members shall be able to update the shipments, along with the status, for the shipments they hold.
 			\item SCM16 - The members shall be able to edit their identity;% (IMPORTANT - should this be here?)
 			\item SCM17 - The members shall be able to input an XML file with a standardized format in order to submit data automatically;
-			\item SCM18 - The members shall be able to hold a cryptocurrency, in the form of a balance, with a static equivalence to real money, so that they can transfer it in contracts, in order to enable payments, fines and to settle contractual agreements. %(benefit of not needing human decision to settle agreements; if it's on a contract, it is followed thoroughly, which also makes it faster, a benefit of blockchain which is mostly overlooked). Hyperledger Fabric does not, by default, support a cryptocurrency.
+			\item SCM18 - The members shall be able to hold a cryptocurrency, in the form of a balance, with a static equivalence to real money, so that they can transfer it in contracts, in order to enable payments, fines and to settle contractual agreements. %(benefit of not needing human decision to settle agreements; if it is on a contract, it is followed thoroughly, which also makes it faster, a benefit of blockchain which is mostly overlooked). Hyperledger Fabric does not, by default, support a cryptocurrency.
         \end{itemize}
 
 		\par \textbf{Regulatory Entity}

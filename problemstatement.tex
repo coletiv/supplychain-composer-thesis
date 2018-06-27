@@ -22,7 +22,7 @@ In SCM, a product's life cycle can be roughly divided into the many phases the p
 \item \textbf{Speed of delivery}
 The effects of the evolution of SCM throughout the last century are visible to everyone. Products are bought and shipped from one side of the globe to the other in a matter of weeks or sometimes even days. Whether this is fast enough or not is a question that can not be entirely answered in one collective voice. 
 
-The world around us moves quickly, and in the freneticism and frenzy of our lives, it might happen that sometimes weeks or days aren't enough. \todo{fcorreia: afirmações absolutas são quase sempre contra-argumentáveis...  :-)} \textbf{The faster the products arrive to their customer, the faster the customer can satisfy their needs.} \todo{concordancia pural singular: "customer" vs "their"} This holds true not only for the final customer of a product, but also for any enterprise that provides products and services to other enterprises, be it in the role of supplier, manufacturers, distributors or retailers. \todo{fcorreia: não será melhor chamar-lhe antes "buyer" em vez de "customer", acho que dá menos a entender que te possas estar a referir ao cliente final}
+The world around us moves quickly, and in the freneticism and frenzy of our lives, it might happen that sometimes weeks or days are not enough. \textbf{The faster the products arrive to their buyer, the faster the buyer can satisfy their needs.} This holds true not only for the final customer of a product, but also for any enterprise that provides products and services to other enterprises, be it in the role of supplier, manufacturers, distributors or retailers.
 
 \item \textbf{Synchronization}
 %Synchronization - specify why it is important
@@ -45,10 +45,8 @@ For this reason, it is of the utmost importance that the products are tracked si
 %Security - specify why it is important
 This point is one of the most important to deal with, as security is comprised of many aspects, such as: who to authorize to access the information and how to restrict this, what authentication methods should be used, how to accurately detect and prevent fraud, etc. 
 
-Information in a supply chain is highly sensitive and not only should the people who access it be controlled, but also the people who generate it. \todo{fcorreia: em vez de dizer que as pessoas têm de ser controladas, eu diria que o acesso à informação tem de ser controlado} On one hand, most enterprises (or groups of enterprises) compete amongst themselves to make the most sales, the most deliveries and have the fastest product cycles. \textbf{All the information that is generated in the process might be too sensitive to share, in order to keep the edge on the competition}.
-On the other hand, \textbf{the information that is generated and inserted into any system should also be controlled and verified, in order to prevent both human error and fraud attempts}.
-
-\todo{fcorreia: não me é claro de que forma é que estas duas partes "on the one hand ... on the other hand" se opõe... Em todo o caso, poderia ser útil uma referência aqui, se tiveres.}
+Information in a supply chain is highly sensitive and it should be controlled so that only trusted entities can access it. Most enterprises (or groups of enterprises) compete amongst themselves to make the most sales, the most deliveries and have the fastest product cycles. \textbf{Therefore, the information that is generated in the process of managing a supply chain might be too sensitive to share, in order to keep the edge on the competition}.
+Additionally, \textbf{the information that is generated and inserted into any system should always be verified, in order to prevent both human error and fraud attempts}.
 
 \end{itemize}
 
@@ -56,16 +54,15 @@ On the other hand, \textbf{the information that is generated and inserted into a
 % Mention a possible solution that might or not be better
 While these previous points of focus are not problems in themselves, their improvement will greatly benefit any industry as well as the consumers of these industries. As such, the actual problem here can be narrowed down to \textbf{finding a way to satisfy these needs for improvement through technological means.}
 
-Some of the most common and traditional solutions include distributed databases, a commonly debated paradigm. \todo{fcorreia: mais que databases, eu diria "distributed systems"} Recently, cloud-based solutions for integrating supply chain software, as well as enterprise planning software have been taking the lead. \todo{fcorreia: há referências?} While these might satisfy the need to store the data in a way that can be easily retrieved, they are sometimes costly and have a rather narrow scope of integration. Distributed databases are not very scalable if we take think about maintaining the data of hundreds of companies \todo{fcorreia: o que é que querias dizer com "scalable" aqui? muitas vezes tornam-se sistemas mais distribuídos precisamente como forma de os escalar. E muitas vezes comaça-se a usar a cloud precisamente com o mesmo objetivo.}. The same can be said of cloud-based solutions. Scalability is not the only concern, security is as well. These technologies, however, are already being used, and it is time to analyze if there is a \textbf {good alternative}.%BACK THIS UP WITH REFERENCES
+Some of the most common and traditional solutions for this problem include distributed systems, and there are many solutions already available. However, these solutions, which include distributed systems like the cloud or distributed databases, might not satisfy all the needs of the supply chain. Researching alternative designs can be a good way to find new and useful implementations that might possibly even revolutionize this area.
 
 So, is there any other tool or technology that can be applied to SCM, in order to satisfy the need for improvement, one that is scalable, as well as secure?
-In many ways, Blockchain is similar to a distributed database, and it can even be integrated with the cloud for a mixed solution (the best of both worlds?), so there is a need to investigate if it might or might not be a fit solution for this optimization problem.
+In many ways, Blockchain is similar to a distributed database, and it can even be integrated with the cloud for a mixed solution (the best of both worlds?), so there is a need to investigate if it might or might not be a good solution for the supply chain requirements.
 
-\todo{fcorreia: esta secção precisa de levar uma volta. eu falaria brevemente (possivelmente fazendo referências para o capitulo do SotA) do software que já existe para SCM, e da forma que tenta resolver os mesmos problemas que estás a tentar resolver. acho que não vale a pena sequer entrar pelos "distributed systems/databases", a não ser que tenhas no SotA detalhes sobre SCMS que usam esse tipo de tecnologias.}
 
 \subsection{Thesis Statement}
 \label{subsec:thesis-statement}
-The main objective has already been defined: to improve the security traits, tracking of goods and processes, information synchronization, and possibly speed of delivery of the supply chain, along with other minor attributes. A seemingly good alternative that stands out is Blockchain. What remains to be answered, though, is if these attributes are really the right requirements to focus on, and if Blockchain can really fill them, as a distributed architecture.
+The main objective has already been defined: to improve the security traits, tracking of goods and processes, information synchronization, and possibly speed of delivery of the supply chain, along with other minor attributes. A seemingly good alternative that stands out is Blockchain. 
 
 \todo{fcorreia: a parte "if these attributes are really the right requirements to focus on" é mais uma consequência do resto do trabalho. acho que só deve aparecer mais tarde, e ser apresentado como uma forma de validar a abordagem}
 
@@ -75,7 +72,7 @@ Therefore, the main statement that this thesis defends is:
 \par \textbf{\textit{"Blockchain a good architectural design for the Supply Chain Management domain."}}
 
 % THESIS branches: all the possibilities that might happen
-This statement may be based on many assumptions, which gives rise to some more questions. For instance, we are assuming that the points of focus from Section~\ref{sec:points-of-focus} are really the most important ones, given the background information that was collected.
+What remains to be answered, though, is if mentioned attributes are really the right requirements to focus on, and if Blockchain can really fill them, as a distributed architecture. Thus, it can be seen that this statement might be based on some assumptions, which gives rise to some more questions. For instance, we are assuming that the points of focus from Section~\ref{sec:points-of-focus} are really the most important ones, given the background information that was collected.
 
 Thus, the questions that need to be answered first, in order to reach a conclusion towards the main thesis statement are the following:
 \begin{enumerate}
@@ -89,7 +86,7 @@ These questions are sequential, meaning that, in theory, in order to answer one 
 In the end, all the questions end up being answered and it is possible to reach a definitive conclusion towards the thesis statement. The sub-conclusions are also interesting to analyze and are a contribute themselves to this area.
 
 \section{Approach}
-% What if no possibility works or we can't ascertain the main possibility? Check other ones!
+% What if no possibility works or we can not ascertain the main possibility? Check other ones!
 
 % Construct the story of how the thesis came along! IMPORTANT (switch order?)
 %TODO: ANSWER THESE LAST 2 POINTS
@@ -162,4 +159,4 @@ After having answered all of the three questions that underlie the thesis statem
 
 %\todo{fcorreia: the technologies/techniques/approaches that make a blockchain are not new, I think you could even call them "traditional". They become more interesting when put together though.}
 
-%\todo{fcorreia: the last sentence of the above paragraph seems like a bit of a stretch. I think we can imagine alternative ways to do all of this without a blockchain. I don't think we want to compare blockchains with existing technologies, we want to see if blockchains *are* a good choice to implement supply chains management software that fits well with today's requirements (even if there may be other ways of achieving the same -- i.e., without a blockchain). WDYT?}
+%\todo{fcorreia: the last sentence of the above paragraph seems like a bit of a stretch. I think we can imagine alternative ways to do all of this without a blockchain. I do not think we want to compare blockchains with existing technologies, we want to see if blockchains *are* a good choice to implement supply chains management software that fits well with today's requirements (even if there may be other ways of achieving the same -- i.e., without a blockchain). WDYT?}
