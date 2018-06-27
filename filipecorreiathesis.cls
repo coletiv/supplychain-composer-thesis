@@ -206,7 +206,7 @@
   \begin{titlepage} 
     \centering
 	\footnotesize 
-	\textbf{\href{http://www.fe.up.pt}{\ \ \ U N I V E R S I D A D E\ \ \ D O\ \ \ P O R T O\ \ \ \textbullet\ \ \ F A C U L D A D E\ \ \ D E\ \ \ E N G E N H A R I A}} \\ 
+	\textbf{\href{http://www.fe.up.pt}{\ \ \ U N I V E R S I T Y\ \ \ O F\ \ \ P O R T O\ \ \ \textbullet\ \ \ F A C U L T Y\ \ \ O F\ \ \ E N G I N E E R I N G}} \\ 
 	\ \\ 
 	\ \\ 
 	\ \\ 
@@ -226,8 +226,8 @@
 	\ \\
 	Scientific Supervision by \\
 	\ \\
-	Filipe Alexandre Pais de Figueiredo Correia, Professor Auxiliar \\
-	Departmento de Engenharia Informática \\
+	Filipe Alexandre Pais de Figueiredo Correia, Assistant Professor \\
+	Department of Informatics Engineering \\
 
 	\vspace{4pc}
 

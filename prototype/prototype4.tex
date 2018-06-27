@@ -52,9 +52,9 @@ As for the non-functional requirements, a few comments will be made regarding ho
 As can be seen, a few of the functionalities are either not possible, or only in a limited way. There were 3 requirements not possible to implement, all due to limitations of the framework: submitting transaction batches, using multiple ledgers on composer and reverting a transaction's effect. 
 
 \begin{itemize}
-	\item \textbf{S4 - Transaction batches} would have to be implemented on the client side of any application that wants to communicate with the blockchain, and even then, it could only "simmulate" this feature, because it would have to submit the transactions one by one, and they might not all get submitted in the same block, which can be problematic.
+	\item \textbf{S4 - Transaction batches} would have to be implemented on the client side of any application that wants to communicate with the blockchain, and even then, it could only "simulate" this feature, because it would have to submit the transactions one by one, and they might not all get submitted in the same block, which can be problematic.
 	\item \textbf{S6 - Multiple channels} are still not available on Composer, making the creation of multiple channels for groups of organizations impossible for this framework.
-	\item \textbf{A1 - Reverting a transaction's effect} is not possible, because it is not possible to programatically in the script file, using the Composer runtime API, to access the contents of a previously submitted transaction. Composer only makes this content accessible to the Client API to be used by other applications.
+	\item \textbf{A1 - Reverting a transaction's effect} is not possible, because it is not possible to programmatically in the script file, using the Composer runtime API, to access the contents of a previously submitted transaction. Composer only makes this content accessible to the Client API to be used by other applications.
 \end{itemize}
 
 The partial requirements mean that part of the requirement was possible, or the requirement was somehow simulated in a different way than the one written in the specification.
@@ -62,7 +62,7 @@ The partial requirements mean that part of the requirement was possible, or the 
 \begin{itemize}
 	\item \textbf{SCM3 - Deploying contractual agreements} is only possible according to the contract format specified in the design. This means that custom contracts can not be submitted. Smart contracts are also limited to the ones already deployed on the network, and only the admins can update the network with new contracts.
 	\item \textbf{SCM4 and RE1 - Querying a product's lifecycle steps} is possible for commodities that have not gone through transformations, by simply querying all transactions associated with that commodity. However, when a commodity is transformed, it basically is deleted and new ones are created and there is no way, with the current Composer queries, to retrieve all of the transactions associated with all the products, from before and after the transformation.
-	\item \textbf{SCM18 - Holding a cryptocurrency} is simmulated here by the balance, reason why it is only partially implemented. It stil has the same usability a real cryptocurrency would have, since the balance can not be double spent because of the consensus, but it has limited interchangeability with other currencies and there are little management functions for the balance.
+	\item \textbf{SCM18 - Holding a cryptocurrency} is simulated here by the balance, reason why it is only partially implemented. It still has the same usability a real cryptocurrency would have, since the balance can not be double spent because of the consensus, but it has limited interchangeability with other currencies and there are little management functions for the balance.
 	\item \textbf{A2 - Create and delete new ledger channels} is possible in Fabric, though not in Composer. In theory, an admin can create a channel for Hyperledger Fabric, but it will not be usable by Composer.
 \end{itemize}
 
@@ -134,7 +134,7 @@ As can be seen, most of the requirements were fulfilled, but not all of them tot
 
 \textbf{Regulatory auditing} is also limited, because of the commodity transformations, which limit the scope of how far we can trace back a product. 
 
-\textbf{The development of industry standards} is done by organizations such as GS1, which are activelly working to ensure that the standards they develop are adopted world-wide.
+\textbf{The development of industry standards} is done by organizations such as GS1, which are actively working to ensure that the standards they develop are adopted world-wide.
 
 \textbf{Financial transactions} were developed, but not fully to a level that can be used industrially, so there is a lot of work to do on that field.
 
@@ -148,8 +148,8 @@ In retrospective, the chosen framework had a big impact in the implementation of
 Some of the Composer framework limitations found that impacted the development of this proof-of-concept:
 \begin{itemize}
 	\item  Queries are not powerful enough. There is no \textit{JOIN} and the usual SQL syntax is not always applicable. There is also no \textit{WHERE … IN …}, for instance. Model changes had to be made to adapt to this, and integrity might be lost.
-	\item The default Composer REST server is somewhat limited in its API. To extend the API, a custom server needs to be written; The queries and use of loopback filters is also limited on the default server, but can be more extensively used by building a custom server.
-	\item It is impossible to natively nest queries with the query language. To make up for this, several independent queries sometimes need to be executed, which is very unefficient.
+	\item The default Composer REST server is somewhat limited in its API. To extend the API, a custom server needs to be written; The queries and use of LoopBack filters is also limited on the default server, but can be more extensively used by building a custom server.
+	\item It is impossible to natively nest queries with the query language. To make up for this, several independent queries sometimes need to be executed, which is very inefficient.
 	\item Some queries are bugged on features like \textit{LIMIT}.
 	\item The run-time API does not have methods to access transactions, so that past transactions from the registry can be interacted with in the script file.
 	\item Some access control rules might be impossible to apply to certain queries. 

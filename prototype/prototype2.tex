@@ -1,8 +1,8 @@
 \section{Requirements Specification}
 \label{sec:requirements-specs}
-From the survey, a list of high level requirements was defined, but these requirements need to be refined into more detailed requirements, if they are to give origin to a design and implementation. As it was already mentioned, in theory, the survey would have to be finished before the requirements were written, but in practice, the work was done more iterativelly.
+From the survey, a list of high level requirements was defined, but these requirements need to be refined into more detailed requirements, if they are to give origin to a design and implementation. As it was already mentioned, in theory, the survey would have to be finished before the requirements were written, but in practice, the work was done more iteratively.
 
-The structure for this specification will somewhat resemble the organization of IEEE 830-1998 requirements specification standard~\ref{720574}, but in a simplified way, without some of the unneeded clutter and information. The specification is divided in the following way:
+The structure for this specification will somewhat resemble the organization of IEEE 830-1998 requirements specification standard~\cite{720574}, but in a simplified way, without some of the unneeded clutter and information. The specification is divided in the following way:
 \begin{enumerate}
 	\item Introduction - Product purpose, scope, overview and users;
 	\item Requirements - Specific requirements including functional requirements, non-functional or quality requirements, permission list and design constraints.
@@ -56,12 +56,12 @@ The structure for this specification will somewhat resemble the organization of 
 	
 \subsection*{1. Functional  Requirements}
 
-To simplify reading and to save space, the functional requirements list consists of a small explanation at the beggining, followed by each requirement, with the ID and description. Since Hyperledger Fabric and Composer are being used, the requirements have some terms specific to the software, such as asset registry, transaction registry, participants, etc.
+To simplify reading and to save space, the functional requirements list consists of a small explanation at the beginning, followed by each requirement, with the ID and description. Since Hyperledger Fabric and Composer are being used, the requirements have some terms specific to the software, such as asset registry, transaction registry, participants, etc.
 
 		\par \textbf{The System}
 		 The system itself needs to be able to record aggregate all of the data into blocks; the data consists of transactions, which are the actions undertaken in the system, and there should be registries for the network participants and assets as well. It is important that the information from these transactions can be made visible and that they can be invoked by the participants which have the permissions to do so. At the same time, the system should be able to handle multiple organizations joining the ledger, inserting all of their current data to the system, as well as extracting it to their own systems when needed. 
 		
-		Identity management, consensus, access control, synchronization of information are all be concerns of the system and how it is programatically written. Some of these concerns are already partially supported by Hyperledger, but the remaining have to be implemented. In the end, the system used itself already has a lot of support for the elicited requirements from the survey.
+		Identity management, consensus, access control, synchronization of information are all be concerns of the system and how it is programmatically written. Some of these concerns are already partially supported by Hyperledger, but the remaining have to be implemented. In the end, the system used itself already has a lot of support for the elicited requirements from the survey.
 		\begin{itemize}
 			\item S1 - The system shall allow the execution of chaincode transactions.
 			\item S2 - The system shall record all user actions, including transactions, into a registry with the identification of the user and action performed. %including transactions which deal with for each action which is intended to change the state of an asset %(which actions is a topic to discuss - reporting that an item was sent, received, altered, lost, etc).
@@ -134,10 +134,10 @@ To simplify reading and to save space, the functional requirements list consists
 		
 		\par \textbf{Admin}
 		
-		The admin is an essential part of the ecossystem that the blockchain will support. Any node maintenance, any problem, will have to be solved by an admin. The admin is also the entry point for users to join the network, as well as an authority that can help fight fraud and make the system more secure and controlled. The identity management mechanisms, which include authentication and authorization are managed by the admin, making the admin an essential user for the enforcement of the elicited requirements.
+		The admin is an essential part of the ecosystem that the blockchain will support. Any node maintenance, any problem, will have to be solved by an admin. The admin is also the entry point for users to join the network, as well as an authority that can help fight fraud and make the system more secure and controlled. The identity management mechanisms, which include authentication and authorization are managed by the admin, making the admin an essential user for the enforcement of the elicited requirements.
 		
 		\begin{itemize}
-			\item A1 - The admin shall be able to revert the effects of certains transactions, by submitting a transaction that has the opposite effect of a given transaction. % (not sure if it is possible, investigate further) inserted with the wrong details or by someone without permissions, but access to the system.
+			\item A1 - The admin shall be able to revert the effects of certain transactions, by submitting a transaction that has the opposite effect of a given transaction. % (not sure if it is possible, investigate further) inserted with the wrong details or by someone without permissions, but access to the system.
 				%□ Not revert the transaction: revert its effects, but manually; as it is not possible to access transactions in runtime/backend, it is very hard or even impossible to write code that, given a transaction, it automatically reverts it; if the transaction content were possible to be accessed, it'd be possible, but a revert function would have to be written for every single custom transaction possible;
 			\item A2 - The admin shall be able to create and delete new ledger channels.
 			\item A3 - The admin shall be able to create a network identity card for a user.

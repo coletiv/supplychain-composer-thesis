@@ -1,6 +1,6 @@
 \section{Design and Implementation}
 
-Altough some projects build entire or partially custom blockchain network software, using a framework like Hyperledger Composer is a much more streamlined way to get a fast functioning prototype.
+Although some projects build entire or partially custom blockchain network software, using a framework like Hyperledger Composer is a much more streamlined way to get a fast functioning prototype.
 
 The baseline for the design will be the written list of requirements, mainly the functional requirements part, and the specifications of the Hyperledger projects.
 
@@ -58,7 +58,7 @@ Another integral component of the system are the assets, for the asset managemen
 The proposed assets in this model were: \textbf{Commodity}, \textbf{ShipmentBatch} and \textbf{Contract}. Each of them serves a purpose. A diagram with the assets and their relationships to the participants and each other can be found in Figure~\ref{fig:participant_asset}.
 
 \par \textbf{Commodity} - Represents a single product being exchanged, with all its attributes, including the product ID (GTIN), name, description, item status and even the ID of the person who owns it (a participant of the network).
-\par \textbf{ShipmentBatch} - Represents a physical shipment, that a buyer orders from a seller. The shipment includes all the tracking information, including tracking number,a shipment status and location. Additionaly, the shipment  has an array of the Commodity items included in it, as well as information on who is the current physical holder of the shipment and owner (other participants). When a shipment is created, since it has an origin and a destination along with other sensible data and shipment conditions, it makes sense that a contract is generated, therefore the shipment also has a contract associated.
+\par \textbf{ShipmentBatch} - Represents a physical shipment, that a buyer orders from a seller. The shipment includes all the tracking information, including tracking number,a shipment status and location. Additionally, the shipment  has an array of the Commodity items included in it, as well as information on who is the current physical holder of the shipment and owner (other participants). When a shipment is created, since it has an origin and a destination along with other sensible data and shipment conditions, it makes sense that a contract is generated, therefore the shipment also has a contract associated.
 \par \textbf{OrderContract} - This represents a digital contract for the conditions of the shipment. The expected arrival location and time, the buyer and seller, as well as a payment price, for when the shipment is delivered (though it is optional). One of the requirements was that contractual agreements should be made possible, as well as financial transactions, and this is the proposed way to make it happen. Fraud checks can also be done on the arrival location, to check if the real arrival location matches the expected one.
 
 \begin{figure}[h]
@@ -140,7 +140,7 @@ To make up for this, some changes in the model had to be made. Originally, the \
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.40]{media/relational_problem.png}
-    \caption[Examplification of the non-relational model problem in the Hyperledger Projects.]{Examplification of the non-relational model problem in the Hyperledger Projects.}
+    \caption[Exemplification of the non-relational model problem in the Hyperledger Projects.]{Exemplification of the non-relational model problem in the Hyperledger Projects.}
     \label{fig:relational_problem}
 \end{figure}
 Figure~\ref{fig:relational_problem} illustrates the problem anc changes to the developed model that had to be made to adapt to it. The \textit{Commodity} was adapted to have a \textit{Owner} data attribute so that it is easier to query the owner of a commodity. This pretty simple query would be a lot harder to accomplish in Composer, and anything more complex or having more tables than this would be pretty much impossible to do without exporting all the data to another system that could organize it and query it in a different way. 
@@ -167,7 +167,7 @@ A set of access control rules was designed with the requirements in mind, so tha
 
  All of these rules were implemented in a mixture of two methods. The first is by using the access control composer language and \textit{.acl} file. The second is to program the transactional scripts to check the identity and data of the person invoking the transaction and then throw errors if the invoker should not have access.
 
- \textbf{The designed permissions are sectioned by items}, namely the \textbf{transactional data and invocations}, the \textbf{asset data and its CRUD actions} and the \textbf{participant data and its CRUD actions}. The following list features a series of these items, with their name, action and access control rule. The admin identity card is has full access, so it will be mostly ommited from these rules.
+ \textbf{The designed permissions are sectioned by items}, namely the \textbf{transactional data and invocations}, the \textbf{asset data and its CRUD actions} and the \textbf{participant data and its CRUD actions}. The following list features a series of these items, with their name, action and access control rule. The admin identity card is has full access, so it will be mostly omitted from these rules.
 
 \textbf{Permissions and access control rules:}
 \par

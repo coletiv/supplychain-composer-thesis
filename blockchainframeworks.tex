@@ -173,6 +173,9 @@ Compared to other blockchains, this consensus mechanism has some advantages, tho
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 \begin{table}[]
 \centering
+\caption{Comparison between traditional PoW consensus and Hyperledger's BFT consensus mechanism}
+\label{table:consensus_comparison}
+\resizebox{\textwidth}{!}{
 \begin{tabular}{c|
 >{\columncolor[HTML]{FFCCC9}}c |
 >{\columncolor[HTML]{D9FFAB}}c |}
@@ -186,8 +189,7 @@ Compared to other blockchains, this consensus mechanism has some advantages, tho
 \multicolumn{1}{|c|}{\cellcolor[HTML]{ECF4FF}\textbf{\begin{tabular}[c]{@{}c@{}}Temporary\\ forks in \\ blockchain\end{tabular}}} & {\color[HTML]{000000} \begin{tabular}[c]{@{}c@{}}Possible (leads to double-spending\\ attacks)\end{tabular}}                                                               & {\color[HTML]{000000} Not possible}                                                                                                                                                           \\ \hline
 \multicolumn{1}{|c|}{\cellcolor[HTML]{ECF4FF}\textbf{\begin{tabular}[c]{@{}c@{}}Consensus \\ Finality\end{tabular}}}              & {\color[HTML]{000000} No}                                                                                                                                                  & {\color[HTML]{000000} Yes}                                                                                                                                                                    \\ \hline
 \end{tabular}
-\caption{Comparison between traditional PoW consensus and Hyperledger's BFT consensus mechanism}
-\label{table:consensus_comparison}
+}
 \end{table}
 
 
@@ -220,7 +222,7 @@ If a business network model is deployed multiple times with a different sets of 
 
 The 4 main components: 
 
-\paragraph{Model File} This is where all the main data components are defined. \textbf{Assets} are the main "objects" that are handled in transactions, and they can represent a variety of things. One example can be a "car". \textbf{Participants} are the types of people that will be participating in the network. One example participant can be "Customer", which will have fields like "Balance" and "Name". An instance of a participant can be linked to a real identity of a person using the blockchain. \textbf{Transactions} are the most important data object. They model what actions can be taken, and they usually have some data fields associated, which act as the input of the transaction. An example of a transaction can be "BuyCar", which could have as parameters the car ID, and a participant could then call this transaction, if they had the permission to do so. All these 3 components, Assets, Participants and Transactions have their own registry. While the Assets and Participants registries are mutable, the Transactions registry is not. Additionaly, another type of object can be defined in this file, \textbf{Events}, which can be emited by transactions and subscribed by applications which can handle them, for instance, to generate notifications.
+\paragraph{Model File} This is where all the main data components are defined. \textbf{Assets} are the main "objects" that are handled in transactions, and they can represent a variety of things. One example can be a "car". \textbf{Participants} are the types of people that will be participating in the network. One example participant can be "Customer", which will have fields like "Balance" and "Name". An instance of a participant can be linked to a real identity of a person using the blockchain. \textbf{Transactions} are the most important data object. They model what actions can be taken, and they usually have some data fields associated, which act as the input of the transaction. An example of a transaction can be "BuyCar", which could have as parameters the car ID, and a participant could then call this transaction, if they had the permission to do so. All these 3 components, Assets, Participants and Transactions have their own registry. While the Assets and Participants registries are mutable, the Transactions registry is not. Additionally, another type of object can be defined in this file, \textbf{Events}, which can be emitted by transactions and subscribed by applications which can handle them, for instance, to generate notifications.
 
 \paragraph{Script File} This file contains all the functions that define how a transaction behaves and what kind of data it processes and outputs. It can also have additional auxiliary functions.
 
