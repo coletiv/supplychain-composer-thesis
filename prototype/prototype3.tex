@@ -151,7 +151,6 @@ Another problem that this can bring, other than having the trouble of changing t
 
 Creating a model design for the network with all the previously explained items grants the needed basic functionalities for the system to work, but it misses one of the most important aspects from the requirements: \textbf{the security and access control}.
 
-%\todo{pedro: explicar melhor identity management no background do composer}
 As previously explained in Section~\ref{sec:composer-background}, Composer features the concept of Participant, a network instance of the class that represents a user, but it also features identity cards, which are files that function as the private key and identification card for a real person. An identity card and an instance of a participant can be linked to each other.
 
 The control rules are written to reflect what actions are allowed to certain participant class types, to specific participant instances, and even to specific identity cards. 
@@ -277,6 +276,5 @@ Composer already features a ready-to-start API server, which includes all the tr
 
 It is also possible to write a custom REST server for composer, using Angular applications, but the default server has the necessary features.
 
-\subsubsection*{Node-RED Integration}
-Node-RED is useful to connect the blockchain to an IoT network of devices, especially in case we want to achieve traceability of product conditions or quickly scan products. It can also be used to subscribe to network events.
-\todo{pedro: more node-red stuff? or not really?}
+\subsubsection*{Other Applications}
+Other software are possible to be implemented with the blockchain. One such instance of a software is Node-RED, to connect the blockchain to an IoT network of devices, especially important in case we want to achieve traceability of product conditions or quickly scan products. It can also be used to subscribe to network events.

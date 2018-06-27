@@ -182,7 +182,7 @@ Overall, the product should follow these parameters:
 		\par Reliability and availability: The product shall not always be available unless all of the nodes fail at once, which is almost impossible, unless a coordinated attack were to happen; If some of the nodes happen to fail, the response time of the system might be lower than expected;
 		\par Scalability: The product should scale to hundreds of companies, which would require a similar number of nodes;
     \item  Maintainability and portability
-		\par The product is expected to run on Linux based systems, compatible with the Docker, nodejs and golang versions that Hyperledger Fabric uses. More specifically, the AWS services have servers with the required setup for this (granted, the nodes still have to be installed). For testing purposes, Windows based systems that are compatible can also be used.\todo{pedro:* I need to make sure of this *}
+		\par The product is expected to run on Linux based systems, compatible with the Docker, nodejs and golang versions that Hyperledger Fabric uses. More specifically, Amazon Web Services services have servers with the required setup for this.
 		\par Creating new nodes or moving an existing one should be an easy process, without much complication, other than starting the node software on the environment, and closing an existing one, if needed.
     \item  Security
 		\par Privacy: The system must ensure appropriate visibility of transactions and products, which might be privacy sensitive; sharing some data would pose a threat or could possibly have negative effects for some of the companies; otherwise, transactions should also be secure, authenticated and verifiable;
@@ -197,46 +197,27 @@ Overall, the product should follow these parameters:
 
 \subsection*{2. Mandated Constraints}
     \begin{itemize}
-		\item The product shall represent a Proof of Concept (PoC), such that it must accurately simulate some of the variables, which include the number of nodes needed for the system to work, their distribution, the transaction load, number of products and companies (TBD).
-		\item The node number and distribution of the nodes might be subject to budget and time constraints, as it depends on external services, such as Amazon Web Services (AWS).
-		\item The data sets used to reproduce this proof of concept are based on the data from projects such as OriginTrail, among others, and are adapted and created by the developer of this PoC.
 		\item The data will follow the GS1 EPCIS standards~\footnote{\url{https://www.gs1.org/sites/default/files/docs/epc/EPCIS-Standard-1.2-r-2016-09-29.pdf}} and specifications for data formatting, as possible.
 		\item The product shall have well defined APIs that allow for incoming and outgoing data to circulate between the ledger and external systems, namely ERPs.
 		\item Any software frameworks used will be open source. This project will use Hyperledger Fabric and Hyperledger Composer.
 		\item A company/trading partner wishing to join the supply chain's blockchain ledger must comply with the GS1 standards, namely by having a globally recognized identification (GS1 Company Prefix) and the company's locations must also be globally and uniquely identified.
-		%\item TODO: Should I allow companies without the GS1 prefix for themselves and for their locations/warehouses/etc? 
         \end{itemize}
-        
-\todo{pedro:decidir se deixo aqui os project issues ou se mudo de sitio}
+
 
 \subsection*{3. Project Issues}
 \begin{enumerate}
 	\item Open Issues
 		\par The architecture of Hyperledger Fabric and Composer are complex and not completely studied yet, which may lead to deviations from the requirements or alterations at some point.
-		\par Again, these softwares are open source, constantly evolving, and Composer is still in the Incubation phase, so it is not a complete product that can be relied upon for everything. In this 
-		case, it is a PoC, so a risk is being taken.
-		\par TODO: Generic blockchain issues
+		\par Again, these softwares are open source, constantly evolving, and Composer is still in the Incubation phase, so it is not a complete product that can be relied upon for everything. In this case, it is a PoC, so a risk is being taken.
 	
-    \item Off-the-shelf Solutions
-		\par There are already some projects in this area, but none of them are ready for use yet. The ones that exist are in their early stages and focus on specific problems. Some are traceability only, some are finance only, and between them, they all differ in how they solve the problem.
-			\item OriginTrail (custom protocol, main network will run on Ethereum)
-			\item Everledger (on Hyperledger)
-			
     \item New Problems
 		\par User Problems: 
 			\item For a new company that is trying to use the product, they have to take the time to understand the API and develop their own oracle to synchronize all the data. 
 		\par Limitations in the Implementation Environment:
-			\item We do not yet know up to how many companies this will be able to scale.
-		
-    \item Risks
-		\par "A multitude of trust issues could stem from external data when the Blockchain is functioning as expected. Even simple provenance issues such as inaccurate time stamps or improperly geotagging of products have the possibility of causing a catastrophic event (e.g., customers dying or taking ill from listeria that has found its way to your company's’ spinach or an F-35 crashing due to counterfeit microchips). In this concept, the Digital Identity of the data provider outside the Blockchain environment can be made known which can be trusted to ensure the data provider has been identified in the event issues arise with the data. Again, there is no provenance, accuracy or other DLT mechanism to ensure valid data has been introduced to the system from an external source. A Data Oracle can be one example of an invalid external source where this risk would need to be identified and mitigated."
-		\todo{pedro: mudar a quote}
+			\item It is not yet known how many companies this will be able to scale to, since it also depends on how many nodes each of them run, and the quantity of data going through the network at any given moment.
 		
     \item Costs
 		\par Maintaining the blockchain running requires little to no cost, as only a few dozen nodes might be needed at most, depending on the scale, and each of them might be operated by different companies.
-		\par The development itself and testing might run into cost troubles in the aspects that require the simulation to be faithful to reality, such has having lots of servers distributed geographically running at the same time (requiring expensive services like AWS).
-   % \item User Documentation
-	%	\par N/A
-    \item Waiting Room Future Requirements/Could be done: Financial aspect/Including loans and insurance
+		\par The development itself and testing might run into cost troubles in the aspects that require the simulation to be faithful to reality, such has having lots of servers distributed geographically running at the same time (requiring expensive cloud services, at times).
 
 \end{enumerate}
