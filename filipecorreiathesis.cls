@@ -17,6 +17,7 @@
 
 \RequirePackage{memhfixc}
 \RequirePackage{etex} % increase register size
+\RequirePackage[pagewise,switch*]{lineno}
 
 % more lenient line breaking (avoids text protruding into margins)
 \sloppy
