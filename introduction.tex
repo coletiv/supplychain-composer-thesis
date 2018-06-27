@@ -6,27 +6,15 @@
 \label{chap:introduction}
 \minitoc \mtcskip \noindent
 
-Our society is turning more consumerist, with most developed countries citizens have high consumer power. Consumers goods, from the essentials up until the entertainment goods, are manufacted and ordered continuously in high quantities.
+Our society is turning more consumerist, with most people in developed countries having high consumer power and standards of life. Consumers goods, from the essentials up until the entertainment goods, are manufactured and ordered continuously in high quantities.
 
-Modern supply chains feel the pressure of this growth, leading to the demand for an efficient management. Most companies are making efforts towards this end, and, though part of the answer to an efficient management lies in having efficient processes, a good management is also based in using the right technologies. Thus, the development of technologies that can satisfy the demands of supply chain management, for any industry, is in high demand.
+\todo{pedro: talvez ter uma quote ou dados estatisticos reunidos de algures}
+
+Modern supply chains feel the pressure of this growth, leading to the demand for an efficient management. Most companies are making efforts towards this end, and, even though part of the answer to an efficient management lies in having efficient processes, a good management is also based in using the right technologies. Thus, the development of technologies that can satisfy the demands of supply chain management, for any industry, is in high demand.
 
 %The development of such technologies should be faced towards the problems that supply chains 
 
 %ace concerns are raised as to whether the demand can be met in a transparent and trustful way. It is difficult to know where the products we consume come from, and the processes they go through. This leads to the need of transparency in the supply chains as well as the need of an increase in their efficiency, if they are to conform to the market's needs.
-
-%\begin{quote}
-%  ``Like the Abstract, the Introduction should be written to engage the
-%  interest of the reader. It should also give the reader an idea of
-%  how the dissertation is structured, and in doing so, define the
-%  thread of the contents.''~\cite[chap.\ Introduction]{kn:Tha01} 
-%\end{quote}
-
-%Neste primeiro capítulo ilustra-se a utilização de citações e de
-%referências biblio\-grá\-fi\-cas.
-%Para além de dar um exemplo de utilização de uma citação, a citação
-%anterior, introduz uma referência que pode ser consultada, entre
-%muitas outras referências bibliográficas
-%interessantes~\cite{kn:Tha01,kn:PP05}. 
 
 \section{Supply Chains}
 \label{supply_chains}
@@ -48,14 +36,14 @@ In the end, the creation of value (products and services) in a supply chain stem
 
 And this is where SCM shines and shows just how useful it can be. Managing all the processes in a supply chain, while maintaining safety, quality and keeping to schedule is difficult. An event on one side of the world, large or small, be it from human or natural causes, can easily disrupt the links in the supply chain. For instance, it might disrupt the supply of a critical component or service. Delays are, therefore, common, and the consequences of such disruptions might have a severe impact in the finances, growth and reputation of the companies involved~\cite{Punter2013}.
 
-SCM diminishes the impact of such disruptions, and actively works to avoid or diminish them, while optimizing the way the supply chain works. This is why SCM is such an important discipline, that we have to better understand and improve, with all the means that we can, and this includes, of course, technologies like the blockchain.
+SCM diminishes the impact of such disruptions, and actively works to avoid or diminish them, while optimizing the way the supply chain works. This is why SCM is such an important discipline, that we have to better understand and improve, with all the means that we can, and this includes, of course, research into technologies like the blockchain.
 
 \section{Challenges}
-\label{supply_chain_challenges}
+\label{sec:supply-chain-challenges}
 
  Having already introduced the concepts of Supply Chain and SCM, it is now possible to briefly introduce some of the problems that affect them.
 
-The first, and most generalist problem of a supply chain, is the ease with which \textbf{an unexpected event might cause delays}. These events, already mentioned in Section~\ref{supply_chains} are not always predictable and must be contained as fast as possible. One event in particular which, often, causes delays are \textbf{synchronization problems in the information systems of a company}. 
+The first, and most generalist problem of a supply chain, is the ease with which \textbf{an unexpected event might cause delays}. These events, already mentioned in Section~\ref{supply_chains} are not always predictable and must be contained as fast as possible. One event in particular which, often, causes delays are \textbf{synchronization problems in the processes and information systems of a company}~\cite{Prokle2017}. 
 
     Another problem is that, often, there are difficulties in sharing information between companies. This is caused both by the fact that \textbf{companies value their privacy and the security of their information}, which means they might not want to share too much information, or that they might only share it through secure channels, and by the \textbf{lack of standards for sending information and communicating}~\cite{Korpela2017}. The issue with non-existing standards is that companies are left to discuss what details to share or not, wasting time and resources.
 
@@ -64,7 +52,7 @@ Most important of all, in the industry, \textbf{the use of traditional tools and
  
 Finally, provenance and traceability of the products on a supply chain are a big objective for companies. But \textbf{the current technologies used in supply chain only accomplish provenance and traceability in a limited scope}, as the information a certain entity possesses is usually also limited. And so, it is very hard for anyone to have a global overview of the supply chain.
 
-Most of these issues in supply chain are, in part, caused by the standalone use of outdated or inadequate software architectures, which are often centralized and have single points of failure. An optimal supply chain should be as efficient and effective as possible, while being secure and satisfying all the traceability requirements. Perhaps, it is time to try out new solutions which replace or complement the existing ones, in a way that supply chain management can better satisfy these requirements.
+Though it is not proven, it is be possible that some, if not most, of these issues in supply chain might be caused by the use of software architectures that do not allow for full data integration. An optimal supply chain should be as efficient and effective as possible, while being secure and satisfying all the traceability requirements. Perhaps, it is time to try out new solutions which replace or augment the existing ones, in such a way that supply chain management can better satisfy the needed requirements.
 
 \section{From Blockchain Technologies to Supply Chains} \label{sec:context}
 
@@ -81,25 +69,24 @@ One area in particular where we believe blockchain could bring about great impro
 %Lorem ipsum~\cite{kn:Lip08} dolor sit amet, consectetuer adipiscing
 %elit. 
 
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Motivation} \label{sec:motivation}
+\section{Motivation} 
+\label{sec:motivation}
 
-As described in section 1.3, these problems are caused by the use of software that can not keep up with the evolution of the supply chains. It is either outdated or inadequate software by itself, and even when the software works just fine, it was not specified to allow for the integration of a whole chain. There is an immediate need for better solutions. New and better solutions might not completely replace the previous ones, but, rather, add to them.
+As described in section~\ref{sec:supply-chain-challenges}, a possible cause of these problems might be the use of software that can not keep up with the evolution of the requirements of modern supply chains. Today's supply chains have high standards for their requirements and even when the software works just fine, maybe it is not recent enough or it was not specified and built to satisfy these requirements. For instance, product falsification might be a huge issue nowadays in the supply chain, but maybe it was not rated as a high importance problem 15 years ago. Therefore, the software from 15 years ago complied with different requirements than the ones from today and was not built to handle that specific problem well. 
 
-One way to approach these specific problems that are caused by the traditional IT solutions is to update them with the use of new technologies, namely by taking what already exists and integrating it with blockchain technology. The characteristics of blockchain would allow for many of the identified problems to be reduced or neutralized. Blockchains are the perfect means to achieve traceability of a supply chain, and so, they are good to achieve provenance as well. At the same time they are a secure, incorruptible and immutable way to store information, with a fast synchronization time, being perpetually available to anyone who has permission, anywhere within the network. It would also be the way to close the analog gaps, turning the chain fully digital, leading to the possibility of a global overview.
+\textbf{Requirements evolve, and so should the technology, in order to support them.} There is an immediate need for solutions, which might either completely replace the previous ones, or augment them.
+
+One way to approach these specific problems is to research what would a modern requirements specification for supply chain look like, and develop new technologies that are more accurately specified for the supply problem challenges in question. 
+
+The characteristics of blockchain architectures seem to be a good solution for many of the identified problems in supply chain to be reduced or neutralized. These architectures are the perfect means to achieve traceability of a supply chain, and so, they are good to achieve provenance as well. At the same time they are a secure, incorruptible and immutable way to store information, with a fast synchronization time, being perpetually available to anyone who has permission, anywhere within the network. It would also be the way to close the analog gaps, turning the chain fully digital, leading to the possibility of a global overview.
 
 \section{Objectives}
 \label{sec:objectives}
-The main objective of this dissertation is to find whether blockchain technology can really solve the most common problems of supply chain management, and in which areas of SCM it could help out the most. There are a multitude of small tasks that blockchain could automatize in supply chain, so this thesis will try to figure out which ones blockchain applies to better. 
+The main objective of this dissertation is to find whether blockchain technology is a good fit to solve the most common problems of supply chain management, and also to find out the technological requirements of a modern supply chain. There are a multitude of small tasks that blockchain could automatize in supply chain, so this thesis will try to figure out which ones blockchain applies to better. 
 
-Certain designs are going to be proposed, with focus on different issues and giving solutions to different archetypes of supply chains and integration models. As a secondary objective, we are going to find which design better fits in order to build a generalist solution to our problem and also what are the requirements for blockchain to be applied in this sense.
+The primary objective of this dissertation is determining if blockchain architectures can be succesfully applied to supply chain management as an improvement towards the technologies that are already being used. For this purpose, it is necessary to conduct research on the supply chain issues and validate these, in order to propose a blockchain design that can target these issues successfuly. 
 
 \section{Dissertation Structure} \label{sec:struct}
 
