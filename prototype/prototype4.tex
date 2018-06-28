@@ -10,12 +10,18 @@ As for the functional requirements, it needs to be ascertained which ones were p
 
 As for the non-functional requirements, a few comments will be made regarding how each point was approached and whether it was fully satisfied, partially satisfied or not satisfied at all.
 
+
 \par \textbf{Functional Requirements Validation}
+
+As can be seen in Table~\ref{table:requirements-validation}, a few of the functionalities are either not possible, or only in a limited way.
+
 % Please add the following required packages to your document preamble:
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 	\begin{table}[ht]
 		\centering
+		\caption{Validation of the functional requirements, according to the possibility of their implementation.}
+		\label{table:requirements-validation}
 		\resizebox{\textwidth}{!}{
 		\begin{tabular}{|
 		>{\columncolor[HTML]{F8F8F8}}l |l|
@@ -45,11 +51,9 @@ As for the non-functional requirements, a few comments will be made regarding ho
 		SCM9 & \begin{tabular}[c]{@{}l@{}}Attach contractual agreement\\ to shipment\end{tabular}                           & Possible                             & A9    & \begin{tabular}[c]{@{}l@{}}Give other users permission to \\ edit roles\end{tabular}                                     & Possible                             \\ \hline
 		\end{tabular}
 		}
-		\caption{My caption}
-		\label{my-label}
 		\end{table}
 
-As can be seen, a few of the functionalities are either not possible, or only in a limited way. There were 3 requirements not possible to implement, all due to limitations of the framework: submitting transaction batches, using multiple ledgers on composer and reverting a transaction's effect. 
+ There were 3 requirements not possible to implement, all due to limitations of the framework: submitting transaction batches, using multiple ledgers on composer and reverting a transaction's effect. 
 
 \begin{itemize}
 	\item \textbf{S4 - Transaction batches} would have to be implemented on the client side of any application that wants to communicate with the blockchain, and even then, it could only "simulate" this feature, because it would have to submit the transactions one by one, and they might not all get submitted in the same block, which can be problematic.
@@ -76,6 +80,8 @@ The validation and analysis of the satisfaction of the quality requirements is p
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 	\begin{table}[ht]
 		\centering
+		\caption{Validation of the non-functional or quality requirements.}
+		\label{table:quality-requirements-validation}
 		\resizebox{\textwidth}{!}{
 		\begin{tabular}{|l|l|l|
 		>{\columncolor[HTML]{E8FFDF}}l |}
@@ -93,42 +99,39 @@ The validation and analysis of the satisfaction of the quality requirements is p
 		\multicolumn{2}{|l|}{\textbf{Legal}}                                                                                                                                                     & \begin{tabular}[c]{@{}l@{}}The new global data protection regulations (GDPR) put the legality \\ of blockchain into question. Supposedly, GDPR argues that any \\ data containing personal information must be removable. This rule\\  is, however, incompatible with the immutability requirement.\end{tabular}                                                             & \cellcolor[HTML]{FFECEB}Not totally satisfied \\ \hline
 		\end{tabular}
 		}
-		\caption{Validation of the non-functional or quality requirements.}
-		\label{table:quality-requirements-validation}
 		\end{table}
 
 
 By joining the conclusions reached in both the functional and non-functional requirements, there is a better understanding  towards validating the requirements from the survey and also reaching a final conclusion for the last questions. The validation of the survey requirements is shown in Table~\ref{table:elicited-requirements-validation}.
 
-%After all of these use cases, conclusions about how many were or were not possible, and what does that tell us about the functionalities that the survey concluded were essential: does the prototype feasibly implement them?
-% Please add the following required packages to your document preamble:
-% \usepackage{multirow}
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-	\begin{table}[]
-		\centering
-		\resizebox{\textwidth}{!}{
-		\begin{tabular}{|l|l|
-		>{\columncolor[HTML]{E8FFDF}}l |}
-		\hline
-																															 & Security according to the latest requirements                                                                                      & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
-																															 & Controlled access for the users                                                                                                    & Satisfied                              \\ \cline{2-3} 
-		\multirow{-3}{*}{\textbf{Security}}                                                                                  & Secure data storage                                                                                                                & Satisfied                              \\ \hline
-																															 & Regulatory auditing                                                                                                                & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
-																															 & Fraud detection                                                                                                                    & Satisfied                              \\ \cline{2-3} 
-																															 & Asset management                                                                                                                   & Satisfied                              \\ \cline{2-3} 
-		\multirow{-4}{*}{\textbf{Traceability}}                                                                              & Real-time tracking information                                                                                                     & Satisfied                              \\ \hline
-																															 & Interoperability between systems                                                                                                   & Satisfied                              \\ \cline{2-3} 
-																															 & Development of industry standards                                                                                                  & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
-		\multirow{-3}{*}{\textbf{Synchronization}}                                                                           & \begin{tabular}[c]{@{}l@{}}Real-time sharing of information with partners, \\ leading to better working relationships\end{tabular} & \cellcolor[HTML]{F4F4F4}Non-applicable \\ \hline
-																															 & Financial transactions                                                                                                             & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
-		\multirow{-2}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}Transaction \\ Enforcement and\\ Financial domain\end{tabular}}} & Enforceable contracts (smart contract functionality)                                                                               & \cellcolor[HTML]{FFFFC7}Limited        \\ \hline
-		\end{tabular}
-		}
-		\caption{Validation of the survey elicited requirements.}
-		\label{table:elicited-requirements-validation}
-		\end{table}
+%After all of these use cases, conclusions about how many were or were not possible, and what does that tell us about the functionalities that the survey concluded were essential: does the prototype feasibly implement them?%
+\begin{table}[]
+	\centering
+	\caption{Validation of the survey elicited requirements.}
+	\label{table:elicited-requirements-validation}
+	\begin{tabular}{|l|l|
+	>{\columncolor[HTML]{E8FFDF}}l |}
+	\hline
+																														 & Security according to the latest requirements                                                                                      & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
+																														 & Controlled access for the users                                                                                                    & Satisfied                              \\ \cline{2-3} 
+	\multirow{-3}{*}{\textbf{Security}}                                                                                  & Secure data storage                                                                                                                & Satisfied                              \\ \hline
+																														 & Regulatory auditing                                                                                                                & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
+																														 & Fraud detection                                                                                                                    & Satisfied                              \\ \cline{2-3} 
+																														 & Asset management                                                                                                                   & Satisfied                              \\ \cline{2-3} 
+	\multirow{-4}{*}{\textbf{Traceability}}                                                                              & Real-time tracking information                                                                                                     & Satisfied                              \\ \hline
+																														 & Interoperability between systems                                                                                                   & Satisfied                              \\ \cline{2-3} 
+																														 & Development of industry standards                                                                                                  & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
+	\multirow{-3}{*}{\textbf{Synchronization}}                                                                           & \begin{tabular}[c]{@{}l@{}}Real-time sharing of information with partners, \\ leading to better working relationships\end{tabular} & \cellcolor[HTML]{FBFBFB}Non-applicable \\ \hline
+  \textbf{Transaction}																													 & Financial transactions                                                                                                        & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
+\textbf{Enforcement and} & \begin{tabular}[c]{@{}l@{}}Enforceable contracts (smart contract\end{tabular}                                    & \cellcolor[HTML]{FFFFC7}Limited        \\ 
+  \textbf{Financial domain} & functionality) & \cellcolor[HTML]{FFFFC7} \\ \hline
+	\end{tabular}
+	\end{table}
+
 As can be seen, most of the requirements were fulfilled, but not all of them totally. 
+
+%\caption{Validation of the survey elicited requirements.}
+%\label{table:elicited-requirements-validation}
 
 \textbf{Security}, as could be seen in the functional and non-functional requirements, has some faults. 
 

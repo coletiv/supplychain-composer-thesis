@@ -96,12 +96,14 @@ Additionally, the transactions, with all their parameters can be seen in Figure~
 \subsubsection*{Queries}
 The transactions are used to model actions and behaviour, but to retrieve some of the information, something else is needed. \textbf{Composer already retrieves the basic information for participants, assets and transactions, but anything else requires queries}. Hyperledger Fabric uses a relational database to store the asset and participant registries and Composer features a way to retrieve that data easily, through filtered queries (using a javascript framework, LoopBack).
 
-In this proof of concept, some queries were programmed for some of the most important pieces of information that can ensure traceability and other properties:
+In this proof of concept, some queries were programmed for some of the most important pieces of information that can ensure traceability and other properties. These can be found in table~\ref{table:queries-list}.
 
 %%%%%%%% TABLE BEGIN %%%%%%%%%%%%%%%
 
-\begin{table}[]
+\begin{table}[h]
     \centering
+    \caption{List of designed and implemented queries, with their parameters.}
+    \label{table:queries-list}
     \begin{tabular}{|l|l|l|l|}
     \hline
     \textbf{ID} & \textbf{Name}                   & \textbf{Retrieve}   & \textbf{Parameters} \\ \hline
@@ -119,13 +121,11 @@ In this proof of concept, some queries were programmed for some of the most impo
     12          & getCommodityOwner               & Commodity           & GTIN                \\ \hline
     13          & getShipmentWhereCommodityExists & ShipmentBatch       & Commodity           \\ \hline
     \end{tabular}
-    \caption{My caption}
-    \label{my-label}
     \end{table}
 
 %%%%%%%% TABLE END %%%%%%%%%%%%%%%%%
 
-These queries are pretty straight forward to code. They are a basic SELECT type of query, with the specification of what object we want to select, followed by a WHERE kind of statement, where certain conditions like equality, inequality, \textit{"CONTAINS"} among a few others can be used. 
+The queries are pretty straight forward to code. They are a basic SELECT type of query, with the specification of what object we want to select, followed by a WHERE kind of statement, where certain conditions like equality, inequality, \textit{"CONTAINS"} among a few others can be used. 
 
 For instance, query number 12, \textit{getCommodityOwner}, takes as parameter the Commodity's ID (GTIN), but instead of retrieving the owner of the commodity, a participant, it returns the Commodity itself. Why? Because the commodity retrieved has all the information of who the owner is. This information has to be extracted manually since it is \textbf{impossible} to make a query to select only that attribute.
 
