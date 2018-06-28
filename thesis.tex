@@ -106,6 +106,7 @@
 		\pagenumbering{roman}
 		\pagestyle{fancy}
 		\include{00-abstract}
+		\include{00-resumo}
 		\addtocontents{toc}{\protect{\pdfbookmark[0]{\contentsname}{toc}}}
 		\tableofcontents
 		\cleardoublepage
@@ -133,9 +134,11 @@
 	%\todo{pedro: consistent with the use of bold or italic, especially on thesis questions and in the items of the survey}
 	
 	%EXTRA FORMATTING
-	%\todo{pedro: ter glossario e/ou abreviacoes}+
 	%\todo{pedro: fix the use of abbreviations so that they are more consistent}
-	
+
+	%\todo{pedro}: corrigir conclusao do abstract
+	%\todo{pedro}: corrigir captions
+	%\todo{pedro}: atualizar a dedicatoria 
 
 	%\subsection*{2. Naming Conventions and Definitions}
 	%glossary + abreviations    \todo{fcorreia: isto devia aparecer talvez no início do documento, num glossário geral}
@@ -205,6 +208,6 @@
 		\end{singlespace}
 		\cleardoublepage
 		\phantomsection
-		\addcontentsline{toc}{chapter}{Index}
+		%\addcontentsline{toc}{chapter}{Index}
 		%\printindex
 \end{document}

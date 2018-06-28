@@ -145,7 +145,7 @@ As can be seen, most of the requirements were fulfilled, but not all of them tot
 
 In retrospective, the chosen framework had a big impact in the implementation of the requirements. Some were made easier, but others were harder or even impossible, due to limitations in the software, and not due to the design.
 
-Some of the Composer framework limitations found that impacted the development of this proof-of-concept:
+Some of the Composer framework limitations found that impacted the development of this proof of concept:
 \begin{itemize}
 	\item  Queries are not powerful enough. There is no \textit{JOIN} and the usual SQL syntax is not always applicable. There is also no \textit{WHERE … IN …}, for instance. Model changes had to be made to adapt to this, and integrity might be lost.
 	\item The default Composer REST server is somewhat limited in its API. To extend the API, a custom server needs to be written; The queries and use of LoopBack filters is also limited on the default server, but can be more extensively used by building a custom server.
