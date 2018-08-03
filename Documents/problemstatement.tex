@@ -1,0 +1,146 @@
+\chapter{Problem Statement}
+\label{chap:supply-chain-problems}
+\minitoc \mtcskip \noindent 
+
+This chapter focuses on explaining the objectives of this thesis, by defining the thesis statement, as well as the approach that will be taken to determine whether the statements and underlying assumptions are valid or not.
+
+After having previously mentioned some background information about Blockchain technology and frameworks, as well as about supply chain management and supply chain issues, it is now time to focus on what these issues mean. Therefore, a possible way to overcome these issues through the means of Blockchain technology shall be formulated and tested.
+
+\section{Objectives}
+
+This section introduces the focus points of the research content and the objectives of the research work.
+
+\subsection{Main Points of Focus}
+\label{sec:points-of-focus}
+In SCM, a product's life cycle can be roughly divided into the many phases the product goes through, down from the raw materials up until the finished product ends in the hands of a consumer. Starting in the raw materials, most products undergo iterations of processing and shipment, traveling from one place to another, while being transformed in successively more refined versions and changing owners. This holds true for any product in any kind of industry, and even the simplest of products which might not require any processing (for instance, fresh produce), have to be shipped from their place of origin to the place where they will be sold.
+
+
+\textbf{The improvement of the management of this life cycle is one of the main objectives of this thesis. This improvement, however, has many points of focus. Some were already briefly introduced in Sections~\ref{supply_chains} and~\ref{sec:supply-chain-challenges}, from which the following points are summarized as being important:}
+
+\begin{itemize}
+% Speed of delivery
+\item \textbf{Speed of delivery}
+The effects of the evolution of SCM throughout the last century are visible to everyone. Products are bought and shipped from one side of the globe to the other in a matter of weeks or sometimes even days. Whether this is fast enough or not is a question that can not be entirely answered in one collective voice. 
+
+The world around us moves quickly, and in the freneticism and frenzy of our lives, it might happen that sometimes weeks or days are not enough. \textbf{The faster the products arrive to their buyer, the faster the buyer can satisfy their needs.} This holds true not only for the final customer of a product, but also for any enterprise that provides products and services to other enterprises, be it in the role of supplier, manufacturers, distributors or retailers.
+
+\item \textbf{Synchronization}
+%Synchronization - specify why it is important
+Many times, the data from a company is synchronized with its own servers and software, in protocols and data formats that can only be understood by that specific piece of software. If many companies share this same software, then they can easily integrate the information between themselves.
+
+The real problem occurs when the companies have no common ground and the data is not transmittable in an automatic way, leading to a lot of unnecessary manual work to export the data from one system and import it into another. Though there may be many causes for this, the logic assumption would be that this problem may be originated mainly from the following:
+
+\begin{itemize}
+\item \textbf{Lack of development of data integration standards in the supply chain industry.}
+\item \textbf{Lack of a common technology to store all data, from where each company could have their own software extract the information from.}
+\end{itemize}
+
+\item \textbf{Tracking}
+%Tracking - specify why it is important
+During a product's lifetime, a lot of alterations occur and, sometimes, the records about the origins of the products are lost, falsified, or flat out not kept in a registry. This leads to unreliability in the goods the consumers use everyday and it may happen that some products are falsified and not the real product they were advertised to be. Additionally, it can also happen that the products, not being properly tracked, do not hold up to the conditions or quality standards that are required by the regulatory entities. This can sometimes even lead to safety hazards. If a product is subject to hazardous conditions during any part of its lifecycle, it may become dangerous to be used or consumed.
+
+For this reason, it is of the utmost importance that the products are tracked since their origin, right up until the delivery to the final customer, as well as the conditions they are shipped in and the transformations they suffer.
+
+\item \textbf{Security}
+%Security - specify why it is important
+This point is one of the most important to deal with, as security is comprised of many aspects, such as: who to authorize to access the information and how to restrict this, what authentication methods should be used, how to accurately detect and prevent fraud, etc. 
+
+Information in a supply chain is highly sensitive and it should be controlled so that only trusted entities can access it. Most enterprises (or groups of enterprises) compete amongst themselves to make the most sales, the most deliveries and have the fastest product cycles. \textbf{Therefore, the information that is generated in the process of managing a supply chain might be too sensitive to share, in order to keep the edge on the competition}.
+Additionally, \textbf{the information that is generated and inserted into any system should always be verified, in order to prevent both human error and fraud attempts}.
+
+\end{itemize}
+
+\subsection{Possible Solutions}
+% Mention a possible solution that might or not be better
+While these previous points of focus are not problems in themselves, their improvement will greatly benefit any industry as well as the consumers of these industries. As such, the actual problem here can be narrowed down to \textbf{finding a way to satisfy these needs for improvement through technological means.}
+
+Some of the most common and traditional solutions for this problem include distributed systems, and there are many solutions already available. However, these solutions, which include distributed systems like the cloud or distributed databases, might not satisfy all the needs of the supply chain. Researching alternative designs can be a good way to find new and useful implementations that might possibly even revolutionize this area.
+
+So, is there any other tool or technology that can be applied to SCM, in order to satisfy the need for improvement, one that is scalable, as well as secure?
+In many ways, Blockchain is similar to a distributed database, and it can even be integrated with the cloud for a mixed solution (the best of both worlds?), so there is a need to investigate if it might or might not be a good solution for the supply chain requirements.
+
+
+\subsection{Thesis Statement}
+\label{subsec:thesis-statement}
+The main objective has already been defined: to improve the security traits, tracking of goods and processes, information synchronization, and possibly speed of delivery of the supply chain, along with other minor attributes. A seemingly good alternative that stands out is Blockchain. 
+
+% MAIN THESIS we are defending defined here
+Therefore, the main statement that this thesis defends is: 
+
+\par \textbf{\textit{"Blockchain is a good architectural design for the Supply Chain Management domain."}}
+
+% THESIS branches: all the possibilities that might happen
+What remains to be answered, though, is if mentioned attributes are really the right requirements to focus on, and if Blockchain can really fill them, as a distributed architecture. Thus, it can be seen that this statement might be based on some assumptions, which gives rise to some more questions. For instance, we are assuming that the points of focus from Section~\ref{sec:points-of-focus} are really the most important ones, given the background information that was collected.
+
+Thus, the questions that need to be answered first, in order to reach a conclusion towards the main thesis statement are the following:
+\begin{enumerate}
+\item \textbf{What supply chain issues, improvements and requirements do the experts really find the most important?}
+\item \textbf{What is the Blockchain tool or framework most adequate to the development of an architecture that can support these requirements?}
+\item \textbf{Is it possible to build a feasible architectural design, by using such a tool, to implement all these requirements?}
+\end{enumerate}
+
+These questions are sequential, meaning that, in theory, in order to answer one of them, we have to answer the previous question. But in practice, it is not always practical to follow this sequence, and a question might serve as a guide to start working on the following one. Therefore, the questions can be worked on iteratively. For instance, having some answers to the survey might allow work on the architecture and prototype to start, and, as more answers are collected, the more the requirements for the prototype are refined.
+
+In the end, all the questions end up being answered and it is possible to reach a definitive conclusion towards the thesis statement. The sub-conclusions are also interesting to analyze and are a contribute themselves to this area.
+
+\section{Approach}
+
+% To test the thesis, we will divide the work in 2 parts: survey and prototype;
+To answer these questions from Section~\ref{subsec:thesis-statement}, the work of this dissertation was divided into two main parts, each of them comprising a chapter:
+\begin{enumerate}
+\item \textbf{Supply Chain Issues Validation and Requirements Elicitation}
+\item \textbf{Solution Design and Implementation}
+\end{enumerate}
+
+% Each one focuses on supporting a specific part of the thesis statement;
+Each of these focuses on reaching a conclusion towards the answers that underlie the thesis statement.
+
+\subsection{Supply Chain Issues Validation And Requirements Elicitation}
+\label{sec:survey-approach}
+% The survey will serve to support "..." and take conclusions about whether "..."
+The first question to answer in order to reach any conclusion is \textbf{\textit{"What supply chain issues, improvements and requirements do the experts really find the most important?"}}. As already mentioned, the other questions depend on the answers that we reach for this question.
+
+The proposed way that was used to get an answer was an online \textbf{survey}. The survey serves the following purposes:
+
+\begin{itemize}
+\item Collecting quantitative data on the relevance of the issues that supply chain management suffers from.
+\item Collecting quantitative and qualitative data on which are the major points of improvement and compare their relative importance.
+\item Collecting quantitative and qualitative data on which use cases the experts think Blockchain can be more useful to accomplish.
+\item Collecting quantitative and qualitative data on which the functionalities that supply chain requires of information systems and blockchain.
+\item Correlate some of the data collected in the previous point and reach some extra conclusions that might help decide on the validity of the results.
+\end{itemize}
+
+% Why did you choose it?
+The survey was designed to be answered by people with experience in the field of Supply Chain, with knowledge about Blockchain being optional but appreciated. These are the opinions that have the most importance on this field, and these are also the people that interact with the systems in question and can more accurately pinpoint the points of failure and improvement.
+
+The survey was distributed over the internet, through relevant media and social forums, as well as through direct contact with professionals from the area. It was shared on some telegram channels of projects that apply Blockchain to the supply chain (most of which mentioned in the state of the art), on Reddit, through their supply chain and logistics forums, as well as on supply chain focused forum websites. It was also distributed to professionals through messages on LinkedIn (with a focus on managers), personally and through email.
+
+In conclusion, the goal of the survey is to validate some assumptions and direct the dissertation towards the most important supply chain management problems.
+
+\subsection{Solution Design and Implementation}
+% The prototype will serve to support "...", along with the requirements that were written based on the background research and literature review; (do i have to rewrite part of the requirements?) 
+
+This section is focused on applying the knowledge of which are the most important aspects of supply chain to focus on improving, to answer the other two final questions: \textbf{\textit{"What is the Blockchain tool or framework most adequate to the development of an architecture that can support these requirements?"}} and 
+\textbf{\textit{"Is it possible to build a feasible architectural design, by using such a tool, to implement all these requirements?"}}
+
+
+The state of the art review documented in Chapters~\ref{chap:blockchain} and~\ref{chap:blockchain-applicability} already provided some information towards the answer to the first of these questions, through the comparison of frameworks. Therefore, and taking the results of the survey into account, a brief analysis is undertaken to make a decision.
+
+Finally, and to answer the final question about the possibility and feasibility of building a blockchain-based architectural design for supply chain management, the implementation of a proof of concept is undertaken, using the chosen platform. 
+
+This approach is divided into the following phases:
+\begin{enumerate}
+\item \textbf{Requirement Elicitation and validation} - through the literature review research and survey results 
+\item \textbf{Design} - using the requirements, building a model that can implement the elicited requirements
+\item \textbf{Implementation} - program the system according to the design
+\item \textbf{Validation} - check if the built system satisfies the initial requirements fully, and if otherwise, explaining why not
+\end{enumerate}
+
+After this approach is finished, the results are analyzed qualitatively, as to which use cases are implementable and usable or not and as to what were the limitations found because of the various decisions taken. Taking the various points of this analysis into consideration will allow for some conclusions to be taken in reference to the remaining question.
+
+After having answered all of the three questions that underlie the thesis statement, it is possible to analyse the validity of the thesis statement ,though future work may eventually bring different answers, since Blockchain is a technology which is seeing great and fast developments, due to the amount of research being put into it.
+% It will be conducted in the following way: 1. Requirements 2. Design 3. Implementation 4. Testing 5. Evolution
+
+%It follows a software engineering development agile pattern with phases 1 through 4 being iterated through;
+
+% Mention that survey did not or possibly wouldnt come along soon enough to support a change in ALL the requirements, but some

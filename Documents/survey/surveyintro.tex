@@ -1,0 +1,81 @@
+The opinions of experts from a field can be highly valuable for research to achieve valuable contributions for that field. The optimal way to validate the issues of the supply chain would be to interview experts in a formal way. However, there were difficulties in this aspect, especially because most of the contacts did not go through and a lot of time and effort put into this was not fruitful. Therefore, since expert knowledge was still necessary, it was decided that a survey would be a more efficient method of gathering opinions and results.
+
+The survey was written during the months of March and April, 2018, with results being collected from the end of April up until the mid of June. The purpose, methodology and results of the survey are analyzed in this chapter, leading to the validation of the issues mentioned in the previous chapters. The survey and analysis done here also serves as a basis for the requirements that were used to build a proof of concept prototype. 
+
+However, due to various factors, the survey and collection of results was delayed from the initial planning, resulting in the collection of results only being completed in June. Thus, the PoC used some assumptions from both the background analysis and the few initial answers from the survey, and kept iterating the requirements based on the new answers received during the development. 
+
+
+\section{Purpose and Target}
+Even though the survey was delayed, the answers given are still important in the end. The main purpose of this survey, as stated in~\ref{sec:survey-approach}, was to give a response to the question we are focusing on: \textbf{"What supply chain issues, improvements and requirements do the experts really find the most important?"}. 
+
+
+
+This is done by dividing the survey into groups of questions: some about the issues of supply chain, some about the points of improvement as well as the opinions applicability of Blockchain as a system for supply chain management. Together, these allow for an opinion to be formed about the quantitative measurements of the importance of each issue, as well as a qualitative collection of requirements.
+
+The survey is aimed at people with knowledge in the area of Supply Chains, and optionally Blockchain. The combination of knowledge in both areas is relevant for the questions that focus Blockchain applicability. However, having low knowledge about Blockchain is also relevant, so that the answers are more diversified for both sides, thus reducing the bias. %The Blockchain knowledge in this study was also part of the questions inquired, and has an approximately normal distribution, which means the sample
+
+\section{Methodology}
+This section describes how the data was collected and analyzed. It gives a brief overview of what questions were asked, how they were grouped, the objectives of each question, along with the type of answers used.
+
+% who are the targets - supply chain experts;
+% Methodology: what we are doing - an only survey;  
+%how we are doing it - spreading it through social channels;
+
+\subsection{Data Collection}
+The data for the survey was collected by sharing the survey with professionals of the supply chain area, through contact with related companies, personal contacts, social networks like LinkedIn, Reddit and conversation groups. 
+
+The collected sample size was 25. Even though these are answers from knowledgeable people, the sample size is not very significant, so the margin of error for this study is higher than if it were otherwise. 
+
+
+The questions of the survey can be roughly grouped into four main groups of questions. Each of the groups has similar questions, with a distinct purpose.
+  
+\begin{enumerate}
+
+\item \textbf{Question Group 1 - General Information}
+	\begin{itemize}
+	\item \textbf{Questions} - Information about the respondent's contact with supply chain, role in the industry, years of experience and number of employees in the current company (if in a job related to supply chain).
+    \item \textbf{Goals} - Characterization of the respondent's, especially in order to validate the relevance of their profiles.
+	\end{itemize}
+    
+\item \textbf{Question Group 2 - Blockchain Knowledge and Opinions}
+	\begin{itemize}
+	\item \textbf{Questions} - Questions about the general knowledge of Blockchain technology, opinions about Blockchain cryptocurrencies and their usefulness in various contexts, as well as Blockchain regulation and the effect of GDPR on Blockchain technology.
+    \item \textbf{Goals} - Get a vision on the need or not of cryptocurrencies for Blockchain related architectures, as well as the impact of regulations on this technology.
+	\end{itemize}
+    
+\item \textbf{Question Group 3 - Supply chain Points of Focus and Problems}
+	\begin{itemize}
+    \item \textbf{Questions} - Questions to rate affirmations that deal with supply chain issues, focusing on the level of agreement that the participants have with the affirmations. Most of the affirmations correlate supply chain major issues with the points of failure that might underlie them; The others rate specific problems in an importance scale or by percentage of occurrence.
+    \item \textbf{Goals} - Validation of the issues that affect the supply chain management metrics the most, as per the opinion of specialists.
+	\end{itemize}
+    
+\item \textbf{Question Group 4 - Supply Chain Points of Improvement and Applicability of Blockchain Technology} 
+	\begin{itemize}
+    \item \textbf{Questions} - The first half of these questions serves to prioritize the importance of some supply chain issues, as well as the importance of some functionalities that supply chain information systems should feature. The second half of the questions ranks the use cases and benefits that Blockchain could bring to supply chain management.
+    \item \textbf{Goals} - This is the main point of the survey, and from here, the most important information towards the conclusions we want from the survey is gathered, which consists in the supply chain issues leading to Blockchain system requirements.
+	\end{itemize}
+    
+\end{enumerate}
+
+%Extra possible hypothesis, involving correlations (POSSIBLE DELETE THIS FROM THIS SECTION):
+%\begin{enumerate}
+%\item The employees who have good or very good blockchain knowledge give significantly different answers to the Blockchain applicability requirements to a supply chain. (divide the answers into 2 groups (for each requirement?), use chi-squared test or t-test?) -> chi-squared is for categorical data, t-test more for continuous data, by using means, so it depends, really, but chi-squared is the one to use here?
+%\item The employees who have good or very good blockchain knowledge give significantly different answers to the blockchain regulation questions. (divide the answers into 2 groups, use chi-squared test or t-test?)
+%\end{enumerate}
+
+ % Should I leave the below paragraph here or move it to section 6.2.2?
+\par Most of the important questions use statements with the Likert scale in the answer, from 1 to 5, where 1 means "Strongly Disagree" and 5 means "Strongly Agree". In this survey the middle of the scale, 3, is "Neutral" or "Neither Agree nor Disagree" and there was a separate answer with "Do not know". Therefore we can classify this 1 to 5 scale as \textbf{ORDINAL}, since all of the values directly relate to a scale of increasing agreement. Additionally, some of the other questions also use a scale of importance from 1 to 5, while the remaining questions mostly have nominal answers (meaning that the group of answers for a question are fixed, qualitative and not numerical). 
+
+\subsection{Data Analysis}
+
+%What is done with the data: what questions do we really want to answer with the collected data?
+ 
+The analysis of the answers is done through bar graphs and using mostly the \textbf{measures of central tendency or location},  \textbf{measures of central spread, scale or dispersion} and \textbf{measures of skewness and kurtosis}. The metrics used to analyze the data set and reach some conclusions are therefore: the mean, median and mode, the standard deviation and range, and the skew.
+
+The meaning behind these metrics and how they are applied here can be found in annex~\ref{annex:metrics}.
+
+To classify if the skew of the distribution is high or not, there is a measure that can be calculated, the skewness standard error, with the following formula: 
+$\sqrt\frac{6*N*(N-1)}{(N-2)*(N+1)*(N+3))}$, where $N = sample size$.
+
+For a sample size of 25, the Skewness Standard Error is 0,463683501.
+%Extreme values indicate loooong tails;

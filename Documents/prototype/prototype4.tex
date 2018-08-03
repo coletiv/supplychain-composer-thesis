@@ -1,0 +1,162 @@
+\section{Results and Validation}
+\label{sec:results-validation}
+
+\subsection{Requirements Validation}
+In order to determine the answer to the third and last of the problem statement questions, \textit{"Is it possible to build a feasible architectural design, by using such a tool, to implement all these requirements?"}, the suggested design and its implementation have to be evaluated in an objective way. 
+
+\textbf{The proposed methodology is to validate both the functional and non-functional requirements from the specification}. 
+
+As for the functional requirements, it needs to be ascertained which ones were possible to implement, which ones were not, which ones were indeterminate (as in, the development was not finished in time to come to a conclusion as to whether they were possible) and which ones are only possible partially. %Or the framework used still had some features in the early states, which made for it to be impossible to implement some requirement.
+
+As for the non-functional requirements, a few comments will be made regarding how each point was approached and whether it was fully satisfied, partially satisfied or not satisfied at all.
+
+
+\par \textbf{Functional Requirements Validation}
+
+As can be seen in Table~\ref{table:requirements-validation}, a few of the functionalities are either not possible, or only in a limited way.
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+	\begin{table}[ht]
+		\centering
+		\caption{Validation of the functional requirements, according to the possibility of their implementation.}
+		\label{table:requirements-validation}
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{|
+		>{\columncolor[HTML]{F8F8F8}}l |l|
+		>{\columncolor[HTML]{E8FFDF}}l |
+		>{\columncolor[HTML]{F8F8F8}}l |l|
+		>{\columncolor[HTML]{E8FFDF}}l |}
+		\hline
+		S1   & Allow chaincode transactions                                                                                 & Possible                             & SCM10 & Query specific shipment                                                                                                  & Possible                             \\ \hline
+		S2   & Record all user actions                                                                                      & Possible                             & SCM11 & Query shipment owned by a user                                                                                           & Possible                             \\ \hline
+		S3   & \begin{tabular}[c]{@{}l@{}}Maintain immutable list of\\ transactions in blocks\end{tabular}                  & Possible                             & SCM12 & Query an asset's owner                                                                                                   & Possible                             \\ \hline
+		S4   & Submit transaction batches                                                                                   & \cellcolor[HTML]{FFE1DF}Not Possible & SCM13 & \begin{tabular}[c]{@{}l@{}}Check shipment status, location,\\ and all of the item's status\end{tabular}                  & Possible                             \\ \hline
+		S5   & Assign timestamp to transaction                                                                              & Possible                             & SCM14 & Submit item damage reports                                                                                               & Possible                             \\ \hline
+		S6   & \begin{tabular}[c]{@{}l@{}}Have multiple ledger/channels for\\ Composer\end{tabular}                         & \cellcolor[HTML]{FFE1DF}Not Possible & SCM15 & \begin{tabular}[c]{@{}l@{}}Update a shipment with a new status\\ and location\end{tabular}                               & Possible                             \\ \hline
+		S7   & Emit notification events                                                                                     & Possible                             & SCM16 & Edit own identity                                                                                                        & Possible                             \\ \hline
+		S8   & Detect fraud mismatches                                                                                      & Possible                             & SCM17 & Input an XML file to submit data                                                                                         & Partially                            \\ \hline
+		S9   & Define different permissions                                                                                 & Possible                             & SCM18 & \begin{tabular}[c]{@{}l@{}}Hold a cryptocurrency or enforced\\ balance with equivalence to real \\ currency\end{tabular} & \cellcolor[HTML]{FFFFC7}Partially    \\ \hline
+		S10  & Expose REST API                                                                                              & Possible                             & RE1   & Query all the steps of a product's life                                                                                  & \cellcolor[HTML]{FFFFC7}Partially    \\ \hline
+		S11  & Enable REST Authentication                                                                                   & Possible                             & RE2   & Query every system registry                                                                                              & Possible                             \\ \hline
+		SCM1 & Invoke transactions                                                                                          & Possible                             & A1    & \begin{tabular}[c]{@{}l@{}}Revert transactions, by submitting an\\ opposite transaction\end{tabular}                     & \cellcolor[HTML]{FFE1DF}Not Possible \\ \hline
+		SCM2 & \begin{tabular}[c]{@{}l@{}}Read assets, participants, \\ transactions, according to permissions\end{tabular} & Possible                             & A2    & Create and delete new ledger channels                                                                                    & \cellcolor[HTML]{FFFFC7}Partially    \\ \hline
+		SCM3 & \begin{tabular}[c]{@{}l@{}}Write and deploy contractual\\ agreements\end{tabular}                            & \cellcolor[HTML]{FFFFC7}Partially    & A3    & Create network identity cards                                                                                            & Possible                             \\ \hline
+		SCM4 & Query all the steps of a product's life                                                                      & \cellcolor[HTML]{FFFFC7}Partially    & A4    & \begin{tabular}[c]{@{}l@{}}Assign identity cards to participant\\  instances\end{tabular}                                & Possible                             \\ \hline
+		SCM5 & Query owner of an asset                                                                                      & Possible                             & A5    & \begin{tabular}[c]{@{}l@{}}Update details of participants,\\  inc/ balance\end{tabular}                                  & Possible                             \\ \hline
+		SCM6 & Create new assets                                                                                            & Possible                             & A6    & Create, edit, delete any asset                                                                                           & Possible                             \\ \hline
+		SCM7 & Edit and delete owned assets                                                                                 & Possible                             & A7    & \begin{tabular}[c]{@{}l@{}}Submit any existing type of \\ transaction\end{tabular}                                       & Possible                             \\ \hline
+		SCM8 & Create shipment with owned assets                                                                            & Possible                             & A8    & Change a user's role                                                                                                     & Possible                             \\ \hline
+		SCM9 & \begin{tabular}[c]{@{}l@{}}Attach contractual agreement\\ to shipment\end{tabular}                           & Possible                             & A9    & \begin{tabular}[c]{@{}l@{}}Give other users permission to \\ edit roles\end{tabular}                                     & Possible                             \\ \hline
+		\end{tabular}
+		}
+		\end{table}
+
+ There were 3 requirements not possible to implement, all due to limitations of the framework: submitting transaction batches, using multiple ledgers on composer and reverting a transaction's effect. 
+
+\begin{itemize}
+	\item \textbf{S4 - Transaction batches} would have to be implemented on the client side of any application that wants to communicate with the blockchain, and even then, it could only "simulate" this feature, because it would have to submit the transactions one by one, and they might not all get submitted in the same block, which can be problematic.
+	\item \textbf{S6 - Multiple channels} are still not available on Composer, making the creation of multiple channels for groups of organizations impossible for this framework.
+	\item \textbf{A1 - Reverting a transaction's effect} is not possible, because it is not possible to programmatically in the script file, using the Composer runtime API, to access the contents of a previously submitted transaction. Composer only makes this content accessible to the Client API to be used by other applications.
+\end{itemize}
+
+The partial requirements mean that part of the requirement was possible, or the requirement was somehow simulated in a different way than the one written in the specification.
+
+\begin{itemize}
+	\item \textbf{SCM3 - Deploying contractual agreements} is only possible according to the contract format specified in the design. This means that custom contracts can not be submitted. Smart contracts are also limited to the ones already deployed on the network, and only the admins can update the network with new contracts.
+	\item \textbf{SCM4 and RE1 - Querying a product's lifecycle steps} is possible for commodities that have not gone through transformations, by simply querying all transactions associated with that commodity. However, when a commodity is transformed, it basically is deleted and new ones are created and there is no way, with the current Composer queries, to retrieve all of the transactions associated with all the products, from before and after the transformation.
+	\item \textbf{SCM18 - Holding a cryptocurrency} is simulated here by the balance, reason why it is only partially implemented. It still has the same usability a real cryptocurrency would have, since the balance can not be double spent because of the consensus, but it has limited interchangeability with other currencies and there are little management functions for the balance.
+	\item \textbf{A2 - Create and delete new ledger channels} is possible in Fabric, though not in Composer. In theory, an admin can create a channel for Hyperledger Fabric, but it will not be usable by Composer.
+\end{itemize}
+
+\par \textbf{Non-Functional Requirements Validation}
+
+The validation and analysis of the satisfaction of the quality requirements is presented in Table~\ref{table:quality-requirements-validation}.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+	\begin{table}[ht]
+		\centering
+		\caption{Validation of the non-functional or quality requirements.}
+		\label{table:quality-requirements-validation}
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{|l|l|l|
+		>{\columncolor[HTML]{E8FFDF}}l |}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Usability}}                                                                                                                                                 & \begin{tabular}[c]{@{}l@{}}The APIs are pretty straightforward to use. It is divided in \\ assets API calls, participant calls, transaction calls and query \\ calls. It should be possible to develop oracles and software \\ integration modules with relative ease.\end{tabular}                                                                                          & Satisfied                                     \\ \hline
+																											  & \textbf{\begin{tabular}[c]{@{}l@{}}Speed and \\ Latency\end{tabular}}            & \begin{tabular}[c]{@{}l@{}}Though not formally tested, the speed of the system was \\ informally asserted from the software tests performed. \\ Composer seems to consistently slow down the speed \\ of the system and have a higher latency when compared \\ to the standalone use of Hyperledger Fabric (based on the \\ metrics analysed in the background)\end{tabular} & \cellcolor[HTML]{FFECEB}Not totally satisfied \\ \cline{2-4} 
+																											  & \textbf{\begin{tabular}[c]{@{}l@{}}Precision and \\ Accuracy\end{tabular}}       & \begin{tabular}[c]{@{}l@{}}All data entries are accurate, and there is some degree of fraud \\ detection/user mistake detection.\end{tabular}                                                                                                                                                                                                                                & Satisfied                                     \\ \cline{2-4} 
+																											  & \textbf{\begin{tabular}[c]{@{}l@{}}Reliability and \\ availability\end{tabular}} & \begin{tabular}[c]{@{}l@{}}These factors work as expected. The more nodes, the better the \\ reliability, but, depending on the endorsement policy, some \\ transactions might not go through when specific nodes are down.\end{tabular}                                                                                                                                     & \cellcolor[HTML]{FFFFC7}Partially satisfied   \\ \cline{2-4} 
+		\multirow{-4}{*}{\textbf{Performance}}                                                                & \textbf{Scalability}                                                             & \begin{tabular}[c]{@{}l@{}}Technically, it is possible to scale the product to the levels of \\ hundreds of companies, though the performance suffers a \\ degradation.\end{tabular}                                                                                                                                                                                         & Satisfied                                     \\ \hline
+																											  & \textbf{Hardware}                                                                & It is easy to add new nodes and edit the configuration.                                                                                                                                                                                                                                                                                                                      & Satisfied                                     \\ \cline{2-4} 
+		\multirow{-2}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}Maintainability \\ and Portability\end{tabular}}} & \textbf{Software}                                                                & \begin{tabular}[c]{@{}l@{}}Limited maintainability, since the new versions of a business \\ network have to be compatible with the previous ones, and for this, \\ some parts of the design can not be removed.\end{tabular}                                                                                                                                                 & \cellcolor[HTML]{FFFFC7}Partially satisfied   \\ \hline
+																											  & \textbf{Privacy}                                                                 & The access control rules ensure privacy.                                                                                                                                                                                                                                                                                                                                     & Satisfied                                     \\ \cline{2-4} 
+																											  & \textbf{Immutability}                                                            & The implemented blockchain designed is fully immutable.                                                                                                                                                                                                                                                                                                                      & Satisfied                                     \\ \cline{2-4} 
+		\multirow{-3}{*}{\textbf{Security}}                                                                   & \textbf{Authorization}                                                           & \begin{tabular}[c]{@{}l@{}}Some actions should require permission from more than 1 user, \\ which does not happen.\end{tabular}                                                                                                                                                                                                                                              & \cellcolor[HTML]{FFFFC7}Partially satisfied   \\ \hline
+		\multicolumn{2}{|l|}{\textbf{Legal}}                                                                                                                                                     & \begin{tabular}[c]{@{}l@{}}The new global data protection regulations (GDPR) put the legality \\ of blockchain into question. Supposedly, GDPR argues that any \\ data containing personal information must be removable. This rule\\  is, however, incompatible with the immutability requirement.\end{tabular}                                                             & \cellcolor[HTML]{FFECEB}Not totally satisfied \\ \hline
+		\end{tabular}
+		}
+		\end{table}
+
+
+By joining the conclusions reached in both the functional and non-functional requirements, there is a better understanding  towards validating the requirements from the survey and also reaching a final conclusion for the last questions. The validation of the survey requirements is shown in Table~\ref{table:elicited-requirements-validation}.
+
+%After all of these use cases, conclusions about how many were or were not possible, and what does that tell us about the functionalities that the survey concluded were essential: does the prototype feasibly implement them?%
+\begin{table}[]
+	\centering
+	\caption{Validation of the survey elicited requirements.}
+	\label{table:elicited-requirements-validation}
+	\begin{tabular}{|l|l|
+	>{\columncolor[HTML]{E8FFDF}}l |}
+	\hline
+																														 & Security according to the latest requirements                                                                                      & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
+																														 & Controlled access for the users                                                                                                    & Satisfied                              \\ \cline{2-3} 
+	\multirow{-3}{*}{\textbf{Security}}                                                                                  & Secure data storage                                                                                                                & Satisfied                              \\ \hline
+																														 & Regulatory auditing                                                                                                                & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
+																														 & Fraud detection                                                                                                                    & Satisfied                              \\ \cline{2-3} 
+																														 & Asset management                                                                                                                   & Satisfied                              \\ \cline{2-3} 
+	\multirow{-4}{*}{\textbf{Traceability}}                                                                              & Real-time tracking information                                                                                                     & Satisfied                              \\ \hline
+																														 & Interoperability between systems                                                                                                   & Satisfied                              \\ \cline{2-3} 
+																														 & Development of industry standards                                                                                                  & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
+	\multirow{-3}{*}{\textbf{Synchronization}}                                                                           & \begin{tabular}[c]{@{}l@{}}Real-time sharing of information with partners, \\ leading to better working relationships\end{tabular} & \cellcolor[HTML]{FBFBFB}Non-applicable \\ \hline
+  \textbf{Transaction}																													 & Financial transactions                                                                                                        & \cellcolor[HTML]{FFFFC7}Limited        \\ \cline{2-3} 
+\textbf{Enforcement and} & \begin{tabular}[c]{@{}l@{}}Enforceable contracts (smart contract\end{tabular}                                    & \cellcolor[HTML]{FFFFC7}Limited        \\ 
+  \textbf{Financial domain} & functionality) & \cellcolor[HTML]{FFFFC7} \\ \hline
+	\end{tabular}
+	\end{table}
+
+As can be seen, most of the requirements were fulfilled, but not all of them totally. 
+
+%\caption{Validation of the survey elicited requirements.}
+%\label{table:elicited-requirements-validation}
+
+\textbf{Security}, as could be seen in the functional and non-functional requirements, has some faults. 
+
+\textbf{Regulatory auditing} is also limited, because of the commodity transformations, which limit the scope of how far we can trace back a product. 
+
+\textbf{The development of industry standards} is done by organizations such as GS1, which are actively working to ensure that the standards they develop are adopted world-wide.
+
+\textbf{Financial transactions} were developed, but not fully to a level that can be used industrially, so there is a lot of work to do on that field.
+
+\textbf{Enforceable contracts}, as explained, are also limited to the designed contracts, and the deployment of new or custom contracts is limited.
+
+
+\subsection{Development Limitations}
+
+In retrospective, the chosen framework had a big impact in the implementation of the requirements. Some were made easier, but others were harder or even impossible, due to limitations in the software, and not due to the design.
+
+Some of the Composer framework limitations found that impacted the development of this proof of concept:
+\begin{itemize}
+	\item  Queries are not powerful enough. There is no \textit{JOIN} and the usual SQL syntax is not always applicable. There is also no \textit{WHERE … IN …}, for instance. Model changes had to be made to adapt to this, and integrity might be lost.
+	\item The default Composer REST server is somewhat limited in its API. To extend the API, a custom server needs to be written; The queries and use of LoopBack filters is also limited on the default server, but can be more extensively used by building a custom server.
+	\item It is impossible to natively nest queries with the query language. To make up for this, several independent queries sometimes need to be executed, which is very inefficient.
+	\item Some queries are bugged on features like \textit{LIMIT}.
+	\item The run-time API does not have methods to access transactions, so that past transactions from the registry can be interacted with in the script file.
+	\item Some access control rules might be impossible to apply to certain queries. 
+	\item The framework is still in development and has some bugs. For instance, \textit{LIMIT} in queries is bugged and does not work. Sometimes, when an asset is deleted, a new asset with the same ID as the previous can not be created, because the system thinks the previous asset still exists.
+	\item Organizations are not supported in Composer in the same way they are in Fabric.
+	\item Composer somewhat lacks integrity checks when references to instances of other objects are used.
+\end{itemize}
