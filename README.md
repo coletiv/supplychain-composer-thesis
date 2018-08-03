@@ -1,4 +1,4 @@
-# feupthesis
+# Supply Chain Management with Blockchain Technologies
 
 This is the repository for the documents of my Master's Thesis at FEUP, in collaboration with the company Coletiv Studio. The focus of the thesis is on applying blockchain technologies to the supply chain management domain.
 
